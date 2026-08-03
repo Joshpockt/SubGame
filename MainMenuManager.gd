@@ -17,11 +17,28 @@ func addPlayerLabel(name:String):
 	label.show()
 	label.text=name
 
+@warning_ignore("shadowed_variable", "unused_parameter")
+func join_request(lobby_id:int,steam_id:int):
+	Steam.joinLobby(lobby_id)
 
 func _on_player_connected(id: int):
 	print("player connected, "+str(id))
-	rpc("addPlayerLabel",Steam.getPersonaName())
 	
+	
+	
+
+@warning_ignore("unused_parameter", "shadowed_variable")
+func _on_lobby_joined(lobby_id:int,permissions:int,locked:bool,response:int):
+	if isHost: return
+	self.lobby_id=lobby_id
+	peer= SteamMultiplayerPeer.new()
+	peer.server_relay=true
+	peer.create_client(Steam.getLobbyOwner(lobby_id))
+	multiplayer.multiplayer_peer=peer
+	multiplayer.peer_connected.connect(_on_player_connected)
+#	multiplayer.peer_disconnected.connect(_on_player_disconnect)
+	await multiplayer.connected_to_server
+	rpc("addPlayerLabel",Steam.getPersonaName())
 func _on_lobby_created(result:int,lobby_id:int):
 	if result == Steam.Result.RESULT_OK:
 		isHost=true
@@ -53,6 +70,8 @@ func _ready() -> void:
 	print("Steam initialized: ",Steam.steamInit(480,true))
 	Steam.initRelayNetworkAccess()
 	host_button.pressed.connect(create_server)
+	Steam.lobby_joined.connect(_on_lobby_joined)
+	Steam.join_requested.connect(join_request)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
