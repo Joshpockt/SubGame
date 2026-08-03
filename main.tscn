@@ -1,11 +1,23 @@
 [gd_scene format=3 uid="uid://c538uwmqdhg3g"]
 
 [ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://v2e5bm8vs1p6" path="res://MainMenuManager.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bqtqm50aeb8hu" path="res://interior_world.tscn" id="2_h2yge"]
 
 [sub_resource type="World3D" id="World3D_beyo5"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
+
+[sub_resource type="FontVariation" id="FontVariation_tf0ms"]
+variation_transform = Transform2D(1, 0.245, 0, 1, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rt2ik"]
+font = SubResource("FontVariation_tf0ms")
+font_size = 30
+font_color = Color(0.38928655, 0.38928664, 0.38928658, 1)
+
 [node name="Main" type="Node" unique_id=32227303]
+script = ExtResource("1_h2yge")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=738920195]
 own_world_3d = true
@@ -14,3 +26,61 @@ world_3d = SubResource("World3D_beyo5")
 [node name="ExteriorWorld" parent="SubViewport" unique_id=564991855 instance=ExtResource("1_0xm2m")]
 
 [node name="InteriorWorld" parent="." unique_id=1745793147 instance=ExtResource("2_h2yge")]
+
+[node name="MainMenu" type="Control" parent="." unique_id=343499129]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu" unique_id=1361220560]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer" unique_id=423832374]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer" unique_id=2019558773]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer" unique_id=1585158755]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Join
+"
+
+[node name="InLobby" type="Panel" parent="MainMenu/CenterContainer" unique_id=1748605180]
+visible = false
+custom_minimum_size = Vector2(179.185, 266.245)
+layout_mode = 2
+
+[node name="Players" type="VBoxContainer" parent="MainMenu/CenterContainer/InLobby" unique_id=2060698648]
+layout_mode = 0
+offset_top = 42.0
+offset_right = 179.0
+offset_bottom = 334.0
+
+[node name="PlayerBase" type="Label" parent="MainMenu/CenterContainer/InLobby/Players" unique_id=1894390934]
+visible = false
+layout_mode = 2
+text = "sjsmith08"
+label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="MainMenu/CenterContainer/InLobby" unique_id=940692300]
+layout_mode = 0
+offset_right = 179.0
+offset_bottom = 42.0
+text = "Players"
+label_settings = SubResource("LabelSettings_rt2ik")
+horizontal_alignment = 1
+vertical_alignment = 1
