@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dscpq4ydtc6j0"]
+
+[ext_resource type="Script" uid="uid://bawn4uoh3wk8i" path="res://PlayerMover.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://0jgoqmdpw74v" path="res://PlayerManager.gd" id="1_onrkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt2ik"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rt2ik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
+albedo_color = Color(1, 0.3729875, 0.35059685, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+radius = 0.9116211
+height = 1.8232422
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+albedo_color = Color(0.6405438, 0.705081, 1, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
+properties/0/path = NodePath("Mover:posLerpTo")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Mover:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="Player" type="Node3D" unique_id=547124595]
+script = ExtResource("1_onrkg")
+
+[node name="Mover" type="CharacterBody3D" parent="." unique_id=1995002440]
+script = ExtResource("1_4flbx")
+
+[node name="Collider" type="CollisionShape3D" parent="Mover" unique_id=1482686396]
+shape = SubResource("CapsuleShape3D_rt2ik")
+
+[node name="Camera" type="Camera3D" parent="Mover" unique_id=647781432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6968549, 0)
+
+[node name="Render" type="Node3D" parent="Mover" unique_id=1700931507]
+
+[node name="Capsule" type="MeshInstance3D" parent="Mover/Render" unique_id=968259814]
+mesh = SubResource("CapsuleMesh_rt2ik")
+surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
+
+[node name="Penis2" type="MeshInstance3D" parent="Mover/Render" unique_id=701046017]
+transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
+mesh = SubResource("CapsuleMesh_4flbx")
+surface_material_override/0 = SubResource("StandardMaterial3D_i3pqv")
+
+[node name="Syncronizer" type="MultiplayerSynchronizer" parent="." unique_id=1165136546]
+replication_config = SubResource("SceneReplicationConfig_onrkg")

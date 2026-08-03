@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://v2e5bm8vs1p6" path="res://MainMenuManager.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bqtqm50aeb8hu" path="res://interior_world.tscn" id="2_h2yge"]
 
 [sub_resource type="World3D" id="World3D_beyo5"]
 
@@ -14,7 +13,6 @@ variation_transform = Transform2D(1, 0.245, 0, 1, 0, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_rt2ik"]
 font = SubResource("FontVariation_tf0ms")
 font_size = 30
-font_color = Color(0.38928655, 0.38928664, 0.38928658, 1)
 
 [node name="Main" type="Node" unique_id=32227303]
 script = ExtResource("1_h2yge")
@@ -24,8 +22,6 @@ own_world_3d = true
 world_3d = SubResource("World3D_beyo5")
 
 [node name="ExteriorWorld" parent="SubViewport" unique_id=564991855 instance=ExtResource("1_0xm2m")]
-
-[node name="InteriorWorld" parent="." unique_id=1745793147 instance=ExtResource("2_h2yge")]
 
 [node name="MainMenu" type="Control" parent="." unique_id=343499129]
 layout_mode = 3
@@ -70,6 +66,7 @@ offset_bottom = 334.0
 
 [node name="PlayerBase" type="Label" parent="MainMenu/CenterContainer/InLobby/Players" unique_id=1894390934]
 visible = false
+modulate = Color(0.5409905, 0.5409905, 0.5409905, 1)
 layout_mode = 2
 text = "sjsmith08"
 label_settings = SubResource("LabelSettings_h2yge")
@@ -84,3 +81,12 @@ text = "Players"
 label_settings = SubResource("LabelSettings_rt2ik")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Start" type="Button" parent="MainMenu/CenterContainer/InLobby" unique_id=1426246614]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = 278.0
+offset_right = 129.0
+offset_bottom = 314.0
+text = "Start"
