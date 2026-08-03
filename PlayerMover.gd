@@ -18,7 +18,6 @@ func _ready() -> void:
 	await get_tree().process_frame
 	if !syncronizer.is_multiplayer_authority():
 		$Camera.queue_free()
-		$Render/Penis2.queue_free()
 		set_collision_mask_value(2,true)
 		set_collision_mask_value(1,false)
 		set_collision_layer_value(2,true)
@@ -26,6 +25,7 @@ func _ready() -> void:
 		set_physics_process(false)
 		set_process_input(false)
 	else:
+		$Render/Penis2.queue_free()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		
 		
