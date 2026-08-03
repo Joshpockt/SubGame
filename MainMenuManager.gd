@@ -33,12 +33,16 @@ func _on_lobby_joined(lobby_id:int,permissions:int,locked:bool,response:int):
 	self.lobby_id=lobby_id
 	peer= SteamMultiplayerPeer.new()
 	peer.server_relay=true
+	$MainMenu/CenterContainer/VBoxContainer.hide()
+	$MainMenu/CenterContainer/InLobby.show()
 	peer.create_client(Steam.getLobbyOwner(lobby_id))
 	multiplayer.multiplayer_peer=peer
 	multiplayer.peer_connected.connect(_on_player_connected)
 #	multiplayer.peer_disconnected.connect(_on_player_disconnect)
 	await multiplayer.connected_to_server
 	rpc("addPlayerLabel",Steam.getPersonaName())
+	
+	
 func _on_lobby_created(result:int,lobby_id:int):
 	if result == Steam.Result.RESULT_OK:
 		isHost=true
