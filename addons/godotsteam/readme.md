@@ -4,12 +4,12 @@ An ecosystem of tools for [Godot Engine](https://godotengine.org) and [Valve's S
 
 Additional Flavors
 ---
-Standard Module | Standard Plug-ins | Server Module | Server Plug-ins | Tools | Examples
---- | --- | --- | --- | --- | ---
-[Godot 2.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot2) | [GDNative](https://codeberg.org/godotsteam/godotsteam/src/branch/gdnative) | [Server 3.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot3) | [GDNative](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdnative) | [GodotSteamKit](https://godotsteam.com/projects/godotsteamkit) | [Skillet](https://codeberg.org/godotsteam/skillet)
-[Godot 3.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot3) | [GDExtension](https://codeberg.org/godotsteam/godotsteam/src/branch/gdextension) | [Server 4.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot4) | [GDExtension](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdextension) | --- | [Skillet UGC Editor](https://codeberg.org/godotsteam/skillet/src/branch/ugc_editor)
-[Godot 4.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot4) | --- | --- | --- | --- | ---
-[MultiplayerPeer](https://codeberg.org/godotsteam/multiplayerpeer)| --- | --- | --- | --- | ---
+Standard Module | Standard Plug-ins | Server Module | Server Plug-ins | Examples
+--- | --- | --- | --- | ---
+[Godot 2.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot2) | [GDNative](https://codeberg.org/godotsteam/godotsteam/src/branch/gdnative) | [Server 3.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot3) | [GDNative](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdnative) | [Skillet](https://codeberg.org/godotsteam/skillet)
+[Godot 3.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot3) | [GDExtension](https://codeberg.org/godotsteam/godotsteam/src/branch/gdextension) | [Server 4.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot4) | [GDExtension](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdextension) | [Skillet UGC Editor](https://codeberg.org/godotsteam/skillet/src/branch/ugc_editor)
+[Godot 4.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot4) | --- | --- | --- | ---
+[MultiplayerPeer](https://codeberg.org/godotsteam/multiplayerpeer)| --- | --- | --- | ---
 
 
 Documentation
@@ -28,18 +28,23 @@ Current Build
 ---
 You can [download pre-compiled versions of this repo here](https://codeberg.org/godotsteam/godotsteam/releases).
 
-**Version 4.21 Changes**
+**Version 4.20 Changes**
 
-- Added: new enums for Apps, Inputs, UGC, Utils
-- Added: new functions for Apps, Matchmaking Servers, Utils
-- Added: new callbacks for Matchmaking Servers
-- Changed: `sendMessages()` now has `delete_failed_messages` parameter
-- Changed: updated for Steamworks SDK 1.65
-- Changed: ControllerPad enum changed to SteamControllerPad
-- Changed: updated in-editor docs
-- Changed: k_cchDeveloperMetadataMax now set to 10000 instead of 5000
-- Removed: `isSteamRunningOnSteamDeck()` as new functionality was introduced in SDK 1.65
-- Removed: GameIDType enum GAME_TYPE_P2P
+- Added: app type toggle in Project Settings
+- Added: various app ID fields for game, demo, playtest, and tool to ProjectSettings
+- Added: update process to convert old project settings to new format
+- Added: check for mismatched Steam API file on Windows and Steam
+- Added: new tutorial links to in-editor docs
+- Added: binds for `get_connection_handle()` and `get_state()` for SteamPacketPeer, thanks to ***jdbool***
+- Changed: initialization process can use correct ID based on app type setting
+- Changed: `initFilterText()` no longer takes argument as it is meant for future use
+- Changed: `lobby_data_update` callback now returns bool for success parameter
+- Changed: PERSONA_CHANGE_FACEBOOK_INFO updated to PERSONA_CHANGE_BROADCAST
+- Fixed: `filterText()` breaking character encoding during filtering process
+- Fixed: missing networking enum binds
+- Fixed: minor in-editor doc regressions
+- Fixed: minor enum regressions
+- Fixed: crash in `lobby_chat_update` when lobby member leaves with MultiplayerPeer, thanks to ***bearlikelion***
 
 [You can read more change-logs here](https://godotsteam.com/changelog/gdextension/).
 
@@ -50,9 +55,8 @@ While rare, sometimes Steamworks SDK updates will break compatilibity with older
 
 Steamworks SDK Version | GodotSteam Version
 ---|---
-1.65 | 4.21 or newer
-1.63 to 1.64 | 4.17 to 4.20.1
-1.62 | 4.14 to 4.16.2
+1.63 or newer | 4.17
+1.62 | 4.14 or 4.16.2
 1.61 | 4.12 to 4.13
 1.60 | 4.6 to 4.11
 1.59 | 4.6 to 4.8
@@ -71,7 +75,6 @@ GodotSteam Version | Broken Compatibility
 4.17 | Windows projects using Steam SDK 1.63 are meant to work with Proton 11 or Experimental on Linux / Steam Deck.
 4.19 | Lots of changes to Voice functions, refer to [4.19 changelog for details](https://godotsteam.com/changelog/godot4/#version-419)
 4.20 | Godot 4.7 changed callable_method_pointer.h to callable_mp.h which will break backwards compatibilty
-4.21 | ControllerPad enum changed to SteamControllerPad enum, SendMessages added new parameter
 
 
 Known Issues

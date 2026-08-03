@@ -4,12 +4,12 @@ An ecosystem of tools for [Godot Engine](https://godotengine.org) and [Valve's S
 
 Additional Flavors
 ---
-Standard Module | Standard Plug-ins | Server Module | Server Plug-ins | Tools | Examples
---- | --- | --- | --- | --- | ---
-[Godot 2.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot2) | [GDNative](https://codeberg.org/godotsteam/godotsteam/src/branch/gdnative) | [Server 3.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot3) | [GDNative](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdnative) | [GodotSteamKit](https://godotsteam.com/projects/godotsteamkit) | [Skillet](https://codeberg.org/godotsteam/skillet)
-[Godot 3.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot3) | [GDExtension](https://codeberg.org/godotsteam/godotsteam/src/branch/gdextension) | [Server 4.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot4) | [GDExtension](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdextension) | --- | [Skillet UGC Editor](https://codeberg.org/godotsteam/skillet/src/branch/ugc_editor)
-[Godot 4.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot4) | --- | --- | --- | --- | ---
-[MultiplayerPeer](https://codeberg.org/godotsteam/multiplayerpeer)| --- | --- | --- | --- | ---
+Standard Module | Standard Plug-ins | Server Module | Server Plug-ins | Examples
+--- | --- | --- | --- | ---
+[Godot 2.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot2) | [GDNative](https://codeberg.org/godotsteam/godotsteam/src/branch/gdnative) | [Server 3.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot3) | [GDNative](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdnative) | [Skillet](https://codeberg.org/godotsteam/skillet)
+[Godot 3.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot3) | [GDExtension](https://codeberg.org/godotsteam/godotsteam/src/branch/gdextension) | [Server 4.x](https://codeberg.org/godotsteam/godotsteam-server/src/branch/godot4) | [GDExtension](https://codeberg.org/godotsteam/godotsteam-server/src/branch/gdextension) | [Skillet UGC Editor](https://codeberg.org/godotsteam/skillet/src/branch/ugc_editor)
+[Godot 4.x](https://codeberg.org/godotsteam/godotsteam/src/branch/godot4) | --- | --- | --- | ---
+[MultiplayerPeer](https://codeberg.org/godotsteam/multiplayerpeer)| --- | --- | --- | ---
 
 
 Documentation
@@ -28,15 +28,9 @@ Current Build
 ---
 You can [download pre-compiled versions of this repo here](https://codeberg.org/godotsteam/godotsteam-server/releases).
 
-**Version 4.9.3 Changes**
+**Version 4.9.2 Changes**
 
-- Added: missing descriptions for constants and enums in in-editor docs
-- Changed: GodotSteam Server should now back-up the Steam version of Godot's steam_api64.dll when updating it (Windows only)
-- Changed: `initFilterText()` no longer takes argument as it is meant for future use
-- Fixed: `filterText()` breaking character encoding during filtering process
-- Fixed: missing networking enum binds
-- Fixed: error in in-editor docs
-- Fixed: incorrect array types for some signals
+- Changed: added last of the enum and constant notes to the in-editor docs
 
 [You can read more change-logs here](https://godotsteam.com/changelog/server_gdextension/).
 
