@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bqtqm50aeb8hu"]
+
+[ext_resource type="PackedScene" uid="uid://cwi8hpqkmnldw" path="res://sub_interior.tscn" id="1_hypwe"]
+
+[node name="InteriorWorld" type="Node" unique_id=1745793147]
+
+[node name="SubInterior" parent="." unique_id=912680225 instance=ExtResource("1_hypwe")]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c538uwmqdhg3g"]
+
+[ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bqtqm50aeb8hu" path="res://interior_world.tscn" id="2_h2yge"]
+
+[sub_resource type="World3D" id="World3D_beyo5"]
+
+[node name="Main" type="Node" unique_id=32227303]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=738920195]
+own_world_3d = true
+world_3d = SubResource("World3D_beyo5")
+
+[node name="ExteriorWorld" parent="SubViewport" unique_id=564991855 instance=ExtResource("1_0xm2m")]
+
+[node name="InteriorWorld" parent="." unique_id=1745793147 instance=ExtResource("2_h2yge")]
