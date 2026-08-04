@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://dd1sbibuxhwpn"]
+
+[ext_resource type="Script" uid="uid://cjrln30fj3577" path="res://RoomManager.gd" id="1_lnlp5"]
+[ext_resource type="Script" uid="uid://b2cxmd7lqfqh4" path="res://interaction_box_3d.gd" id="2_akvua"]
+[ext_resource type="Script" uid="uid://bhg7miojvxys" path="res://SubManager.gd" id="2_xre04"]
+[ext_resource type="Script" uid="uid://cq35vehajkbgi" path="res://Parascope.gd" id="3_32o2v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_akvua"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_id2ue"]
+sky_material = SubResource("ProceduralSkyMaterial_akvua")
+
+[sub_resource type="Environment" id="Environment_xre04"]
+background_mode = 2
+sky = SubResource("Sky_id2ue")
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rt2ik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
+albedo_color = Color(1, 0.3729875, 0.35059685, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+radius = 0.9116211
+height = 1.8232422
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+albedo_color = Color(0.6405438, 0.705081, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rt2ik"]
+size = Vector3(0.43658447, 0.6855774, 0.67541504)
+
+[node name="DebugScene" type="Node" unique_id=1049535370]
+script = ExtResource("1_lnlp5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=737243892]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2052707853]
+environment = SubResource("Environment_xre04")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1310675781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2352972, 0)
+use_collision = true
+size = Vector3(15.077148, 0.52075195, 14.40918)
+
+[node name="Spawnpoint" type="Node3D" parent="." unique_id=869562929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6976002, 0)
+
+[node name="Player" type="Node3D" parent="." unique_id=547124595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9194007, 0.02507925, 1.368232)
+
+[node name="Render" type="Node3D" parent="Player" unique_id=1700931507]
+
+[node name="Capsule" type="MeshInstance3D" parent="Player/Render" unique_id=968259814]
+mesh = SubResource("CapsuleMesh_rt2ik")
+surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
+
+[node name="Penis2" type="MeshInstance3D" parent="Player/Render" unique_id=701046017]
+transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
+mesh = SubResource("CapsuleMesh_4flbx")
+surface_material_override/0 = SubResource("StandardMaterial3D_i3pqv")
+
+[node name="Ship" type="Node3D" parent="." unique_id=572930223]
+script = ExtResource("2_xre04")
+
+[node name="Parascope" type="Node3D" parent="Ship" unique_id=1808381966 node_paths=PackedStringArray("roomManager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7327294, 0, -0.16586542)
+script = ExtResource("3_32o2v")
+roomManager = NodePath("../..")
+
+[node name="Interactor" type="Area3D" parent="Ship/Parascope" unique_id=272128895]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_akvua")
+
+[node name="InteractionCollider" type="CollisionShape3D" parent="Ship/Parascope/Interactor" unique_id=1879206352]
+transform = Transform3D(0.87559944, -0.4830379, 0, 0.4830379, 0.87559944, 0, 0, 0, 1, 0.11126709, 0.25378254, 0.006164551)
+shape = SubResource("BoxShape3D_rt2ik")
+
+[node name="Render" type="Node3D" parent="Ship/Parascope" unique_id=1625659742]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ship/Parascope/Render" unique_id=517130720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15795898, -0.3239746, 0)
+use_collision = true
+size = Vector3(0.68408203, 1.3461914, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Ship/Parascope/Render" unique_id=245634951]
+transform = Transform3D(0.8944114, -0.44724515, 0, 0.44724515, 0.8944114, 0, 0, 0, 1, 0.1492281, 0.28424177, 1.1920929e-07)
+use_collision = true
+size = Vector3(0.2716875, 0.684, 0.684)
+
+[node name="CameraHook" type="Node3D" parent="Ship/Parascope" unique_id=1618218339]
+transform = Transform3D(-3.8946496e-08, -0.45401904, 0.890992, -1.9845803e-08, 0.890992, 0.45401904, -1, 0, -4.371139e-08, 0.6943054, 0.567466, 0)
+
+[node name="PlayerSeat" type="Node3D" parent="Ship/Parascope" unique_id=202586370]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.165514, 0.038327932, 0)
+
+[node name="Reference" type="Node3D" parent="Ship/Parascope/PlayerSeat" unique_id=437993183]
+visible = false
+
+[node name="Capsule" type="MeshInstance3D" parent="Ship/Parascope/PlayerSeat/Reference" unique_id=1942205425]
+mesh = SubResource("CapsuleMesh_rt2ik")
+
+[node name="Facing" type="MeshInstance3D" parent="Ship/Parascope/PlayerSeat/Reference" unique_id=1025708081]
+transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Players" type="Node3D" parent="." unique_id=2122263035]

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bawn4uoh3wk8i" path="res://PlayerMover.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://0jgoqmdpw74v" path="res://PlayerManager.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://bawrmbik83yk1" path="res://Interactor.gd" id="3_hqtel"]
+[ext_resource type="Shader" uid="uid://cj4us1i0sv2cn" path="res://crosshair.gdshader" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt2ik"]
 
@@ -24,6 +26,15 @@ properties/0/replication_mode = 2
 properties/1/path = NodePath("Mover:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
+properties/2/path = NodePath(".:username")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lnlp5"]
+shader = ExtResource("3_i3pqv")
+shader_parameter/can_interact = false
+shader_parameter/circleSize = 0.1
+shader_parameter/hollowSize = 0.0
 
 [node name="Player" type="Node3D" unique_id=547124595]
 script = ExtResource("1_onrkg")
@@ -33,9 +44,6 @@ script = ExtResource("1_4flbx")
 
 [node name="Collider" type="CollisionShape3D" parent="Mover" unique_id=1482686396]
 shape = SubResource("CapsuleShape3D_rt2ik")
-
-[node name="Camera" type="Camera3D" parent="Mover" unique_id=647781432]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6968549, 0)
 
 [node name="Render" type="Node3D" parent="Mover" unique_id=1700931507]
 
@@ -48,5 +56,43 @@ transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.41056
 mesh = SubResource("CapsuleMesh_4flbx")
 surface_material_override/0 = SubResource("StandardMaterial3D_i3pqv")
 
+[node name="display_name" type="Label3D" parent="Mover/Render" unique_id=1915843826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1401914, 0)
+billboard = 1
+
+[node name="CameraOffset" type="Node3D" parent="Mover" unique_id=2014327617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58034635, 0)
+
 [node name="Syncronizer" type="MultiplayerSynchronizer" parent="." unique_id=1165136546]
 replication_config = SubResource("SceneReplicationConfig_onrkg")
+
+[node name="UI" type="Control" parent="." unique_id=457796670]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="CenterContainer" parent="UI" unique_id=602194777]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="circle" type="ColorRect" parent="UI/Crosshair" unique_id=556836087]
+material = SubResource("ShaderMaterial_lnlp5")
+custom_minimum_size = Vector2(26.03, 26.03)
+layout_mode = 2
+
+[node name="Camera" type="Camera3D" parent="." unique_id=647781432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6968549, 0)
+
+[node name="Interactor" type="RayCast3D" parent="Camera" unique_id=843132296]
+target_position = Vector3(0, 0, -1.68)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("3_hqtel")

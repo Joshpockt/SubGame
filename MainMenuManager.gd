@@ -56,6 +56,7 @@ func _on_lobby_created(result:int,lobby_id:int):
 		$MainMenu/CenterContainer/VBoxContainer.hide()
 		$MainMenu/CenterContainer/InLobby.show()
 		$MainMenu/CenterContainer/InLobby/Start.show()
+		$MainMenu/CenterContainer/InLobby/Debug.show()
 		peer = SteamMultiplayerPeer.new()
 		peer.server_relay=true
 		peer.create_host()
@@ -67,6 +68,12 @@ func _on_lobby_created(result:int,lobby_id:int):
 		#Steam.setLobbyData(lobby_id,"ver",data.gameversion)
 		#Steam.setLobbyData(lobby_id,"usr",Steam.getPersonaName())
 
+@rpc("authority","call_local","reliable")
+func EnterTesting():
+	var game = load("res://debug_scene.tscn").instantiate()
+	get_tree().root.add_child(game)
+	queue_free()
+
 
 @rpc("authority","call_local","reliable")
 func StartGame():
@@ -76,6 +83,9 @@ func StartGame():
 
 func HostStartGame():
 	rpc("StartGame")
+	
+func HostDebugGame():
+	rpc("EnterTesting")
 
 func create_server():
 	Steam.lobby_created.connect(_on_lobby_created)
@@ -95,6 +105,7 @@ func _ready() -> void:
 	Steam.lobby_match_list.connect(lobby_match_list)
 	$MainMenu/CenterContainer/VBoxContainer/JoinButton.pressed.connect(attemptJoin)
 	$MainMenu/CenterContainer/InLobby/Start.pressed.connect(HostStartGame)
+	$MainMenu/CenterContainer/InLobby/Debug.pressed.connect(HostDebugGame)
 
 
 func attemptJoin():

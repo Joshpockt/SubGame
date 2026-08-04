@@ -1,9 +1,11 @@
 extends CharacterBody3D
 
 @onready var syncronizer: MultiplayerSynchronizer = $"../Syncronizer"
-@onready var camera: Camera3D = $Camera
+@onready var camera: Camera3D = $"../Camera"
+@onready var player: Node3D = $".."
 
 var tabout = false;
+@onready var camera_offset: Node3D = $CameraOffset
 
 var mouseX = 0;
 var mouseY = 0;
@@ -11,13 +13,16 @@ const sensitivity = 10;
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+var ExternalCameraHook=null
+
 @export var posLerpTo=Vector3.ZERO;
 @export var rotLerpTo=Vector3.ZERO;
 
 func _ready() -> void:
 	await get_tree().process_frame
 	if !syncronizer.is_multiplayer_authority():
-		$Camera.queue_free()
+		$"../UI".queue_free()
+		$"../Camera".queue_free()
 		set_collision_mask_value(2,true)
 		set_collision_mask_value(1,false)
 		set_collision_layer_value(2,true)
@@ -25,29 +30,38 @@ func _ready() -> void:
 		set_physics_process(false)
 		set_process_input(false)
 	else:
-		$Render/Penis2.queue_free()
+		$Render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
+		player.username=Steam.getPersonaName()
 		
 		
 func cameraMovments(delta: float):
-	mouseX = clamp(mouseX,-90,90)
-	rotation_degrees.y = mouseY;
-	camera.rotation_degrees.x = mouseX;
-	
+	if ExternalCameraHook == null:
+		Utils.SnapTo(camera,camera_offset)
+	else:
+		Utils.LerpTo(camera,ExternalCameraHook,delta*10)
+		
+
+func updateTabout():
+	if tabout:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
+		$"../UI/Crosshair".hide()
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
+		$"../UI/Crosshair".show()
+
 func _input(event: InputEvent) -> void:
 	if !syncronizer.is_multiplayer_authority(): return;
 	if event is InputEventMouseMotion && !tabout:
-		mouseX += event.screen_relative.y/-sensitivity;
-		mouseY += event.screen_relative.x/-sensitivity;
+		camera_offset.rotation_degrees.x += event.screen_relative.y/-sensitivity;
+		rotation_degrees.y += event.screen_relative.x/-sensitivity;
 	else:
 		if Input.is_action_just_pressed("tab_out"):
 			tabout=!tabout;
-			if tabout:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
-			else:
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
+			updateTabout()
 
 func _process(delta: float) -> void:
+	$Render/display_name.text=player.username
 	if syncronizer.is_multiplayer_authority():
 		cameraMovments(delta)
 		if global_position.distance_to(posLerpTo) > .1:
@@ -64,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	if tabout:return;
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY

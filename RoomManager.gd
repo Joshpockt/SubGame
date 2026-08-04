@@ -4,6 +4,8 @@ extends Node
 var localplayer;
 var avatar = preload("res://player.tscn")
 var firstServerId;
+var Players:Dictionary
+
 # Called when the node enters the scene tree for the first time.
 
 func player_leaves(id: int):
@@ -20,6 +22,7 @@ func _ready() -> void:
 	localplayer.name=str(multiplayer.get_unique_id())
 	localplayer.set_multiplayer_authority(multiplayer.get_unique_id())
 	localplayer.find_child("Syncronizer").set_multiplayer_authority(multiplayer.get_unique_id())
+	Players[multiplayer.get_unique_id()]=localplayer
 	for i in multiplayer.get_peers():
 		var plr = avatar.instantiate()
 		add_child(plr)
@@ -27,5 +30,6 @@ func _ready() -> void:
 		plr.find_child("Syncronizer").set_multiplayer_authority(i)
 		plr.name=str(i)
 		plr.find_child("Mover").global_position+=Vector3(0,5,0)
+		Players[i]=plr
 
 	
