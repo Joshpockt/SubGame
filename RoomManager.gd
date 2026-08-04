@@ -5,8 +5,8 @@ var localplayer;
 var avatar = preload("res://player.tscn")
 var firstServerId;
 var Players:Dictionary
-
 # Called when the node enters the scene tree for the first time.
+
 
 func player_leaves(id: int):
 	for i in $Players.get_children():
@@ -15,6 +15,7 @@ func player_leaves(id: int):
 
 
 func _ready() -> void:
+
 	multiplayer.peer_disconnected.connect(player_leaves)
 	self.set_multiplayer_authority(1)
 	localplayer = avatar.instantiate()

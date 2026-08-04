@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://kawd0hj84e0p"]
+
+[ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="1_cm05c"]
+
+[sub_resource type="World3D" id="World3D_beyo5"]
+
+[node name="ExteriorViewport" type="SubViewport" unique_id=1238947704]
+own_world_3d = true
+world_3d = SubResource("World3D_beyo5")
+
+[node name="ExteriorWorld" parent="." unique_id=564991855 instance=ExtResource("1_cm05c")]

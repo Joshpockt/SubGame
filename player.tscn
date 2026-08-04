@@ -4,20 +4,22 @@
 [ext_resource type="Script" uid="uid://0jgoqmdpw74v" path="res://PlayerManager.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://bawrmbik83yk1" path="res://Interactor.gd" id="3_hqtel"]
 [ext_resource type="Shader" uid="uid://cj4us1i0sv2cn" path="res://crosshair.gdshader" id="3_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://d03xc1u1ld271" path="res://plrmodel.png" id="3_sweqy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt2ik"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_rt2ik"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_rt2ik"]
+lightmap_size_hint = Vector2i(12, 12)
+orientation = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
-albedo_color = Color(1, 0.3729875, 0.35059685, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
-radius = 0.9116211
-height = 1.8232422
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
-albedo_color = Color(0.6405438, 0.705081, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf0ms"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("3_sweqy")
+texture_filter = 0
+billboard_mode = 2
+grow_amount = 1.407
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
 properties/0/path = NodePath("Mover:posLerpTo")
@@ -35,6 +37,7 @@ shader = ExtResource("3_i3pqv")
 shader_parameter/can_interact = false
 shader_parameter/circleSize = 0.1
 shader_parameter/hollowSize = 0.0
+shader_parameter/progress = 1.0
 
 [node name="Player" type="Node3D" unique_id=547124595]
 script = ExtResource("1_onrkg")
@@ -47,18 +50,13 @@ shape = SubResource("CapsuleShape3D_rt2ik")
 
 [node name="Render" type="Node3D" parent="Mover" unique_id=1700931507]
 
-[node name="Capsule" type="MeshInstance3D" parent="Mover/Render" unique_id=968259814]
-mesh = SubResource("CapsuleMesh_rt2ik")
-surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
-
-[node name="Penis2" type="MeshInstance3D" parent="Mover/Render" unique_id=701046017]
-transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
-mesh = SubResource("CapsuleMesh_4flbx")
-surface_material_override/0 = SubResource("StandardMaterial3D_i3pqv")
-
 [node name="display_name" type="Label3D" parent="Mover/Render" unique_id=1915843826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1401914, 0)
 billboard = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mover/Render" unique_id=1058731819]
+mesh = SubResource("PlaneMesh_rt2ik")
+surface_material_override/0 = SubResource("StandardMaterial3D_tf0ms")
 
 [node name="CameraOffset" type="Node3D" parent="Mover" unique_id=2014327617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58034635, 0)

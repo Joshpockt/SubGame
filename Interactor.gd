@@ -2,6 +2,7 @@ extends RayCast3D
 var last=null
 var circleLerp=.2
 var hollowLerp=0.0
+var ProgressLerp=1.0
 var lerpSpeed=13
 @onready var mover: CharacterBody3D = $"../../Mover"
 @onready var circle: ColorRect = $"../../UI/Crosshair/circle"
@@ -17,10 +18,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	circle.material.set_shader_parameter("circleSize", circleLerp)
 	circle.material.set_shader_parameter("hollowSize", hollowLerp)
+	circle.material.set_shader_parameter("progress", ProgressLerp)
 	var area = get_collider()
 	if (area is InteractionBox3D) && !mover.tabout:
 		circleLerp=lerp(circleLerp,.4,lerpSpeed*delta)
 		hollowLerp=lerp(hollowLerp,.25,lerpSpeed*delta)
+		ProgressLerp=area.Progress
 		area.hover()
 		last=area
 		if Input.is_action_just_pressed("interact"):
@@ -31,3 +34,4 @@ func _process(delta: float) -> void:
 	else:
 		circleLerp=lerp(circleLerp,.2,lerpSpeed*delta)
 		hollowLerp=lerp(hollowLerp,0.0,lerpSpeed*delta)
+		ProgressLerp=lerp(ProgressLerp,1.0,lerpSpeed*delta)

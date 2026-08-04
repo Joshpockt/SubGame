@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://c538uwmqdhg3g"]
 
-[ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://v2e5bm8vs1p6" path="res://MainMenuManager.gd" id="1_h2yge"]
-
-[sub_resource type="World3D" id="World3D_beyo5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
 
@@ -16,12 +13,6 @@ font_size = 30
 
 [node name="Main" type="Node" unique_id=32227303]
 script = ExtResource("1_h2yge")
-
-[node name="SubViewport" type="SubViewport" parent="." unique_id=738920195]
-own_world_3d = true
-world_3d = SubResource("World3D_beyo5")
-
-[node name="ExteriorWorld" parent="SubViewport" unique_id=564991855 instance=ExtResource("1_0xm2m")]
 
 [node name="MainMenu" type="Control" parent="." unique_id=343499129]
 layout_mode = 3

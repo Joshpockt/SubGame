@@ -5,6 +5,7 @@ class_name InteractionBox3D
 signal interacted
 signal hovered
 signal hoveredEND
+var Progress=1.0;
 
 func _ready() -> void:
 	set_collision_layer_value(1, false)

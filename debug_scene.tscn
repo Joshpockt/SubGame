@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://b2cxmd7lqfqh4" path="res://interaction_box_3d.gd" id="2_akvua"]
 [ext_resource type="Script" uid="uid://bhg7miojvxys" path="res://SubManager.gd" id="2_xre04"]
 [ext_resource type="Script" uid="uid://cq35vehajkbgi" path="res://Parascope.gd" id="3_32o2v"]
+[ext_resource type="Texture2D" uid="uid://fjfccakcxi1b" path="res://front_view.tres" id="5_rec6y"]
+[ext_resource type="Script" uid="uid://dx8tkd0nkdyew" path="res://CoalPile.gd" id="6_bstsi"]
+[ext_resource type="PackedScene" uid="uid://kawd0hj84e0p" path="res://exterior_viewport.tscn" id="6_igtqi"]
+[ext_resource type="Script" uid="uid://dddcaliy0odek" path="res://Boiler.gd" id="7_1tx2p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_akvua"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,20 +21,44 @@ background_mode = 2
 sky = SubResource("Sky_id2ue")
 glow_enabled = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_rt2ik"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rt2ik"]
+size = Vector3(0.43658447, 0.6855774, 0.67541504)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
-albedo_color = Color(1, 0.3729875, 0.35059685, 1)
+[sub_resource type="PlaneMesh" id="PlaneMesh_rt2ik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf0ms"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("5_rec6y")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rt2ik"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 radius = 0.9116211
 height = 1.8232422
 
+[sub_resource type="SphereMesh" id="SphereMesh_rt2ik"]
+radius = 1.471
+height = 2.942
+radial_segments = 11
+rings = 7
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opbaf"]
+albedo_color = Color(0.18000486, 0.18000486, 0.18000486, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7vmx"]
+radius = 1.4526367
+height = 4.3181543
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
+albedo_color = Color(1, 0.3729875, 0.35059685, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
 albedo_color = Color(0.6405438, 0.705081, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rt2ik"]
-size = Vector3(0.43658447, 0.6855774, 0.67541504)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3t6qa"]
+radius = 0.56591797
+height = 2.0150855
 
 [node name="DebugScene" type="Node" unique_id=1049535370]
 script = ExtResource("1_lnlp5")
@@ -50,27 +78,14 @@ size = Vector3(15.077148, 0.52075195, 14.40918)
 [node name="Spawnpoint" type="Node3D" parent="." unique_id=869562929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6976002, 0)
 
-[node name="Player" type="Node3D" parent="." unique_id=547124595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9194007, 0.02507925, 1.368232)
-
-[node name="Render" type="Node3D" parent="Player" unique_id=1700931507]
-
-[node name="Capsule" type="MeshInstance3D" parent="Player/Render" unique_id=968259814]
-mesh = SubResource("CapsuleMesh_rt2ik")
-surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
-
-[node name="Penis2" type="MeshInstance3D" parent="Player/Render" unique_id=701046017]
-transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
-mesh = SubResource("CapsuleMesh_4flbx")
-surface_material_override/0 = SubResource("StandardMaterial3D_i3pqv")
-
 [node name="Ship" type="Node3D" parent="." unique_id=572930223]
 script = ExtResource("2_xre04")
 
-[node name="Parascope" type="Node3D" parent="Ship" unique_id=1808381966 node_paths=PackedStringArray("roomManager")]
+[node name="Parascope" type="Node3D" parent="Ship" unique_id=1808381966 node_paths=PackedStringArray("roomManager", "submarine")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7327294, 0, -0.16586542)
 script = ExtResource("3_32o2v")
 roomManager = NodePath("../..")
+submarine = NodePath("../../ExteriorViewport/ExteriorWorld/SubExterior")
 
 [node name="Interactor" type="Area3D" parent="Ship/Parascope" unique_id=272128895]
 collision_layer = 8
@@ -88,10 +103,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15795898, -0.3239746, 0)
 use_collision = true
 size = Vector3(0.68408203, 1.3461914, 1)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Ship/Parascope/Render" unique_id=245634951]
-transform = Transform3D(0.8944114, -0.44724515, 0, 0.44724515, 0.8944114, 0, 0, 0, 1, 0.1492281, 0.28424177, 1.1920929e-07)
-use_collision = true
-size = Vector3(0.2716875, 0.684, 0.684)
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Ship/Parascope/Render" unique_id=773532384]
+transform = Transform3D(0.2154647, 0.25342822, 0, -0.40749502, 0.13400124, 0, 0, 0, 0.46095246, 0.22117996, 0.30499923, 0)
+inner_radius = 0.812
+outer_radius = 1.295
+sides = 10
+ring_sides = 7
+smooth_faces = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship/Parascope/Render" unique_id=431958909]
+transform = Transform3D(-1.6409848e-08, 0.3327229, 0.17387013, 5.5986337e-16, 0.17387013, -0.33272293, -0.37541354, -1.4543779e-08, -7.600105e-09, 0.22920561, 0.32052156, 0.006164551)
+mesh = SubResource("PlaneMesh_rt2ik")
+surface_material_override/0 = SubResource("StandardMaterial3D_tf0ms")
 
 [node name="CameraHook" type="Node3D" parent="Ship/Parascope" unique_id=1618218339]
 transform = Transform3D(-3.8946496e-08, -0.45401904, 0.890992, -1.9845803e-08, 0.890992, 0.45401904, -1, 0, -4.371139e-08, 0.6943054, 0.567466, 0)
@@ -109,4 +132,58 @@ mesh = SubResource("CapsuleMesh_rt2ik")
 transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
 mesh = SubResource("CapsuleMesh_4flbx")
 
+[node name="CoalPile" type="Node3D" parent="Ship" unique_id=161838436 node_paths=PackedStringArray("roomManager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2405496, -0.9787055, 3.1940868)
+script = ExtResource("6_bstsi")
+roomManager = NodePath("../..")
+
+[node name="Visual" type="MeshInstance3D" parent="Ship/CoalPile" unique_id=801294869]
+mesh = SubResource("SphereMesh_rt2ik")
+surface_material_override/0 = SubResource("StandardMaterial3D_opbaf")
+
+[node name="Interactor" type="Area3D" parent="Ship/CoalPile" unique_id=1903558371]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_akvua")
+
+[node name="InteractionCollider" type="CollisionShape3D" parent="Ship/CoalPile/Interactor" unique_id=725307981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71787596, 0)
+shape = SubResource("CapsuleShape3D_g7vmx")
+
+[node name="Boiler" type="Node3D" parent="Ship" unique_id=1980874117 node_paths=PackedStringArray("roomManager", "submarine")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.43447, 0, -1.7010089)
+script = ExtResource("7_1tx2p")
+roomManager = NodePath("../..")
+submarine = NodePath("../../ExteriorViewport/ExteriorWorld/SubExterior")
+
+[node name="Render" type="Node3D" parent="Ship/Boiler" unique_id=577331271]
+transform = Transform3D(0.09330363, 0, 0.9956377, 0, 1, 0, -0.9956377, 0, 0.09330363, 0, 0, 0)
+
+[node name="Capsule" type="MeshInstance3D" parent="Ship/Boiler/Render" unique_id=80483643]
+mesh = SubResource("CapsuleMesh_rt2ik")
+surface_material_override/0 = SubResource("StandardMaterial3D_onrkg")
+
+[node name="Penis2" type="MeshInstance3D" parent="Ship/Boiler/Render" unique_id=1784152828]
+transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
+mesh = SubResource("CapsuleMesh_4flbx")
+surface_material_override/0 = SubResource("StandardMaterial3D_i3pqv")
+
+[node name="Interactor" type="Area3D" parent="Ship/Boiler" unique_id=59763009]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_akvua")
+
+[node name="InteractionCollider" type="CollisionShape3D" parent="Ship/Boiler/Interactor" unique_id=1722189115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015808344, 0)
+shape = SubResource("CapsuleShape3D_3t6qa")
+
 [node name="Players" type="Node3D" parent="." unique_id=2122263035]
+
+[node name="ExteriorViewport" parent="." unique_id=1238947704 instance=ExtResource("6_igtqi")]
+
+[node name="SubExterior" parent="ExteriorViewport/ExteriorWorld" parent_id_path=PackedInt32Array(1238947704, 564991855) index="1" unique_id=201099548]
+visible = false
+
+[editable path="ExteriorViewport"]
+[editable path="ExteriorViewport/ExteriorWorld"]
+[editable path="ExteriorViewport/ExteriorWorld/SubExterior"]

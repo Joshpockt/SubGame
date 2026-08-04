@@ -13,6 +13,7 @@ const sensitivity = 10;
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+
 var ExternalCameraHook=null
 
 @export var posLerpTo=Vector3.ZERO;

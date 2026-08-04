@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://15w18834er6v"]
 
+[ext_resource type="Script" uid="uid://2f4rv46fxlr8" path="res://SubMovementController.gd" id="1_mvfxg"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
 radius = 5.0
 height = 25.0
@@ -8,9 +10,22 @@ height = 25.0
 radius = 5.0
 height = 25.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a6mxv"]
+properties/0/path = NodePath(".:linear_velocity")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:angular_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="SubExterior" type="RigidBody3D" unique_id=201099548]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+gravity_scale = 0.0
+can_sleep = false
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_mvfxg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1101979113]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -19,3 +34,14 @@ mesh = SubResource("CapsuleMesh_beyo5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1368176144]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_dklud")
+
+[node name="FrontView" type="SubViewport" parent="." unique_id=1654531739]
+
+[node name="Camera" type="Camera3D" parent="FrontView" unique_id=1137055733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
+
+[node name="Syncronizer" type="MultiplayerSynchronizer" parent="." unique_id=1419262111]
+replication_config = SubResource("SceneReplicationConfig_a6mxv")
+
+[node name="FrontViewAnchor" type="Node3D" parent="." unique_id=1263571826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
