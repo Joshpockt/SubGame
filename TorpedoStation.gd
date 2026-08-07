@@ -13,6 +13,7 @@ var isClient=false
 @export var MaxLockOnDeviation=20
 @onready var creatures: Node3D = $"../../ExteriorViewport/ExteriorWorld/Creatures"
 var lockedOnto=null
+var hookDelay=0
 
 
 
@@ -43,6 +44,7 @@ func LockOn():
 
 @rpc("authority","call_local","reliable")
 func UseStation(id):
+	hookDelay=1
 	if beingUsed&&roomManager.Players[id] == using:
 		beingUsed=false
 		using=null
@@ -60,6 +62,8 @@ func UseStation(id):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	interactor.interacted.connect(func():
+		if hookDelay >= 0:
+			return
 		if multiplayer.is_server():
 			RequestUse(1)
 		else:
@@ -69,6 +73,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if hookDelay > 0:
+		hookDelay-=delta
 	if beingUsed:
 		using.mover.global_position=player_seat.global_position
 		rotate.global_rotation=using.mover.global_rotation
