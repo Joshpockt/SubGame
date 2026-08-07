@@ -13,8 +13,8 @@ var hullcrackIds=0
 
 var syncCooldown=10
 
-func HullCrack():
-	var crackPos = hole_ref.to_global(sub_exterior.currentCollisionPoint)
+@rpc("any_peer","call_local","reliable")
+func HullCrack(crackPos):
 	var crack = HULLCRACK.instantiate()
 	hull_crack_spots.add_child(crack)
 	crack.global_position=crackPos
@@ -22,9 +22,12 @@ func HullCrack():
 	crack.name=str(hullcrackIds)
 	hullcrackIds+=1
 
+func RequestHullCrack():
+	rpc("HullCrack",hole_ref.to_global(sub_exterior.currentCollisionPoint))
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sub_exterior.SubTookDamage.connect(HullCrack)
+	sub_exterior.SubTookDamage.connect(RequestHullCrack)
 
 func syncData(floodedAmt,boileramt):
 	floodedAmount=floodedAmt
