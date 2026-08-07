@@ -100,7 +100,7 @@ ring_segments = 14
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rt2ik"]
 height = 0.8763428
-radius = 0.22363281
+radius = 0.58203125
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_rt2ik"]
 viewport_path = NodePath("ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView")
@@ -288,13 +288,13 @@ transform = Transform3D(0.07, 0, 0, 0, -3.059797e-09, -0.07, 0, 0.07, -3.059797e
 mesh = SubResource("TorusMesh_rt2ik")
 
 [node name="Interactor" type="Area3D" parent="Ship/TorpedoStation" unique_id=901997302]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5556133, 0.0062487116)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.556, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_akvua")
 
 [node name="InteractionCollider" type="CollisionShape3D" parent="Ship/TorpedoStation/Interactor" unique_id=2123108154]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4619348, -0.7102903)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462, 0)
 shape = SubResource("CylinderShape3D_rt2ik")
 
 [node name="PlayerSeat" type="Node3D" parent="Ship/TorpedoStation" unique_id=1529438785]

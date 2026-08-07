@@ -62,7 +62,7 @@ func UseStation(id):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	interactor.interacted.connect(func():
-		if hookDelay >= 0:
+		if hookDelay > 0:
 			return
 		if multiplayer.is_server():
 			RequestUse(1)
@@ -75,13 +75,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if hookDelay > 0:
 		hookDelay-=delta
-	if beingUsed:
+	if beingUsed && using != null:
 		using.mover.global_position=player_seat.global_position
 		rotate.global_rotation=using.mover.global_rotation
 		if isClient:
 			if Input.is_action_just_pressed("interact"):
-				beingUsed=false
-				using=null
 				isClient=false
 				view.hide()
 				if multiplayer.is_server():
