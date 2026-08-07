@@ -49,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	if Searching:return;
 	if PathIndex==Max || CurrentPath.is_empty():
 		FindWanderSpot()
+		return
 	var TargetPosition = CurrentPath[PathIndex]
 	var dir = head.global_transform.basis.y
 	head.apply_central_force(dir*speed)

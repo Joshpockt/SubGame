@@ -18,6 +18,10 @@ background_mode = 2
 sky = SubResource("Sky_rlwym")
 glow_enabled = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_itu75"]
+friction = 0.9
+bounce = 0.3
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ky1dq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bnjtu"]
@@ -84,6 +88,10 @@ environment = SubResource("Environment_vysrt")
 
 [node name="SubExterior" parent="." unique_id=201099548 instance=ExtResource("1_rxtm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -79.508095)
+collision_layer = 3
+mass = 30.0
+physics_material_override = SubResource("PhysicsMaterial_itu75")
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 1
 
@@ -122,6 +130,7 @@ PathfindingNodes = NodePath("../PathfindingNodes")
 
 [node name="Head" type="RigidBody3D" parent="Werm" unique_id=1711939210]
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 1.0
 
@@ -134,6 +143,7 @@ mesh = SubResource("BoxMesh_4tuaj")
 [node name="Body0" type="RigidBody3D" parent="Werm" unique_id=187137576]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29076, 0)
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 3.0
 
@@ -154,6 +164,7 @@ angular_limit_z/enabled = false
 [node name="Body1" type="RigidBody3D" parent="Werm" unique_id=1848063360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0141153, 0)
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 3.0
 
@@ -174,6 +185,7 @@ angular_limit_z/enabled = false
 [node name="Body2" type="RigidBody3D" parent="Werm" unique_id=213355172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.719995, 0)
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 3.0
 
@@ -194,6 +206,7 @@ angular_limit_z/enabled = false
 [node name="Body3" type="RigidBody3D" parent="Werm" unique_id=1552871563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.344972, 0)
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 3.0
 
@@ -214,6 +227,7 @@ angular_limit_z/enabled = false
 [node name="Body4" type="RigidBody3D" parent="Werm" unique_id=487729081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.080928, 0)
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 3.0
 
@@ -234,6 +248,7 @@ angular_limit_z/enabled = false
 [node name="Body5" type="RigidBody3D" parent="Werm" unique_id=875086327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.737237, 0)
 gravity_scale = 0.0
+continuous_cd = true
 linear_damp = 1.0
 angular_damp = 3.0
 

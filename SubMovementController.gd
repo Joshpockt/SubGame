@@ -1,8 +1,8 @@
 extends RigidBody3D
 
-const SPEED = 5.0
-const ROTATION_SPEED=5.0
-const VERTICAL_SPEED = 3
+const SPEED = 150.0
+const ROTATION_SPEED=150.0
+const VERTICAL_SPEED = 80
 @onready var front_view_camera: Camera3D = $FrontView/Camera
 @onready var front_view_anchor: Node3D = $FrontViewAnchor
 @onready var bumper: Area3D = $Bumper
@@ -14,6 +14,7 @@ var lastlastMagnitdue=0.0
 var Damage=0
 var isColliding=false
 var currentCollisionPoint=Vector3.ZERO
+var syncTimer=10
 
 signal SubTookDamage
 
@@ -29,12 +30,21 @@ func SubCollides():
 	shakeCooldown=1.0
 	SubTookDamage.emit()
 	
+@rpc("authority","call_local","reliable")
+func reSync(pos,rot):
+	global_position=pos
+	global_rotation=rot
 	
-
 
 func _process(delta: float) -> void:
 	Utils.SnapTo(front_view_camera,front_view_anchor)
 	shakeCooldown-=delta
+	if syncronizer.is_multiplayer_authority():
+		if syncTimer > 0:
+			syncTimer-=delta
+		else:
+			syncTimer=10
+			rpc("reSync",global_position,global_rotation)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	isColliding=state.get_contact_count()!=0

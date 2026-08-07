@@ -23,12 +23,17 @@ func HullCrack(crackPos):
 	hullcrackIds+=1
 
 func RequestHullCrack():
-	rpc("HullCrack",hole_ref.to_global(sub_exterior.currentCollisionPoint))
+	var crackPos=hole_ref.to_global(sub_exterior.currentCollisionPoint)
+	for i in hull_crack_spots.get_children():
+		if crackPos.distance_to(i.global_position) < .3:
+			return
+	rpc("HullCrack",crackPos)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sub_exterior.SubTookDamage.connect(RequestHullCrack)
 
+@rpc("authority","call_local","reliable")
 func syncData(floodedAmt,boileramt):
 	floodedAmount=floodedAmt
 	boiler.Energy=boileramt
@@ -36,7 +41,8 @@ func syncData(floodedAmt,boileramt):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$Water/InWater.visible=localplayer.mover.global_position.y < floodedAmount-1.6
-	floodedAmount+=delta*hull_crack_spots.get_child_count()/40
+	if floodedAmount < 5.5:
+		floodedAmount+=delta*hull_crack_spots.get_child_count()/40
 	if hull_crack_spots.get_child_count() == 0 && floodedAmount > 0:
 		floodedAmount-=delta/50
 	if multiplayer.is_server():
