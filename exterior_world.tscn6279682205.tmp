@@ -83,9 +83,6 @@ height = 2.3115234
 environment = SubResource("Environment_vysrt")
 
 [node name="SubExterior" parent="." unique_id=201099548 instance=ExtResource("1_rxtm4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -79.508095)
-contact_monitor = true
-max_contacts_reported = 1
 
 [node name="test_cave" type="Node3D" parent="." unique_id=1396209838]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.1785393, 0.27724075, 37.50976)
@@ -104,11 +101,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 39.698933)
 script = ExtResource("3_vysrt")
 
 [node name="Node" type="Node3D" parent="PathfindingNodes" unique_id=857124492]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.19432, 1.5258789e-05, -114.3358)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.14023, 0, -938.15497)
 
 [node name="Debug" type="MeshInstance3D" parent="PathfindingNodes/Node" unique_id=1059776433]
 transform = Transform3D(0.34577668, 0, 0, 0, 0.34577668, 0, 0, 0, 0.34577668, 0, 0, 0)
-visible = false
 mesh = SubResource("SphereMesh_6aag7")
 surface_material_override/0 = SubResource("StandardMaterial3D_h1l74")
 
@@ -116,7 +112,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_h1l74")
 script = ExtResource("4_6aag7")
 
 [node name="Werm" type="Node3D" parent="." unique_id=1438468707 node_paths=PackedStringArray("PathfindingNodes")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.48413, 5.3574934, -162.66196)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.694614, 5.3574934, -35.595078)
 script = ExtResource("5_h1l74")
 PathfindingNodes = NodePath("../PathfindingNodes")
 

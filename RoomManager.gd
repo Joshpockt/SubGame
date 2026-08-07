@@ -5,6 +5,8 @@ var localplayer;
 var avatar = preload("res://player.tscn")
 var firstServerId;
 var Players:Dictionary
+@onready var sub_exterior: RigidBody3D = $ExteriorViewport/ExteriorWorld/SubExterior
+
 # Called when the node enters the scene tree for the first time.
 
 
@@ -23,7 +25,9 @@ func _ready() -> void:
 	localplayer.name=str(multiplayer.get_unique_id())
 	localplayer.set_multiplayer_authority(multiplayer.get_unique_id())
 	localplayer.find_child("Syncronizer").set_multiplayer_authority(multiplayer.get_unique_id())
+	localplayer.submarine=sub_exterior
 	Players[multiplayer.get_unique_id()]=localplayer
+	$Ship.localplayer=localplayer
 	for i in multiplayer.get_peers():
 		var plr = avatar.instantiate()
 		add_child(plr)

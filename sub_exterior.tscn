@@ -6,10 +6,6 @@
 radius = 5.0
 height = 25.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dklud"]
-radius = 5.0
-height = 25.0
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a6mxv"]
 properties/0/path = NodePath(".:linear_velocity")
 properties/0/spawn = true
@@ -18,7 +14,12 @@ properties/1/path = NodePath(".:angular_velocity")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dklud"]
+radius = 5.0
+height = 25.0
+
 [node name="SubExterior" type="RigidBody3D" unique_id=201099548]
+collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 gravity_scale = 0.0
@@ -31,10 +32,6 @@ script = ExtResource("1_mvfxg")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_beyo5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1368176144]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_dklud")
-
 [node name="FrontView" type="SubViewport" parent="." unique_id=1654531739]
 
 [node name="Camera" type="Camera3D" parent="FrontView" unique_id=1137055733]
@@ -44,4 +41,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
 replication_config = SubResource("SceneReplicationConfig_a6mxv")
 
 [node name="FrontViewAnchor" type="Node3D" parent="." unique_id=1263571826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.430268)
+
+[node name="Bumper" type="Area3D" parent="." unique_id=2141023260]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Collider" type="CollisionShape3D" parent="Bumper" unique_id=1368176144]
+shape = SubResource("CapsuleShape3D_dklud")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=1794558149]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_dklud")

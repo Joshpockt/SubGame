@@ -4,9 +4,12 @@ var circleLerp=.2
 var hollowLerp=0.0
 var ProgressLerp=1.0
 var lerpSpeed=13
-@onready var mover: CharacterBody3D = $"../../Mover"
-@onready var circle: ColorRect = $"../../UI/Crosshair/circle"
-@onready var syncronizer: MultiplayerSynchronizer = $"../../Syncronizer"
+@onready var mover: CharacterBody3D = $"../../../Mover"
+
+@onready var circle: ColorRect = $"../../../UI/Crosshair/circle"
+
+@onready var syncronizer: MultiplayerSynchronizer = $"../../../Syncronizer"
+
 
 
 func _ready() -> void:

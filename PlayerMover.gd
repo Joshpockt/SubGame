@@ -6,6 +6,7 @@ extends CharacterBody3D
 
 var tabout = false;
 @onready var camera_offset: Node3D = $CameraOffset
+@onready var camera_holder: Node3D = $"../CameraHolder"
 
 var mouseX = 0;
 var mouseY = 0;
@@ -18,6 +19,11 @@ var ExternalCameraHook=null
 
 @export var posLerpTo=Vector3.ZERO;
 @export var rotLerpTo=Vector3.ZERO;
+
+
+
+func HullShaken():
+	camera_offset._custom_shake(2, 0.1)
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -34,13 +40,15 @@ func _ready() -> void:
 		$Render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		player.username=Steam.getPersonaName()
+		player.submarine.SubTookDamage.connect(HullShaken)
 		
 		
 func cameraMovments(delta: float):
 	if ExternalCameraHook == null:
-		Utils.SnapTo(camera,camera_offset)
+		Utils.SnapTo(camera_holder,camera_offset)
 	else:
-		Utils.LerpTo(camera,ExternalCameraHook,delta*10)
+		Utils.LerpTo(camera_holder,ExternalCameraHook,delta*10)
+
 		
 
 func updateTabout():
@@ -55,6 +63,7 @@ func _input(event: InputEvent) -> void:
 	if !syncronizer.is_multiplayer_authority(): return;
 	if event is InputEventMouseMotion && !tabout:
 		camera_offset.rotation_degrees.x += event.screen_relative.y/-sensitivity;
+		camera_offset.rotation_degrees.x = clamp(camera_offset.rotation_degrees.x,-89,89)
 		rotation_degrees.y += event.screen_relative.x/-sensitivity;
 	else:
 		if Input.is_action_just_pressed("tab_out"):
@@ -64,6 +73,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	$Render/display_name.text=player.username
 	if syncronizer.is_multiplayer_authority():
+		
 		cameraMovments(delta)
 		if global_position.distance_to(posLerpTo) > .1:
 			posLerpTo=global_position
