@@ -82,6 +82,7 @@ func _process(delta: float) -> void:
 					RequestUse(1)
 				else:
 					rpc_id(1,"RequestUse",multiplayer.get_unique_id())
+				return
 			LockOn()
 			torpedo_view_anchor.global_rotation=using.mover.camera.global_rotation
 		
