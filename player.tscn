@@ -92,6 +92,7 @@ layout_mode = 2
 [node name="CameraHolder" type="Node3D" parent="." unique_id=101966883]
 
 [node name="Camera" type="Camera3D" parent="CameraHolder" unique_id=647781432 node_paths=PackedStringArray("shake_node")]
+current = true
 script = ExtResource("6_dw050")
 shake_node = NodePath("../../Mover/CameraOffset")
 

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dx8tkd0nkdyew" path="res://CoalPile.gd" id="6_bstsi"]
 [ext_resource type="PackedScene" uid="uid://kawd0hj84e0p" path="res://exterior_viewport.tscn" id="6_igtqi"]
 [ext_resource type="Script" uid="uid://dddcaliy0odek" path="res://Boiler.gd" id="7_1tx2p"]
+[ext_resource type="Script" uid="uid://b43xdv2uowbsa" path="res://TorpedoStation.gd" id="7_3t6qa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_akvua"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -83,6 +84,26 @@ albedo_color = Color(0.43489692, 0.6041591, 0.99999577, 0.53333336)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tf0ms"]
 size = Vector3(20.473633, 10.150436, 11.820557)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tf0ms"]
+size = Vector3(0.218, 1.4963379, 0.218)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bstsi"]
+size = Vector3(0.218, 0.9760132, 0.218)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1tx2p"]
+size = Vector3(0.39453125, 0.1625061, 0.16106738)
+
+[sub_resource type="TorusMesh" id="TorusMesh_rt2ik"]
+rings = 21
+ring_segments = 14
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rt2ik"]
+height = 0.8763428
+radius = 0.22363281
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rt2ik"]
+viewport_path = NodePath("ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView")
 
 [node name="DebugScene" type="Node" unique_id=1049535370]
 script = ExtResource("1_lnlp5")
@@ -234,12 +255,81 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17454505, 0.30584177, 0.6247758, 0.42352942)
 
+[node name="TorpedoStation" type="Node3D" parent="Ship" unique_id=1348236003 node_paths=PackedStringArray("roomManager")]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 2.9885976, 2.2174962)
+script = ExtResource("7_3t6qa")
+roomManager = NodePath("../..")
+
+[node name="Rotate" type="Node3D" parent="Ship/TorpedoStation" unique_id=2023967965]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3164024, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship/TorpedoStation/Rotate" unique_id=491862666]
+transform = Transform3D(1, 0, 0, 0, 0.8654229, -0.5010417, 0, 0.5010417, 0.8654229, 0, -0.73022485, -0.45559144)
+mesh = SubResource("BoxMesh_tf0ms")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ship/TorpedoStation/Rotate" unique_id=1492606234]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, -1.75255, -0.8135067)
+mesh = SubResource("BoxMesh_bstsi")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ship/TorpedoStation/Rotate" unique_id=1564587120]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, 0.34934878, -0.102832556)
+mesh = SubResource("BoxMesh_bstsi")
+
+[node name="SCreen" type="MeshInstance3D" parent="Ship/TorpedoStation/Rotate" unique_id=70748157]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, -2.1051965, -0.6337867)
+mesh = SubResource("BoxMesh_1tx2p")
+
+[node name="SCreen2" type="MeshInstance3D" parent="Ship/TorpedoStation/Rotate" unique_id=1350137605]
+transform = Transform3D(0.07, 0, 0, 0, -3.059797e-09, -0.07, 0, 0.07, -3.059797e-09, 0.10695751, -2.1051965, -0.5590708)
+mesh = SubResource("TorusMesh_rt2ik")
+
+[node name="SCreen3" type="MeshInstance3D" parent="Ship/TorpedoStation/Rotate" unique_id=562050781]
+transform = Transform3D(0.07, 0, 0, 0, -3.059797e-09, -0.07, 0, 0.07, -3.059797e-09, -0.12268473, -2.1051965, -0.5590708)
+mesh = SubResource("TorusMesh_rt2ik")
+
+[node name="Interactor" type="Area3D" parent="Ship/TorpedoStation" unique_id=901997302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5556133, 0.0062487116)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_akvua")
+
+[node name="InteractionCollider" type="CollisionShape3D" parent="Ship/TorpedoStation/Interactor" unique_id=2123108154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4619348, -0.7102903)
+shape = SubResource("CylinderShape3D_rt2ik")
+
+[node name="PlayerSeat" type="Node3D" parent="Ship/TorpedoStation" unique_id=1529438785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9703472, 0)
+
+[node name="Reference" type="Node3D" parent="Ship/TorpedoStation/PlayerSeat" unique_id=1395706918]
+visible = false
+
+[node name="Capsule" type="MeshInstance3D" parent="Ship/TorpedoStation/PlayerSeat/Reference" unique_id=1600587373]
+mesh = SubResource("CapsuleMesh_rt2ik")
+
+[node name="Facing" type="MeshInstance3D" parent="Ship/TorpedoStation/PlayerSeat/Reference" unique_id=2091535657]
+transform = Transform3D(-6.1403322e-09, -0.32269946, -6.9669577e-09, 0, -1.4105641e-08, 0.15938541, -0.14047442, 1.4105641e-08, 3.045354e-16, 2.3841858e-07, 0.52854306, -0.40210962)
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="View" type="TextureRect" parent="Ship/TorpedoStation" unique_id=896929928]
+visible = false
+modulate = Color(0.29321533, 0.56253266, 0.7470757, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_rt2ik")
+
 [node name="Players" type="Node3D" parent="." unique_id=2122263035]
 
 [node name="ExteriorViewport" parent="." unique_id=1238947704 instance=ExtResource("6_igtqi")]
 
 [node name="FrontView" parent="ExteriorViewport/ExteriorWorld/SubExterior" parent_id_path=PackedInt32Array(1238947704, 564991855, 201099548) index="1" unique_id=1654531739]
 size = Vector2i(198, 198)
+
+[node name="TorpedoCam" parent="ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView" parent_id_path=PackedInt32Array(1238947704, 564991855, 201099548, 104737898) index="0" unique_id=2064507480]
+current = false
 
 [node name="Cube" parent="ExteriorViewport/ExteriorWorld/test_cave" parent_id_path=PackedInt32Array(1238947704, 564991855, 1396209838) index="0" unique_id=599971255]
 transform = Transform3D(0.9999995, -0.00018307044, 0.00091291504, 0.00018447191, 0.9999988, -0.001529386, -0.00091263285, 0.0015295544, 0.9999984, -0.034057617, 0.12141752, 0.017681122)

@@ -7,6 +7,8 @@ const VERTICAL_SPEED = 80
 @onready var front_view_anchor: Node3D = $FrontViewAnchor
 @onready var bumper: Area3D = $Bumper
 @onready var collider: CollisionShape3D = $Bumper/Collider
+@onready var torpedo_cam: Camera3D = $TorpedoView/TorpedoCam
+@onready var torpedo_view_anchor: Node3D = $TorpedoViewAnchor
 
 var shakeCooldown=0.0
 var lastMagnitude=0.0
@@ -38,6 +40,7 @@ func reSync(pos,rot):
 
 func _process(delta: float) -> void:
 	Utils.SnapTo(front_view_camera,front_view_anchor)
+	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
 	shakeCooldown-=delta
 	if syncronizer.is_multiplayer_authority():
 		if syncTimer > 0:

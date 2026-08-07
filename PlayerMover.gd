@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var syncronizer: MultiplayerSynchronizer = $"../Syncronizer"
-@onready var camera: Camera3D = $"../Camera"
+@onready var camera: Camera3D = $"../CameraHolder/Camera"
 @onready var player: Node3D = $".."
 
 var tabout = false;
@@ -87,9 +87,10 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	if tabout:return;
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	if tabout:return;
+
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY

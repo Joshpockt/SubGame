@@ -12,6 +12,8 @@ var PathIndex=0
 var CurrentPath=null
 var Searching=false
 var Max =0
+var lockOnPos=Vector3.ZERO
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -62,3 +64,6 @@ func _physics_process(delta: float) -> void:
 	head.apply_torque(axis.normalized() * angle * torque_strength- head.angular_velocity * damping)
 	if head.global_position.distance_to(TargetPosition) < 3:
 		PathIndex+=1
+
+func _process(delta: float) -> void:
+	lockOnPos=head.global_position
