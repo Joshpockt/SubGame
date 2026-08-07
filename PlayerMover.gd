@@ -29,7 +29,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	if !syncronizer.is_multiplayer_authority():
 		$"../UI".queue_free()
-		$"../Camera".queue_free()
+		$"../CameraHolder/Camera".queue_free()
 		set_collision_mask_value(2,true)
 		set_collision_mask_value(1,false)
 		set_collision_layer_value(2,true)
