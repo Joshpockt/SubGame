@@ -40,6 +40,7 @@ func FindWanderSpot():
 	if CurrentPath == null:
 		Searching=true
 		push_error("your fucked")
+		return
 	Max = CurrentPath.size()-1
 	PathIndex=0
 
