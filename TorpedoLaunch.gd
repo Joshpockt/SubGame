@@ -13,7 +13,8 @@ var exploded=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if !multiplayer.is_server():
+		freeze=true
 
 @rpc("authority","call_local","reliable")
 func reSyncRpc(pos,rot):
@@ -50,12 +51,12 @@ func impactHandler():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !sync.is_multiplayer_authority(): return
+	if !multiplayer.is_server(): return
 	Thrust()
 	impactHandler()
 	
-	reSync-=delta
-	if reSync < 0:
-		reSync=4.0
-		rpc("reSyncRpc",global_position,global_rotation)
+	#reSync-=delta
+	#if reSync < 0:
+		#reSync=4.0
+		#rpc("reSyncRpc",global_position,global_rotation)
 		
