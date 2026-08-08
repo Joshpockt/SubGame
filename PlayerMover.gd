@@ -22,7 +22,7 @@ var ExternalCameraHook=null
 @export var rotLerpTo=Vector3.ZERO;
 
 var input_Lerp:Vector2
-
+@export var input_dir_anims:Vector2
 func HullShaken():
 	camera_offset._custom_shake(2, 0.1)
 
@@ -75,6 +75,8 @@ func _process(delta: float) -> void:
 	$Render/display_name.text=player.username
 	if syncronizer.is_multiplayer_authority():
 		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		if input_dir_anims != input_dir:
+			input_dir_anims=input_dir
 		input_Lerp=input_Lerp.lerp(input_dir,8*delta)
 		tree.set("parameters/MainTree/blend_position", input_Lerp)
 		cameraMovments(delta)
@@ -84,7 +86,8 @@ func _process(delta: float) -> void:
 			#print("updating rotation")
 			#rotLerpTo=global_rotation
 	else:
-		pass
+		input_Lerp=input_Lerp.lerp(input_dir_anims,8*delta)
+		tree.set("parameters/MainTree/blend_position", input_Lerp)
 		global_position=global_position.lerp(posLerpTo,15*delta)
 		#global_rotation=global_rotation.lerp(rotLerpTo,15*delta)
 
