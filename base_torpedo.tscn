@@ -117,8 +117,15 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_opbaf")
 orientation = 2
 
+[sub_resource type="Curve" id="Curve_bidfw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.82679737, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_j6bc1"]
+curve = SubResource("Curve_bidfw")
+
 [sub_resource type="Curve" id="Curve_cx0cr"]
-_data = [Vector2(0, 0.5811966), 0.0, 0.0, 0, 0, Vector2(0.7091503, 0.5470086), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.5811966), 0.0, 0.0, 0, 0, Vector2(0.7091503, 0.5470086), 0.0, 0.0, 0, 0, Vector2(1, 0.3595506), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_n30nq"]
@@ -129,13 +136,16 @@ lifetime_randomness = 0.28
 angle_min = -720.0
 angle_max = 720.0
 direction = Vector3(0, 0, -1)
-spread = 0.0
+spread = 30.0
 initial_velocity_min = 2.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 1, 0)
+damping_min = 1.0
+damping_max = 1.0
 scale_min = 0.29999998
 scale_max = 0.39999998
 scale_curve = SubResource("CurveTexture_n30nq")
+alpha_curve = SubResource("CurveTexture_j6bc1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oshr5"]
 transparency = 1
@@ -185,6 +195,6 @@ draw_pass_1 = SubResource("PlaneMesh_tf0ms")
 [node name="thrust" type="GPUParticles3D" parent="." unique_id=530672128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0856278)
 amount = 300
-lifetime = 2.0
+lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_rt2ik")
 draw_pass_1 = SubResource("PlaneMesh_f5qoj")

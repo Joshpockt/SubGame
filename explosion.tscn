@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bqar55wx6jg2" path="res://explosion.gd" id="1_vxas0"]
 
 [sub_resource type="Curve" id="Curve_vxas0"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.33660132, 0.8205129), 1.0059167, 1.0059167, 0, 0, Vector2(0.59150326, 0.8205129), -0.9807695, -0.9807695, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2777778, 0.78688514), 2.0437148, 2.0437148, 0, 0, Vector2(0.6666666, 0.762295), -1.5372822, -1.5372822, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_r3edp"]
@@ -38,6 +38,52 @@ albedo_texture = ExtResource("1_q7epf")
 material = SubResource("StandardMaterial3D_n30nq")
 orientation = 1
 
+[sub_resource type="Curve" id="Curve_k0n8d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.83986926, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dklud"]
+curve = SubResource("Curve_k0n8d")
+
+[sub_resource type="Curve" id="Curve_j4sxf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4786325), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vxas0"]
+curve = SubResource("Curve_j4sxf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_beyo5"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 2, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_vxas0")
+alpha_curve = SubResource("CurveTexture_dklud")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vxas0"]
+load_path = "res://.godot/imported/splash.png-929ed8a00b89ba36c51789452f874c77.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4sxf"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.5752346, 0.70350903, 0.92582196, 1)
+albedo_texture = SubResource("CompressedTexture2D_vxas0")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_m5xho"]
+material = SubResource("StandardMaterial3D_j4sxf")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_rt2ik"]
 radius = 1.0
 
@@ -47,16 +93,26 @@ radius = 7.090728
 [node name="Explosion" type="StaticBody3D" unique_id=68353872]
 script = ExtResource("1_vxas0")
 
-[node name="fx" type="GPUParticles3D" parent="." unique_id=798301538]
+[node name="Implosion" type="GPUParticles3D" parent="." unique_id=798301538]
 emitting = false
 amount = 200
-lifetime = 0.7
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_tf0ms")
 draw_pass_1 = SubResource("QuadMesh_opbaf")
+
+[node name="Bubbles" type="GPUParticles3D" parent="." unique_id=1320890297]
+emitting = false
+amount = 150
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_beyo5")
+draw_pass_1 = SubResource("QuadMesh_m5xho")
 
 [node name="collider" type="CollisionShape3D" parent="." unique_id=1454803949]
 shape = SubResource("SphereShape3D_rt2ik")
