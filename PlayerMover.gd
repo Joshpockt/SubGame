@@ -7,6 +7,7 @@ extends CharacterBody3D
 var tabout = false;
 @onready var camera_offset: Node3D = $CameraOffset
 @onready var camera_holder: Node3D = $"../CameraHolder"
+@onready var tree: AnimationTree = $Tree
 
 var mouseX = 0;
 var mouseY = 0;
@@ -20,7 +21,7 @@ var ExternalCameraHook=null
 @export var posLerpTo=Vector3.ZERO;
 @export var rotLerpTo=Vector3.ZERO;
 
-
+var input_Lerp:Vector2
 
 func HullShaken():
 	camera_offset._custom_shake(2, 0.1)
@@ -37,7 +38,7 @@ func _ready() -> void:
 		set_physics_process(false)
 		set_process_input(false)
 	else:
-		$Render.hide()
+		#$Render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		player.username=Steam.getPersonaName()
 		player.submarine.SubTookDamage.connect(HullShaken)
@@ -73,7 +74,9 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	$Render/display_name.text=player.username
 	if syncronizer.is_multiplayer_authority():
-		
+		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		input_Lerp=input_Lerp.lerp(input_dir,8*delta)
+		tree.set("parameters/MainTree/blend_position", input_Lerp)
 		cameraMovments(delta)
 		if global_position.distance_to(posLerpTo) > .1:
 			posLerpTo=global_position
@@ -105,5 +108,5 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
 	move_and_slide()
