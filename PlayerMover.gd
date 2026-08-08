@@ -80,7 +80,9 @@ func StopEmotes():
 	currentEmote=""
 	tree.active=true
 	animation_player.stop(false)
-	
+	if multiplayer.get_remote_sender_id() == multiplayer.get_unique_id():
+		render.hide()
+		camera_offset.position.z=0
 
 
 func _input(event: InputEvent) -> void:
@@ -96,6 +98,14 @@ func _input(event: InputEvent) -> void:
 			rpc("PlayEmote","emote2")
 		if Input.is_action_just_pressed("emote3"):
 			rpc("PlayEmote","emote3")
+		if Input.is_action_just_pressed("emote4"):
+			rpc("PlayEmote","emote4")
+		if Input.is_action_just_pressed("emote5"):
+			rpc("PlayEmote","emote5")
+		if Input.is_action_just_pressed("emote6"):
+			rpc("PlayEmote","emote6")
+		if Input.is_action_just_pressed("emote7"):
+			rpc("PlayEmote","emote7")
 		if Input.is_action_just_pressed("tab_out"):
 			tabout=!tabout;
 			updateTabout()
@@ -106,11 +116,14 @@ func _process(delta: float) -> void:
 		render.position.y=-1
 		render.rotation_degrees.y=180
 		if input_dir_anims.length() != 0 && syncronizer.is_multiplayer_authority():
-			render.hide()
 			rpc("StopEmotes")
 		if animation_player.current_animation != "character/"+currentEmote:
 			currentEmote=""
 			tree.active=true
+			if syncronizer.is_multiplayer_authority():
+				render.hide()
+				camera_offset.position.z=0
+
 	else:
 		render.rotation.y=0
 		render.position.y=0
