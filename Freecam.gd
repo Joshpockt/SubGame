@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 
 
 var warping=false
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	rotation_degrees.x = clamp(mouseX,-90,90);
 	rotation_degrees.y=mouseY;

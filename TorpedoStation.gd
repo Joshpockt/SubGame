@@ -5,7 +5,7 @@ var beingUsed=false
 @export var roomManager:Node
 @onready var interactor: InteractionBox3D = $Interactor
 @onready var player_seat: Node3D = $PlayerSeat
-@onready var rotate: Node3D = $Rotate
+@onready var rot: Node3D = $Rotate
 @onready var view: TextureRect = $View
 @onready var torpedo_view_anchor: Node3D = $"../../ExteriorViewport/ExteriorWorld/SubExterior/TorpedoViewAnchor"
 var isClient=false
@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 		hookDelay-=delta
 	if beingUsed && using != null:
 		using.mover.global_position=player_seat.global_position
-		rotate.global_rotation=using.mover.global_rotation
+		rot.global_rotation=using.mover.global_rotation
 		if isClient:
 			if Input.is_action_just_pressed("interact"):
 				isClient=false

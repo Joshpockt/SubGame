@@ -23,7 +23,9 @@ var syncTimer=10
 
 var base_torpedo = preload("res://base_torpedo.tscn")
 var firedTorpedos=0
-var torpedoLoaded=true
+var torpedoLoaded=true:
+	get():
+		return true
 signal SubTookDamage
 
 @onready var syncronizer: MultiplayerSynchronizer = $Syncronizer
@@ -59,7 +61,7 @@ func fireTorpedo(id,cid):
 	torpedo.LockedOnto = creatures.creatures[cid]
 	torpedo.name="Torpedo"+str(id)
 	Utils.SnapTo(torpedo,torpedo_launch)
-	
+
 
 func _process(delta: float) -> void:
 	torpedo_launch.visible=torpedoLoaded
@@ -80,7 +82,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if isColliding && syncronizer.is_multiplayer_authority():
 		if shakeCooldown <= 0 && lastlastMagnitdue > 1.8:
 			rpc("SubCollides")
@@ -90,6 +92,6 @@ func _physics_process(delta: float) -> void:
 	var movement_dir := Input.get_vector("descend", "rise", "ui_up", "ui_down")
 	var rotation_dir := Input.get_vector("ui_right", "ui_left", "ui_up", "ui_down")
 	var movement := (transform.basis * Vector3(0, movement_dir.x, movement_dir.y)).normalized()
-	var rotation := (transform.basis * Vector3(0, rotation_dir.x, 0)).normalized()
+	var rot := (transform.basis * Vector3(0, rotation_dir.x, 0)).normalized()
 	apply_central_force(movement*SPEED)
-	apply_torque(rotation*ROTATION_SPEED)
+	apply_torque(rot*ROTATION_SPEED)

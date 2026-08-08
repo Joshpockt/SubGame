@@ -101,7 +101,7 @@ func getLockOn():
 	lockOnPos=head.global_position
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	lockOnPos=head.global_position
 	#if multiplayer.is_server():
 		#syncTime-=delta

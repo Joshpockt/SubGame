@@ -13,7 +13,7 @@ var config = ConfigFile.new()
 var isHost=false
 
 @rpc("any_peer","call_local","reliable")
-func addPlayerLabel(name:String):
+func addPlayerLabel(_name:String):
 	var label = player_base.duplicate()
 	players.add_child(label)
 	label.show()
@@ -47,12 +47,12 @@ func _on_lobby_joined(lobby_id:int,permissions:int,locked:bool,response:int):
 	addPlayerLabel(Steam.getPersonaName())
 	
 	
-func _on_lobby_created(result:int,lobby_id:int):
+func _on_lobby_created(result:int,id:int):
 	if result == Steam.Result.RESULT_OK:
 		isHost=true
 		print("hosting")
 
-		self.lobby_id=lobby_id
+		lobby_id = id
 		$MainMenu/CenterContainer/VBoxContainer.hide()
 		$MainMenu/CenterContainer/InLobby.show()
 		$MainMenu/CenterContainer/InLobby/Start.show()
@@ -116,10 +116,10 @@ func attemptJoin():
 
 func lobby_match_list(lobby_ids):
 	print(lobby_ids)
-	for lobby_id in lobby_ids:
-		Steam.joinLobby(lobby_id)
+	for id in lobby_ids:
+		Steam.joinLobby(id)
 		break
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

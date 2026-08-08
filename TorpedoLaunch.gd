@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @onready var sync: MultiplayerSynchronizer = $Sync
 var LockedOnto = null
-var speed=30.0;
+var speed=50.0;
 var torque_strength = 50.0
 var damping = 8.0
 @onready var explode_ray: RayCast3D = $ExplodeRay
@@ -58,7 +58,7 @@ func impactHandler():
 		rpc("Detonate")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !multiplayer.is_server(): return
 	Thrust()
 	impactHandler()

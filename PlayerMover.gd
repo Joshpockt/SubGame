@@ -48,7 +48,7 @@ func _ready() -> void:
 		player.submarine.SubTookDamage.connect(HullShaken)
 		
 		
-func cameraMovments(delta: float):
+func cameraMovments(_delta: float):
 	if ExternalCameraHook == null:
 		Utils.SnapTo(camera_holder,camera_offset)
 	else:

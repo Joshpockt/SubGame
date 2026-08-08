@@ -41,7 +41,7 @@ func IterateNodePath(pos:Vector3i):
 
 func GeneratePathTo(from:Vector3,target:Vector3):
 	var at = from
-	var max = 0
+	var max_range = 0
 	var points:Dictionary
 	var readablePoints:Array
 	while true:
@@ -62,8 +62,8 @@ func GeneratePathTo(from:Vector3,target:Vector3):
 			var radius=PathStepDistance
 			var noGo=false
 			while !noGo:
-				max+=1
-				if max > 1000:
+				max_range+=1
+				if max_range > 1000:
 					print("target unlocatable")
 					return
 				var closest = 10000
@@ -101,5 +101,5 @@ func _ready() -> void:
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
