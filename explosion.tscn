@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://bqar55wx6jg2" path="res://explosion.gd" id="1_vxas0"]
 
 [sub_resource type="Curve" id="Curve_vxas0"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.79738563, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.33660132, 0.8205129), 1.0059167, 1.0059167, 0, 0, Vector2(0.59150326, 0.8205129), -0.9807695, -0.9807695, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_g7vmx"]
+[sub_resource type="CurveTexture" id="CurveTexture_r3edp"]
 curve = SubResource("Curve_vxas0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf0ms"]
@@ -20,12 +20,14 @@ rotation_3d_min = Vector3(0, 0, 0)
 rotation_3d_max = Vector3(8.005, 8.005, 8.005)
 direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_min = 17.039999
-initial_velocity_max = 17.039999
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
 gravity = Vector3(0, 0, 0)
 scale_min = 15.0
 scale_max = 15.0
-scale_curve = SubResource("CurveTexture_g7vmx")
+scale_curve = SubResource("CurveTexture_r3edp")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n30nq"]
 transparency = 1
@@ -51,6 +53,7 @@ amount = 200
 lifetime = 0.7
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_tf0ms")
 draw_pass_1 = SubResource("QuadMesh_opbaf")

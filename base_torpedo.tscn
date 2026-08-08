@@ -58,12 +58,71 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_43f4j")
 
+[sub_resource type="Curve" id="Curve_m5xho"]
+_data = [Vector2(0, 0.04273498), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j4sxf"]
+curve = SubResource("Curve_m5xho")
+
+[sub_resource type="Gradient" id="Gradient_cx0cr"]
+offsets = PackedFloat32Array(0, 0.071428575, 0.13214286)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.967, 0.33999997, 1, 1, 0.16666669, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vxas0"]
+gradient = SubResource("Gradient_cx0cr")
+
 [sub_resource type="Curve" id="Curve_xf37c"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.5098039, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cx0cr"]
+curve = SubResource("Curve_xf37c")
+
+[sub_resource type="Curve" id="Curve_in52a"]
+_data = [Vector2(0, 0.5811966), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bidfw"]
+curve = SubResource("Curve_in52a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j6bc1"]
+lifetime_randomness = 0.28
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, -1)
+spread = 0.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_bidfw")
+color_ramp = SubResource("GradientTexture1D_vxas0")
+alpha_curve = SubResource("CurveTexture_j4sxf")
+emission_curve = SubResource("CurveTexture_cx0cr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opbaf"]
+render_priority = 1
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tf0ms"]
+material = SubResource("StandardMaterial3D_opbaf")
+orientation = 2
+
+[sub_resource type="Curve" id="Curve_cx0cr"]
 _data = [Vector2(0, 0.5811966), 0.0, 0.0, 0, 0, Vector2(0.7091503, 0.5470086), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_n30nq"]
-curve = SubResource("Curve_xf37c")
+curve = SubResource("Curve_cx0cr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rt2ik"]
 lifetime_randomness = 0.28
@@ -73,14 +132,14 @@ direction = Vector3(0, 0, -1)
 spread = 0.0
 initial_velocity_min = 2.0
 initial_velocity_max = 2.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 1, 0)
 scale_min = 0.29999998
 scale_max = 0.39999998
 scale_curve = SubResource("CurveTexture_n30nq")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opbaf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oshr5"]
 transparency = 1
-albedo_color = Color(0.7283956, 0.9110452, 0.9924969, 1)
+vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_cx0cr")
 billboard_mode = 3
 billboard_keep_scale = true
@@ -88,8 +147,8 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_tf0ms"]
-material = SubResource("StandardMaterial3D_opbaf")
+[sub_resource type="PlaneMesh" id="PlaneMesh_f5qoj"]
+material = SubResource("StandardMaterial3D_oshr5")
 orientation = 2
 
 [node name="Torpedo" type="RigidBody3D" unique_id=1392027223]
@@ -116,9 +175,16 @@ target_position = Vector3(0, 0, 0.725)
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_wlnnh")
 
+[node name="thrust2" type="GPUParticles3D" parent="." unique_id=1666687410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9884782)
+amount = 300
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_j6bc1")
+draw_pass_1 = SubResource("PlaneMesh_tf0ms")
+
 [node name="thrust" type="GPUParticles3D" parent="." unique_id=530672128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0856278)
 amount = 300
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_rt2ik")
-draw_pass_1 = SubResource("PlaneMesh_tf0ms")
+draw_pass_1 = SubResource("PlaneMesh_f5qoj")
