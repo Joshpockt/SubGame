@@ -25,6 +25,10 @@ var input_Lerp:Vector2
 @export var input_dir_anims:Vector2
 func HullShaken():
 	camera_offset._custom_shake(2, 0.1)
+@onready var render: Node3D = $Render/Model
+
+var currentEmote=""
+@onready var animation_player: AnimationPlayer = $Render/Model/AnimationPlayer
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -38,7 +42,7 @@ func _ready() -> void:
 		set_physics_process(false)
 		set_process_input(false)
 	else:
-		$Render.hide()
+		render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		player.username=Steam.getPersonaName()
 		player.submarine.SubTookDamage.connect(HullShaken)
@@ -60,6 +64,26 @@ func updateTabout():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		$"../UI/Crosshair".show()
 
+@rpc("authority","call_local","reliable")
+func PlayEmote(animname):
+	if multiplayer.get_remote_sender_id() == multiplayer.get_unique_id():
+		render.show()
+		camera_offset.position.z=1.6
+	tree.active=false
+	animation_player.play("character/"+animname)
+	currentEmote=animname
+	render.position.y=-1
+	
+@rpc("authority","call_local","reliable")
+func StopEmotes():
+	render.hide()
+	camera_offset.position.z=0
+	currentEmote=""
+	tree.active=true
+	animation_player.stop(false)
+	
+
+
 func _input(event: InputEvent) -> void:
 	if !syncronizer.is_multiplayer_authority(): return;
 	if event is InputEventMouseMotion && !tabout:
@@ -67,11 +91,29 @@ func _input(event: InputEvent) -> void:
 		camera_offset.rotation_degrees.x = clamp(camera_offset.rotation_degrees.x,-89,89)
 		rotation_degrees.y += event.screen_relative.x/-sensitivity;
 	else:
+		if Input.is_action_just_pressed("emote1"):
+			rpc("PlayEmote","emote1")
+		if Input.is_action_just_pressed("emote2"):
+			rpc("PlayEmote","emote2")
+		if Input.is_action_just_pressed("emote3"):
+			rpc("PlayEmote","emote3")
 		if Input.is_action_just_pressed("tab_out"):
 			tabout=!tabout;
 			updateTabout()
 
+
 func _process(delta: float) -> void:
+	if !currentEmote.is_empty():
+		render.position.y=-1
+		render.rotation_degrees.y=180
+		if input_dir_anims.length() != 0:
+			rpc("StopEmotes")
+		if animation_player.current_animation != "character/"+currentEmote:
+			currentEmote=""
+			tree.active=true
+	else:
+		render.rotation.y=0
+		render.position.y=0
 	$Render/display_name.text=player.username
 	if syncronizer.is_multiplayer_authority():
 		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

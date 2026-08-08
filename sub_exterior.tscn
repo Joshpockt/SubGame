@@ -88,7 +88,7 @@ replication_config = SubResource("SceneReplicationConfig_a6mxv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.430268)
 
 [node name="TorpedoViewAnchor" type="Node3D" parent="." unique_id=1195830270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.1546364, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.996721, -0.035478055)
 
 [node name="Bumper" type="Area3D" parent="." unique_id=2141023260]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
