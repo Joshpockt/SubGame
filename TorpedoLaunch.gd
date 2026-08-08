@@ -1,10 +1,9 @@
 extends RigidBody3D
 
 @onready var sync: MultiplayerSynchronizer = $Sync
-var reSync=4.0
 var LockedOnto = Vector3.ZERO
-var speed=20.0;
-var torque_strength = 40.0
+var speed=30.0;
+var torque_strength = 80.0
 var damping = 8.0
 @onready var explode_ray: RayCast3D = $ExplodeRay
 const EXPLOSION = preload("res://explosion.tscn")

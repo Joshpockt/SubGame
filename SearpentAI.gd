@@ -81,8 +81,8 @@ func SyncWurm(pos,rot):
 
 func _process(delta: float) -> void:
 	lockOnPos=head.global_position
-	if multiplayer.is_server():
-		syncTime-=delta
-		if syncTime < 0:
-			syncTime=10
-			rpc("SyncWurm",head.global_position,head.global_rotation)
+	#if multiplayer.is_server():
+		#syncTime-=delta
+		#if syncTime < 0:
+			#syncTime=10
+			#rpc("SyncWurm",head.global_position,head.global_rotation)

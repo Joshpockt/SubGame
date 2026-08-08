@@ -50,7 +50,7 @@ func RequestTorpedoFire(creatureId):
 	rpc("fireTorpedo",firedTorpedos,creatureId)
 
 
-@rpc("authority","call_local","reliable")
+@rpc("any_peer","call_local","reliable")
 func fireTorpedo(id,cid):
 	firedTorpedos=id
 	torpedoLoaded=false

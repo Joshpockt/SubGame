@@ -83,12 +83,48 @@ radius = 0.6328125
 height = 2.3115234
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h1l74"]
-properties/0/path = NodePath("Head:linear_velocity")
+properties/0/path = NodePath("Head:position")
 properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath("Head:angular_velocity")
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Body0:position")
 properties/1/spawn = true
-properties/1/replication_mode = 2
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Body1:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Body2:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Body3:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Body4:position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Body5:position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Head:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Body0:rotation")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("Body1:rotation")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("Body2:rotation")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("Body3:rotation")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("Body4:rotation")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath("Body5:rotation")
+properties/13/spawn = true
+properties/13/replication_mode = 1
 
 [node name="ExteriorWorld" type="Node" unique_id=564991855]
 
@@ -279,4 +315,9 @@ angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 
 [node name="Sync" type="MultiplayerSynchronizer" parent="Creatures/Werm" unique_id=1464904848]
+replication_config = SubResource("SceneReplicationConfig_h1l74")
+
+[node name="LateSync" type="MultiplayerSynchronizer" parent="Creatures/Werm" unique_id=1704218790]
+replication_interval = 3.0
+delta_interval = 3.0
 replication_config = SubResource("SceneReplicationConfig_h1l74")
