@@ -24,12 +24,10 @@ func _ready() -> void:
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(shine, "omni_range", 13, 0.3)
 	tween.tween_property(shine, "light_energy", 9.5, 0.25)
-	tween.tween_property(collider, "scale", Vector3.ONE*4.5, 0.3)
 	await get_tree().create_timer(.35).timeout
 	tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(shine, "omni_range", 0, 0.25)
-	tween.tween_property(collider, "scale", Vector3.ZERO, 0.3)
 	await get_tree().create_timer(5).timeout
 	queue_free()
