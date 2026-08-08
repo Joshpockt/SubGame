@@ -9,6 +9,7 @@ const VERTICAL_SPEED = 80
 @onready var collider: CollisionShape3D = $Bumper/Collider
 @onready var torpedo_cam: Camera3D = $TorpedoView/TorpedoCam
 @onready var torpedo_view_anchor: Node3D = $TorpedoViewAnchor
+@onready var torpedo_station: Node3D = $"../../../Ship/TorpedoStation"
 
 var shakeCooldown=0.0
 var lastMagnitude=0.0
@@ -17,7 +18,11 @@ var Damage=0
 var isColliding=false
 var currentCollisionPoint=Vector3.ZERO
 var syncTimer=10
+@onready var torpedo_launch: MeshInstance3D = $TorpedoLaunch
 
+var base_torpedo = preload("res://base_torpedo.tscn")
+var firedTorpedos=0
+var torpedoLoaded=true
 signal SubTookDamage
 
 @onready var syncronizer: MultiplayerSynchronizer = $Syncronizer
@@ -36,9 +41,26 @@ func SubCollides():
 func reSync(pos,rot):
 	global_position=pos
 	global_rotation=rot
+
+@rpc("any_peer","call_remote","reliable")
+func RequestTorpedoFire():
+	if !torpedoLoaded: return
+	firedTorpedos+=1
+	rpc("fireTorpedo",firedTorpedos)
+
+
+@rpc("authority","call_local","reliable")
+func fireTorpedo(id):
+	firedTorpedos=id
+	torpedoLoaded=false
+	var torpedo = base_torpedo.instantiate()
+	get_parent().add_child(torpedo)
+	torpedo.LockedOnto = torpedo_station.lockedOnto
+	Utils.SnapTo(torpedo,torpedo_launch)
 	
 
 func _process(delta: float) -> void:
+	torpedo_launch.visible=torpedoLoaded
 	Utils.SnapTo(front_view_camera,front_view_anchor)
 	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
 	shakeCooldown-=delta

@@ -81,6 +81,14 @@ height = 2.3183594
 radius = 0.6328125
 height = 2.3115234
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h1l74"]
+properties/0/path = NodePath("Head:linear_velocity")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Head:angular_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="ExteriorWorld" type="Node" unique_id=564991855]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=349990505]
@@ -268,145 +276,5 @@ angular_limit_x/enabled = false
 angular_limit_y/enabled = false
 angular_limit_z/enabled = false
 
-[node name="Werm2" type="Node3D" parent="Creatures" unique_id=1562095421 node_paths=PackedStringArray("PathfindingNodes")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.04063, 5.3574934, -63.67961)
-script = ExtResource("5_h1l74")
-PathfindingNodes = NodePath("../../PathfindingNodes")
-
-[node name="Head" type="RigidBody3D" parent="Creatures/Werm2" unique_id=1696859013]
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 1.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Head" unique_id=797280766]
-shape = SubResource("BoxShape3D_itu75")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Head" unique_id=952368669]
-mesh = SubResource("BoxMesh_4tuaj")
-
-[node name="Body0" type="RigidBody3D" parent="Creatures/Werm2" unique_id=585044861]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29076, 0)
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 3.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Body0" unique_id=1369072540]
-shape = SubResource("CapsuleShape3D_vjlf6")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Body0" unique_id=289975558]
-mesh = SubResource("CapsuleMesh_sjs2a")
-
-[node name="Joint" type="Generic6DOFJoint3D" parent="Creatures/Werm2/Body0" unique_id=562712607]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79576254, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Head")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
-
-[node name="Body1" type="RigidBody3D" parent="Creatures/Werm2" unique_id=1228619160]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0141153, 0)
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 3.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Body1" unique_id=1585683927]
-shape = SubResource("CapsuleShape3D_vjlf6")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Body1" unique_id=1676420951]
-mesh = SubResource("CapsuleMesh_sjs2a")
-
-[node name="Joint" type="Generic6DOFJoint3D" parent="Creatures/Werm2/Body1" unique_id=771918744]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86647725, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Body0")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
-
-[node name="Body2" type="RigidBody3D" parent="Creatures/Werm2" unique_id=1285567077]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.719995, 0)
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 3.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Body2" unique_id=287526354]
-shape = SubResource("CapsuleShape3D_vjlf6")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Body2" unique_id=1557363753]
-mesh = SubResource("CapsuleMesh_sjs2a")
-
-[node name="Joint" type="Generic6DOFJoint3D" parent="Creatures/Werm2/Body2" unique_id=781683514]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86647725, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Body1")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
-
-[node name="Body3" type="RigidBody3D" parent="Creatures/Werm2" unique_id=1119122678]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.344972, 0)
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 3.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Body3" unique_id=1082645170]
-shape = SubResource("CapsuleShape3D_vjlf6")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Body3" unique_id=360123495]
-mesh = SubResource("CapsuleMesh_sjs2a")
-
-[node name="Joint" type="Generic6DOFJoint3D" parent="Creatures/Werm2/Body3" unique_id=40581488]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86647725, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Body2")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
-
-[node name="Body4" type="RigidBody3D" parent="Creatures/Werm2" unique_id=766740294]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.080928, 0)
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 3.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Body4" unique_id=1266356183]
-shape = SubResource("CapsuleShape3D_vjlf6")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Body4" unique_id=337535391]
-mesh = SubResource("CapsuleMesh_sjs2a")
-
-[node name="Joint" type="Generic6DOFJoint3D" parent="Creatures/Werm2/Body4" unique_id=1015633641]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86647725, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Body3")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
-
-[node name="Body5" type="RigidBody3D" parent="Creatures/Werm2" unique_id=2108614389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.737237, 0)
-gravity_scale = 0.0
-continuous_cd = true
-linear_damp = 1.0
-angular_damp = 3.0
-
-[node name="Collider" type="CollisionShape3D" parent="Creatures/Werm2/Body5" unique_id=550731416]
-shape = SubResource("CapsuleShape3D_vjlf6")
-
-[node name="Mesh" type="MeshInstance3D" parent="Creatures/Werm2/Body5" unique_id=1292487120]
-mesh = SubResource("CapsuleMesh_sjs2a")
-
-[node name="Joint" type="Generic6DOFJoint3D" parent="Creatures/Werm2/Body5" unique_id=2132961493]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86647725, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Body4")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
+[node name="Sync" type="MultiplayerSynchronizer" parent="Creatures/Werm" unique_id=1464904848]
+replication_config = SubResource("SceneReplicationConfig_h1l74")

@@ -14,9 +14,13 @@ var Searching=false
 var Max =0
 var lockOnPos=Vector3.ZERO
 
+@onready var sync: MultiplayerSynchronizer = $Sync
+
+var syncTime=10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if !multiplayer.is_server(): return
 	Searching=true
 	await get_tree().create_timer(5).timeout
 	print("starting")
@@ -48,6 +52,7 @@ func FindWanderSpot():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var t = 0
 func _physics_process(delta: float) -> void:
+	if !multiplayer.is_server(): return
 	t+=delta*3
 	if Searching:return;
 	if PathIndex==Max || CurrentPath.is_empty():
@@ -66,5 +71,16 @@ func _physics_process(delta: float) -> void:
 	if head.global_position.distance_to(TargetPosition) < 3:
 		PathIndex+=1
 
+@rpc("authority","call_local","reliable")
+func SyncWurm(pos,rot):
+	head.global_position=pos;
+	head.global_rotation=rot
+
+
 func _process(delta: float) -> void:
 	lockOnPos=head.global_position
+	if multiplayer.is_server():
+		syncTime-=delta
+		if syncTime < 0:
+			syncTime=10
+			rpc("SyncWurm",head.global_position,head.global_rotation)

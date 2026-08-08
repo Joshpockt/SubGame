@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://kawd0hj84e0p" path="res://exterior_viewport.tscn" id="6_igtqi"]
 [ext_resource type="Script" uid="uid://dddcaliy0odek" path="res://Boiler.gd" id="7_1tx2p"]
 [ext_resource type="Script" uid="uid://b43xdv2uowbsa" path="res://TorpedoStation.gd" id="7_3t6qa"]
+[ext_resource type="Script" uid="uid://dypsmessuhsws" path="res://torpedo_storage.gd" id="8_3t6qa"]
+[ext_resource type="Script" uid="uid://dpgo3fmcmk8wc" path="res://torpedo_loading.gd" id="9_rb1vg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_akvua"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -104,6 +106,24 @@ radius = 0.58203125
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_rt2ik"]
 viewport_path = NodePath("ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_iydj7"]
+radius = 0.25683594
+height = 1.8986816
+
+[sub_resource type="PrismMesh" id="PrismMesh_tf0ms"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt2ik"]
+radius = 0.23876953
+height = 0.47753906
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3t6qa"]
+top_radius = 0.21777344
+bottom_radius = 0.21777344
+height = 0.20117188
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tl212"]
+radius = 0.31753325
 
 [node name="DebugScene" type="Node" unique_id=1049535370]
 script = ExtResource("1_lnlp5")
@@ -255,10 +275,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17454505, 0.30584177, 0.6247758, 0.42352942)
 
-[node name="TorpedoStation" type="Node3D" parent="Ship" unique_id=1348236003 node_paths=PackedStringArray("roomManager")]
+[node name="TorpedoStation" type="Node3D" parent="Ship" unique_id=1348236003 node_paths=PackedStringArray("roomManager", "submarine")]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 2.9885976, 2.2174962)
 script = ExtResource("7_3t6qa")
 roomManager = NodePath("../..")
+submarine = NodePath("../../ExteriorViewport/ExteriorWorld/SubExterior")
 
 [node name="Rotate" type="Node3D" parent="Ship/TorpedoStation" unique_id=2023967965]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3164024, 0)
@@ -320,6 +341,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_rt2ik")
+
+[node name="TorpedoStorage" type="Node3D" parent="Ship" unique_id=760965728 node_paths=PackedStringArray("roomManager")]
+transform = Transform3D(-0.9539775, 0.0015295596, -0.29987395, 0.0014042695, 0.99999875, 0.0006333197, 0.2998745, 0.00018306896, -0.95397866, 7.220139, -0.8288112, -1.0530872)
+script = ExtResource("8_3t6qa")
+roomManager = NodePath("../..")
+
+[node name="render" type="MeshInstance3D" parent="Ship/TorpedoStorage" unique_id=1049301351]
+transform = Transform3D(1.0000001, 8.940697e-08, -5.5079e-09, -1.0913936e-11, -4.3364707e-08, -1, -1.1920929e-07, 1, -4.3975888e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_iydj7")
+
+[node name="Tip" type="MeshInstance3D" parent="Ship/TorpedoStorage" unique_id=920017940]
+transform = Transform3D(0.35500002, -2.9802322e-08, 1.9354047e-09, 1.2732926e-11, -1.5621481e-08, 0.35500002, -5.2154064e-08, -0.355, -1.546141e-08, 0, 5.9604645e-08, -0.92084134)
+mesh = SubResource("PrismMesh_tf0ms")
+
+[node name="Interactor" type="Area3D" parent="Ship/TorpedoStorage" unique_id=1235871174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.556, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_akvua")
+
+[node name="InteractionCollider" type="CollisionShape3D" parent="Ship/TorpedoStorage/Interactor" unique_id=1713436141]
+transform = Transform3D(1.0000002, 8.940697e-08, -5.3951226e-09, -1.1641532e-10, -4.337926e-08, -1.0000002, -1.4901161e-07, 1.0000002, -4.3961336e-08, -4.7683716e-07, 2.5560005, 0)
+shape = SubResource("CapsuleShape3D_rt2ik")
+
+[node name="TorpedoLoading" type="Node3D" parent="Ship" unique_id=835572517 node_paths=PackedStringArray("roomManager", "submarine")]
+transform = Transform3D(-0.9999999, 0, -8.742278e-08, 0, 0.99999994, 0, 8.742277e-08, 0, -1, 1.3623198, 0.8898863, 3.5661063)
+script = ExtResource("9_rb1vg")
+roomManager = NodePath("../..")
+submarine = NodePath("../../ExteriorViewport/ExteriorWorld/SubExterior")
+
+[node name="render" type="MeshInstance3D" parent="Ship/TorpedoLoading" unique_id=583086669]
+transform = Transform3D(1.0000098, 1.1324883e-06, 1.036824e-09, -1.9426807e-09, -4.156027e-08, -1.0000013, -2.7120113e-06, 1.0000092, -4.710455e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_3t6qa")
+
+[node name="Interactor" type="Area3D" parent="Ship/TorpedoLoading" unique_id=1087760086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.556, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_akvua")
+
+[node name="InteractionCollider" type="CollisionShape3D" parent="Ship/TorpedoLoading/Interactor" unique_id=467103198]
+transform = Transform3D(1.0000002, 8.940696e-08, -5.3951226e-09, -1.1641532e-10, -4.337926e-08, -1.0000002, -1.4901161e-07, 1.0000002, -4.3961336e-08, -4.7683716e-07, 2.5560007, 0)
+shape = SubResource("SphereShape3D_tl212")
 
 [node name="Players" type="Node3D" parent="." unique_id=2122263035]
 

@@ -18,6 +18,10 @@ properties/1/replication_mode = 2
 radius = 5.0
 height = 25.0
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rt2ik"]
+radius = 0.25683594
+height = 1.8986816
+
 [node name="SubExterior" type="RigidBody3D" unique_id=201099548]
 collision_layer = 2
 axis_lock_angular_x = true
@@ -65,3 +69,7 @@ size = Vector2i(860, 512)
 [node name="TorpedoCam" type="Camera3D" parent="TorpedoView" unique_id=2064507480]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.1546364, 0)
 current = true
+
+[node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=1209546255]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, -4.9890637, 3.8481243)
+mesh = SubResource("CapsuleMesh_rt2ik")

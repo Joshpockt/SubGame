@@ -14,6 +14,7 @@ var isClient=false
 @onready var creatures: Node3D = $"../../ExteriorViewport/ExteriorWorld/Creatures"
 var lockedOnto=null
 var hookDelay=0
+@export var submarine:RigidBody3D
 
 
 
@@ -70,6 +71,12 @@ func _ready() -> void:
 			rpc_id(1,"RequestUse",multiplayer.get_unique_id())
 		)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("fire_torpedo") && roomManager.Players[multiplayer.get_unique_id()] == using:
+		if multiplayer.is_server():
+			submarine.RequestTorpedoFire()
+		else:
+			submarine.rpc_id(1,"RequestTorpedoFire")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

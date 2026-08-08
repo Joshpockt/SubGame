@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://b44038n158if4"]
+
+[ext_resource type="Script" uid="uid://cawdmf8gdwu75" path="res://TorpedoLaunch.gd" id="1_e4ove"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_iydj7"]
+radius = 0.25683594
+height = 1.8986816
+
+[sub_resource type="PrismMesh" id="PrismMesh_tf0ms"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt2ik"]
+radius = 0.23876953
+height = 1.9121094
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_82brq"]
+properties/0/path = NodePath(".:linear_velocity")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:angular_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="Torpedo" type="RigidBody3D" unique_id=1392027223]
+mass = 2.0
+gravity_scale = 0.0
+linear_velocity = Vector3(0, -2, 5)
+linear_damp = 1.0
+script = ExtResource("1_e4ove")
+
+[node name="render" type="MeshInstance3D" parent="." unique_id=1049301351]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_iydj7")
+
+[node name="Tip" type="MeshInstance3D" parent="." unique_id=920017940]
+transform = Transform3D(0.355, 0, 0, 0, -1.5517543e-08, -0.355, 0, 0.355, -1.5517543e-08, 0, 0, 0.921)
+mesh = SubResource("PrismMesh_tf0ms")
+
+[node name="collider" type="CollisionShape3D" parent="." unique_id=1713436141]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_rt2ik")
+
+[node name="Sync" type="MultiplayerSynchronizer" parent="." unique_id=990971818]
+replication_config = SubResource("SceneReplicationConfig_82brq")
+
+[node name="ExplodeRay" type="RayCast3D" parent="." unique_id=1495303973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8730928)
+target_position = Vector3(0, 0, 0.725)
