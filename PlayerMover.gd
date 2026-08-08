@@ -76,7 +76,6 @@ func PlayEmote(animname):
 	
 @rpc("authority","call_local","reliable")
 func StopEmotes():
-	render.hide()
 	camera_offset.position.z=0
 	currentEmote=""
 	tree.active=true
@@ -106,7 +105,8 @@ func _process(delta: float) -> void:
 	if !currentEmote.is_empty():
 		render.position.y=-1
 		render.rotation_degrees.y=180
-		if input_dir_anims.length() != 0:
+		if input_dir_anims.length() != 0 && syncronizer.is_multiplayer_authority():
+			render.hide()
 			rpc("StopEmotes")
 		if animation_player.current_animation != "character/"+currentEmote:
 			currentEmote=""
