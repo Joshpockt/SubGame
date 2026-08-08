@@ -19,7 +19,7 @@ func HullCrack(crackPos,id):
 	hull_crack_spots.add_child(crack)
 	crack.global_position=crackPos
 	crack.look_at(global_position)
-	crack.name=str(id)
+	crack.name="hole"+str(id)
 	hullcrackIds=id+1
 
 func RequestHullCrack():

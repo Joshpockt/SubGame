@@ -47,7 +47,7 @@ func cameraMovments(delta: float):
 	if ExternalCameraHook == null:
 		Utils.SnapTo(camera_holder,camera_offset)
 	else:
-		Utils.LerpTo(camera_holder,ExternalCameraHook,delta*10)
+		Utils.SnapTo(camera_holder,ExternalCameraHook)
 
 		
 

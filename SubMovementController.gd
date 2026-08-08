@@ -57,6 +57,7 @@ func fireTorpedo(id,cid):
 	var torpedo = base_torpedo.instantiate()
 	get_parent().add_child(torpedo)
 	torpedo.LockedOnto = creatures.creatures[cid]
+	torpedo.name="Torpedo"+str(id)
 	Utils.SnapTo(torpedo,torpedo_launch)
 	
 

@@ -10,12 +10,15 @@ var holding=false
 var patchProgress=0.0
 
 @rpc("any_peer","call_local","reliable")
-func destroy():
-	hole.hide()
-	waterfx.emitting=false
-	interaction_collider.disabled=true
-	await get_tree().create_timer(1.5).timeout
-	queue_free()
+func destroy(_name):
+	for i in get_parent().get_children():
+		if i.name == _name:
+			var meithink=i
+			meithink.hole.hide()
+			meithink.waterfx.emitting=false
+			meithink.interaction_collider.disabled=true
+			await get_tree().create_timer(1.5).timeout
+			meithink.queue_free()
 
 
 func _ready() -> void:
@@ -34,4 +37,4 @@ func _process(delta: float) -> void:
 		interactor.Progress=1.0
 	if patchProgress >= PatchTime:
 		patchProgress=0
-		rpc("destroy")
+		rpc("destroy",name)
