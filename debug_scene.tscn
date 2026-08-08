@@ -132,7 +132,7 @@ script = ExtResource("1_lnlp5")
 environment = SubResource("Environment_xre04")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1310675781]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22009277, -1.2352972, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21985435, -1.2419319, -0.0033216476)
 use_collision = true
 size = Vector3(19.891846, 0.52075195, 14.40918)
 
