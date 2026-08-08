@@ -23,6 +23,7 @@ func HullCrack(crackPos,id):
 	hullcrackIds=id+1
 
 func RequestHullCrack():
+	if !multiplayer.is_server():return
 	var crackPos=hole_ref.to_global(sub_exterior.currentCollisionPoint)
 	for i in hull_crack_spots.get_children():
 		if crackPos.distance_to(i.global_position) < .3:

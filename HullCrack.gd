@@ -11,14 +11,12 @@ var patchProgress=0.0
 
 @rpc("any_peer","call_local","reliable")
 func destroy(_name):
-	for i in get_parent().get_children():
-		if i.name == _name:
-			var meithink=i
-			meithink.hole.hide()
-			meithink.waterfx.emitting=false
-			meithink.interaction_collider.disabled=true
-			await get_tree().create_timer(1.5).timeout
-			meithink.queue_free()
+	var meithink=self
+	meithink.hole.hide()
+	meithink.waterfx.emitting=false
+	meithink.interaction_collider.disabled=true
+	await get_tree().create_timer(1.5).timeout
+	meithink.queue_free()
 
 
 func _ready() -> void:
