@@ -19,6 +19,7 @@ var isColliding=false
 var currentCollisionPoint=Vector3.ZERO
 var syncTimer=10
 @onready var torpedo_launch: MeshInstance3D = $TorpedoLaunch
+@onready var creatures: Node3D = $"../Creatures"
 
 var base_torpedo = preload("res://base_torpedo.tscn")
 var firedTorpedos=0
@@ -43,19 +44,19 @@ func reSync(pos,rot):
 	global_rotation=rot
 
 @rpc("any_peer","call_remote","reliable")
-func RequestTorpedoFire():
+func RequestTorpedoFire(creatureId):
 	if !torpedoLoaded: return
 	firedTorpedos+=1
-	rpc("fireTorpedo",firedTorpedos)
+	rpc("fireTorpedo",firedTorpedos,creatureId)
 
 
 @rpc("authority","call_local","reliable")
-func fireTorpedo(id):
+func fireTorpedo(id,cid):
 	firedTorpedos=id
 	torpedoLoaded=false
 	var torpedo = base_torpedo.instantiate()
 	get_parent().add_child(torpedo)
-	torpedo.LockedOnto = torpedo_station.lockedOnto
+	torpedo.LockedOnto = creatures.creatures[cid]
 	Utils.SnapTo(torpedo,torpedo_launch)
 	
 

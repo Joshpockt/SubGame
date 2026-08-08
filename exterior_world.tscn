@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dm0rswub76k5o" path="res://PathNodeGenerator.gd" id="3_vysrt"]
 [ext_resource type="Script" uid="uid://dvbyvhutpbpga" path="res://Freecam.gd" id="4_6aag7"]
 [ext_resource type="Script" uid="uid://ds0fx5yns4qxh" path="res://SearpentAI.gd" id="5_h1l74"]
+[ext_resource type="Script" uid="uid://dq27pfbq3vjd8" path="res://CreatureHandler.gd" id="5_itu75"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rxtm4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -132,6 +133,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_h1l74")
 script = ExtResource("4_6aag7")
 
 [node name="Creatures" type="Node3D" parent="." unique_id=2004865042]
+script = ExtResource("5_itu75")
 
 [node name="Werm" type="Node3D" parent="Creatures" unique_id=1438468707 node_paths=PackedStringArray("PathfindingNodes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.342697, 5.3574934, -63.67961)

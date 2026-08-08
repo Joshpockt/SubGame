@@ -14,6 +14,8 @@ var Searching=false
 var Max =0
 var lockOnPos=Vector3.ZERO
 
+@export var id=0
+
 @onready var sync: MultiplayerSynchronizer = $Sync
 
 var syncTime=10.0

@@ -115,7 +115,7 @@ height = 1.8986816
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt2ik"]
 radius = 0.23876953
-height = 0.47753906
+height = 1.9121094
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3t6qa"]
 top_radius = 0.21777344

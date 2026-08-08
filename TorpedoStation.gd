@@ -74,9 +74,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire_torpedo") && roomManager.Players[multiplayer.get_unique_id()] == using:
 		if multiplayer.is_server():
-			submarine.RequestTorpedoFire()
+			submarine.RequestTorpedoFire(lockedOnto.id)
 		else:
-			submarine.rpc_id(1,"RequestTorpedoFire")
+			submarine.rpc_id(1,"RequestTorpedoFire",lockedOnto.id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
