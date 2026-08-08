@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bqar55wx6jg2" path="res://explosion.gd" id="1_vxas0"]
 
 [sub_resource type="Curve" id="Curve_vxas0"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7297298, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.79738563, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_g7vmx"]
@@ -23,6 +23,8 @@ spread = 180.0
 initial_velocity_min = 17.039999
 initial_velocity_max = 17.039999
 gravity = Vector3(0, 0, 0)
+scale_min = 15.0
+scale_max = 15.0
 scale_curve = SubResource("CurveTexture_g7vmx")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n30nq"]
@@ -45,8 +47,8 @@ script = ExtResource("1_vxas0")
 
 [node name="fx" type="GPUParticles3D" parent="." unique_id=798301538]
 emitting = false
-amount = 479
-lifetime = 2.0
+amount = 200
+lifetime = 0.7
 one_shot = true
 explosiveness = 1.0
 transform_align = 2

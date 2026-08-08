@@ -79,6 +79,9 @@ func _process(delta: float) -> void:
 			input_dir_anims=input_dir
 		input_Lerp=input_Lerp.lerp(input_dir,8*delta)
 		tree.set("parameters/MainTree/blend_position", input_Lerp)
+		if tabout:
+			input_dir=Vector2.ZERO
+			input_dir_anims=Vector2.ZERO
 		cameraMovments(delta)
 		if global_position.distance_to(posLerpTo) > .1:
 			posLerpTo=global_position

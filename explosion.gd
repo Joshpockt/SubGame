@@ -4,7 +4,7 @@ extends StaticBody3D
 @onready var collider: CollisionShape3D = $collider
 @onready var aof: Area3D = $AOF
 
-@export var ExplosionForce=50
+@export var ExplosionForce=5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,5 +29,5 @@ func _ready() -> void:
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(shine, "omni_range", 0, 0.3)
 	tween.tween_property(collider, "scale", Vector3.ZERO, 0.3)
-	await get_tree().create_timer(.35).timeout
+	await get_tree().create_timer(1).timeout
 	queue_free()

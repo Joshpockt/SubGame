@@ -1,9 +1,9 @@
 extends RigidBody3D
 
 @onready var sync: MultiplayerSynchronizer = $Sync
-var LockedOnto = Vector3.ZERO
+var LockedOnto = null
 var speed=30.0;
-var torque_strength = 80.0
+var torque_strength = 50.0
 var damping = 8.0
 @onready var explode_ray: RayCast3D = $ExplodeRay
 const EXPLOSION = preload("res://explosion.tscn")
@@ -14,6 +14,8 @@ var exploded=false
 func _ready() -> void:
 	if !multiplayer.is_server():
 		freeze=true
+	$thrust.global_scale(Vector3.ONE)
+
 
 @rpc("authority","call_local","reliable")
 func reSyncRpc(pos,rot):
@@ -21,7 +23,12 @@ func reSyncRpc(pos,rot):
 	global_rotation=rot
 
 func Thrust():
+	if LockedOnto == null:return
 	var dir = global_transform.basis.z
+	var dis = global_position.distance_to(LockedOnto.lockOnPos)
+	var lockAdd=0
+	if dis < 50:
+		lockAdd=(50-dis)*1.5
 	apply_central_force(dir*speed)
 	var desired = (LockedOnto.lockOnPos - global_position).normalized()
 	var current = global_transform.basis.z
@@ -29,7 +36,7 @@ func Thrust():
 	var axis = current.cross(desired)
 	var angle = acos(clamp(current.dot(desired), -1.0, 1.0))
 
-	apply_torque(axis.normalized() * angle * torque_strength- angular_velocity * damping)
+	apply_torque(axis.normalized() * angle * (torque_strength+lockAdd)- angular_velocity * damping)
 
 @rpc("authority","call_local","reliable")
 func Detonate():
@@ -46,6 +53,8 @@ func impactHandler():
 	if explode_ray.is_colliding() && !exploded:
 		print("kaboomalso")
 		exploded=true
+		if explode_ray.get_collider() is WormSegment:
+			explode_ray.get_collider().rpc("Gib")
 		rpc("Detonate")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

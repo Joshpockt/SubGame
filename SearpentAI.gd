@@ -20,10 +20,23 @@ var lockOnPos=Vector3.ZERO
 
 var syncTime=10.0
 
+var Segments:Array;
+var attachedSegments=0;
+var segmentMultiplier=1.0
+
+func initializeSegments():
+	for i in get_children():
+		if i is WormSegment:
+			Segments.append(i)
+			i.Segment=Segments.size()
+	attachedSegments=Segments.size()
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if !multiplayer.is_server(): return
 	Searching=true
+	initializeSegments()
 	await get_tree().create_timer(5).timeout
 	print("starting")
 	FindWanderSpot()
@@ -55,6 +68,7 @@ func FindWanderSpot():
 var t = 0
 func _physics_process(delta: float) -> void:
 	if !multiplayer.is_server(): return
+	segmentMultiplier=float(attachedSegments)/Segments.size()
 	t+=delta*3
 	if Searching:return;
 	if PathIndex==Max || CurrentPath.is_empty():
@@ -62,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		return
 	var TargetPosition = CurrentPath[PathIndex]
 	var dir = head.global_transform.basis.y
-	head.apply_central_force(dir*speed)
+	head.apply_central_force(dir*(speed*segmentMultiplier))
 	var desired = (TargetPosition - (head.global_position+(head.global_transform.basis.z*(sin(t)*4)))).normalized()
 	var current = head.global_transform.basis.y
 
@@ -78,6 +92,14 @@ func SyncWurm(pos,rot):
 	head.global_position=pos;
 	head.global_rotation=rot
 
+func getLockOn():
+	for i in get_children():
+		if i is WormSegment:
+			if !i.gibbed && !i.seperated:
+				lockOnPos=i.global_position
+				return
+	lockOnPos=head.global_position
+	
 
 func _process(delta: float) -> void:
 	lockOnPos=head.global_position
