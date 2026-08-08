@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cxr7p3c4xgpyn"]
+
+[ext_resource type="Texture2D" uid="uid://bo5st63ucjie6" path="res://Assets/diver_diver_texture.png" id="2_3iybd"]
+
+[resource]
+albedo_texture = ExtResource("2_3iybd")
+emission = Color(1, 1, 1, 1)
+texture_filter = 2
