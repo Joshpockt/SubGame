@@ -129,7 +129,7 @@ func _process(delta: float) -> void:
 		render.position.y=0
 	$Render/display_name.text=player.username
 	if syncronizer.is_multiplayer_authority():
-		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		if input_dir_anims != input_dir:
 			input_dir_anims=input_dir
 		input_Lerp=input_Lerp.lerp(input_dir,8*delta)
