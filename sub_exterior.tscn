@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2f4rv46fxlr8" path="res://SubMovementController.gd" id="1_mvfxg"]
 [ext_resource type="Texture2D" uid="uid://das0ovibmyqcx" path="res://Assets/torp_Torpedo_texture.png" id="2_3t6uk"]
+[ext_resource type="Texture2D" uid="uid://dlegrv7ncwsn5" path="res://icon.svg" id="3_ry25f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
 radius = 5.0
@@ -123,3 +124,18 @@ collision_mask = 16
 
 [node name="radius" type="CollisionShape3D" parent="LoudnessRadius" unique_id=1027293663]
 shape = SubResource("SphereShape3D_rt2ik")
+
+[node name="SonarOrigin" type="Node3D" parent="." unique_id=1780169631]
+
+[node name="Sonar" type="RayCast3D" parent="SonarOrigin" unique_id=1342867334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.5)
+target_position = Vector3(0, -2, -25)
+collide_with_areas = true
+
+[node name="ActiveSonarView" type="SubViewport" parent="." unique_id=1499913079]
+disable_3d = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]
+position = Vector2(256, 256)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_ry25f")

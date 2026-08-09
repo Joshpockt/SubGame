@@ -1,7 +1,7 @@
 extends RigidBody3D
 
-const SPEED = 150.0
-const ROTATION_SPEED=150.0
+const SPEED = 750.0
+const ROTATION_SPEED=2000.0
 const VERTICAL_SPEED = 80
 @onready var front_view_camera: Camera3D = $FrontView/Camera
 @onready var front_view_anchor: Node3D = $FrontViewAnchor
@@ -10,7 +10,12 @@ const VERTICAL_SPEED = 80
 @onready var torpedo_cam: Camera3D = $TorpedoView/TorpedoCam
 @onready var torpedo_view_anchor: Node3D = $TorpedoViewAnchor
 @onready var torpedo_station: Node3D = $"../../../Ship/TorpedoStation"
+@onready var active_sonar_view: SubViewport = $ActiveSonarView
+const SONAR_BLIP = preload("uid://dbg3jp5gjmcgb")
+# i know this is yucky i dont care
+@onready var sonar_ray: RayCast3D = $SonarOrigin/Sonar
 
+var sonar_range = 300.0
 var shakeCooldown=0.0
 var lastMagnitude=0.0
 var lastlastMagnitdue=0.0
@@ -65,8 +70,27 @@ func fireTorpedo(id,cid):
 	torpedo.global_position = torpedo_launch.global_position
 	torpedo.global_rotation = torpedo_launch.global_rotation
 
-
+var sonar_clock := 0.0
 func _process(delta: float) -> void:
+	
+	# this will be independently run on the clients
+	# but i cannot be pissed to do that :P
+	var range_total := 0.0
+	var range_average := 0.0
+	var sonar_precision = pow(2,8)
+	var view_center = active_sonar_view.size / 2
+	for i in sonar_precision:
+		var angle : float = i / (sonar_precision / TAU)
+		var direction := Vector3(sin(angle), 0, cos(angle))
+		sonar_ray.target_position = direction * sonar_range
+		sonar_ray.force_raycast_update()
+		var distance = to_local(sonar_ray.get_collision_point()).length()
+		
+		var blip_instance : Node2D = SONAR_BLIP.instantiate()
+		active_sonar_view.add_child(blip_instance)
+		blip_instance.position = view_center
+		blip_instance.position += Vector2(direction.x, direction.z) * distance
+	
 	torpedo_launch.visible=torpedoLoaded
 	Utils.SnapTo(front_view_camera,front_view_anchor)
 	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)

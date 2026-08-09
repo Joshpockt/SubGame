@@ -178,8 +178,9 @@ func Follow(delta):
 
 func _physics_process(delta: float) -> void:
 	if isDead:set_physics_process(false);
-	if SoundAreaFollowing != null: #Wander unless a sound area is detected
-		Follow(delta); return
+	# NOTICE: commenting out so i can test sonar
+	#if SoundAreaFollowing != null: #Wander unless a sound area is detected
+		#Follow(delta); return
 	Wander(delta)
 
 

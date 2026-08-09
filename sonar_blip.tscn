@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dbg3jp5gjmcgb"]
+
+[ext_resource type="Texture2D" uid="uid://dlegrv7ncwsn5" path="res://icon.svg" id="1_rkaq1"]
+[ext_resource type="Script" uid="uid://np2rg1tl00dm" path="res://sonar_blip.gd" id="2_grboy"]
+
+[node name="SonarBlip" type="Sprite2D" unique_id=1228401807]
+modulate = Color(0.1833334, 1, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_rkaq1")
+script = ExtResource("2_grboy")
