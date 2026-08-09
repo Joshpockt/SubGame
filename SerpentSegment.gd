@@ -6,6 +6,7 @@ class_name SerpentSegment
 var joint = Generic6DOFJoint3D.new()
 var segments:Array
 var segmentId=0
+var isHead=false
 
 func InitializeJoint():
 	joint.set_flag_x(Generic6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT,false)
@@ -21,14 +22,17 @@ func InitializeJoint():
 	
 @rpc("any_peer","call_local","reliable")
 func Gib():
+	ParticleDebris.SpawnParticle("res://blood.tscn",5,get_parent().get_parent(),global_position)
 	get_parent().isDead=true
 	queue_free()
 
 func _ready() -> void:
+	isHead=name == "Head"
 	for i in get_parent().get_children(): #Fill Segment Array
-		if i is SerpentSegment:
+		if i is SerpentSegment and !i.name=="Head":
 			segments.append(i)
 			if i == self:
 				segmentId=segments.size()
+	if isHead:return
 	InitializeJoint()
 	

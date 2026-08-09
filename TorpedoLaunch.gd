@@ -46,11 +46,13 @@ func Thrust():
 	var time_of_flight = target_distance / linear_velocity.length()
 	# this is a really weak way to refrence this, but we also dont have
 	# any other creatures added so i dont care + shut up.
-	var target_speed = LockedOnto.head.linear_velocity
+	var target_speed =Vector3.ZERO
 	# really simple equation but should work
 	var impact_position = LockedOnto.LockOntoOffset + target_speed * (time_of_flight * 1.0)
 	
 	apply_central_force(current_direction * max_force)
+	if LockedOnto.LockOntoOffset == Vector3.ZERO:
+		return
 	if aborted:return
 	if guidance_cd <= 1.0:
 		return

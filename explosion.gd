@@ -18,7 +18,8 @@ func _ready() -> void:
 	for i in aof.get_overlapping_bodies():
 		if i is RigidBody3D:
 			var dir = global_position.direction_to(i.global_position)
-			i.apply_central_impulse(dir*ExplosionForce)
+			#i.apply_central_impulse(dir*ExplosionForce)
+			i.apply_impulse(dir*ExplosionForce,i.to_local(global_position))
 	explode_fx()
 	await get_tree().create_timer(5).timeout
 	queue_free()

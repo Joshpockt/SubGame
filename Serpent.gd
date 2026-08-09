@@ -17,6 +17,9 @@ var isServer=true
 @export var MinSearchDistance=80.0
 @export var SegmentResyncIntervals=10.0
 
+@onready var chomper: RayCast3D = $Head/chomper
+
+
 @onready var SoundArea: Area3D = $SoundDetector
 
 #Sound Detection Stuff
@@ -30,12 +33,18 @@ var CurrentPath=null
 var GettingPath=true
 var CurrentPathSize =0
 
+var isRetreating=false
+
 #Segment Stuff
 var Segments:Array;
 var attachedSegments=0;
 
 var id = 0
 var isDead=false
+
+@onready var left_beak: MeshInstance3D = $Head/left_beak/beak
+@onready var right_beak: MeshInstance3D = $Head/right_beak/beak
+@onready var top_beak: MeshInstance3D = $Head/top_beak
 
 
 func fillSegmentArray():
@@ -88,7 +97,7 @@ func Wander(delta):
 	t+=delta*3 #for sin
 	
 	if GettingPath:return;
-	if CurrentPathIndex==CurrentPathSize || CurrentPath.is_empty():
+	if CurrentPathIndex>=CurrentPathSize || CurrentPath.is_empty():
 		FindWanderSpot()
 		return
 		
@@ -105,9 +114,45 @@ func Wander(delta):
 	if head.global_position.distance_to(TargetPosition) < 3:
 		CurrentPathIndex+=1
 		
+func Attack():
+	if chomper.is_colliding() && !isRetreating:
+		print("Chomp!")
+		isRetreating=true
+		chomp=27
+
+func Retreating(delta):
+	t+=delta*3 #for sin
+	
+	if global_position.distance_to(SoundAreaFollowing.global_position) > 60 && isRetreating:
+		isRetreating=false
+		return
+	
+	if GettingPath:return;
+	if CurrentPathIndex>=CurrentPathSize || CurrentPath.is_empty():
+		FindWanderSpot()
+		return
+		
+	var TargetPosition = CurrentPath[CurrentPathIndex]
+	var dir = -head.global_transform.basis.z
+	head.apply_central_force(dir*chase_speed)
+	var desired = (TargetPosition - (head.global_position+(head.global_transform.basis.x*(sin(t)*8)))).normalized()
+	var current = -head.global_transform.basis.z
+
+	var axis = current.cross(desired)
+	var angle = acos(clamp(current.dot(desired), -1.0, 1.0))
+
+	head.apply_torque(axis.normalized() * angle * (torque_strength+40)- head.angular_velocity * torque_damping)
+	if head.global_position.distance_to(TargetPosition) < 3:
+		CurrentPathIndex+=1
+
 
 func Follow(delta):
 	t+=delta*3 #for sin
+	if isRetreating:
+		Retreating(delta)
+		return
+	Attack()
+	#Need to allow pathfinding if sound not in view!
 	
 	#if GettingPath:return;
 	#if CurrentPathIndex==CurrentPathSize || CurrentPath.is_empty():
@@ -115,16 +160,17 @@ func Follow(delta):
 		#return
 		#
 	#var TargetPosition = CurrentPath[CurrentPathIndex]
+	
 	var TargetPosition = SoundAreaFollowing.global_position
-	var dir = head.global_transform.basis.y
-	head.apply_central_force(dir*wander_speed)
-	var desired = (TargetPosition - (head.global_position+(head.global_transform.basis.z*(sin(t)*4)))).normalized()
-	var current = head.global_transform.basis.y
+	var dir = -head.global_transform.basis.z
+	head.apply_central_force(dir*chase_speed)
+	var desired = (TargetPosition - (head.global_position+(head.global_transform.basis.x*(sin(t)*8)))).normalized()
+	var current = -head.global_transform.basis.z
 
 	var axis = current.cross(desired)
 	var angle = acos(clamp(current.dot(desired), -1.0, 1.0))
 
-	head.apply_torque(axis.normalized() * angle * torque_strength- head.angular_velocity * torque_damping)
+	head.apply_torque(axis.normalized() * angle * (torque_strength+20)- head.angular_velocity * torque_damping)
 	if head.global_position.distance_to(TargetPosition) < 3:
 		CurrentPathIndex+=1
 
@@ -143,18 +189,44 @@ func SetLockOnOffset(): #the position where a locked on torpedo will goto
 		return
 	LockOntoOffset=head.global_position
 	
+func DetectSound(): #Searches for sound areas intersecting SoundArea
+	var closest=999
+	for i in SoundArea.get_overlapping_areas():
+		var dis = head.global_position.distance_to(i.global_position)
+		if dis < closest:
+			SoundAreaFollowing=i
+			closest=dis
+			
+var jaw_t=0
+var jaw_m=0.0
+var chomp=0.0
+func animateJaw(delta):
 
+	if SoundAreaFollowing != null:
+		if global_position.distance_to(SoundAreaFollowing.global_position) < 45 && !isRetreating:
+			jaw_m=lerp(jaw_m,27.0,5*delta)
+		else:
+			jaw_m=lerp(jaw_m,0.0,5.0*delta)
+	jaw_t+=delta*2
+	var sinuh=(sin(jaw_t)-1)
+	sinuh-=jaw_m
+	if chomp > 0:
+		sinuh=-chomp
+		chomp-=delta*(chomp*20)
+	left_beak.rotation_degrees.y=-sinuh
+	right_beak.rotation_degrees.y=sinuh
+	top_beak.rotation_degrees.x=-sinuh
 
 func _process(_delta: float) -> void:
-	SetLockOnOffset()
-	global_position=head.global_position
+	if head != null:
+		global_position=head.global_position
+		SetLockOnOffset()
+	else:
+		LockOntoOffset=Vector3.ZERO
+	if isDead:return;
+	animateJaw(_delta)
 	if !isServer:return
 	_detect_interval-=_delta
 	if _detect_interval <= 0:
 		_detect_interval=DetectInterval
-		var closest=999
-		for i in SoundArea.get_overlapping_areas():
-			var dis = head.global_position.distance_to(i.global_position)
-			if dis < closest:
-				SoundAreaFollowing=i
-				closest=dis
+		DetectSound()
