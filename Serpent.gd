@@ -121,6 +121,7 @@ func Attack():
 		chomp=27
 
 func Retreating(delta):
+	if !head: return
 	t+=delta*3 #for sin
 	
 	if global_position.distance_to(SoundAreaFollowing.global_position) > 60 && isRetreating:
