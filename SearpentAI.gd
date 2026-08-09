@@ -1,4 +1,5 @@
 extends Node3D
+class_name Worm
 
 var EndPosition=Vector3.ZERO
 var OldPos=Vector3.ZERO
@@ -16,6 +17,7 @@ var PathIndex=0
 var CurrentPath=null
 var Searching=false
 var Max =0
+# i hate you
 var lockOnPos=Vector3.ZERO
 
 @export var id=0

@@ -73,8 +73,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 0.967, 0.33999997, 1, 1, 0.16666669, 0,
 gradient = SubResource("Gradient_cx0cr")
 
 [sub_resource type="Curve" id="Curve_xf37c"]
-_limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.5098039, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 1000.0, 0.0, 1.0]
+_data = [Vector2(0, 1000), 0.0, -2037.453, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_cx0cr"]
@@ -147,18 +147,16 @@ scale_max = 0.39999998
 scale_curve = SubResource("CurveTexture_n30nq")
 alpha_curve = SubResource("CurveTexture_j6bc1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oshr5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf37c"]
 transparency = 1
-vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_cx0cr")
-billboard_mode = 3
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+billboard_mode = 1
 billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_f5qoj"]
-material = SubResource("StandardMaterial3D_oshr5")
+material = SubResource("StandardMaterial3D_xf37c")
 orientation = 2
 
 [node name="Torpedo" type="RigidBody3D" unique_id=1392027223]
@@ -167,7 +165,7 @@ mass = 2.0
 gravity_scale = 0.0
 linear_velocity = Vector3(0, 0, 5)
 linear_damp = 2.0
-angular_damp = 1.0
+angular_damp = 12.0
 script = ExtResource("1_e4ove")
 
 [node name="collider" type="CollisionShape3D" parent="." unique_id=1713436141]
@@ -188,7 +186,8 @@ mesh = SubResource("ArrayMesh_wlnnh")
 [node name="thrust2" type="GPUParticles3D" parent="." unique_id=1666687410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9884782)
 amount = 300
-lifetime = 0.5
+lifetime = 0.25
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_j6bc1")
 draw_pass_1 = SubResource("PlaneMesh_tf0ms")
 
@@ -199,7 +198,10 @@ lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_rt2ik")
 draw_pass_1 = SubResource("PlaneMesh_f5qoj")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=172322260]
-light_color = Color(1, 0.969, 0.69, 1)
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1898384210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
+light_color = Color(1, 0.90900004, 0.61, 1)
 light_energy = 5.0
-omni_attenuation = 2.0
+spot_range = 25.0
+spot_attenuation = 2.0

@@ -1,5 +1,5 @@
 @tool
-extends StaticBody3D
+extends Node3D
 
 @onready var shine: OmniLight3D = $shine
 @onready var collider: CollisionShape3D = $collider

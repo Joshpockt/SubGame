@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://das0ovibmyqcx"
-path.s3tc="res://.godot/imported/torp_Torpedo_texture.png-b6d621d8e276baa57efbd8be0ed51978.s3tc.ctex"
+path="res://.godot/imported/torp_Torpedo_texture.png-b6d621d8e276baa57efbd8be0ed51978.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "56e0bd5574d41204a683bb4038409cca"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/torp_Torpedo_texture.png"
-dest_files=["res://.godot/imported/torp_Torpedo_texture.png-b6d621d8e276baa57efbd8be0ed51978.s3tc.ctex"]
+dest_files=["res://.godot/imported/torp_Torpedo_texture.png-b6d621d8e276baa57efbd8be0ed51978.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

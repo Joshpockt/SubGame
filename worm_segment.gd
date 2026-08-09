@@ -16,8 +16,10 @@ func Gib():
 	gibbed=true
 	seperated=true
 	blood.emitting=true
-	joint.queue_free()
-	collider.queue_free()
+	if joint:
+		joint.queue_free()
+	if collider:
+		collider.queue_free()
 	mass=.001
 	mesh.hide()
 	for i in get_parent().get_children():
