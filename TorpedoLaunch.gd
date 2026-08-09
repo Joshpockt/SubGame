@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @onready var sync: MultiplayerSynchronizer = $Sync
 var LockedOnto = null
-var speed=50.0;
+var speed=80.0;
 var torque_strength = 50.0
 var damping = 8.0
 @onready var explode_ray: RayCast3D = $ExplodeRay
@@ -18,9 +18,9 @@ func _ready() -> void:
 
 
 @rpc("authority","call_local","reliable")
-func reSyncRpc(pos,rot):
-	global_position=pos
-	global_rotation=rot
+func reSyncRpc(pos, rot):
+	global_position = pos
+	global_rotation = rot
 
 func Thrust():
 	if LockedOnto == null:return
@@ -28,8 +28,8 @@ func Thrust():
 	var dis = global_position.distance_to(LockedOnto.lockOnPos)
 	var lockAdd=0
 	if dis < 50:
-		lockAdd=(50-dis)*1.5
-	apply_central_force(dir*speed)
+		lockAdd= (50 - dis) * 1.5
+	apply_central_force(dir * speed)
 	var desired = (LockedOnto.lockOnPos - global_position).normalized()
 	var current = global_transform.basis.z
 

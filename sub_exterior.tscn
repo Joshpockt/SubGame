@@ -90,7 +90,7 @@ replication_config = SubResource("SceneReplicationConfig_a6mxv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.430268)
 
 [node name="TorpedoViewAnchor" type="Node3D" parent="." unique_id=1195830270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.996721, -0.035478055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.2669864, -3.8149238)
 
 [node name="Bumper" type="Area3D" parent="." unique_id=2141023260]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -105,14 +105,15 @@ shape = SubResource("CapsuleShape3D_dklud")
 [node name="TorpedoView" type="SubViewport" parent="." unique_id=104737898]
 scaling_3d_mode = 5
 scaling_3d_scale = 0.3069
-size = Vector2i(860, 512)
+size = Vector2i(1720, 1024)
 
 [node name="TorpedoCam" type="Camera3D" parent="TorpedoView" unique_id=2064507480]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.1546364, 0)
 current = true
+fov = 70.0
 
 [node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=559212577]
-transform = Transform3D(-1, 8.742278e-08, 0, 3.8213705e-15, 4.3711385e-08, -0.99999994, -8.742277e-08, -0.99999994, -4.3711385e-08, 0, -2.2140388, -12.046281)
+transform = Transform3D(-1, 8.742278e-08, 0, 8.742276e-08, 0.9999999, 8.742276e-08, 5.3731323e-16, 8.742276e-08, -0.9999999, 0, -2.2140388, -13.148414)
 mesh = SubResource("ArrayMesh_wlnnh")
 
 [node name="LoudnessRadius" type="Area3D" parent="." unique_id=1985308503]

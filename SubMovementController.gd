@@ -58,11 +58,12 @@ func RequestTorpedoFire(creatureId):
 func fireTorpedo(id,cid):
 	firedTorpedos=id
 	torpedoLoaded=false
-	var torpedo = base_torpedo.instantiate()
+	var torpedo : Node3D = base_torpedo.instantiate()
 	get_parent().add_child(torpedo)
 	torpedo.LockedOnto = creatures.creatures[cid]
 	torpedo.name="Torpedo"+str(id)
-	Utils.SnapTo(torpedo,torpedo_launch)
+	torpedo.global_position = torpedo_launch.global_position
+	torpedo.global_rotation = torpedo_launch.global_rotation
 
 
 func _process(delta: float) -> void:
@@ -76,6 +77,7 @@ func _process(delta: float) -> void:
 		else:
 			syncTimer=10
 			rpc("reSync",global_position,global_rotation)
+
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	isColliding=state.get_contact_count()!=0

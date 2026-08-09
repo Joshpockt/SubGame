@@ -23,11 +23,11 @@ func addPlayerLabel(_name:String):
 func join_request(lobby_id:int,steam_id:int):
 	Steam.joinLobby(lobby_id)
 
+
 func _on_player_connected(id: int):
 	print("player connected, "+str(id))
 	rpc_id(id,"addPlayerLabel",Steam.getPersonaName())
-	
-	
+
 
 @warning_ignore("unused_parameter", "shadowed_variable")
 func _on_lobby_joined(lobby_id:int,permissions:int,locked:bool,response:int):

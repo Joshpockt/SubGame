@@ -1,42 +1,7 @@
 [gd_scene format=3 uid="uid://cy8v6pqkcyls0"]
 
-[ext_resource type="Texture2D" uid="uid://x3fafrpdfcu0" path="res://splash.png" id="1_q7epf"]
 [ext_resource type="Script" uid="uid://bqar55wx6jg2" path="res://explosion.gd" id="1_vxas0"]
-
-[sub_resource type="Curve" id="Curve_vxas0"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2777778, 0.78688514), 2.0437148, 2.0437148, 0, 0, Vector2(0.6666666, 0.762295), -1.5372822, -1.5372822, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_r3edp"]
-curve = SubResource("Curve_vxas0")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf0ms"]
-emission_shape = 1
-emission_sphere_radius = 1.0
-angle_min = -720.0
-angle_max = 720.0
-use_rotation_3d = true
-rotation_3d_min = Vector3(0, 0, 0)
-rotation_3d_max = Vector3(8.005, 8.005, 8.005)
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 5.0
-radial_velocity_min = -2.2351742e-05
-radial_velocity_max = -2.2351742e-05
-gravity = Vector3(0, 0, 0)
-scale_min = 15.0
-scale_max = 15.0
-scale_curve = SubResource("CurveTexture_r3edp")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n30nq"]
-transparency = 1
-albedo_color = Color(0.5752346, 0.70350903, 0.92582196, 1)
-albedo_texture = ExtResource("1_q7epf")
-
-[sub_resource type="QuadMesh" id="QuadMesh_opbaf"]
-material = SubResource("StandardMaterial3D_n30nq")
-orientation = 1
+[ext_resource type="Shader" uid="uid://fplpoyg2wsmt" path="res://explosion.gdshader" id="3_j4sxf"]
 
 [sub_resource type="Curve" id="Curve_k0n8d"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.83986926, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -90,19 +55,18 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_tf0ms"]
 radius = 7.090728
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dklud"]
+render_priority = 0
+shader = ExtResource("3_j4sxf")
+shader_parameter/refraction = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
+radial_segments = 16
+rings = 8
+
 [node name="Explosion" type="StaticBody3D" unique_id=68353872]
 script = ExtResource("1_vxas0")
-
-[node name="Implosion" type="GPUParticles3D" parent="." unique_id=798301538]
-emitting = false
-amount = 200
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-transform_align = 2
-process_material = SubResource("ParticleProcessMaterial_tf0ms")
-draw_pass_1 = SubResource("QuadMesh_opbaf")
+ExplosionForce = 20
 
 [node name="Bubbles" type="GPUParticles3D" parent="." unique_id=1320890297]
 emitting = false
@@ -119,8 +83,8 @@ shape = SubResource("SphereShape3D_rt2ik")
 
 [node name="shine" type="OmniLight3D" parent="." unique_id=664291531]
 light_color = Color(1, 1, 0.8862745, 1)
-light_energy = 1.889
-omni_range = 1.0
+light_energy = 9.5
+omni_range = 0.0
 
 [node name="AOF" type="Area3D" parent="." unique_id=1853554824]
 collision_layer = 255
@@ -129,3 +93,8 @@ priority = 1
 
 [node name="range" type="CollisionShape3D" parent="AOF" unique_id=117816437]
 shape = SubResource("SphereShape3D_tf0ms")
+
+[node name="Shockwave" type="MeshInstance3D" parent="." unique_id=1329145544]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_dklud")
+mesh = SubResource("SphereMesh_beyo5")
