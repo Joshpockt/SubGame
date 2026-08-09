@@ -103,9 +103,9 @@ func impactHandler():
 var guidance_cd := 0.0
 func _physics_process(delta: float) -> void:
 	if exploded == true: return
-	guidance_cd += delta
 #	print(linear_velocity.length())
 	if !multiplayer.is_server(): return
+	guidance_cd += delta
 	Thrust()
 	impactHandler()
 	
