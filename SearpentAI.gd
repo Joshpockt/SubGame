@@ -18,6 +18,8 @@ var CurrentPath=null
 var Searching=false
 var Max =0
 # i hate you
+
+#😭
 var lockOnPos=Vector3.ZERO
 
 @export var id=0
@@ -134,6 +136,9 @@ func _process(_delta: float) -> void:
 	lockOnPos=head.global_position
 	if !multiplayer.is_server():return
 	if soundTarget == null:
+		if speed != wander_speed:
+			Searching=true
+			FindWanderSpot()
 		speed=wander_speed
 	else:
 		speed=chase_speed 

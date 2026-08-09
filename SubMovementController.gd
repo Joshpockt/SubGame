@@ -88,7 +88,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	
 func _physics_process(_delta: float) -> void:
 	#print(linear_velocity.length()+angular_velocity.length()*10)
-	sound_radius.shape.set("radius",(linear_velocity.length()+angular_velocity.length())*15)
+	sound_radius.shape.set("radius",clamp((linear_velocity.length()+angular_velocity.length())*15,.1,9000))
 	if isColliding && syncronizer.is_multiplayer_authority():
 		if shakeCooldown <= 0 && lastlastMagnitdue > 1.8:
 			rpc("SubCollides")

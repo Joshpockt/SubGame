@@ -2,7 +2,6 @@
 extends Node3D
 
 @onready var shine: OmniLight3D = $shine
-@onready var collider: CollisionShape3D = $collider
 @onready var aof: Area3D = $AOF
 @onready var shockwave: MeshInstance3D = $Shockwave
 

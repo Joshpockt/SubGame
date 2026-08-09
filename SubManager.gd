@@ -10,7 +10,7 @@ var floodedAmount=0.0
 var localplayer=null;
 var hullcrackIds=0
 @onready var boiler: Node3D = $Boiler
-
+var damageTaken=0
 var syncCooldown=10
 
 @rpc("any_peer","call_local","reliable")
@@ -24,6 +24,8 @@ func HullCrack(crackPos,id):
 
 func RequestHullCrack():
 	if !multiplayer.is_server():return
+	damageTaken+=1
+	if damageTaken % 3 != 0 :return
 	var crackPos=hole_ref.to_global(sub_exterior.currentCollisionPoint)
 	for i in hull_crack_spots.get_children():
 		if crackPos.distance_to(i.global_position) < .3:
