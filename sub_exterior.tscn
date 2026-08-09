@@ -61,6 +61,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_43f4j")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_rt2ik"]
+
 [node name="SubExterior" type="RigidBody3D" unique_id=201099548]
 collision_layer = 2
 axis_lock_angular_x = true
@@ -112,3 +114,11 @@ current = true
 [node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=559212577]
 transform = Transform3D(-1, 8.742278e-08, 0, 3.8213705e-15, 4.3711385e-08, -0.99999994, -8.742277e-08, -0.99999994, -4.3711385e-08, 0, -2.2140388, -12.046281)
 mesh = SubResource("ArrayMesh_wlnnh")
+
+[node name="LoudnessRadius" type="Area3D" parent="." unique_id=1985308503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.321148)
+collision_layer = 16
+collision_mask = 16
+
+[node name="radius" type="CollisionShape3D" parent="LoudnessRadius" unique_id=1027293663]
+shape = SubResource("SphereShape3D_rt2ik")

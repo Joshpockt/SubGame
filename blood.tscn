@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dfkg82hhb7r4s"]
+
+[ext_resource type="Texture2D" uid="uid://dxr7bq3msycas" path="res://Assets/wormchunk.png" id="1_44s4y"]
+
+[sub_resource type="Curve" id="Curve_2emrh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7702703, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_opbaf"]
+curve = SubResource("Curve_2emrh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf0ms"]
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 0.729
+initial_velocity_max = 47.629997
+angular_velocity_min = -216.77
+angular_velocity_max = 317.41998
+gravity = Vector3(0, -3, 0)
+scale_min = 0.29999998
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_opbaf")
+color = Color(0, 0, 0, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 0.05
+turbulence_noise_scale = 7.241
+turbulence_influence_min = 0.076000005
+turbulence_influence_max = 0.076000005
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o63uw"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.9647059, 0, 0, 1)
+albedo_texture = ExtResource("1_44s4y")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_rt2ik"]
+material = SubResource("StandardMaterial3D_o63uw")
+size = Vector2(1, 1.405)
+
+[node name="blood" type="GPUParticles3D" unique_id=1708164465]
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+trail_lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_tf0ms")
+draw_pass_1 = SubResource("QuadMesh_rt2ik")

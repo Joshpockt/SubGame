@@ -4,7 +4,11 @@ var EndPosition=Vector3.ZERO
 var OldPos=Vector3.ZERO
 @onready var head: RigidBody3D = $Head
 @export var PathfindingNodes:Node3D
-var speed=20.0;
+@export var wander_speed=20.0
+@export var chase_speed=50.0
+@export var DetectInterval=1.0
+var _detect_interval=0
+var speed = 20.0
 var torque_strength = 20.0
 var damping = 12.0
 var MaxNodeDistance=80.0
@@ -19,10 +23,13 @@ var lockOnPos=Vector3.ZERO
 @onready var sync: MultiplayerSynchronizer = $Sync
 
 var syncTime=10.0
+@onready var sound_detector: Area3D = $Head/SoundDetector
 
 var Segments:Array;
 var attachedSegments=0;
 var segmentMultiplier=1.0
+
+var soundTarget=null
 
 func initializeSegments():
 	for i in get_children():
@@ -65,10 +72,30 @@ func FindWanderSpot():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func chaseMode(delta):
+	print("rahhhhhhhhhhh")
+	t+=delta*5
+	var TargetPosition = soundTarget.global_position
+	var dir = head.global_transform.basis.y
+	head.apply_central_force(dir*(speed*segmentMultiplier))
+	var desired = (TargetPosition - (head.global_position+(head.global_transform.basis.z*(sin(t)*15)))).normalized()
+	var current = head.global_transform.basis.y
+
+	var axis = current.cross(desired)
+	var angle = acos(clamp(current.dot(desired), -1.0, 1.0))
+
+	head.apply_torque(axis.normalized() * angle * torque_strength- head.angular_velocity * damping)
+
 var t = 0
 func _physics_process(delta: float) -> void:
 	if !multiplayer.is_server(): return
 	segmentMultiplier=float(attachedSegments)/Segments.size()
+	if soundTarget != null:
+		torque_strength=45
+		chaseMode(delta)
+		return
+	torque_strength=20
 	t+=delta*3
 	if Searching:return;
 	if PathIndex==Max || CurrentPath.is_empty():
@@ -103,6 +130,20 @@ func getLockOn():
 
 func _process(_delta: float) -> void:
 	lockOnPos=head.global_position
+	if !multiplayer.is_server():return
+	if soundTarget == null:
+		speed=wander_speed
+	else:
+		speed=chase_speed 
+	_detect_interval-=_delta
+	if _detect_interval <= 0:
+		var closest=999
+		for i in sound_detector.get_overlapping_areas():
+			var dis = head.global_position.distance_to(i.global_position)
+			if dis < closest:
+				soundTarget=i
+				closest=dis
+		
 	#if multiplayer.is_server():
 		#syncTime-=delta
 		#if syncTime < 0:
