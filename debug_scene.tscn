@@ -1286,3 +1286,4 @@ area_size = Vector2(7.356181, 1.1315207)
 [editable path="ExteriorViewport"]
 [editable path="ExteriorViewport/ExteriorWorld"]
 [editable path="ExteriorViewport/ExteriorWorld/SubExterior"]
+[editable path="ExteriorViewport/ExteriorWorld/Creatures/Serpent"]

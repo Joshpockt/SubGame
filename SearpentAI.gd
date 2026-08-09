@@ -20,6 +20,8 @@ var Max =0
 # i hate you
 
 #😭
+
+
 var lockOnPos=Vector3.ZERO
 
 @export var id=0
@@ -78,7 +80,6 @@ func FindWanderSpot():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func chaseMode(delta):
-	print("rahhhhhhhhhhh")
 	t+=delta*5
 	var TargetPosition = soundTarget.global_position
 	var dir = head.global_transform.basis.y

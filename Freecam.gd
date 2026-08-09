@@ -21,8 +21,6 @@ func _input(event: InputEvent) -> void:
 		mouseX += event.screen_relative.y/-sensitivity;
 		mouseY += event.screen_relative.x/-sensitivity;
 	else:
-		if Input.is_action_just_pressed("ui_home"):
-			ShakeCamera(70.0,0.7,2.0)
 		if Input.is_action_just_pressed("tab_out"):
 			tabout=!tabout;
 			if tabout:
@@ -30,23 +28,6 @@ func _input(event: InputEvent) -> void:
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 
-func ShakeCamera(freq,mag,tm):
-	frequency=freq
-	magnitude=mag
-	shakeTime=tm
-
-func ApplyCameraShake(delta):
-	if shakeTime > 0:
-		shakeTime-=delta
-	if frequency > 0:
-		frequency-=delta
-	if magnitude > 0:
-		magnitude-=delta
-	shakeOffset=Vector3(sin(shakeTime*frequency)*magnitude,(cos(shakeTime*frequency)*magnitude)/2,0)
-
-func _process(delta: float) -> void:
-	ApplyCameraShake(delta)
-	position=shakeOffset
 	
 
 

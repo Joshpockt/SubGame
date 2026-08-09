@@ -30,7 +30,8 @@ func LockOn():
 	var cl=null
 	for step in LockOnSteps:
 		for i in creatures.get_children():
-			var lock = i.lockOnPos
+			if !(i is Enemy):return
+			var lock = i.LockOntoOffset
 			var toCam=torpedo_view_anchor.global_position.distance_to(lock)
 			var toStep=(torpedo_view_anchor.global_position+(-torpedo_view_anchor.transform.basis.z*step)).distance_to(lock)
 			if cl == null:
