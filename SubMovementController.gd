@@ -2,6 +2,8 @@ extends RigidBody3D
 
 const SPEED = 300.0
 const ROTATION_SPEED=150.0
+#const SPEED = 1000.0
+#const ROTATION_SPEED=2000.0
 const VERTICAL_SPEED = 80
 @onready var front_view_camera: Camera3D = $FrontView/Camera
 @onready var front_view_anchor: Node3D = $FrontViewAnchor
@@ -12,6 +14,9 @@ const VERTICAL_SPEED = 80
 @onready var torpedo_station: Node3D = $"../../../Ship/TorpedoStation"
 @onready var active_sonar_view: SubViewport = $ActiveSonarView
 @onready var ring: Sprite2D = $ActiveSonarView/Ring
+@onready var sonar_camera: Camera2D = $ActiveSonarView/SonarCenter/SonarCamera
+# FIXME: change name
+@onready var sonar_center: Sprite2D = $ActiveSonarView/SonarCenter
 const SONAR_BLIP = preload("uid://dbg3jp5gjmcgb")
 # i know this is yucky i dont care
 @onready var sonar_ray: RayCast3D = $SonarOrigin/Sonar
@@ -73,33 +78,47 @@ func fireTorpedo(id,cid):
 
 var sonar_clock := 0.0
 func _process(delta: float) -> void:
+	# Im gonna try my best to explain what is happening here
+	# i know this code is incredibly brittle, but i dont care >:P
 	sonar_clock += delta
-	# this will be independently run on the clients
-	# but i cannot be pissed to do that :P
 	if sonar_clock >= 1.75:
+		# number of rays is a power of 2
 		var sonar_precision = pow(2,6)
 		@warning_ignore("integer_division")
-		var view_center = active_sonar_view.size / 2
 		for i in sonar_precision:
 			var angle : float = i / (sonar_precision / TAU)
-			var direction := Vector3(sin(angle), 0, cos(angle))
+			# We add a random number to make the rays feel less "stiff"
+			var direction := Vector3(sin(angle + randf() * 0.1), 0, cos(angle + randf() * 0.1))
+			#var direction := Vector3(sin(angle), 0.0, cos(angle))
 			sonar_ray.target_position = direction * sonar_range
 			sonar_ray.force_raycast_update()
+			var hit_position := Vector3.ZERO
 			var distance := 0.0
+			# If the ray hit something, we log that. else we just move to the next ray
 			if sonar_ray.is_colliding():
+				hit_position = sonar_ray.get_collision_point()
 				distance = to_local(sonar_ray.get_collision_point()).length()
 			else:
 				continue
-			
+			# Make a new blip
 			var blip_instance : Node2D = SONAR_BLIP.instantiate()
+			# Set its delay, this will make it appear later
+			# (yes yes i know i came on your ass about weak refrences but shhhhhhh)
 			blip_instance.delay = distance / 300
+			# Then we just set the position in global space
+			blip_instance.position = Vector2(hit_position.x, hit_position.z)
 			active_sonar_view.add_child(blip_instance)
-			blip_instance.position = view_center
-			blip_instance.position += Vector2(direction.x, direction.z) * distance
-			#blip_instance.rotation = atan2(direction.z, direction.x)
-		sonar_clock = 0.0
+			# Then we just set the position in global space
+			blip_instance.position = Vector2(hit_position.x, hit_position.z)
+		
+		# Ring just always expands, we just set it to zero when we send out a pulse
 		ring.scale = Vector2.ZERO
-	ring.scale += Vector2.ONE * delta * 1.4
+		ring.position = Vector2(position.x, position.z)
+		sonar_clock = 0.0
+	# then we update the dummy sub on the sonar
+	sonar_center.position = Vector2(position.x, position.z)
+	sonar_center.rotation = -rotation.y
+	ring.scale += Vector2.ONE * delta * 1.40
 	
 	torpedo_launch.visible=torpedoLoaded
 	Utils.SnapTo(front_view_camera,front_view_anchor)
@@ -133,5 +152,6 @@ func _physics_process(_delta: float) -> void:
 	var rotation_dir := Input.get_vector("ui_right", "ui_left", "ui_up", "ui_down")
 	var movement := (transform.basis * Vector3(0, movement_dir.x, movement_dir.y)).normalized()
 	var rot := (transform.basis * Vector3(0, rotation_dir.x, 0)).normalized()
+	var rotation_speed_mult = max(1, abs(linear_velocity.dot(-global_basis.z)) * linear_velocity.length() * 0.05)
 	apply_central_force(movement*SPEED)
-	apply_torque(rot*ROTATION_SPEED)
+	apply_torque(rot*ROTATION_SPEED * rotation_speed_mult)

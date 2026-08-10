@@ -140,7 +140,7 @@ shape = SubResource("SphereShape3D_rt2ik")
 
 [node name="Sonar" type="RayCast3D" parent="SonarOrigin" unique_id=1342867334]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.5)
-target_position = Vector3(0, -2, -25)
+target_position = Vector3(0, 0, -25)
 collide_with_areas = true
 
 [node name="ActiveSonarView" type="SubViewport" parent="." unique_id=1499913079]
@@ -148,20 +148,14 @@ disable_3d = true
 
 [node name="Ring" type="Sprite2D" parent="ActiveSonarView" unique_id=747806783]
 z_index = 2
-position = Vector2(256, 256)
+scale = Vector2(0.99999994, 0.99999994)
 texture = SubResource("GradientTexture2D_beyo5")
 
-[node name="Sprite2D" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]
+[node name="SonarCenter" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]
 modulate = Color(0, 1, 0, 1)
 z_index = 1
-position = Vector2(256, 256)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_ry25f")
 
-[node name="ColorRect" type="ColorRect" parent="ActiveSonarView" unique_id=1415605906]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="SonarCamera" type="Camera2D" parent="ActiveSonarView/SonarCenter" unique_id=1787606820]
+ignore_rotation = false

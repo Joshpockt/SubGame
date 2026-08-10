@@ -739,12 +739,11 @@ smooth_faces = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ship/Parascope/Render" unique_id=431958909]
 transform = Transform3D(-2.4792342e-08, 0.62880653, 0.021336444, 1.1903359e-08, 0.021336444, -0.6288066, -0.62916845, -2.4374417e-08, -1.2737277e-08, -1.5107865, 0.6354586, 0.08666748)
-visible = false
 mesh = SubResource("PlaneMesh_rt2ik")
 surface_material_override/0 = SubResource("StandardMaterial3D_tf0ms")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Ship/Parascope/Render" unique_id=150151827]
-transform = Transform3D(-2.4396394e-08, 0.55369085, 0.14290506, -5.440704e-09, 0.14290507, -0.5536909, -0.5718351, -2.4981965e-08, -8.2873935e-10, -1.141995, 0.654758, 0.086470366)
+transform = Transform3D(-0.19012217, 0.33199364, 0.08568602, -3.7302073e-09, 0.0979773, -0.37961665, -0.34287295, -0.18408962, -0.047512677, -1.141995, 0.24161983, 0.58777905)
 mesh = SubResource("PlaneMesh_rt2ik")
 surface_material_override/0 = SubResource("StandardMaterial3D_tl212")
 
