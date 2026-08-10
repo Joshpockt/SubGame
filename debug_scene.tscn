@@ -1286,9 +1286,6 @@ size = Vector2i(198, 198)
 [node name="TorpedoCam" parent="ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView" parent_id_path=PackedInt32Array(1238947704, 564991855, 201099548, 104737898) index="0" unique_id=2064507480]
 current = false
 
-[node name="Cube" parent="ExteriorViewport/ExteriorWorld/test_cave" parent_id_path=PackedInt32Array(1238947704, 564991855, 1396209838) index="0" unique_id=599971255]
-transform = Transform3D(0.9999995, -0.00018307044, 0.00091291504, 0.00018447191, 0.9999988, -0.001529386, -0.00091263285, 0.0015295544, 0.9999984, 0.08300018, 0.20576978, -0.023299694)
-
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=951329234]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 3.6296306, -0.53711665)
 light_color = Color(1, 1, 0.92156863, 1)

@@ -64,6 +64,17 @@ shadow_mesh = SubResource("ArrayMesh_43f4j")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rt2ik"]
 
+[sub_resource type="Gradient" id="Gradient_ry25f"]
+offsets = PackedFloat32Array(0.545045, 0.5810811, 0.6171171, 0.6531532)
+colors = PackedColorArray(0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_beyo5"]
+gradient = SubResource("Gradient_ry25f")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="SubExterior" type="RigidBody3D" unique_id=201099548]
 collision_layer = 2
 axis_lock_angular_x = true
@@ -135,7 +146,22 @@ collide_with_areas = true
 [node name="ActiveSonarView" type="SubViewport" parent="." unique_id=1499913079]
 disable_3d = true
 
-[node name="Sprite2D" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]
+[node name="Ring" type="Sprite2D" parent="ActiveSonarView" unique_id=747806783]
+z_index = 2
 position = Vector2(256, 256)
-scale = Vector2(0.25, 0.25)
+texture = SubResource("GradientTexture2D_beyo5")
+
+[node name="Sprite2D" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]
+modulate = Color(0, 1, 0, 1)
+z_index = 1
+position = Vector2(256, 256)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_ry25f")
+
+[node name="ColorRect" type="ColorRect" parent="ActiveSonarView" unique_id=1415605906]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
