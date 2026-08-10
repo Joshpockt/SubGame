@@ -12,6 +12,7 @@ const VERTICAL_SPEED = 80
 @onready var torpedo_cam: Camera3D = $TorpedoView/TorpedoCam
 @onready var torpedo_view_anchor: Node3D = $TorpedoViewAnchor
 @onready var torpedo_station: Node3D = $"../../../Ship/TorpedoStation"
+@onready var snow: GPUParticles3D = $Snow
 @onready var active_sonar_view: SubViewport = $ActiveSonarView
 @onready var ring: Sprite2D = $ActiveSonarView/Ring
 @onready var sonar_camera: Camera2D = $ActiveSonarView/SonarCenter/SonarCamera
@@ -119,6 +120,9 @@ func _process(delta: float) -> void:
 	sonar_center.position = Vector2(position.x, position.z)
 	sonar_center.rotation = -rotation.y
 	ring.scale += Vector2.ONE * delta * 1.40
+	
+	#snow.position = linear_velocity * 3
+	#print(linear_velocity)
 	
 	torpedo_launch.visible=torpedoLoaded
 	Utils.SnapTo(front_view_camera,front_view_anchor)

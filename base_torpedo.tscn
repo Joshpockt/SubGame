@@ -186,7 +186,7 @@ mesh = SubResource("ArrayMesh_wlnnh")
 [node name="thrust2" type="GPUParticles3D" parent="." unique_id=1666687410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9884782)
 amount = 300
-lifetime = 0.25
+lifetime = 0.5
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_j6bc1")
 draw_pass_1 = SubResource("PlaneMesh_tf0ms")
@@ -198,10 +198,10 @@ lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_rt2ik")
 draw_pass_1 = SubResource("PlaneMesh_f5qoj")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1898384210]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=957090092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-visible = false
-light_color = Color(1, 0.90900004, 0.61, 1)
-light_energy = 5.0
-spot_range = 25.0
-spot_attenuation = 2.0
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 2.0
+omni_range = 10.0
+omni_attenuation = 2.0

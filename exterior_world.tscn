@@ -17,9 +17,21 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_rxtm4")
 
 [sub_resource type="Environment" id="Environment_vysrt"]
-background_mode = 2
+background_mode = 4
 sky = SubResource("Sky_rlwym")
+ambient_light_source = 2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_depth_curve = 0.098073296
+fog_depth_begin = 0.0
+fog_depth_end = 200.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.62, 1, 0.8796667, 1)
+adjustment_enabled = true
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_itu75"]
 friction = 0.9
@@ -103,6 +115,7 @@ material_override = SubResource("StandardMaterial3D_8qxau")
 mesh = ExtResource("7_vjlf6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="test_cave2" unique_id=1789819771]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="test_cave2/StaticBody3D" unique_id=348661346]
 shape = ExtResource("8_sjs2a")

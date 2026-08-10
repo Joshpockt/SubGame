@@ -97,6 +97,7 @@ func Wander(delta):
 	t+=delta*3 #for sin
 	
 	if GettingPath:return;
+	if !head: return
 	if CurrentPathIndex>=CurrentPathSize || CurrentPath.is_empty():
 		FindWanderSpot()
 		return
@@ -178,9 +179,8 @@ func Follow(delta):
 
 func _physics_process(delta: float) -> void:
 	if isDead:set_physics_process(false);
-	# NOTICE: commenting out so i can test sonar
-	#if SoundAreaFollowing != null: #Wander unless a sound area is detected
-		#Follow(delta); return
+	if SoundAreaFollowing != null: #Wander unless a sound area is detected
+		Follow(delta); return
 	Wander(delta)
 
 

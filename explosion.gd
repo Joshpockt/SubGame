@@ -29,8 +29,8 @@ func explode_fx() -> void:
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(shine, "omni_range", ExplosionForce+8, 0.25)
-	tween.tween_property(shine, "light_energy", ExplosionForce+4.5, 0.25)
+	#tween.tween_property(shine, "omni_range", ExplosionForce+50, 0.25)
+	tween.tween_property(shine, "light_energy", ExplosionForce+200, 0.25)
 	tween.tween_property(shockwave,"scale", Vector3.ONE * (ExplosionForce+3), 0.25)
 	
 	await get_tree().create_timer(.25).timeout
@@ -40,5 +40,8 @@ func explode_fx() -> void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(shockwave,"scale", Vector3.ZERO, 0.25)
-	tween.tween_property(shine, "omni_range", 0, 0.25)
+	tween.tween_property(shine, "light_energy", 500, 0.25)
+#	tween.tween_property(shine, "omni_range", 0, 0.25)
+	await tween.finished
+	shine.light_energy = 0.0
 	$Bubbles.emitting = true

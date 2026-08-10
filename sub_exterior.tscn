@@ -75,6 +75,55 @@ height = 512
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="Curve" id="Curve_tffsh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.9, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fjth5"]
+curve = SubResource("Curve_tffsh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_beyo5"]
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.1
+damping_max = 0.1
+alpha_curve = SubResource("CurveTexture_fjth5")
+turbulence_enabled = true
+turbulence_noise_scale = 9.5
+turbulence_noise_speed_random = 0.75
+
+[sub_resource type="Gradient" id="Gradient_8oc0v"]
+offsets = PackedFloat32Array(0, 0.6208791, 0.6978022)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r65m6"]
+gradient = SubResource("Gradient_8oc0v")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0n8d"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_r65m6")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+fixed_size = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dklud"]
+material = SubResource("StandardMaterial3D_k0n8d")
+size = Vector2(0.03, 0.03)
+orientation = 2
+
 [node name="SubExterior" type="RigidBody3D" unique_id=201099548]
 collision_layer = 2
 axis_lock_angular_x = true
@@ -91,6 +140,8 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 mesh = SubResource("CapsuleMesh_beyo5")
 
 [node name="FrontView" type="SubViewport" parent="." unique_id=1654531739]
+scaling_3d_mode = 5
+size = Vector2i(96, 96)
 
 [node name="Camera" type="Camera3D" parent="FrontView" unique_id=1137055733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
@@ -103,6 +154,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.430268)
 
 [node name="TorpedoViewAnchor" type="Node3D" parent="." unique_id=1195830270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -4)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="TorpedoViewAnchor" unique_id=1114057768]
+light_color = Color(1, 0.96933335, 0.77, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 0.1
+spot_range = 100.0
+spot_angle = 12.0
 
 [node name="Bumper" type="Area3D" parent="." unique_id=2141023260]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -117,15 +175,16 @@ shape = SubResource("CapsuleShape3D_dklud")
 [node name="TorpedoView" type="SubViewport" parent="." unique_id=104737898]
 scaling_3d_mode = 5
 scaling_3d_scale = 0.3069
-size = Vector2i(860, 512)
+size = Vector2i(640, 360)
 
 [node name="TorpedoCam" type="Camera3D" parent="TorpedoView" unique_id=2064507480]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.1546364, 0)
 current = true
-fov = 40.0
+fov = 45.0
 
 [node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=559212577]
 transform = Transform3D(-1, 8.742278e-08, 0, 8.742276e-08, 0.9999999, 8.742276e-08, 5.3731323e-16, 8.742276e-08, -0.9999999, 0, -2.2140388, -13.148414)
+visible = false
 mesh = SubResource("ArrayMesh_wlnnh")
 
 [node name="LoudnessRadius" type="Area3D" parent="." unique_id=1985308503]
@@ -152,10 +211,42 @@ scale = Vector2(0.99999994, 0.99999994)
 texture = SubResource("GradientTexture2D_beyo5")
 
 [node name="SonarCenter" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]
-modulate = Color(0, 1, 0, 1)
+self_modulate = Color(0, 1, 0, 1)
 z_index = 1
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_ry25f")
 
 [node name="SonarCamera" type="Camera2D" parent="ActiveSonarView/SonarCenter" unique_id=1787606820]
 ignore_rotation = false
+
+[node name="ColorRect" type="ColorRect" parent="ActiveSonarView/SonarCenter" unique_id=1122567389]
+z_index = -2
+offset_left = -5000.0
+offset_top = -5000.0
+offset_right = 5000.0
+offset_bottom = 5000.0
+color = Color(0, 0, 0, 1)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1538144028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -12)
+light_color = Color(1, 0.96933335, 0.77, 1)
+light_energy = 64.0
+light_volumetric_fog_energy = 0.05
+spot_range = 250.0
+spot_angle = 40.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=147903925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -12)
+light_color = Color(1, 0.96933335, 0.77, 1)
+light_energy = 64.0
+light_volumetric_fog_energy = 0.05
+spot_range = 250.0
+spot_angle = 40.0
+
+[node name="Snow" type="GPUParticles3D" parent="." unique_id=1288552502]
+amount = 300
+lifetime = 5.0
+visibility_aabb = AABB(-50, -50, -50, 100, 100, 100)
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_beyo5")
+draw_pass_1 = SubResource("PlaneMesh_dklud")

@@ -16,6 +16,9 @@ void fragment() {
 	float fresnel = pow(-dot(VIEW, NORMAL) + 1.0, 1.0);
 	ALBEDO = texture(screen, SCREEN_UV - (NORMAL.xy * refraction)).rgb;
 	ALBEDO += fresnel * 0.01;
+	//EMISSION = vec3(1.0);
+	//RADIANCE = vec4(100.0);
+	ALBEDO *= 3.0 / fresnel;
 }
 
 //void light() {

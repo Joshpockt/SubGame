@@ -74,9 +74,11 @@ process_material = SubResource("ParticleProcessMaterial_beyo5")
 draw_pass_1 = SubResource("QuadMesh_m5xho")
 
 [node name="shine" type="OmniLight3D" parent="." unique_id=664291531]
-light_color = Color(1, 1, 0.8862745, 1)
-light_energy = 9.5
-omni_range = 0.0
+light_color = Color(1, 0.8426667, 0.41000003, 1)
+light_energy = 2000.0
+light_volumetric_fog_energy = 0.1
+omni_range = 200.0
+omni_attenuation = 2.0
 
 [node name="AOF" type="Area3D" parent="." unique_id=1853554824]
 collision_layer = 255
