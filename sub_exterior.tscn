@@ -3,10 +3,7 @@
 [ext_resource type="Script" uid="uid://2f4rv46fxlr8" path="res://SubMovementController.gd" id="1_mvfxg"]
 [ext_resource type="Texture2D" uid="uid://das0ovibmyqcx" path="res://Assets/torp_Torpedo_texture.png" id="2_3t6uk"]
 [ext_resource type="Texture2D" uid="uid://dlegrv7ncwsn5" path="res://icon.svg" id="3_ry25f"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
-radius = 5.0
-height = 25.0
+[ext_resource type="PackedScene" uid="uid://2ci3d4uj8kpu" path="res://Assets/submarine.glb" id="4_8oc0v"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a6mxv"]
 properties/0/path = NodePath(".:linear_velocity")
@@ -18,7 +15,10 @@ properties/1/replication_mode = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dklud"]
 radius = 5.0
-height = 25.0
+height = 40.045532
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8oc0v"]
+size = Vector3(5, 9, 4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hcvf"]
 resource_name = "Material.001"
@@ -135,42 +135,44 @@ linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_mvfxg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1101979113]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_beyo5")
-
 [node name="FrontView" type="SubViewport" parent="." unique_id=1654531739]
 scaling_3d_mode = 5
 size = Vector2i(128, 128)
 
 [node name="Camera" type="Camera3D" parent="FrontView" unique_id=1137055733]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47897053, -19.796963)
 
 [node name="Syncronizer" type="MultiplayerSynchronizer" parent="." unique_id=1419262111]
 replication_config = SubResource("SceneReplicationConfig_a6mxv")
 
 [node name="FrontViewAnchor" type="Node3D" parent="." unique_id=1263571826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.430268)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9580135, -19.61879)
 
 [node name="TorpedoViewAnchor" type="Node3D" parent="." unique_id=1195830270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1014755, 7.147977, -7.4431806)
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="TorpedoViewAnchor" unique_id=1114057768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12663627, 0, 0)
 light_color = Color(1, 0.96933335, 0.77, 1)
 light_energy = 16.0
 light_volumetric_fog_energy = 0.1
 spot_range = 100.0
-spot_angle = 12.0
+spot_angle = 30.0
 
 [node name="Bumper" type="Area3D" parent="." unique_id=2141023260]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="Collider" type="CollisionShape3D" parent="Bumper" unique_id=1368176144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107522964, 2.0471128e-07)
 shape = SubResource("CapsuleShape3D_dklud")
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1794558149]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -3.501126e-08, 0.80096436)
 shape = SubResource("CapsuleShape3D_dklud")
+
+[node name="Collider2" type="CollisionShape3D" parent="." unique_id=1736763666]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 6.6899414, -3.1990356)
+shape = SubResource("BoxShape3D_8oc0v")
 
 [node name="TorpedoView" type="SubViewport" parent="." unique_id=104737898]
 scaling_3d_mode = 5
@@ -178,17 +180,17 @@ scaling_3d_scale = 0.3069
 size = Vector2i(640, 360)
 
 [node name="TorpedoCam" type="Camera3D" parent="TorpedoView" unique_id=2064507480]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.1546364, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1014755, 7.147977, -7.4431806)
 current = true
 fov = 45.0
 
 [node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=559212577]
-transform = Transform3D(-1, 8.742278e-08, 0, 8.742276e-08, 0.9999999, 8.742276e-08, 5.3731323e-16, 8.742276e-08, -0.9999999, 0, -2.2140388, -13.148414)
+transform = Transform3D(-1, 8.7422755e-08, -1.5529399e-21, 8.742274e-08, 0.9999999, 8.742275e-08, 5.3730963e-16, 8.742275e-08, -0.9999999, 0, -2.2140388, -20.148415)
 visible = false
 mesh = SubResource("ArrayMesh_wlnnh")
 
 [node name="LoudnessRadius" type="Area3D" parent="." unique_id=1985308503]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.321148)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23.321148)
 collision_layer = 16
 collision_mask = 16
 
@@ -196,9 +198,9 @@ collision_mask = 16
 shape = SubResource("SphereShape3D_rt2ik")
 
 [node name="SonarOrigin" type="Node3D" parent="." unique_id=1780169631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 
 [node name="Sonar" type="RayCast3D" parent="SonarOrigin" unique_id=1342867334]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.5)
 target_position = Vector3(0, 0, -25)
 collide_with_areas = true
 
@@ -227,26 +229,49 @@ offset_right = 5000.0
 offset_bottom = 5000.0
 color = Color(0, 0, 0, 1)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1538144028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -12)
-light_color = Color(1, 0.96933335, 0.77, 1)
-light_energy = 64.0
-light_volumetric_fog_energy = 0.05
-spot_range = 250.0
-spot_angle = 40.0
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=147903925]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -12)
-light_color = Color(1, 0.96933335, 0.77, 1)
-light_energy = 64.0
-light_volumetric_fog_energy = 0.05
-spot_range = 250.0
-spot_angle = 40.0
-
 [node name="Snow" type="GPUParticles3D" parent="." unique_id=1288552502]
+visible = false
 amount = 300
 lifetime = 5.0
 visibility_aabb = AABB(-50, -50, -50, 100, 100, 100)
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_beyo5")
 draw_pass_1 = SubResource("PlaneMesh_dklud")
+
+[node name="submarine" parent="." unique_id=251536747 instance=ExtResource("4_8oc0v")]
+
+[node name="Lights" type="Node3D" parent="." unique_id=1447030745]
+
+[node name="FrontLight" type="SpotLight3D" parent="Lights" unique_id=1538144028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.571623, 2.3485312, -18.31163)
+light_color = Color(1, 0.96933335, 0.77, 1)
+light_energy = 128.0
+light_volumetric_fog_energy = 0.05
+spot_range = 250.0
+spot_angle = 40.0
+
+[node name="FrontLight2" type="SpotLight3D" parent="Lights" unique_id=1662579768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.572, 2.349, -18.312)
+light_color = Color(1, 0.96933335, 0.77, 1)
+light_energy = 128.0
+light_volumetric_fog_energy = 0.05
+spot_range = 250.0
+spot_angle = 40.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1352434829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -2)
+omni_range = 15.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1390795279]
+transform = Transform3D(0.49999994, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999994, -3, 5, -2)
+light_color = Color(1, 0, 0, 1)
+light_energy = 4.0
+spot_range = 15.0
+spot_angle = 65.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1412351538]
+transform = Transform3D(0.5, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.5, 3, 5, -2)
+light_color = Color(0, 1, 0, 1)
+light_energy = 2.0
+spot_range = 15.0
+spot_angle = 65.0
