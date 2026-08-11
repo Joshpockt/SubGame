@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ddcuvvejjxljn"
-path="res://.godot/imported/test_cave2.glb-47fb08dc7b0ef0a0e2dc0f11c42d045f.scn"
+uid="uid://2ci3d4uj8kpu"
+path="res://.godot/imported/submarine.glb-49e16b8b7e412da11db1f2bbb062c5c3.scn"
 
 [deps]
 
-source_file="res://test_cave2.glb"
-dest_files=["res://.godot/imported/test_cave2.glb-47fb08dc7b0ef0a0e2dc0f11c42d045f.scn"]
+source_file="res://Assets/submarine.glb"
+dest_files=["res://.godot/imported/submarine.glb-49e16b8b7e412da11db1f2bbb062c5c3.scn"]
 
 [params]
 
