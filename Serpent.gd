@@ -179,6 +179,7 @@ func Follow(delta):
 
 func _physics_process(delta: float) -> void:
 	if isDead:set_physics_process(false);
+	if isDead:return;
 	if SoundAreaFollowing != null: #Wander unless a sound area is detected
 		Follow(delta); return
 	Wander(delta)

@@ -24,6 +24,7 @@ func InitializeJoint():
 func Gib():
 	ParticleDebris.SpawnParticle("res://blood.tscn",5,get_parent().get_parent(),global_position)
 	get_parent().isDead=true
+	await get_tree().process_frame
 	queue_free()
 
 func _ready() -> void:
