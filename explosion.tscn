@@ -24,7 +24,7 @@ emission_sphere_radius = 1.0
 angle_min = -720.0
 angle_max = 720.0
 spread = 180.0
-initial_velocity_max = 3.0
+initial_velocity_max = 5.0
 gravity = Vector3(0, 2, 0)
 damping_min = 1.0
 damping_max = 1.0
@@ -38,7 +38,6 @@ load_path = "res://.godot/imported/splash.png-929ed8a00b89ba36c51789452f874c77.s
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4sxf"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.5752346, 0.70350903, 0.92582196, 1)
 albedo_texture = SubResource("CompressedTexture2D_vxas0")
 billboard_mode = 3
 particles_anim_h_frames = 1

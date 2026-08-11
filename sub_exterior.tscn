@@ -141,7 +141,7 @@ mesh = SubResource("CapsuleMesh_beyo5")
 
 [node name="FrontView" type="SubViewport" parent="." unique_id=1654531739]
 scaling_3d_mode = 5
-size = Vector2i(96, 96)
+size = Vector2i(128, 128)
 
 [node name="Camera" type="Camera3D" parent="FrontView" unique_id=1137055733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.814749)
@@ -207,7 +207,7 @@ disable_3d = true
 
 [node name="Ring" type="Sprite2D" parent="ActiveSonarView" unique_id=747806783]
 z_index = 2
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(1e-05, 1e-05)
 texture = SubResource("GradientTexture2D_beyo5")
 
 [node name="SonarCenter" type="Sprite2D" parent="ActiveSonarView" unique_id=953202639]

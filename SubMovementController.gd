@@ -77,8 +77,24 @@ func fireTorpedo(id,cid):
 	torpedo.global_position = torpedo_launch.global_position
 	torpedo.global_rotation = torpedo_launch.global_rotation
 
-var sonar_clock := 0.0
+
 func _process(delta: float) -> void:
+	sonar_pulse(delta)
+	
+	torpedo_launch.visible=torpedoLoaded
+	Utils.SnapTo(front_view_camera,front_view_anchor)
+	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
+	shakeCooldown-=delta
+	if syncronizer.is_multiplayer_authority():
+		if syncTimer > 0:
+			syncTimer-=delta
+		else:
+			syncTimer=10
+			rpc("reSync",global_position,global_rotation)
+
+
+var sonar_clock := 0.0
+func sonar_pulse(delta) -> void:
 	# Im gonna try my best to explain what is happening here
 	# i know this code is incredibly brittle, but i dont care >:P
 	sonar_clock += delta
@@ -107,7 +123,7 @@ func _process(delta: float) -> void:
 			# (yes yes i know i came on your ass about weak refrences but shhhhhhh)
 			blip_instance.delay = distance / 300
 			# Then we just set the position in global space
-			blip_instance.position = Vector2(hit_position.x, hit_position.z)
+			#blip_instance.position = Vector2(hit_position.x, hit_position.z)
 			active_sonar_view.add_child(blip_instance)
 			# Then we just set the position in global space
 			blip_instance.position = Vector2(hit_position.x, hit_position.z)
@@ -120,21 +136,25 @@ func _process(delta: float) -> void:
 	sonar_center.position = Vector2(position.x, position.z)
 	sonar_center.rotation = -rotation.y
 	ring.scale += Vector2.ONE * delta * 1.40
-	
-	#snow.position = linear_velocity * 3
-	#print(linear_velocity)
-	
-	torpedo_launch.visible=torpedoLoaded
-	Utils.SnapTo(front_view_camera,front_view_anchor)
-	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
-	shakeCooldown-=delta
-	if syncronizer.is_multiplayer_authority():
-		if syncTimer > 0:
-			syncTimer-=delta
-		else:
-			syncTimer=10
-			rpc("reSync",global_position,global_rotation)
 
+var sonar_angle := 0.0
+func sonar_spin(delta) -> void:
+	sonar_angle += delta * 5
+	var direction := Vector3(sin(sonar_angle), 0, cos(sonar_angle))
+	sonar_ray.target_position = direction * sonar_range
+	force_update_transform()
+	
+	var hit_position = sonar_ray.get_collision_point()
+	#var distance = global_position.distance_to(hit_position)
+	var blip_instance : Node2D = SONAR_BLIP.instantiate()
+	
+	#blip_instance.delay = distance / 300
+	#blip_instance.position = Vector2(hit_position.x, hit_position.z)
+	active_sonar_view.add_child(blip_instance)
+	blip_instance.position = Vector2(hit_position.x, hit_position.z)
+	
+	sonar_center.position = Vector2(position.x, position.z)
+	sonar_center.rotation = -rotation.y
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	isColliding=state.get_contact_count()!=0
