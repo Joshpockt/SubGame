@@ -145,13 +145,13 @@ scaling_3d_mode = 5
 size = Vector2i(128, 128)
 
 [node name="Camera" type="Camera3D" parent="FrontView" unique_id=1137055733]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47897053, -19.796963)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47897053, -18.923227)
 
 [node name="Syncronizer" type="MultiplayerSynchronizer" parent="." unique_id=1419262111]
 replication_config = SubResource("SceneReplicationConfig_a6mxv")
 
 [node name="FrontViewAnchor" type="Node3D" parent="." unique_id=1263571826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9580135, -19.61879)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9580135, -18.745054)
 
 [node name="TorpedoViewAnchor" type="Node3D" parent="." unique_id=1195830270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1014755, 7.147977, -7.4431806)
@@ -189,7 +189,7 @@ current = true
 fov = 45.0
 
 [node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=559212577]
-transform = Transform3D(-1, 8.7422755e-08, -1.5529399e-21, 8.742274e-08, 0.9999999, 8.742275e-08, 5.3730963e-16, 8.742275e-08, -0.9999999, 0, -3.6016169, -19.395605)
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 0.9999999, 0, 8.742278e-08, 0, -0.9999999, 0, -2.6947849, -19.50974)
 visible = false
 mesh = SubResource("ArrayMesh_wlnnh")
 

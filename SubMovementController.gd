@@ -81,7 +81,7 @@ func fireTorpedo(id,cid):
 func _process(delta: float) -> void:
 	sonar_pulse(delta)
 	
-	torpedo_launch.visible=torpedoLoaded
+	#torpedo_launch.visible=torpedoLoaded
 	Utils.SnapTo(front_view_camera,front_view_anchor)
 	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
 	shakeCooldown-=delta
