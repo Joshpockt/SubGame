@@ -27,6 +27,11 @@ func RequestHullCrack():
 	damageTaken+=1
 	if damageTaken % 3 != 0 :return
 	var crackPos=hole_ref.to_global(sub_exterior.currentCollisionPoint)
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(crackPos,global_position)
+	query.collide_with_areas=true
+	var result = space_state.intersect_ray(query)
+	crackPos=result.position
 	for i in hull_crack_spots.get_children():
 		if crackPos.distance_to(i.global_position) < .3:
 			return

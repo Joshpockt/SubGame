@@ -277,6 +277,10 @@ flip_faces = true
 radius = 3.5786133
 height = 18.394043
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tf0ms"]
+radius = 3.569336
+height = 18.41504
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bstsi"]
 flip_faces = true
 radius = 3.5786133
@@ -1016,8 +1020,13 @@ shape = SubResource("CapsuleShape3D_3t6qa")
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.6755371, 0.3866625, 0)
 mesh = SubResource("CapsuleMesh_1tx2p")
 
+[node name="Area3D" type="Area3D" parent="Ship/Inside" unique_id=829596899]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship/Inside/Area3D" unique_id=52489170]
+shape = SubResource("CapsuleShape3D_tf0ms")
+
 [node name="HoleRef" type="MeshInstance3D" parent="Ship" unique_id=1898712816]
-transform = Transform3D(1.4139073e-15, 3.2346428e-08, 0.74, 0.74, -3.2346428e-08, 0, 3.2346428e-08, 0.74, -3.2346428e-08, 0.6755371, 0.3866625, 0)
+transform = Transform3D(1.8629183e-15, 4.2618606e-08, 0.975, 0.975, -4.2618606e-08, 0, 4.2618606e-08, 0.975, -4.2618606e-08, 0.6755371, 0.3866625, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_bstsi")
 

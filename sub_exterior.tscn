@@ -5,6 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://dlegrv7ncwsn5" path="res://icon.svg" id="3_ry25f"]
 [ext_resource type="PackedScene" uid="uid://2ci3d4uj8kpu" path="res://Assets/submarine.glb" id="4_8oc0v"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dklud"]
+radius = 4.938965
+height = 39.94368
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a6mxv"]
 properties/0/path = NodePath(".:linear_velocity")
 properties/0/spawn = true
@@ -13,12 +17,9 @@ properties/1/path = NodePath(".:angular_velocity")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dklud"]
-radius = 5.0
-height = 40.045532
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8oc0v"]
-size = Vector3(5, 9, 4)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_la0kl"]
+radius = 2.3208008
+height = 9.213379
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hcvf"]
 resource_name = "Material.001"
@@ -135,6 +136,10 @@ linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_mvfxg")
 
+[node name="Collider3" type="CollisionShape3D" parent="." unique_id=753694318]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -3.64983e-08, 0.8349838)
+shape = SubResource("CapsuleShape3D_dklud")
+
 [node name="FrontView" type="SubViewport" parent="." unique_id=1654531739]
 scaling_3d_mode = 5
 size = Vector2i(128, 128)
@@ -160,19 +165,18 @@ spot_range = 100.0
 spot_angle = 30.0
 
 [node name="Bumper" type="Area3D" parent="." unique_id=2141023260]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
-[node name="Collider" type="CollisionShape3D" parent="Bumper" unique_id=1368176144]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107522964, 2.0471128e-07)
+[node name="Collider2" type="CollisionShape3D" parent="Bumper" unique_id=502355508]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -3.64983e-08, 0.8349838)
 shape = SubResource("CapsuleShape3D_dklud")
 
-[node name="Collider" type="CollisionShape3D" parent="." unique_id=1794558149]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -3.501126e-08, 0.80096436)
-shape = SubResource("CapsuleShape3D_dklud")
+[node name="Collider3" type="CollisionShape3D" parent="Bumper" unique_id=1668800324]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 6.1976495, -2.8589478)
+shape = SubResource("CapsuleShape3D_la0kl")
 
 [node name="Collider2" type="CollisionShape3D" parent="." unique_id=1736763666]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 6.6899414, -3.1990356)
-shape = SubResource("BoxShape3D_8oc0v")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 6.1976495, -2.8589478)
+shape = SubResource("CapsuleShape3D_la0kl")
 
 [node name="TorpedoView" type="SubViewport" parent="." unique_id=104737898]
 scaling_3d_mode = 5
@@ -185,7 +189,7 @@ current = true
 fov = 45.0
 
 [node name="TorpedoLaunch" type="MeshInstance3D" parent="." unique_id=559212577]
-transform = Transform3D(-1, 8.7422755e-08, -1.5529399e-21, 8.742274e-08, 0.9999999, 8.742275e-08, 5.3730963e-16, 8.742275e-08, -0.9999999, 0, -2.2140388, -20.148415)
+transform = Transform3D(-1, 8.7422755e-08, -1.5529399e-21, 8.742274e-08, 0.9999999, 8.742275e-08, 5.3730963e-16, 8.742275e-08, -0.9999999, 0, -3.6016169, -19.395605)
 visible = false
 mesh = SubResource("ArrayMesh_wlnnh")
 
