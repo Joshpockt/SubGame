@@ -508,6 +508,8 @@ shape = SubResource("SphereShape3D_gqpai")
 [node name="Head" type="RigidBody3D" parent="." unique_id=999004252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1882014)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0
@@ -570,6 +572,8 @@ target_position = Vector3(0, 0, -3.66)
 [node name="Body1" type="RigidBody3D" parent="." unique_id=1700283982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.2594857)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0
@@ -589,6 +593,8 @@ shape = SubResource("CapsuleShape3D_gqpai")
 [node name="Body2" type="RigidBody3D" parent="." unique_id=1466622381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5584846)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0
@@ -608,6 +614,8 @@ shape = SubResource("CapsuleShape3D_rrkd7")
 [node name="Body3" type="RigidBody3D" parent="." unique_id=557067211]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.334866)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0
@@ -627,6 +635,8 @@ shape = SubResource("CapsuleShape3D_0ll01")
 [node name="Body4" type="RigidBody3D" parent="." unique_id=2102652980]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.790153)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0
@@ -646,6 +656,8 @@ shape = SubResource("CapsuleShape3D_1gwnd")
 [node name="Body5" type="RigidBody3D" parent="." unique_id=839653778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.474192)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0
@@ -665,6 +677,8 @@ shape = SubResource("CapsuleShape3D_ifo8v")
 [node name="Body6" type="RigidBody3D" parent="." unique_id=289884977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.955479)
 top_level = true
+collision_layer = 2
+collision_mask = 7
 gravity_scale = 0.01
 linear_damp = 1.0
 angular_damp = 3.0

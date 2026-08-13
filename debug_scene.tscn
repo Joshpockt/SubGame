@@ -5,12 +5,12 @@
 [ext_resource type="Script" uid="uid://bhg7miojvxys" path="res://SubManager.gd" id="2_xre04"]
 [ext_resource type="Script" uid="uid://cq35vehajkbgi" path="res://Parascope.gd" id="3_32o2v"]
 [ext_resource type="Script" uid="uid://dx8tkd0nkdyew" path="res://CoalPile.gd" id="6_bstsi"]
-[ext_resource type="PackedScene" uid="uid://kawd0hj84e0p" path="res://exterior_viewport.tscn" id="6_igtqi"]
 [ext_resource type="Script" uid="uid://dddcaliy0odek" path="res://Boiler.gd" id="7_1tx2p"]
 [ext_resource type="Script" uid="uid://b43xdv2uowbsa" path="res://TorpedoStation.gd" id="7_3t6qa"]
 [ext_resource type="Script" uid="uid://dypsmessuhsws" path="res://torpedo_storage.gd" id="8_3t6qa"]
 [ext_resource type="Texture2D" uid="uid://bo5st63ucjie6" path="res://Assets/diver_diver_texture.png" id="8_of7eg"]
 [ext_resource type="Script" uid="uid://dpgo3fmcmk8wc" path="res://torpedo_loading.gd" id="9_rb1vg"]
+[ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="11_tl212"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_akvua"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -133,12 +133,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8vbm8")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ensr5"]
-viewport_path = NodePath("ExteriorViewport/ExteriorWorld/SubExterior/ActiveSonarView")
+[sub_resource type="ViewportTexture" id="ViewportTexture_tl212"]
+viewport_path = NodePath("ActiveSonarView")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_por7r"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_ensr5")
+albedo_texture = SubResource("ViewportTexture_tl212")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gamig"]
 
@@ -891,6 +891,11 @@ height = 0.20117188
 [sub_resource type="SphereShape3D" id="SphereShape3D_tl212"]
 radius = 0.31753325
 
+[sub_resource type="World3D" id="World3D_beyo5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_of7eg"]
+viewport_path = NodePath("ActiveSonarView")
+
 [node name="DebugScene" type="Node" unique_id=1049535370]
 script = ExtResource("1_lnlp5")
 
@@ -1487,10 +1492,17 @@ shape = SubResource("SphereShape3D_tl212")
 
 [node name="Players" type="Node3D" parent="." unique_id=2122263035]
 
-[node name="ExteriorViewport" parent="." unique_id=1238947704 instance=ExtResource("6_igtqi")]
+[node name="ExteriorViewport" type="SubViewport" parent="." unique_id=1238947704]
+own_world_3d = true
+world_3d = SubResource("World3D_beyo5")
 
-[node name="TorpedoCam" parent="ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView" parent_id_path=PackedInt32Array(1238947704, 564991855, 201099548, 104737898) index="0" unique_id=2064507480]
+[node name="ExteriorWorld" parent="ExteriorViewport" unique_id=564991855 instance=ExtResource("11_tl212")]
+
+[node name="TorpedoCam" parent="ExteriorViewport/ExteriorWorld/SubExterior/TorpedoView" parent_id_path=PackedInt32Array(564991855, 201099548, 104737898) index="0" unique_id=2064507480]
 current = false
+
+[node name="Sonar" parent="ExteriorViewport/ExteriorWorld/SubExterior" parent_id_path=PackedInt32Array(564991855, 201099548) index="11" unique_id=78122515]
+viewport_texture = SubResource("ViewportTexture_of7eg")
 
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=951329234]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 3.6296306, -0.53711665)
@@ -1500,7 +1512,6 @@ area_range = 7.956
 area_attenuation = 0.604
 area_size = Vector2(7.356181, 1.1315207)
 
-[editable path="ExteriorViewport"]
 [editable path="ExteriorViewport/ExteriorWorld"]
 [editable path="ExteriorViewport/ExteriorWorld/SubExterior"]
 [editable path="ExteriorViewport/ExteriorWorld/Creatures/Serpent"]

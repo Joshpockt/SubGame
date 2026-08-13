@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://barfi1a14mptb"]
+
+[ext_resource type="Script" uid="uid://cp55iptg62mm3" path="res://src/Subs/submarine.gd" id="1_68w53"]
+[ext_resource type="PackedScene" uid="uid://2ci3d4uj8kpu" path="res://Assets/submarine.glb" id="2_bs2fh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wsgdl"]
+radius = 4.938965
+height = 39.94368
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4twa3"]
+radius = 2.3208008
+height = 9.213379
+
+[node name="Submarine" type="RigidBody3D" unique_id=1330466907]
+script = ExtResource("1_68w53")
+
+[node name="Collider3" type="CollisionShape3D" parent="." unique_id=1280595592]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -3.64983e-08, 0.8349838)
+shape = SubResource("CapsuleShape3D_wsgdl")
+
+[node name="Collider2" type="CollisionShape3D" parent="." unique_id=208120331]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 6.1976495, -2.8589478)
+shape = SubResource("CapsuleShape3D_4twa3")
+
+[node name="submarine" parent="." unique_id=251536747 instance=ExtResource("2_bs2fh")]

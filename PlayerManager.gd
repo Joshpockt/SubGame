@@ -6,4 +6,3 @@ extends Node3D
 var hasCoal=false
 var coalHolding=0;
 var hasTorpedo=false
-var submarine=null

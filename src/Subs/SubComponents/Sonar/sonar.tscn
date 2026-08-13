@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://4omjvdknmm6u"]
+
+[ext_resource type="Texture2D" uid="uid://dlegrv7ncwsn5" path="res://icon.svg" id="1_e1g5k"]
+[ext_resource type="Script" uid="uid://bja4sl055oi0" path="res://src/Subs/SubComponents/Sonar/sonar.gd" id="1_hu77w"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hu77w"]
+viewport_path = NodePath("ActiveSonarView")
+
+[sub_resource type="Gradient" id="Gradient_ry25f"]
+offsets = PackedFloat32Array(0.545045, 0.5810811, 0.6171171, 0.6531532)
+colors = PackedColorArray(0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_beyo5"]
+gradient = SubResource("Gradient_ry25f")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Sonar" type="Node3D" unique_id=606441761]
+script = ExtResource("1_hu77w")
+viewport_texture = SubResource("ViewportTexture_hu77w")
+
+[node name="SonarRay" type="RayCast3D" parent="." unique_id=1135862684]
+
+[node name="ActiveSonarView" type="SubViewport" parent="." unique_id=78122515]
+disable_3d = true
+
+[node name="Ring" type="Sprite2D" parent="ActiveSonarView" unique_id=1566585814]
+z_index = 2
+scale = Vector2(1e-05, 1e-05)
+texture = SubResource("GradientTexture2D_beyo5")
+
+[node name="SonarCenter" type="Sprite2D" parent="ActiveSonarView" unique_id=1179044043]
+self_modulate = Color(0, 1, 0, 1)
+z_index = 1
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_e1g5k")
+
+[node name="SonarCamera" type="Camera2D" parent="ActiveSonarView/SonarCenter" unique_id=617361957]
+ignore_rotation = false
+
+[node name="ColorRect" type="ColorRect" parent="ActiveSonarView/SonarCenter" unique_id=1281682812]
+z_index = -2
+offset_left = -5000.0
+offset_top = -5000.0
+offset_right = 5000.0
+offset_bottom = 5000.0
+color = Color(0, 0, 0, 1)

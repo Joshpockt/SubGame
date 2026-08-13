@@ -1,5 +1,12 @@
 class_name Utils
 
+#ALERT, ATTENTION, CAUTION, CRITICAL, DANGER, SECURITY
+
+#BUG, DEPRECATED, FIXME, HACK, TASK, TBD, TODO, WARNING
+
+#INFO, NOTE, NOTICE, TEST, TESTING
+
+
 static func SnapTo(node:Node3D,node2:Node3D):
 	node.global_position=node2.global_position
 	node.global_rotation=node2.global_rotation

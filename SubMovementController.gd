@@ -1,10 +1,34 @@
 extends RigidBody3D
+class_name Submarine
 
-const SPEED = 300.0
-const ROTATION_SPEED=150.0
-#const SPEED = 1000.0
-#const ROTATION_SPEED=2000.0
-const VERTICAL_SPEED = 80
+signal SubTookDamage
+
+const SONAR_BLIP = preload("uid://dbg3jp5gjmcgb")
+
+@export var max_linear_force := 300.0
+@export var max_rotation_torque := 150.0
+@export var max_vetical_force := 30.0
+
+@export var front_viewport : ViewportTexture
+
+var sonar_range = 300.0
+var shakeCooldown = 0.0
+var lastMagnitude = 0.0
+var lastlastMagnitdue = 0.0
+var Damage = 0
+var isColliding = false
+var currentCollisionPoint = Vector3.ZERO
+var syncTimer = 10
+var base_torpedo = preload("res://base_torpedo.tscn")
+var firedTorpedos = 0
+var torpedoLoaded = true:
+	#TEST
+	get():
+		return true
+var inUse=false
+var hasPower=true
+
+#region @onready
 @onready var front_view_camera: Camera3D = $FrontView/Camera
 @onready var front_view_anchor: Node3D = $FrontViewAnchor
 @onready var bumper: Area3D = $Bumper
@@ -18,46 +42,65 @@ const VERTICAL_SPEED = 80
 @onready var sonar_camera: Camera2D = $ActiveSonarView/SonarCenter/SonarCamera
 # FIXME: change name
 @onready var sonar_center: Sprite2D = $ActiveSonarView/SonarCenter
-const SONAR_BLIP = preload("uid://dbg3jp5gjmcgb")
 # i know this is yucky i dont care
 @onready var sonar_ray: RayCast3D = $SonarOrigin/Sonar
-
-var sonar_range = 300.0
-var shakeCooldown=0.0
-var lastMagnitude=0.0
-var lastlastMagnitdue=0.0
-var Damage=0
-var isColliding=false
-var currentCollisionPoint=Vector3.ZERO
-var syncTimer=10
 @onready var sound_radius: CollisionShape3D = $LoudnessRadius/radius
-
 @onready var torpedo_launch: MeshInstance3D = $TorpedoLaunch
 @onready var creatures: Node3D = $"../Creatures"
-
-var base_torpedo = preload("res://base_torpedo.tscn")
-var firedTorpedos=0
-var torpedoLoaded=true:
-	get():
-		return true
-signal SubTookDamage
-
 @onready var syncronizer: MultiplayerSynchronizer = $Syncronizer
+#endregion
 
-var inUse=false
-var hasPower=true
+func _process(delta: float) -> void:
+	#sonar_pulse(delta)
+	#torpedo_launch.visible=torpedoLoaded
+	Utils.SnapTo(front_view_camera,front_view_anchor)
+	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
+	shakeCooldown -= delta
+	if syncronizer.is_multiplayer_authority():
+		if syncTimer > 0:
+			syncTimer-=delta
+		else:
+			syncTimer = 10
+			rpc("reSync",global_position,global_rotation)
+
+
+func _physics_process(_delta: float) -> void:
+	#print(linear_velocity.length()+angular_velocity.length()*10)
+	sound_radius.shape.set("radius",clamp((linear_velocity.length()+angular_velocity.length())*15,.1,9000))
+	if isColliding && syncronizer.is_multiplayer_authority():
+		if shakeCooldown <= 0 && lastlastMagnitdue > 1.8:
+			rpc("SubCollides")
+	lastlastMagnitdue=lastMagnitude
+	lastMagnitude=(linear_velocity.length()+angular_velocity.length())
+	if !syncronizer.is_multiplayer_authority() || !inUse || !hasPower:return
+	var movement_dir := Input.get_vector("descend", "rise", "move_forward", "move_backward")
+	var rotation_dir := Input.get_axis("move_right", "move_left")
+	var movement := (transform.basis * Vector3(0, movement_dir.x, movement_dir.y)).normalized()
+	var rot := (transform.basis * Vector3(0, rotation_dir, 0)).normalized()
+	var rotation_speed_mult = max(1, abs(linear_velocity.dot(-global_basis.z)) * linear_velocity.length() * 0.05)
+	apply_central_force(movement * max_linear_force)
+	apply_torque(rot*max_rotation_torque * rotation_speed_mult)
+
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	isColliding=state.get_contact_count()!=0
+	if isColliding:
+		currentCollisionPoint=to_local(state.get_contact_collider_position(0))
+
 
 @rpc("authority","call_local","reliable")
 func SubCollides():
 	Damage+=1
 	print("kadunk")
 	shakeCooldown=1.0
-	SubTookDamage.emit()
-	
+	EventBus.sub_damaged.emit()
+
+
 @rpc("authority","call_local","reliable")
 func reSync(pos,rot):
 	global_position=pos
 	global_rotation=rot
+
 
 @rpc("any_peer","call_remote","reliable")
 func RequestTorpedoFire(creatureId):
@@ -76,21 +119,6 @@ func fireTorpedo(id,cid):
 	torpedo.name="Torpedo"+str(id)
 	torpedo.global_position = torpedo_launch.global_position
 	torpedo.global_rotation = torpedo_launch.global_rotation
-
-
-func _process(delta: float) -> void:
-	sonar_pulse(delta)
-	
-	#torpedo_launch.visible=torpedoLoaded
-	Utils.SnapTo(front_view_camera,front_view_anchor)
-	Utils.SnapTo(torpedo_cam,torpedo_view_anchor)
-	shakeCooldown-=delta
-	if syncronizer.is_multiplayer_authority():
-		if syncTimer > 0:
-			syncTimer-=delta
-		else:
-			syncTimer=10
-			rpc("reSync",global_position,global_rotation)
 
 
 var sonar_clock := 0.0
@@ -137,6 +165,7 @@ func sonar_pulse(delta) -> void:
 	sonar_center.rotation = -rotation.y
 	ring.scale += Vector2.ONE * delta * 1.40
 
+
 var sonar_angle := 0.0
 func sonar_spin(delta) -> void:
 	sonar_angle += delta * 5
@@ -155,27 +184,3 @@ func sonar_spin(delta) -> void:
 	
 	sonar_center.position = Vector2(position.x, position.z)
 	sonar_center.rotation = -rotation.y
-
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	isColliding=state.get_contact_count()!=0
-	if isColliding:
-		currentCollisionPoint=to_local(state.get_contact_collider_position(0))
-		
-	
-	
-func _physics_process(_delta: float) -> void:
-	#print(linear_velocity.length()+angular_velocity.length()*10)
-	sound_radius.shape.set("radius",clamp((linear_velocity.length()+angular_velocity.length())*15,.1,9000))
-	if isColliding && syncronizer.is_multiplayer_authority():
-		if shakeCooldown <= 0 && lastlastMagnitdue > 1.8:
-			rpc("SubCollides")
-	lastlastMagnitdue=lastMagnitude
-	lastMagnitude=(linear_velocity.length()+angular_velocity.length())
-	if !syncronizer.is_multiplayer_authority() || !inUse || !hasPower:return
-	var movement_dir := Input.get_vector("descend", "rise", "ui_up", "ui_down")
-	var rotation_dir := Input.get_vector("ui_right", "ui_left", "ui_up", "ui_down")
-	var movement := (transform.basis * Vector3(0, movement_dir.x, movement_dir.y)).normalized()
-	var rot := (transform.basis * Vector3(0, rotation_dir.x, 0)).normalized()
-	var rotation_speed_mult = max(1, abs(linear_velocity.dot(-global_basis.z)) * linear_velocity.length() * 0.05)
-	apply_central_force(movement*SPEED)
-	apply_torque(rot*ROTATION_SPEED * rotation_speed_mult)

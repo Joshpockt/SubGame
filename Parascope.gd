@@ -15,6 +15,7 @@ func RequestInteraction():
 	else:
 		HandleInteraction(1)
 
+
 @rpc("authority","call_local","reliable")
 func ChangeController(id:int):
 	if id == 0&&inUse:
@@ -37,7 +38,8 @@ func ChangeController(id:int):
 		mover.ExternalCameraHook=camera_hook
 		mover.tabout=true
 		mover.updateTabout()
-		
+
+
 @rpc("any_peer","call_remote","reliable")
 func HandleInteraction(id:int):
 	if id == playerUsing:
@@ -45,7 +47,8 @@ func HandleInteraction(id:int):
 		return
 	if inUse:return
 	rpc("ChangeController",id)
-	
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") && Utils.isClient(playerUsing,multiplayer) && inUse:
 		RequestInteraction()

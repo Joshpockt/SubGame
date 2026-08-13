@@ -161,6 +161,8 @@ shadow_mesh = SubResource("ArrayMesh_43f4j")
 
 [node name="Torpedo" type="RigidBody3D" unique_id=1392027223]
 top_level = true
+collision_layer = 2
+collision_mask = 7
 mass = 2.0
 gravity_scale = 0.0
 linear_velocity = Vector3(0, 0, 5)

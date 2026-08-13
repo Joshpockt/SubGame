@@ -2,16 +2,16 @@ extends Node3D
 @onready var hull_crack_spots: Node3D = $HullCrackSpots
 @onready var sub_exterior: RigidBody3D = $"../ExteriorViewport/ExteriorWorld/SubExterior"
 
-const HULLCRACK=preload("res://hull_crack.tscn")
+const HULLCRACK = preload("res://hull_crack.tscn")
 @onready var hole_ref: MeshInstance3D = $HoleRef
-var floodedAmount=0.0
+var floodedAmount = 0.0
 @onready var water: Node3D = $Water
 @onready var water_area: Area3D = $Water/WaterArea
-var localplayer=null;
-var hullcrackIds=0
+var localplayer = null;
+var hullcrackIds = 0
 @onready var boiler: Node3D = $Boiler
-var damageTaken=0
-var syncCooldown=10
+var damageTaken = 0
+var syncCooldown = 10
 
 @rpc("any_peer","call_local","reliable")
 func HullCrack(crackPos,id):
@@ -49,7 +49,8 @@ func syncData(floodedAmt,boileramt):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Water/InWater.visible=localplayer.mover.global_position.y < floodedAmount-1.6
+	#FIXME
+	#$Water/InWater.visible = localplayer.mover.global_position.y < floodedAmount-1.6
 	if floodedAmount < 5.5:
 		floodedAmount+=delta*hull_crack_spots.get_child_count()/40
 	if hull_crack_spots.get_child_count() == 0 && floodedAmount > 0:

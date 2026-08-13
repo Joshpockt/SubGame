@@ -1,4 +1,5 @@
 extends Node
+class_name SubInterior
 
 @onready var spawnpoint: Node3D = $Spawnpoint
 var localplayer;
@@ -13,9 +14,10 @@ func player_leaves(id: int):
 		if i.name.contains(str(id)):
 			i.queue_free()
 
+func test():
+	pass
 
 func _ready() -> void:
-
 	multiplayer.peer_disconnected.connect(player_leaves)
 	self.set_multiplayer_authority(1)
 	localplayer = avatar.instantiate()

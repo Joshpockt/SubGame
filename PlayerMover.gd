@@ -23,6 +23,7 @@ var ExternalCameraHook=null
 
 var input_Lerp:Vector2
 @export var input_dir_anims:Vector2
+
 func HullShaken():
 	camera_offset._custom_shake(2, 0.1)
 @onready var render: Node3D = $Render/Model
@@ -45,16 +46,15 @@ func _ready() -> void:
 		render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		player.username=Steam.getPersonaName()
-		player.submarine.SubTookDamage.connect(HullShaken)
-		
-		
+		EventBus.sub_damaged.connect(HullShaken)
+
+
 func cameraMovments(_delta: float):
 	if ExternalCameraHook == null:
 		Utils.SnapTo(camera_holder,camera_offset)
 	else:
 		Utils.SnapTo(camera_holder,ExternalCameraHook)
 
-		
 
 func updateTabout():
 	if tabout:
@@ -63,6 +63,7 @@ func updateTabout():
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		$"../UI/Crosshair".show()
+
 
 @rpc("authority","call_local","reliable")
 func PlayEmote(animname):
@@ -73,7 +74,8 @@ func PlayEmote(animname):
 	animation_player.play("character/"+animname)
 	currentEmote=animname
 	render.position.y=-1
-	
+
+
 @rpc("authority","call_local","reliable")
 func StopEmotes():
 	camera_offset.position.z=0
@@ -124,6 +126,7 @@ func _process(delta: float) -> void:
 				render.hide()
 				camera_offset.position.z=0
 
+
 	else:
 		render.rotation.y=0
 		render.position.y=0
@@ -149,18 +152,15 @@ func _process(delta: float) -> void:
 		global_position=global_position.lerp(posLerpTo,15*delta)
 		#global_rotation=global_rotation.lerp(rotLerpTo,15*delta)
 
+
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if tabout:return;
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	# Handle jump.
+	
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:

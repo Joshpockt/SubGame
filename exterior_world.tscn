@@ -116,6 +116,7 @@ mesh = ExtResource("7_vjlf6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="test_cave2" unique_id=1789819771]
 visible = false
+collision_layer = 33
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="test_cave2/StaticBody3D" unique_id=348661346]
 shape = ExtResource("8_sjs2a")
