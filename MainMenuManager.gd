@@ -70,9 +70,10 @@ func _on_lobby_created(result:int,id:int):
 
 @rpc("authority","call_local","reliable")
 func EnterTesting():
-	var game = load("res://debug_scene.tscn").instantiate()
-	get_tree().root.add_child(game)
-	queue_free()
+	pass
+	#var game = load("res://debug_scene.tscn").instantiate()
+	#get_tree().root.add_child(game)
+	#queue_free()
 
 
 @rpc("authority","call_local","reliable")

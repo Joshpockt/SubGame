@@ -9,4 +9,5 @@ class_name Game
 static var front_viewport : ViewportTexture
 
 func _ready() -> void:
-	front_viewport = sub_exterior.front_viewport
+	pass
+	#front_viewport = sub_exterior.front_viewport

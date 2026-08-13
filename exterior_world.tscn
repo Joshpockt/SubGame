@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dybj6efyooap7"]
 
-[ext_resource type="PackedScene" uid="uid://15w18834er6v" path="res://sub_exterior.tscn" id="1_rxtm4"]
+[ext_resource type="PackedScene" uid="uid://barfi1a14mptb" path="res://src/Subs/Dev/Submarine.tscn" id="1_vjlf6"]
 [ext_resource type="Texture2D" uid="uid://d03xc1u1ld271" path="res://plrmodel.png" id="2_rlwym"]
 [ext_resource type="Script" uid="uid://dm0rswub76k5o" path="res://PathNodeGenerator.gd" id="3_vysrt"]
 [ext_resource type="Script" uid="uid://dvbyvhutpbpga" path="res://Freecam.gd" id="4_6aag7"]
@@ -33,10 +33,6 @@ volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(0.62, 1, 0.8796667, 1)
 adjustment_enabled = true
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_itu75"]
-friction = 0.9
-bounce = 0.3
-
 [sub_resource type="SphereMesh" id="SphereMesh_6aag7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1l74"]
@@ -49,17 +45,10 @@ uv1_triplanar = true
 
 [node name="ExteriorWorld" type="Node" unique_id=564991855]
 
+[node name="Submarine" parent="." unique_id=1330466907 instance=ExtResource("1_vjlf6")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=349990505]
 environment = SubResource("Environment_vysrt")
-
-[node name="SubExterior" parent="." unique_id=201099548 instance=ExtResource("1_rxtm4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.703613)
-collision_layer = 3
-mass = 30.0
-physics_material_override = SubResource("PhysicsMaterial_itu75")
-continuous_cd = true
-contact_monitor = true
-max_contacts_reported = 1
 
 [node name="PathfindingNodes" type="Node3D" parent="." unique_id=81073858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 39.698933)

@@ -6,15 +6,13 @@ class_name CameraShakeNodeExample
 func _process(delta: float) -> void:
 	# test input
 	if Input.is_key_pressed(KEY_1):
-		shake_node._custom_shake(3, 0.05)
+		shake_node._custom_shake(1, 0.05)
 
 	elif Input.is_key_pressed(KEY_2):
-		shake_node._custom_shake(2, 0.1)
+		shake_node._custom_shake(0.9, 0.1)
 
 	elif Input.is_key_pressed(KEY_3):
-		shake_node._custom_shake(1, 0.25)
+		shake_node._custom_shake(0.8, 0.25)
 		
 	elif Input.is_key_pressed(KEY_4):
-		shake_node._custom_shake(0.5, 0.5)
-		pass
-	pass
+		shake_node._custom_shake(0.7, 0.5)

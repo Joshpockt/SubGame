@@ -46,7 +46,7 @@ func _ready() -> void:
 		render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 		player.username=Steam.getPersonaName()
-		EventBus.sub_damaged.connect(HullShaken)
+		EventBus.hull_hit.connect(HullShaken)
 
 
 func cameraMovments(_delta: float):

@@ -37,6 +37,8 @@ func _init_camera_shake(pCamera):
 
 func _shake():
 	cameraShake._start_shake(decay, magnitude)
+	print_debug("test")
 
 func _custom_shake(pDecay, pMagnitude): # maybe rename to "_start_shake()" ?
 	cameraShake._start_shake(pDecay, pMagnitude)
+	print_debug("test")

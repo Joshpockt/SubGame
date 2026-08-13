@@ -7,13 +7,13 @@ class_name Utils
 #INFO, NOTE, NOTICE, TEST, TESTING
 
 
-static func SnapTo(node:Node3D,node2:Node3D):
-	node.global_position=node2.global_position
-	node.global_rotation=node2.global_rotation
+static func SnapTo(from:Node3D,to:Node3D):
+	from.global_position = to.global_position
+	from.global_rotation = to.global_rotation
 	
-static func LerpTo(node:Node3D,node2:Node3D,speed):
-	node.global_position=node.global_position.lerp(node2.global_position,speed)
-	node.global_rotation=node.global_rotation.slerp(node2.global_rotation,speed)
+static func LerpTo(from: Node3D, to: Node3D, speed):
+	from.global_position = from.global_position.lerp(to.global_position,speed)
+	from.global_rotation = from.global_rotation.slerp(to.global_rotation,speed)
 
 const EXPLOSION = preload("res://explosion.tscn")
 

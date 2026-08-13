@@ -673,13 +673,16 @@ collision_layer = 2
 script = ExtResource("1_4flbx")
 
 [node name="Collider" type="CollisionShape3D" parent="Mover" unique_id=1482686396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_bwjto")
 
 [node name="Render" type="Node3D" parent="Mover" unique_id=1700931507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="display_name" type="Label3D" parent="Mover/Render" unique_id=1915843826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1401914, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1401916, 0)
 billboard = 1
+text = "Username"
 
 [node name="Model" type="Node3D" parent="Mover/Render" unique_id=200283873]
 
@@ -1019,7 +1022,7 @@ libraries/ = SubResource("AnimationLibrary_op7ga")
 libraries/character = SubResource("AnimationLibrary_7ahtn")
 
 [node name="CameraOffset" type="Node3D" parent="Mover" unique_id=2014327617 node_paths=PackedStringArray("camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.865, 0)
 script = ExtResource("4_1jxqw")
 camera = NodePath("../../CameraHolder/Camera")
 
@@ -1054,13 +1057,14 @@ custom_minimum_size = Vector2(26.03, 26.03)
 layout_mode = 2
 
 [node name="CameraHolder" type="Node3D" parent="." unique_id=101966883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8403466, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraHolder" unique_id=647781432 node_paths=PackedStringArray("shake_node")]
 current = true
 script = ExtResource("6_dw050")
 shake_node = NodePath("../../Mover/CameraOffset")
 
-[node name="Interactor" type="RayCast3D" parent="CameraHolder/Camera" unique_id=843132296]
+[node name="Interactor" type="RayCast3D" parent="CameraHolder" unique_id=843132296]
 target_position = Vector3(0, 0, -1.68)
 collision_mask = 8
 collide_with_areas = true

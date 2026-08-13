@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://4omjvdknmm6u"]
 
 [ext_resource type="Texture2D" uid="uid://dlegrv7ncwsn5" path="res://icon.svg" id="1_e1g5k"]
-[ext_resource type="Script" uid="uid://bja4sl055oi0" path="res://src/Subs/SubComponents/Sonar/sonar.gd" id="1_hu77w"]
+[ext_resource type="Script" uid="uid://bja4sl055oi0" path="res://src/Subs/SubComponents/Exterior/Sonar/sonar.gd" id="1_hu77w"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hu77w"]
 viewport_path = NodePath("ActiveSonarView")

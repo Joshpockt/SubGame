@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://2ci3d4uj8kpu" path="res://Assets/submarine.glb" id="2_bs2fh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wsgdl"]
-radius = 4.938965
-height = 39.94368
+radius = 5.0
+height = 40.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4twa3"]
 radius = 2.3208008
