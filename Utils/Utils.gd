@@ -1,4 +1,4 @@
-class_name Utils
+extends Node
 
 #ALERT, ATTENTION, CAUTION, CRITICAL, DANGER, SECURITY
 
@@ -7,26 +7,27 @@ class_name Utils
 #INFO, NOTE, NOTICE, TEST, TESTING
 
 
-static func SnapTo(from:Node3D,to:Node3D):
+func snap_to(from:Node3D,to:Node3D) -> void:
 	from.global_position = to.global_position
 	from.global_rotation = to.global_rotation
 	
-static func LerpTo(from: Node3D, to: Node3D, speed):
-	from.global_position = from.global_position.lerp(to.global_position,speed)
-	from.global_rotation = from.global_rotation.slerp(to.global_rotation,speed)
+func lerp_to(from: Node3D, to: Node3D, weight: float) -> void:
+	from.global_position = from.global_position.lerp(to.global_position, weight)
+	from.global_rotation = from.global_rotation.slerp(to.global_rotation, weight)
 
 const EXPLOSION = preload("res://explosion.tscn")
 
-static func ExplodeAt(pos:Vector3,environment,radius:float):
-	var explosion = EXPLOSION.instantiate()
+## @deprecated
+func ExplodeAt(pos:Vector3, environment: Node, radius:float) -> void:
+	var explosion : Node3D = EXPLOSION.instantiate()
 	environment.add_child(explosion)
 	explosion.global_position=pos
 	explosion.ExplosionForce=radius
 	explosion.get_child(0).emitting=true
+## @deprecated
+func is_host() -> bool:
+	return multiplayer.get_unique_id() == 1
 
-
-static func isHost(mult):
-	return mult.get_unique_id() == 1
-
-static func isClient(id:int,multiplayer):
-	return multiplayer.get_unique_id() == id
+## @deprecated
+func is_client() -> bool:
+	return multiplayer.get_unique_id() != 1

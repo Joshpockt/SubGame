@@ -4,9 +4,9 @@ class_name SerpentSegment
 @onready var joint_attachment: Node3D = $JointAttachment
 
 var joint = Generic6DOFJoint3D.new()
-var segments:Array
-var segmentId=0
-var isHead=false
+var segments: Array
+var segmentId := 0
+var isHead := false
 
 func InitializeJoint():
 	joint.set_flag_x(Generic6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT,false)

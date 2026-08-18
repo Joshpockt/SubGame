@@ -1,34 +1,35 @@
 extends CharacterBody3D
+class_name Player
 
-@onready var syncronizer: MultiplayerSynchronizer = $"../Syncronizer"
-@onready var camera: Camera3D = $"../CameraHolder/Camera"
-@onready var player: Node3D = $".."
+@onready var syncronizer: MultiplayerSynchronizer = $Syncronizer
+@onready var camera: Camera3D = $CameraHolder/Camera
 
-var tabout = false;
+var tabout := false;
 @onready var camera_offset: Node3D = $CameraOffset
-@onready var camera_holder: Node3D = $"../CameraHolder"
+@onready var camera_holder: Node3D = $CameraHolder
 @onready var tree: AnimationTree = $Tree
 
-var mouseX = 0;
-var mouseY = 0;
+var mouseX := 0;
+var mouseY := 0;
+var username := ""
 const sensitivity = 10;
 const SPEED = 4.0
 const JUMP_VELOCITY = 4.5
 
 
-var ExternalCameraHook=null
-
-@export var posLerpTo=Vector3.ZERO;
-@export var rotLerpTo=Vector3.ZERO;
+var external_camera_hook : Node3D = null
+@export_storage var posLerpTo := Vector3.ZERO;
+@export_storage var rotLerpTo := Vector3.ZERO;
+@export_storage var input_dir_anims: Vector2
 
 var input_Lerp:Vector2
-@export var input_dir_anims:Vector2
 
-func HullShaken():
+func HullShaken() -> void:
 	camera_offset._custom_shake(2, 0.1)
+
 @onready var render: Node3D = $Render/Model
 
-var currentEmote=""
+var currentEmote := ""
 @onready var animation_player: AnimationPlayer = $Render/Model/AnimationPlayer
 
 func _ready() -> void:
@@ -45,39 +46,39 @@ func _ready() -> void:
 	else:
 		render.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
-		player.username=Steam.getPersonaName()
-		EventBus.hull_hit.connect(HullShaken)
+		username = Steam.getPersonaName()
+		GameEventBus.hull_hit.connect(HullShaken)
 
 
-func cameraMovments(_delta: float):
-	if ExternalCameraHook == null:
-		Utils.SnapTo(camera_holder,camera_offset)
+func handle_camera(_delta: float) -> void:
+	if external_camera_hook == null:
+		Utils.snap_to(camera_holder,camera_offset)
 	else:
-		Utils.SnapTo(camera_holder,ExternalCameraHook)
+		Utils.snap_to(camera_holder,external_camera_hook)
 
 
-func updateTabout():
+func updateTabout() -> void:
 	if tabout:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
-		$"../UI/Crosshair".hide()
+		$UI/Crosshair.hide()
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
-		$"../UI/Crosshair".show()
+		$UI/Crosshair.show()
 
 
 @rpc("authority","call_local","reliable")
-func PlayEmote(animname):
+func PlayEmote(animname: String) -> void:
 	if multiplayer.get_remote_sender_id() == multiplayer.get_unique_id():
 		render.show()
 		camera_offset.position.z=1.6
 	tree.active=false
 	animation_player.play("character/"+animname)
-	currentEmote=animname
+	currentEmote = animname
 	render.position.y=-1
 
 
 @rpc("authority","call_local","reliable")
-func StopEmotes():
+func StopEmotes() -> void:
 	camera_offset.position.z=0
 	currentEmote=""
 	tree.active=true
@@ -130,7 +131,7 @@ func _process(delta: float) -> void:
 	else:
 		render.rotation.y=0
 		render.position.y=0
-	$Render/display_name.text=player.username
+	$Render/display_name.text = username
 	if syncronizer.is_multiplayer_authority():
 		var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		if input_dir_anims != input_dir:
@@ -140,7 +141,7 @@ func _process(delta: float) -> void:
 		if tabout:
 			input_dir=Vector2.ZERO
 			input_dir_anims=Vector2.ZERO
-		cameraMovments(delta)
+		handle_camera(delta)
 		if global_position.distance_to(posLerpTo) > .1:
 			posLerpTo=global_position
 		#if global_rotation.distance_to(rotLerpTo) > .1:

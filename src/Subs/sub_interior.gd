@@ -5,7 +5,7 @@ class_name SubInterior
 var localplayer;
 var avatar = preload("res://player.tscn")
 var firstServerId;
-var Players:Dictionary
+#var Players:Dictionary
 #@onready var sub_exterior: RigidBody3D = $ExteriorViewport/ExteriorWorld/SubExterior
 
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 	localplayer.set_multiplayer_authority(multiplayer.get_unique_id())
 	localplayer.find_child("Syncronizer").set_multiplayer_authority(multiplayer.get_unique_id())
 	#localplayer.submarine = sub_exterior
-	Players[multiplayer.get_unique_id()]=localplayer
+	NetworkUtilitys.players[multiplayer.get_unique_id()]=localplayer
 	#$Ship.localplayer=localplayer
 	for i in multiplayer.get_peers():
 		var player_instance = avatar.instantiate()
@@ -35,6 +35,6 @@ func _ready() -> void:
 		player_instance.find_child("Syncronizer").set_multiplayer_authority(i)
 		player_instance.name=str(i)
 		player_instance.find_child("Mover").global_position+=Vector3(0,5,0)
-		Players[i]=player_instance
+		NetworkUtilitys.players[i]=player_instance
 
 	

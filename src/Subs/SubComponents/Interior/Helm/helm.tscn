@@ -206,8 +206,11 @@ shadow_mesh = SubResource("ArrayMesh_qm3pf")
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1.4, 2.3, 1)
 
-[node name="Helm" type="Node3D" unique_id=1292257282]
+[node name="Helm" type="Node3D" unique_id=1292257282 node_paths=PackedStringArray("interaction_box", "player_anchor", "camera_anchor")]
 script = ExtResource("1_3dtng")
+interaction_box = NodePath("InteractionBox3D")
+player_anchor = NodePath("PlayerAnchor")
+camera_anchor = NodePath("CameraAnchor")
 
 [node name="Helm_test" type="Node3D" parent="." unique_id=2106796204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -252,3 +255,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1149226183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14999998, 0)
 shape = SubResource("BoxShape3D_beyo5")
+
+[node name="PlayerAnchor" type="Marker3D" parent="." unique_id=359515023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2823762)
+
+[node name="CameraAnchor" type="Marker3D" parent="." unique_id=1306993173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.624853, 1.163112)

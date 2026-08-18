@@ -6,7 +6,7 @@ var progress := 1.0
 var ProgressLerp := 1.0
 var lerpSpeed := 13.0
 
-@onready var mover: CharacterBody3D = $"../../Mover"
+@onready var mover: CharacterBody3D = $"../.."
 
 @onready var circle: ColorRect = $"../../UI/Crosshair/circle"
 
