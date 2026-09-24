@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://cfcqnc2vn26mt"]
+
+[ext_resource type="Script" uid="uid://dknqe3bwxg3fi" path="res://src/MainMenu/main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Control" unique_id=1368243867]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1001927181]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="StartingScreen" type="Control" parent="MarginContainer" unique_id=1468776794]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/StartingScreen" unique_id=1249809910]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/StartingScreen/CenterContainer" unique_id=1376305273]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer" unique_id=1789678633]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1682108689]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1875544421]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " Join "
+
+[node name="Address" type="LineEdit" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer/VBoxContainer" unique_id=97303001]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+placeholder_text = "127.0.0.1, \"localhost\""
+alignment = 1
+
+[node name="Lobby" type="Control" parent="MarginContainer" unique_id=17011437]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Lobby" unique_id=1925269686]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Lobby/HBoxContainer" unique_id=382936720]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Lobby/HBoxContainer/MarginContainer" unique_id=1765014967]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="LobbyPlayerList" type="VBoxContainer" parent="MarginContainer/Lobby/HBoxContainer/MarginContainer/ScrollContainer" unique_id=297869528]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Lobby/HBoxContainer" unique_id=173506684]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Lobby/HBoxContainer" unique_id=1604687623]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Lobby/HBoxContainer/CenterContainer" unique_id=456936787]
+layout_mode = 2
+
+[node name="StartGame" type="Button" parent="MarginContainer/Lobby/HBoxContainer/CenterContainer/VBoxContainer" unique_id=585720368]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Start!"

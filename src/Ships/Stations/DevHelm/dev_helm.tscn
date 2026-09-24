@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://b01kt6b3n182i"]
+
+[ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/Stations/DevHelm/dev_helm.gd" id="1_c1x4s"]
+[ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_de4h6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_beyo5"]
+size = Vector3(1, 1, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c1x4s"]
+size = Vector3(1, 2, 0.25)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beyo5"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
+size = Vector3(1, 2, 0.8)
+
+[node name="Station" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("player_standing_marker", "camera_marker")]
+script = ExtResource("1_c1x4s")
+player_standing_marker = NodePath("PlayerMarker")
+camera_marker = NodePath("CameraMarker")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=265232951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_beyo5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1321905173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.35)
+mesh = SubResource("BoxMesh_c1x4s")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1660660701]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 1, 0.24206054)
+mesh = SubResource("CylinderMesh_beyo5")
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=1057324836]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_de4h6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1465797814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.050000012)
+shape = SubResource("BoxShape3D_beyo5")
+
+[node name="PlayerMarker" type="Marker3D" parent="." unique_id=176746422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
+
+[node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5718837, 0.7)

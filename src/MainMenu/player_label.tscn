@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bbkc5a3fb7cn7"]
+
+[ext_resource type="Script" uid="uid://qe0dmooa56fi" path="res://src/MainMenu/player_label.gd" id="1_vmhl3"]
+
+[node name="PlayerLabel" type="Control" unique_id=312415055]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vmhl3")
+
+[node name="Panel" type="Panel" parent="." unique_id=1590612277]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1565290788]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=682300879]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=535626095]
+layout_mode = 2
+text = "Player Name"
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1759406638]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KickButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=56738711]
+layout_mode = 2
+disabled = true
+text = " Kick "

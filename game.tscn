@@ -1,27 +1,18 @@
-[gd_scene format=3 uid="uid://dxjahf1bx31bk"]
+[gd_scene format=3 uid="uid://dgvqg2yagkuep"]
 
-[ext_resource type="Script" uid="uid://c1rly7ca8regf" path="res://game.gd" id="1_80nbo"]
-[ext_resource type="PackedScene" uid="uid://dybj6efyooap7" path="res://exterior_world.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://cwi8hpqkmnldw" path="res://sub_interior.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cuj2gpbf6tct6" path="res://src/Ships/DevSub/Interior/dev_interior.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://bfeu208ynk2et" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dg2quqk0kepxt" path="res://src/world.tscn" id="2_e2o6t"]
 
-[sub_resource type="World3D" id="World3D_beyo5"]
+[sub_resource type="World3D" id="World3D_o5x6r"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_feb5d"]
-viewport_path = NodePath("FrontView")
+[node name="Game" type="Node" unique_id=180159247]
+script = ExtResource("1_feb5d")
 
-[node name="Game" type="Node" unique_id=1166316064]
-script = ExtResource("1_80nbo")
+[node name="DevInterior" parent="." unique_id=84030230 instance=ExtResource("1_80nbo")]
 
-[node name="ExteriorViewport" type="SubViewport" parent="." unique_id=1238947704]
+[node name="ExteriorWorld" type="SubViewport" parent="." unique_id=1180096657]
 own_world_3d = true
-world_3d = SubResource("World3D_beyo5")
+world_3d = SubResource("World3D_o5x6r")
 
-[node name="ExteriorWorld" parent="ExteriorViewport" unique_id=564991855 instance=ExtResource("2_e2o6t")]
-
-[node name="SubExterior" parent="ExteriorViewport/ExteriorWorld" index="1" unique_id=201099548]
-front_viewport = SubResource("ViewportTexture_feb5d")
-
-[node name="SubInterior" parent="." unique_id=912680225 instance=ExtResource("3_feb5d")]
-
-[editable path="ExteriorViewport/ExteriorWorld"]
-[editable path="ExteriorViewport/ExteriorWorld/Creatures/Serpent"]
+[node name="Node" parent="ExteriorWorld" unique_id=2143142866 instance=ExtResource("2_e2o6t")]

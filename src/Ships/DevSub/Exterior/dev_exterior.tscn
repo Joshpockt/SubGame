@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://b6gedrrvtpvpd"]
+
+[ext_resource type="Script" uid="uid://dh0mxauxi4iep" path="res://src/Ships/DevSub/Exterior/exterior.gd" id="1_6vnwu"]
+[ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="2_w4tfr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vo0vy"]
+radius = 5.0
+height = 25.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gh0ne"]
+albedo_texture = ExtResource("2_w4tfr")
+uv1_triplanar = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
+material = SubResource("StandardMaterial3D_gh0ne")
+radius = 5.0
+height = 25.0
+
+[sub_resource type="Curve" id="Curve_laggi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_w4tfr"]
+curve = SubResource("Curve_laggi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_beyo5"]
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(30, 20, 30)
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+alpha_curve = SubResource("CurveTexture_w4tfr")
+turbulence_enabled = true
+turbulence_noise_strength = 8.95
+turbulence_noise_scale = 9.315
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0n8d"]
+transparency = 1
+shading_mode = 2
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_dklud"]
+material = SubResource("StandardMaterial3D_k0n8d")
+size = Vector2(0.1, 0.1)
+
+[node name="DevExterior" type="RigidBody3D" unique_id=1056441616]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+linear_damp = 0.25
+angular_damp = 0.5
+script = ExtResource("1_6vnwu")
+max_linear_force = 5.0
+max_torque = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vo0vy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1379823015]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=969240049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -2)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1201884900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
+light_color = Color(0.7128, 0.99, 0.80057997, 1)
+light_energy = 16.0
+spot_range = 150.0
+spot_angle = 50.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1102759865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+cast_shadow = 0
+amount = 1000
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_beyo5")
+draw_pass_1 = SubResource("QuadMesh_dklud")

@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cuj2gpbf6tct6"]
+
+[ext_resource type="Script" uid="uid://4fiv42tc386t" path="res://src/Ships/DevSub/Interior/interior.gd" id="1_pjvd3"]
+[ext_resource type="PackedScene" uid="uid://b01kt6b3n182i" path="res://src/Ships/Stations/DevHelm/dev_helm.tscn" id="2_o5x6r"]
+[ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_o5x6r"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dxppu"]
+sky_material = SubResource("ProceduralSkyMaterial_t34gm")
+
+[sub_resource type="Environment" id="Environment_gy3sr"]
+background_mode = 2
+sky = SubResource("Sky_dxppu")
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_beyo5"]
+size = Vector2(8, 20)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
+size = Vector2(128, 128)
+
+[node name="DevInterior" type="Node" unique_id=18960767]
+script = ExtResource("1_pjvd3")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1428999658]
+spawn_path = NodePath("../Entitys")
+
+[node name="WorldEnv" type="Node3D" parent="." unique_id=1522798022]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnv" unique_id=2003007890]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldEnv" unique_id=677214817]
+environment = SubResource("Environment_gy3sr")
+
+[node name="Level" type="Node3D" parent="." unique_id=1530232166]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level" unique_id=1960854016]
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1593627651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, 2, 0)
+flip_faces = true
+size = Vector3(2.5, 4, 25)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=577692816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+flip_faces = true
+size = Vector3(6, 4, 25)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1794888790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+flip_faces = true
+size = Vector3(9, 3, 2.5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1915062060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75, 2, 0)
+flip_faces = true
+size = Vector3(2.5, 4, 25)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Level/CSGCombiner3D" unique_id=167815974]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+operation = 1
+flip_faces = true
+radius = 6.0
+height = 25.0
+sides = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level" unique_id=2109020811]
+mesh = SubResource("PlaneMesh_beyo5")
+
+[node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
+
+[node name="Station" parent="." unique_id=1236775955 instance=ExtResource("2_o5x6r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=240830634]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.5, -4.2213626)
+texture_filter = 0
+texture = SubResource("PlaceholderTexture2D_beyo5")
+script = ExtResource("3_o5x6r")
