@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 
 Networking="*uid://cx3wsipblna3d"
 EnetNetworking="*uid://cyiodbhpcl4ui"
+ScreenManager="*uid://bifbf6i2r157m"
+SubmarineData="*uid://bjs58ptl2gigh"
 
 [display]
 

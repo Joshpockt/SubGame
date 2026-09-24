@@ -17,7 +17,7 @@ height = 0.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1, 2, 0.8)
 
-[node name="Station" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("player_standing_marker", "camera_marker")]
+[node name="Helm" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("player_standing_marker", "camera_marker")]
 script = ExtResource("1_c1x4s")
 player_standing_marker = NodePath("PlayerMarker")
 camera_marker = NodePath("CameraMarker")
@@ -47,4 +47,4 @@ shape = SubResource("BoxShape3D_beyo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
 
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5718837, 0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5718837, 0.36745018)

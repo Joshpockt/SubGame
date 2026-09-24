@@ -67,13 +67,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -19)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Cube" type="MeshInstance3D" parent="test_cave" unique_id=1112873321]
+transform = Transform3D(1.535, 0, 0, 0, 1.535, 0, 0, 0, 1.535, -17.654335, 0, -7.716955e-07)
 material_override = SubResource("StandardMaterial3D_3cfgd")
 mesh = SubResource("ArrayMesh_w8cxt")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="test_cave" unique_id=188264324]
+[node name="StaticBody3D" type="StaticBody3D" parent="test_cave" unique_id=254557434]
+transform = Transform3D(1.535, 0, 0, 0, 1.535, 0, 0, 0, 1.535, -17.654335, 0, -7.716955e-07)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="test_cave/StaticBody3D" unique_id=33752068]
-visible = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_cave/StaticBody3D" unique_id=1623532224]
 shape = ExtResource("2_0qwtu")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1542959026]

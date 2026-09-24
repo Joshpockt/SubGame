@@ -1,20 +1,11 @@
 [gd_scene format=3 uid="uid://b6gedrrvtpvpd"]
 
 [ext_resource type="Script" uid="uid://dh0mxauxi4iep" path="res://src/Ships/DevSub/Exterior/exterior.gd" id="1_6vnwu"]
-[ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="2_w4tfr"]
+[ext_resource type="PackedScene" uid="uid://cddj4ew411efo" path="res://Assets/Meshes/Subs/submarine.glb" id="2_w4tfr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vo0vy"]
 radius = 5.0
-height = 25.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gh0ne"]
-albedo_texture = ExtResource("2_w4tfr")
-uv1_triplanar = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
-material = SubResource("StandardMaterial3D_gh0ne")
-radius = 5.0
-height = 25.0
+height = 39.25
 
 [sub_resource type="Curve" id="Curve_laggi"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -51,6 +42,17 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_k0n8d")
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4tfr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
+size = Vector3(5, 4, 7)
+
 [node name="DevExterior" type="RigidBody3D" unique_id=1056441616]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -59,21 +61,26 @@ linear_damp = 0.25
 angular_damp = 0.5
 script = ExtResource("1_6vnwu")
 max_linear_force = 5.0
-max_torque = 10.0
+max_torque = 15.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.6391766e-08, 0.375)
 shape = SubResource("CapsuleShape3D_vo0vy")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1379823015]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_beyo5")
+[node name="submarine" parent="." unique_id=1472708832 instance=ExtResource("2_w4tfr")]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=969240049]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -2)
+[node name="Propeller" parent="submarine" index="7" unique_id=1112571565]
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1201884900]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5644534, 2.310649, -18.2247)
+light_color = Color(0.7128, 0.99, 0.80057997, 1)
+light_energy = 16.0
+spot_range = 150.0
+spot_angle = 50.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1706362357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.564, 2.311, -18.225)
 light_color = Color(0.7128, 0.99, 0.80057997, 1)
 light_energy = 16.0
 spot_range = 150.0
@@ -86,3 +93,22 @@ amount = 1000
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_beyo5")
 draw_pass_1 = SubResource("QuadMesh_dklud")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1513719610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5128019, 6.0318213, -7.4427805)
+remote_path = NodePath("../SubViewport/Camera3D")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1944179739]
+size = Vector2i(128, 128)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=969240049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5128019, 6.0318213, -7.4427805)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1691628961]
+replication_config = SubResource("SceneReplicationConfig_w4tfr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1244196742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -3)
+shape = SubResource("BoxShape3D_beyo5")
+
+[editable path="submarine"]

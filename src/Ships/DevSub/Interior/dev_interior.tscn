@@ -76,10 +76,10 @@ mesh = SubResource("PlaneMesh_beyo5")
 [node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
 
 [node name="Station" parent="." unique_id=1236775955 instance=ExtResource("2_o5x6r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=240830634]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.5, -4.2213626)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.5, -8.221363)
 texture_filter = 0
 texture = SubResource("PlaceholderTexture2D_beyo5")
 script = ExtResource("3_o5x6r")

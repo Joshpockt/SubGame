@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dgvqg2yagkuep"]
 
-[ext_resource type="PackedScene" uid="uid://cuj2gpbf6tct6" path="res://src/Ships/DevSub/Interior/dev_interior.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bfeu208ynk2et" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://dg2quqk0kepxt" path="res://src/world.tscn" id="2_e2o6t"]
 
@@ -9,10 +8,8 @@
 [node name="Game" type="Node" unique_id=180159247]
 script = ExtResource("1_feb5d")
 
-[node name="DevInterior" parent="." unique_id=84030230 instance=ExtResource("1_80nbo")]
-
 [node name="ExteriorWorld" type="SubViewport" parent="." unique_id=1180096657]
 own_world_3d = true
 world_3d = SubResource("World3D_o5x6r")
 
-[node name="Node" parent="ExteriorWorld" unique_id=2143142866 instance=ExtResource("2_e2o6t")]
+[node name="World" parent="ExteriorWorld" unique_id=2143142866 instance=ExtResource("2_e2o6t")]
