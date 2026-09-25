@@ -17,7 +17,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#throttle_input = Input.get_axis("move_backward","move_forward")
 	#steering_input = Input.get_axis("move_left","move_right")
-	
+	if SubInterior.interior_instance.fuel <= 0:
+		return
 	apply_central_force(
 			Vector3.FORWARD.rotated(Vector3.UP,rotation.y) * throttle_input * max_linear_force)
 	apply_torque(Vector3.DOWN * steering_input * max_torque)

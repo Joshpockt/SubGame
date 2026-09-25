@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cuj2gpbf6tct6"]
 
 [ext_resource type="Script" uid="uid://4fiv42tc386t" path="res://src/Ships/DevSub/Interior/interior.gd" id="1_pjvd3"]
-[ext_resource type="PackedScene" uid="uid://b01kt6b3n182i" path="res://src/Ships/Stations/DevHelm/dev_helm.tscn" id="2_o5x6r"]
+[ext_resource type="PackedScene" uid="uid://b01kt6b3n182i" path="res://src/Ships/SubComponents/DevHelm/dev_helm.tscn" id="2_o5x6r"]
 [ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_o5x6r"]
+[ext_resource type="PackedScene" uid="uid://hxy003y2usmm" path="res://src/Ships/SubComponents/DevBoiler/dev_boiler.tscn" id="4_ha1vf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -83,3 +84,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.5, -8.221363)
 texture_filter = 0
 texture = SubResource("PlaceholderTexture2D_beyo5")
 script = ExtResource("3_o5x6r")
+
+[node name="DevBoiler" parent="." unique_id=245123805 instance=ExtResource("4_ha1vf")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 5)

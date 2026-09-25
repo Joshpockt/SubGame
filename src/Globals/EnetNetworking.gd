@@ -1,7 +1,9 @@
 extends Node
 
+
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_peer_joined)
+
 
 func create_server() -> Error:
 	var peer := ENetMultiplayerPeer.new()

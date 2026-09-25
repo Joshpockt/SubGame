@@ -1,14 +1,22 @@
 extends Node
 class_name SubInterior
 
-@onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
 const PLAYER = preload("uid://1vhx3e3e0f80")
 
 static var interior_instance : SubInterior
 
+@export var max_fuel_seconds := 180.0
+
+var fuel := 0.0:
+	set(value):
+		fuel = clamp(value, 0, max_fuel_seconds)
+
+@onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
+
 
 func _ready() -> void:
 	interior_instance = self
+	fuel = max_fuel_seconds
 	player_spawner.spawn_function = spawn_function
 	player_spawner.spawned.connect(_on_player_spawned)
 	
@@ -16,6 +24,11 @@ func _ready() -> void:
 	spawn_player(multiplayer.get_unique_id())
 	for peer in multiplayer.get_peers():
 		spawn_player(peer)
+
+
+func _physics_process(delta: float) -> void:
+	fuel = fuel - delta
+	print(fuel / max_fuel_seconds)
 
 
 # NOTE: Only called on peers

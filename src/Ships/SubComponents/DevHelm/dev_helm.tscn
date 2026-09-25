@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b01kt6b3n182i"]
 
-[ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/Stations/DevHelm/dev_helm.gd" id="1_c1x4s"]
+[ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/SubComponents/DevHelm/dev_helm.gd" id="1_c1x4s"]
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_de4h6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_beyo5"]
