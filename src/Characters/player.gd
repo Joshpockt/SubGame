@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Player
 
+@export var current_item : Item
+
 var mouse_motion := Vector2.ZERO
 var can_move := true
 
@@ -8,12 +10,21 @@ var can_move := true
 @onready var ray_cast_3d: RayCast3D = $CameraPivot/RayCast3D
 @onready var camera_pivot: Node3D = $CameraPivot
 
+static func get_player(peer_id: int) -> Player:
+	return Networking.players[peer_id]
 
 func _ready() -> void:
 	if is_multiplayer_authority():
 		camera_3d.current = true
 		$CameraPivot/MeshInstance3D.hide()
 		$MeshInstance3D.hide()
+
+
+func _process(delta: float) -> void:
+	if current_item:
+		$Label3D.text = "item: " + current_item.name
+	else:
+		$Label3D.text = "item: None"
 
 
 func _physics_process(_delta: float) -> void:
@@ -53,6 +64,23 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			mouse_motion -= event.screen_relative
+
+
+func give_item(item: Item) -> void:
+	if current_item == null:
+		current_item = item
+		_sync_item.rpc(current_item.get_uid())
+
+func remove_item() -> void:
+	current_item = null
+	_sync_item.rpc("")
+
+@rpc("any_peer", "call_remote", "reliable")
+func _sync_item(item_uid: String):
+	if item_uid == "":
+		current_item = null
+	else:
+		current_item = load(item_uid)
 
 
 func set_player_controling(station: Station):

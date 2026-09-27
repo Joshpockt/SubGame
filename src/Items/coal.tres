@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bu8h31atua56k"]
+
+[ext_resource type="Script" uid="uid://ckb3dgnq8a2kw" path="res://src/Components/item.gd" id="1_yjr20"]
+
+[resource]
+script = ExtResource("1_yjr20")
+name = "Coal"
+fuel_seconds = 10.0
+metadata/_custom_type_script = "uid://ckb3dgnq8a2kw"

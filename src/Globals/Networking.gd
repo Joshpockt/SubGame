@@ -11,4 +11,5 @@ signal start_game
 
 var current_networking : NetworkingType = NetworkingType.NONE
 
+## @deprecated: Use [Player].get_player
 var players : Dictionary[int, Player] = {}
