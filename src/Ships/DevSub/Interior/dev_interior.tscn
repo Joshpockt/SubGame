@@ -21,7 +21,7 @@ glow_enabled = true
 size = Vector2(8, 20)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
-size = Vector2(128, 128)
+size = Vector2(256, 256)
 
 [node name="DevInterior" type="Node" unique_id=18960767]
 script = ExtResource("1_pjvd3")
@@ -80,7 +80,7 @@ mesh = SubResource("PlaneMesh_beyo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=240830634]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.5, -8.221363)
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 0, 1.5, -8.221363)
 texture_filter = 0
 texture = SubResource("PlaceholderTexture2D_beyo5")
 script = ExtResource("3_o5x6r")

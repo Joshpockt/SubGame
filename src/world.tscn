@@ -55,6 +55,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_bnjtu")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dklud"]
+albedo_color = Color(18.892157, 18.892157, 18.892157, 1)
+use_point_size = true
+point_size = 3.0
+
+[sub_resource type="PointMesh" id="PointMesh_fjth5"]
+
 [node name="World" type="Node" unique_id=2143142866]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1220378761]
@@ -81,3 +88,9 @@ light_color = Color(0.7128, 0.99, 0.80057997, 1)
 light_energy = 16.0
 spot_range = 150.0
 spot_angle = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1885544260]
+transform = Transform3D(0.9726756, 0.08102826, -0.21756978, -0.11239796, 0.9843256, -0.13590387, 0.2031475, 0.15664484, 0.966537, 0, 0, -25)
+visible = false
+material_override = SubResource("StandardMaterial3D_dklud")
+mesh = SubResource("PointMesh_fjth5")

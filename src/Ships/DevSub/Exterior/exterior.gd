@@ -14,9 +14,11 @@ func _ready() -> void:
 	exterior_instance = self
 	ScreenManager.register_screen($SubViewport, "FRONT")
 
+
 func _physics_process(delta: float) -> void:
-	#throttle_input = Input.get_axis("move_backward","move_forward")
-	#steering_input = Input.get_axis("move_left","move_right")
+	#$GPUParticles3D.global_position = (linear_velocity * 2) + global_position
+	#print(linear_velocity * 2)
+	
 	if SubInterior.interior_instance.fuel <= 0:
 		return
 	apply_central_force(

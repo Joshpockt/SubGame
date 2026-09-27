@@ -11,6 +11,10 @@ var fuel := 0.0:
 	set(value):
 		fuel = clamp(value, 0, max_fuel_seconds)
 
+var fuel_uniform := 0.0:
+	get():
+		return fuel / max_fuel_seconds
+
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
 
 
@@ -28,7 +32,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	fuel = fuel - delta
-	print(fuel / max_fuel_seconds)
+	if Input.is_action_just_pressed("ui_up"):
+		print(fuel)
+	#print(fuel)
+	#print(fuel_uniform)
+	#print(fuel / max_fuel_seconds)
 
 
 # NOTE: Only called on peers

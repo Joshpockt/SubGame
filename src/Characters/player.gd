@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
+	
 	if Input.is_action_just_pressed("dev"):
 		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
