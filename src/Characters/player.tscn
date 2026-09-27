@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://1vhx3e3e0f80"]
 
 [ext_resource type="Script" uid="uid://cilaqtos5h1im" path="res://src/Characters/player.gd" id="1_d7uvo"]
-[ext_resource type="Resource" uid="uid://bu8h31atua56k" path="res://src/Items/coal.tres" id="2_srcsy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
@@ -21,7 +20,6 @@ properties/1/replication_mode = 1
 [node name="Player" type="CharacterBody3D" unique_id=1312657620]
 collision_layer = 2
 script = ExtResource("1_d7uvo")
-current_item = ExtResource("2_srcsy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1916812783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

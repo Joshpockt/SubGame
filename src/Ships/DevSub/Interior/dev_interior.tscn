@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b01kt6b3n182i" path="res://src/Ships/SubComponents/DevHelm/dev_helm.tscn" id="2_o5x6r"]
 [ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_o5x6r"]
 [ext_resource type="PackedScene" uid="uid://hxy003y2usmm" path="res://src/Ships/SubComponents/DevBoiler/dev_boiler.tscn" id="4_ha1vf"]
+[ext_resource type="PackedScene" uid="uid://leb7ytw2lq1u" path="res://src/Ships/SubComponents/DevCoal/dev_coal.tscn" id="5_djwfo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,6 +26,7 @@ size = Vector2(256, 256)
 
 [node name="DevInterior" type="Node" unique_id=18960767]
 script = ExtResource("1_pjvd3")
+max_fuel_seconds = 30.0
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1428999658]
 spawn_path = NodePath("../Entitys")
@@ -87,3 +89,6 @@ script = ExtResource("3_o5x6r")
 
 [node name="DevBoiler" parent="." unique_id=245123805 instance=ExtResource("4_ha1vf")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 5)
+
+[node name="DevCoal" parent="." unique_id=1983937949 instance=ExtResource("5_djwfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4907246, 0, 2.612074)

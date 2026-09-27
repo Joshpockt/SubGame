@@ -9,3 +9,11 @@ func inteact(peer_id: int) -> void:
 
 func observe() -> void:
 	observed.emit()
+
+
+# For classes that use this node
+#func _ready() -> void:
+	#interaction_area.interacted.connect(_interacted)
+#
+#func _interacted(peer_id: int) -> void:
+	#pass
