@@ -26,7 +26,6 @@ size = Vector2(256, 256)
 
 [node name="DevInterior" type="Node" unique_id=18960767]
 script = ExtResource("1_pjvd3")
-max_fuel_seconds = 30.0
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1428999658]
 spawn_path = NodePath("../Entitys")

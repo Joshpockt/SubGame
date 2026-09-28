@@ -30,12 +30,6 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	
-	if Input.is_action_just_pressed("dev"):
-		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
 	if Input.is_action_just_pressed("interact"):
 		var area = ray_cast_3d.get_collider()
 		if area is InteractionArea:

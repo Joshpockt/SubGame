@@ -15,6 +15,7 @@ var fuel_uniform := 0.0:
 	get():
 		return fuel / max_fuel_seconds
 
+
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
 
 
@@ -38,6 +39,17 @@ func _physics_process(delta: float) -> void:
 	#print(fuel_uniform)
 	#print(fuel / max_fuel_seconds)
 
+
+func add_fuel(ammount: float) -> void:
+	_sync_fuel_add.rpc(ammount)
+
+@rpc("any_peer", "call_local", "reliable")
+func _sync_fuel_add(fuel_added: float):
+	fuel += fuel_added
+
+@rpc("authority", "call_remote", "reliable")
+func _sync_fuel_set(fuel_set: float):
+	fuel = fuel_set
 
 # NOTE: Only called on peers
 func _on_player_spawned(player: Player) -> void:

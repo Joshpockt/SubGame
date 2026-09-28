@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_gar1v"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_beyo5"]
-size = Vector3(1, 3.7, 1.6)
+size = Vector3(1, 3.5, 1.6)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m4y5w"]
 size = Vector3(0.6, 0.1, 0.4)
@@ -44,7 +44,7 @@ albedo_color = Color(1, 1, 0, 1)
 script = ExtResource("1_m4y5w")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2007116385]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.8000001, -0.8499999)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.8000001, -0.7499999)
 mesh = SubResource("BoxMesh_beyo5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1893782195]
@@ -78,12 +78,12 @@ material_override = SubResource("StandardMaterial3D_k0n8d")
 mesh = SubResource("BoxMesh_dklud")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1452393392]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 1.516, 1.029)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.078, 1.516, 1.029)
 material_override = SubResource("StandardMaterial3D_dklud")
 mesh = SubResource("SphereMesh_beyo5")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=1565775612]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07828601, 1.516, 1.029)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 1.516, 1.029)
 material_override = SubResource("StandardMaterial3D_gar1v")
 mesh = SubResource("SphereMesh_beyo5")
 

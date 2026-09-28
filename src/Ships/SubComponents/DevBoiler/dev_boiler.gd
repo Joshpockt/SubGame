@@ -7,10 +7,11 @@ func _ready() -> void:
 	interaction_area.interacted.connect(_interacted)
 
 func _interacted(peer_id: int) -> void:
-	var player := Networking.players[peer_id]
+	var player := Player.get_player(peer_id)
 	if player.current_item != null:
-		if player.current_item.fuel_seconds > 0.0:
-			SubInterior.interior_instance.fuel += 30
+		var item := player.current_item
+		if item.fuel_seconds > 0.0:
+			SubInterior.interior_instance.add_fuel(item.fuel_seconds)
 			player.remove_item()
 
 func _process(delta: float) -> void:
