@@ -19,10 +19,19 @@ sky = SubResource("Sky_dxppu")
 glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_beyo5"]
-size = Vector2(8, 20)
+size = Vector2(10, 25)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
 size = Vector2(256, 256)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djwfo"]
+radius = 3.0
+height = 18.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
+flip_faces = true
+radius = 3.0
+height = 18.0
 
 [node name="DevInterior" type="Node" unique_id=18960767]
 script = ExtResource("1_pjvd3")
@@ -41,53 +50,38 @@ environment = SubResource("Environment_gy3sr")
 
 [node name="Level" type="Node3D" parent="." unique_id=1530232166]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level" unique_id=1960854016]
-visible = false
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1593627651]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, 2, 0)
-flip_faces = true
-size = Vector3(2.5, 4, 25)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=577692816]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-flip_faces = true
-size = Vector3(6, 4, 25)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1794888790]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-flip_faces = true
-size = Vector3(9, 3, 2.5)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1915062060]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75, 2, 0)
-flip_faces = true
-size = Vector3(2.5, 4, 25)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Level/CSGCombiner3D" unique_id=167815974]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-operation = 1
-flip_faces = true
-radius = 6.0
-height = 25.0
-sides = 16
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level" unique_id=2109020811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("PlaneMesh_beyo5")
 
 [node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
 
 [node name="Station" parent="." unique_id=1236775955 instance=ExtResource("2_o5x6r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -8)
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=240830634]
-transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 0, 1.5, -8.221363)
+[node name="Sprite3D" type="Sprite3D" parent="Station" unique_id=240830634]
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 0, 1.5, -0.22136307)
 texture_filter = 0
 texture = SubResource("PlaceholderTexture2D_beyo5")
 script = ExtResource("3_o5x6r")
 
 [node name="DevBoiler" parent="." unique_id=245123805 instance=ExtResource("4_ha1vf")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 5)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 5)
 
 [node name="DevCoal" parent="." unique_id=1983937949 instance=ExtResource("5_djwfo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4907246, 0, 2.612074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4907246, -1, 2.612074)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=781173203]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1639957147]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.3, 0)
+shape = SubResource("CapsuleShape3D_djwfo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=392676462]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.3, 0)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1656699537]
+collision_mask = 4

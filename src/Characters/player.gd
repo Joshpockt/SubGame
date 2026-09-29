@@ -46,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 	else: velocity = Vector3.ZERO
 	
 	if can_move:
-		mouse_motion *= 0.0015
+		mouse_motion *= 0.0010
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x + mouse_motion.y, -PI/2, PI/2)
 		camera_pivot.rotation.y = wrap(camera_pivot.rotation.y + mouse_motion.x, -PI, PI)
 	mouse_motion = Vector2.ZERO

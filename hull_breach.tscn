@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://br5o4ec5ie751"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 4
+
+[node name="HullBreach" type="Node3D" unique_id=1811676205]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=676715418]
+mesh = SubResource("SphereMesh_beyo5")

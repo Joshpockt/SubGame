@@ -5,11 +5,11 @@
 [ext_resource type="Shader" uid="uid://bdtiqlofpncux" path="res://src/Ships/DevSub/Exterior/particle.gdshader" id="3_laggi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5og5y"]
-friction = 0.9
+friction = 0.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vo0vy"]
 radius = 5.0
-height = 39.25
+height = 40.025
 
 [sub_resource type="Curve" id="Curve_laggi"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -65,7 +65,7 @@ max_linear_force = 8.0
 max_torque = 15.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.6391766e-08, 0.375)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.332996e-08, 0.76250076)
 shape = SubResource("CapsuleShape3D_vo0vy")
 
 [node name="submarine" parent="." unique_id=1472708832 instance=ExtResource("2_w4tfr")]
