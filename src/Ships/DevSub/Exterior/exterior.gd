@@ -4,11 +4,13 @@ class_name SubExterior
 signal sub_hit(collision_direction: Vector3, strength: float)
 
 static var throttle_input : float = 0.0
+static var vertical_input : float = 0.0
 static var steering_input : float = 0.0
 
 var damage_on_cooldown := false
 
 @export var max_linear_force := 10.0
+@export var max_vertical_force := 5.0
 @export var max_torque := 1.0
 
 
@@ -32,6 +34,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	apply_central_force(
 			Vector3.FORWARD.rotated(Vector3.UP,rotation.y) * throttle_input * max_linear_force)
+	apply_central_force(Vector3.UP * vertical_input * max_vertical_force)
 	apply_torque(Vector3.DOWN * steering_input * max_torque)
 	throttle_input = 0.0
 	steering_input = 0.0

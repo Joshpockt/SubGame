@@ -25,18 +25,18 @@ var interaction_progress : float:
 
 func inteact(peer_id: int) -> void:
 	if disable_interaction: return
-	print("interact")
+	#print("interact")
 	interacted.emit(peer_id)
 
 func start_interaction(peer_id: int) -> void:
 	if disable_interaction: return
-	print("start_interact")
+	#print("start_interact")
 	intreaction_started.emit(peer_id)
 	is_being_interacted = true
 
 func stop_interaction(peer_id: int) -> void:
 	if disable_interaction: return
-	print("stop_interact")
+	#print("stop_interact")
 	interaction_stopped.emit(peer_id)
 	is_being_interacted = false
 
