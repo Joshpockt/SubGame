@@ -13,6 +13,9 @@ var can_move := true
 static func get_player(peer_id: int) -> Player:
 	return Networking.players[peer_id]
 
+static func get_id(player: Player) -> int:
+	return Networking.players.find_key(player)
+
 func _ready() -> void:
 	if is_multiplayer_authority():
 		camera_3d.current = true
@@ -29,11 +32,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	
-	if Input.is_action_just_pressed("interact"):
-		var area = ray_cast_3d.get_collider()
-		if area is InteractionArea:
-			area.inteact(multiplayer.get_unique_id())
 	
 	var direction := Vector3(
 		Input.get_axis("move_left", "move_right"),

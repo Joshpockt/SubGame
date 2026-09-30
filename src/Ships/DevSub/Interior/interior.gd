@@ -34,16 +34,8 @@ func _ready() -> void:
 	for peer in multiplayer.get_peers():
 		spawn_player(peer)
 	
-	#var ammount := 16
-	#for z in ammount:
-		#for x in ammount:
-			#for y in ammount:
-				#var x_rot = ((TAU / ammount) * x) - PI
-				#var y_rot = ((TAU / ammount) * y) - PI
-				#var z_rot = ((TAU / ammount) * z) - PI
-				#spawn_damage(Vector3(x_rot,y_rot,z_rot).normalized(), 1)
-				#await get_tree().process_frame
-	#for i in 10000:
+	# Good for testing where holes pop up
+	#for i in 10:
 		#var dir = Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
 		#spawn_damage(dir,1)
 		#await get_tree().process_frame

@@ -8,10 +8,10 @@ func register_screen(viewport: SubViewport, id: String) -> void:
 		return
 	var texture : ViewportTexture = viewport.get_texture()
 	screens[id] = texture
-	print(screens)
+	#print(screens)
 
 func get_screen(id) -> ViewportTexture:
-	print("id")
+	#print("id")
 	if screens.has(id):
 		return screens[id]
 	else:

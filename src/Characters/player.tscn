@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://1vhx3e3e0f80"]
 
 [ext_resource type="Script" uid="uid://cilaqtos5h1im" path="res://src/Characters/player.gd" id="1_d7uvo"]
+[ext_resource type="Script" uid="uid://dkjhdovjwtjyr" path="res://src/Characters/interaction_ray.gd" id="2_srcsy"]
+[ext_resource type="Shader" uid="uid://b2c6w1xb5yup0" path="res://Assets/Shaders/crosshair.gdshader" id="3_wgy3x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
@@ -16,6 +18,15 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("CameraPivot:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3tld"]
+shader = ExtResource("3_wgy3x")
+shader_parameter/circleSize = 0.3
+shader_parameter/hollowSize = 0.0
+shader_parameter/progress = 1.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
+size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody3D" unique_id=1312657620]
 collision_layer = 2
@@ -40,6 +51,7 @@ target_position = Vector3(0, 0, -2)
 collision_mask = 8
 collide_with_areas = true
 collide_with_bodies = false
+script = ExtResource("2_srcsy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1100652912]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -52,3 +64,16 @@ replication_config = SubResource("SceneReplicationConfig_4flbx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2352283, 0)
 billboard = 1
 text = "Item: None"
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=417151700]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="TextureRect" parent="CenterContainer" unique_id=748122953]
+material = SubResource("ShaderMaterial_e3tld")
+layout_mode = 2
+offset_transform_enabled = true
+texture = SubResource("PlaceholderTexture2D_beyo5")

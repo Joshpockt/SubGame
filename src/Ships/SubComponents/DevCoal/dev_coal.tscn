@@ -27,6 +27,7 @@ mesh = SubResource("CylinderMesh_beyo5")
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_hishl")
+interaction_time = 0.5
 metadata/_custom_type_script = "uid://biwa0j28dtdbf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=190278960]

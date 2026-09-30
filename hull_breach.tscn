@@ -1,12 +1,30 @@
 [gd_scene format=3 uid="uid://br5o4ec5ie751"]
 
+[ext_resource type="Script" uid="uid://chtmeh1nhbu81" path="res://hull_breach.gd" id="1_4ijxy"]
+[ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="1_u67hs"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
-radius = 0.1
-height = 0.2
+radius = 0.4
+height = 0.8
 radial_segments = 8
 rings = 4
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_beyo5"]
+radius = 0.4
+
 [node name="HullBreach" type="Node3D" unique_id=1811676205]
+script = ExtResource("1_4ijxy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=676715418]
 mesh = SubResource("SphereMesh_beyo5")
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=555026704]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_u67hs")
+interaction_time = 0.5
+allow_swipe = true
+metadata/_custom_type_script = "uid://biwa0j28dtdbf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=608746028]
+shape = SubResource("SphereShape3D_beyo5")
