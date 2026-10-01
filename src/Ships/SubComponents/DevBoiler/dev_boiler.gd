@@ -14,5 +14,5 @@ func _interacted(peer_id: int) -> void:
 			SubInterior.interior_instance.add_fuel(item.fuel_seconds)
 			player.remove_item()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Node3D.rotation.z = - (SubInterior.interior_instance.fuel_uniform * 2 - 1) * PI * 0.8

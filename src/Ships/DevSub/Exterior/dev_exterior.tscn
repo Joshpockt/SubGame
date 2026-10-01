@@ -78,15 +78,15 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5644534, 2.310649, -18.2247)
 light_color = Color(0.7128, 0.99, 0.80057997, 1)
 light_energy = 16.0
-spot_range = 150.0
-spot_angle = 35.0
+spot_range = 200.0
+spot_angle = 30.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1706362357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.564, 2.311, -18.225)
 light_color = Color(0.7128, 0.99, 0.80057997, 1)
 light_energy = 16.0
-spot_range = 150.0
-spot_angle = 35.0
+spot_range = 200.0
+spot_angle = 30.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1102759865]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27)

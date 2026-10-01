@@ -25,7 +25,8 @@ func _process(delta: float) -> void:
 		
 		# If we are looking at an area then we observe it
 		area.observe(id)
-		open_crosshair()
+		if !area.disable_interaction:
+			open_crosshair()
 		# If we have inputs then handle them
 		if Input.is_action_just_pressed("interact"):
 				last_interaction_area = area
@@ -41,7 +42,7 @@ func _process(delta: float) -> void:
 					area.start_interaction(id)
 		
 		# If last_interaction_area has not been flushed, then tick its interaction time.
-		if last_interaction_area != null and last_interaction_area.interaction_time != 0.0:
+		if last_interaction_area != null and last_interaction_area.interaction_time != 0.0 and !area.disable_interaction:
 			crosshair.material.set("shader_parameter/progress", last_interaction_area.interaction_progress)
 			t += delta
 			last_interaction_area.current_interaction_time = t

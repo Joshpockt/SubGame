@@ -26,7 +26,7 @@ shader_parameter/hollowSize = 0.0
 shader_parameter/progress = 1.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
-size = Vector2(16, 16)
+size = Vector2(12, 12)
 
 [node name="Player" type="CharacterBody3D" unique_id=1312657620]
 collision_layer = 2

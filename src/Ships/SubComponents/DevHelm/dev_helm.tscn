@@ -47,4 +47,4 @@ shape = SubResource("BoxShape3D_beyo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
 
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5718837, 0.36745018)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.367)

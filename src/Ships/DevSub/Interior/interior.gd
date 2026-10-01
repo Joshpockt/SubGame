@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	#print(fuel_uniform)
 	#print(fuel / max_fuel_seconds)
 
-func spawn_damage(direction: Vector3, str) -> void:
+func spawn_damage(direction: Vector3, _stren) -> void:
 	if direction == Vector3.ZERO:
 		return
 	

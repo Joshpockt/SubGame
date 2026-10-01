@@ -20,9 +20,6 @@ static var exterior_instance : SubExterior
 func _ready() -> void:
 	exterior_instance = self
 	ScreenManager.register_screen($SubViewport, "FRONT")
-	var f = func(_collision_direction, _strength: float):
-		print(multiplayer.get_unique_id(), ": ", "hit ", _collision_direction, ", ", _strength)
-	sub_hit.connect(f)
 
 
 func _physics_process(_delta: float) -> void:
@@ -65,7 +62,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			var f = func(): damage_on_cooldown = false
 			get_tree().create_timer(0.25).timeout.connect(f)
 			
-			print("scrape: ", state.get_contact_local_velocity_at_position(0).length())
+			#print("scrape: ", state.get_contact_local_velocity_at_position(0).length())
 
 # could probably be authority but eh.
 @rpc("any_peer", "call_remote", "reliable")

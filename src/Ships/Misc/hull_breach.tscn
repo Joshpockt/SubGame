@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://br5o4ec5ie751"]
 
-[ext_resource type="Script" uid="uid://chtmeh1nhbu81" path="res://hull_breach.gd" id="1_4ijxy"]
+[ext_resource type="Script" uid="uid://chtmeh1nhbu81" path="res://src/Ships/Misc/hull_breach.gd" id="1_4ijxy"]
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="1_u67hs"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_beyo5"]

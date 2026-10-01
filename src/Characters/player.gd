@@ -23,7 +23,7 @@ func _ready() -> void:
 		$MeshInstance3D.hide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if current_item:
 		$Label3D.text = "item: " + current_item.name
 	else:
