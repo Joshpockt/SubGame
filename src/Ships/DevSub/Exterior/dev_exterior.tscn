@@ -53,8 +53,10 @@ properties/1/replication_mode = 1
 size = Vector3(5, 4, 7)
 
 [node name="DevExterior" type="RigidBody3D" unique_id=1056441616]
+collision_layer = 5
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_5og5y")
 gravity_scale = 0.0
 contact_monitor = true
@@ -62,8 +64,9 @@ max_contacts_reported = 1
 linear_damp = 0.25
 angular_damp = 0.5
 script = ExtResource("1_6vnwu")
-max_linear_force = 8.0
-max_torque = 15.0
+max_linear_force = 16000.0
+max_vertical_force = 10000.0
+max_torque = 30000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.332996e-08, 0.76250076)
@@ -79,14 +82,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5644534, 2.310649, -18.2247
 light_color = Color(0.7128, 0.99, 0.80057997, 1)
 light_energy = 16.0
 spot_range = 200.0
-spot_angle = 30.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1706362357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.564, 2.311, -18.225)
 light_color = Color(0.7128, 0.99, 0.80057997, 1)
 light_energy = 16.0
 spot_range = 200.0
-spot_angle = 30.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1102759865]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27)

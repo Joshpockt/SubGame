@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://nwr86sow7xhq" path="res://src/Creatures/DevFish/dev_fish.gd" id="1_2g8hu"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2g8hu"]
+friction = 0.5
+bounce = 1.0
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_0i6jf"]
 radius = 1.0
 
@@ -9,11 +13,34 @@ radius = 1.0
 radius = 1.0
 height = 2.0
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_beyo5"]
+top_radius = 0.0
+bottom_radius = 1.0
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2g8hu"]
+top_radius = 0.0
+bottom_radius = 0.75
+height = 1.5
+
 [node name="DevFish" type="RigidBody3D" unique_id=297756122]
+mass = 25.0
+physics_material_override = SubResource("PhysicsMaterial_2g8hu")
 script = ExtResource("1_2g8hu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=857357587]
 shape = SubResource("SphereShape3D_0i6jf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1095373740]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_beyo5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=346530298]
+transform = Transform3D(0.5, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.09278474e-07, 1.35)
+mesh = SubResource("CylinderMesh_beyo5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=2134549485]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -9.8350625e-08, -0.9)
+mesh = SubResource("CylinderMesh_2g8hu")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=2045201126]

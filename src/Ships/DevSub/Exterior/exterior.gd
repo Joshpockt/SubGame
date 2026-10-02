@@ -52,15 +52,15 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			var f = func(): damage_on_cooldown = false
 			get_tree().create_timer(0.35).timeout.connect(f)
 			
-		elif state.get_contact_local_velocity_at_position(contact).length() >= 2:
-			var collision_direction := to_local(state.get_contact_local_position(contact)).normalized()
-			var strength := state.get_contact_local_velocity_at_position(contact).length()
-			sub_hit.emit(collision_direction, strength)
-			sync_hit.rpc(collision_direction, strength)
-			
-			damage_on_cooldown = true
-			var f = func(): damage_on_cooldown = false
-			get_tree().create_timer(0.25).timeout.connect(f)
+		#elif state.get_contact_local_velocity_at_position(contact).length() >= 2:
+			#var collision_direction := to_local(state.get_contact_local_position(contact)).normalized()
+			#var strength := state.get_contact_local_velocity_at_position(contact).length()
+			#sub_hit.emit(collision_direction, strength)
+			#sync_hit.rpc(collision_direction, strength)
+			#
+			#damage_on_cooldown = true
+			#var f = func(): damage_on_cooldown = false
+			#get_tree().create_timer(0.25).timeout.connect(f)
 			
 			#print("scrape: ", state.get_contact_local_velocity_at_position(0).length())
 

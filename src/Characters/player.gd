@@ -5,6 +5,8 @@ class_name Player
 
 var mouse_motion := Vector2.ZERO
 var can_move := true
+var current_shake := 0.0
+var shake_fade := 4.0
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var ray_cast_3d: RayCast3D = $CameraPivot/RayCast3D
@@ -21,17 +23,26 @@ func _ready() -> void:
 		camera_3d.current = true
 		$CameraPivot/MeshInstance3D.hide()
 		$MeshInstance3D.hide()
+	var f = func(collision_direction: Vector3, strength: float): shake_screen(strength * 0.0005)
+	SubExterior.exterior_instance.sub_hit.connect(f)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if current_item:
 		$Label3D.text = "item: " + current_item.name
 	else:
 		$Label3D.text = "item: None"
+	
+	if current_shake > 0:
+		current_shake = lerp(current_shake, 0.0, shake_fade * delta)
+		camera_3d.position = Vector3(randf_range(-1, 1), randf_range(-1, 1), 0) * current_shake
 
 
 func _physics_process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
+	
+	if Input.is_action_just_pressed("dev"):
+		shake_screen(5)
 	
 	var direction := Vector3(
 		Input.get_axis("move_left", "move_right"),
@@ -57,6 +68,8 @@ func _input(event: InputEvent) -> void:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			mouse_motion -= event.screen_relative
 
+func shake_screen(strength: float):
+	current_shake = sqrt(abs(strength / 10))
 
 func give_item(item: Item) -> void:
 	if current_item == null:
@@ -78,14 +91,14 @@ func _sync_item(item_uid: String):
 func set_player_controling(station: Station):
 	if station == null:
 		can_move = true
-		camera_3d.top_level = false
-		camera_3d.position = Vector3.ZERO
-		camera_3d.rotation = Vector3.ZERO
+		camera_pivot.top_level = false
+		camera_pivot.position = Vector3(0, 1.5, 0)
+		camera_pivot.rotation = Vector3.ZERO
 	else:
 		can_move = false
 		global_position = station.player_standing_marker.global_position
-		camera_3d.top_level = true
-		camera_3d.global_position = station.camera_marker.global_position
-		camera_3d.global_rotation = station.camera_marker.global_rotation
+		camera_pivot.top_level = true
+		camera_pivot.global_position = station.camera_marker.global_position
+		camera_pivot.global_rotation = station.camera_marker.global_rotation
 		camera_pivot.rotation.y = station.camera_marker.global_rotation.y
 		camera_pivot.rotation.x = station.camera_marker.global_rotation.x
