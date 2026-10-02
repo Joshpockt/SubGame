@@ -9,6 +9,7 @@ enum {
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	var interior_scene : PackedScene = load(SubmarineData.DEV[INTERIOR])
 	var exterior_scene : PackedScene = load(SubmarineData.DEV[EXTERIOR])
 	

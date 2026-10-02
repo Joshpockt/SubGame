@@ -18,12 +18,13 @@ static func get_player(peer_id: int) -> Player:
 static func get_id(player: Player) -> int:
 	return Networking.players.find_key(player)
 
+
 func _ready() -> void:
 	if is_multiplayer_authority():
 		camera_3d.current = true
 		$CameraPivot/MeshInstance3D.hide()
 		$MeshInstance3D.hide()
-	var f = func(collision_direction: Vector3, strength: float): shake_screen(strength * 0.0005)
+	var f = func(collision_direction: Vector3, strength: float): shake_screen(strength * 0.05)
 	SubExterior.exterior_instance.sub_hit.connect(f)
 
 

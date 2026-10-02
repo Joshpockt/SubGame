@@ -24,7 +24,6 @@ bottom_radius = 0.75
 height = 1.5
 
 [node name="DevFish" type="RigidBody3D" unique_id=297756122]
-mass = 25.0
 physics_material_override = SubResource("PhysicsMaterial_2g8hu")
 script = ExtResource("1_2g8hu")
 

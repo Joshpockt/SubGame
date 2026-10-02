@@ -44,6 +44,7 @@ fov = 90.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot" unique_id=555666579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
+visible = false
 mesh = SubResource("BoxMesh_beyo5")
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraPivot" unique_id=1510077582]
