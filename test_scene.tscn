@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c4d5o2a0f2fgs"]
+
+[ext_resource type="PackedScene" uid="uid://crxdyjcx2h8xd" path="res://torpedo.tscn" id="1_uhqqe"]
+[ext_resource type="Script" uid="uid://dmmvq62qapxot" path="res://swaws.gd" id="2_ia1lp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_uhqqe"]
+sky_material = SubResource("ProceduralSkyMaterial_6adnx")
+
+[sub_resource type="Environment" id="Environment_ia1lp"]
+background_mode = 2
+sky = SubResource("Sky_uhqqe")
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dklud"]
+size = Vector2(10, 10)
+
+[sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
+
+[node name="TestScene" type="Node3D" unique_id=804774785]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=980925505]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1371183759]
+environment = SubResource("Environment_ia1lp")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=654090530]
+transform = Transform3D(-0.05491097, -0.49477792, 0.86728287, 0, 0.8685934, 0.4955255, -0.9984913, 0.027209785, -0.0476953, 18.024153, 22.575378, -12.313931)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1315733251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("PlaneMesh_dklud")
+
+[node name="Torpedo" parent="." unique_id=1241457050 node_paths=PackedStringArray("target") instance=ExtResource("1_uhqqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 1, 0)
+angular_damp_mode = 1
+angular_damp = 1.0
+target = NodePath("../Node3D")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=612890375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.004402, -24.562737, -36.83481)
+script = ExtResource("2_ia1lp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=589090954]
+mesh = SubResource("SphereMesh_beyo5")

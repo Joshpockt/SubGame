@@ -29,6 +29,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("drop_item"):
+		remove_item()
+	
 	if current_item:
 		$Label3D.text = "item: " + current_item.name
 	else:
@@ -41,9 +44,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	
-	if Input.is_action_just_pressed("dev"):
-		shake_screen(5)
 	
 	var direction := Vector3(
 		Input.get_axis("move_left", "move_right"),
@@ -92,14 +92,13 @@ func _sync_item(item_uid: String):
 func set_player_controling(station: Station):
 	if station == null:
 		can_move = true
-		camera_pivot.top_level = false
+		#camera_pivot.top_level = false
 		camera_pivot.position = Vector3(0, 1.5, 0)
 		camera_pivot.rotation = Vector3.ZERO
 	else:
 		can_move = false
 		global_position = station.player_standing_marker.global_position
-		camera_pivot.top_level = true
+		#camera_pivot.top_level = true
 		camera_pivot.global_position = station.camera_marker.global_position
-		camera_pivot.global_rotation = station.camera_marker.global_rotation
 		camera_pivot.rotation.y = station.camera_marker.global_rotation.y
 		camera_pivot.rotation.x = station.camera_marker.global_rotation.x

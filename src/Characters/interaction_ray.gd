@@ -9,7 +9,13 @@ var t := 0.0
 
 
 func _process(delta: float) -> void:
-	if player.can_move == false: return
+	if !is_multiplayer_authority(): return
+	
+	if player.can_move == false:
+		crosshair.hide()
+		return
+	else:
+		crosshair.show()
 	
 	var id = multiplayer.get_unique_id()
 	var area = get_collider()
@@ -53,6 +59,7 @@ func _process(delta: float) -> void:
 			last_interaction_area.inteact(id)
 			flush_last_interaction_area(id)
 
+
 # helper function
 func flush_last_interaction_area(id: int):
 	close_crosshair()
@@ -63,6 +70,7 @@ func flush_last_interaction_area(id: int):
 		last_interaction_area = null
 		t = 0.0
 
+
 func open_crosshair():
 	if crosshair_tween != null:
 		crosshair_tween.kill()
@@ -72,6 +80,7 @@ func open_crosshair():
 	
 	crosshair_tween.tween_property(crosshair.material, "shader_parameter/circleSize", 0.5, 0.05)
 	crosshair_tween.tween_property(crosshair.material, "shader_parameter/hollowSize", 0.3, 0.05)
+
 
 func close_crosshair():
 	if crosshair_tween != null:

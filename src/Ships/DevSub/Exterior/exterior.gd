@@ -1,6 +1,11 @@
 extends RigidBody3D
 class_name SubExterior
 
+
+#HACK, TESTING
+const TORPEDO = preload("uid://crxdyjcx2h8xd")
+@export var targ : Node3D
+
 signal sub_hit(collision_direction: Vector3, strength: float)
 
 static var exterior_instance : SubExterior
@@ -20,10 +25,17 @@ var damage_on_cooldown := false
 func _ready() -> void:
 	exterior_instance = self
 	ScreenManager.register_screen($SubViewport, "FRONT")
+	for sibling in get_parent().get_children():
+		if sibling.name == "DevFish":
+			targ = sibling
+			break
 
 var i = 0
 func _physics_process(_delta: float) -> void:
 	#print(sleeping)
+	
+	if Input.is_action_just_pressed("shoot"):
+		_shoot()
 	
 	if SubInterior.interior_instance.fuel <= 0:
 		return
@@ -39,12 +51,21 @@ func _physics_process(_delta: float) -> void:
 		"vertical" : vertical_input,
 		"steering" : steering_input,
 	}
-	sync_input.rpc(inputs)
-	i += 1
-	if i >= 5:
-		i = 0
-		sync_position.rpc(position, rotation)
+	
+	if is_multiplayer_authority():
+		sync_input.rpc(inputs)
+		i += 1
+		if i >= 5:
+			i = 0
+			sync_position.rpc(position, rotation)
 
+#HACK, TESTING
+func _shoot():
+	var torp_inst : Torpedo = TORPEDO.instantiate()
+	add_sibling(torp_inst)
+	torp_inst.global_position = $test.global_position
+	torp_inst.global_rotation = $test.global_rotation
+	torp_inst.target = targ
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if damage_on_cooldown: return

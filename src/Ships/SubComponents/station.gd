@@ -11,6 +11,7 @@ func _ready() -> void:
 	interaction_area.interacted.connect(func(player): _interacted(player))
 
 func _process(_delta: float) -> void:
+	
 	# If current controller is client
 	if current_controller_id == multiplayer.get_unique_id():
 		_get_player_input()
@@ -24,20 +25,27 @@ func _interacted(peer_id: int):
 
 
 func request_set_controller(peer_id: int):
-	rpc_id(1, "control", peer_id)
+	rpc_id(1,"control", peer_id)
 
 
 @rpc("authority", "call_local", "reliable")
 func update_current_controller_id(peer_id: int):
-	if peer_id == -1:
-		current_controller_id = -1
-		return
 	current_controller_id = peer_id
-	Networking.players[peer_id].set_player_controling(self)
+	_on_controller_update(peer_id)
+	
+	if peer_id == -1: return
+	if multiplayer.get_unique_id() == peer_id:
+		Player.get_player(peer_id).set_player_controling(self)
+
+
+@warning_ignore("unused_parameter")
+func _on_controller_update(peer_id: int):
+	pass
 
 
 @rpc("any_peer","call_local","reliable")
 func control(peer_id: int):
+	#print_weewee()
 	#print(!multiplayer.is_server())
 	if !multiplayer.is_server(): return
 	
