@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bsm60qlcqw6hm"]
+
+[ext_resource type="Script" uid="uid://dt45507ho5kc1" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.gd" id="1_fywkv"]
+[ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_2is2m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
+size = Vector3(2.5, 1.8000001, 0.6)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fywkv"]
+radius = 0.25
+height = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_dklud"]
+size = Vector3(0.3, 1.9, 0.6)
+
+[node name="TorpedoRack" type="Node3D" unique_id=1638878038]
+script = ExtResource("1_fywkv")
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=157707487]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_2is2m")
+interaction_time = 0.5
+metadata/_custom_type_script = "uid://biwa0j28dtdbf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=849564458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_beyo5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1117599810]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_fywkv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1930599125]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_fywkv")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=597395570]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 1.6, 0)
+mesh = SubResource("CapsuleMesh_fywkv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2015814115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.95000005, 0)
+mesh = SubResource("BoxMesh_dklud")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1113734472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.95, 0)
+mesh = SubResource("BoxMesh_dklud")

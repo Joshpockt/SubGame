@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_o5x6r"]
 [ext_resource type="PackedScene" uid="uid://hxy003y2usmm" path="res://src/Ships/SubComponents/DevBoiler/dev_boiler.tscn" id="4_ha1vf"]
 [ext_resource type="PackedScene" uid="uid://leb7ytw2lq1u" path="res://src/Ships/SubComponents/DevCoal/dev_coal.tscn" id="5_djwfo"]
+[ext_resource type="PackedScene" uid="uid://bsm60qlcqw6hm" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.tscn" id="6_f0fd5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -85,3 +86,6 @@ mesh = SubResource("CapsuleMesh_beyo5")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1656699537]
 collision_mask = 4
+
+[node name="TorpedoRack" parent="." unique_id=1638878038 instance=ExtResource("6_f0fd5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.5, -1, 0)
