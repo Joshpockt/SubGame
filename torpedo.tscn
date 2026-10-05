@@ -12,10 +12,12 @@ bottom_radius = 0.1
 height = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_beyo5"]
-radius = 0.125
+radius = 0.25
 height = 2.5
 
 [node name="Torpedo" type="RigidBody3D" unique_id=2085054750]
+contact_monitor = true
+max_contacts_reported = 1
 linear_damp = 2.0
 angular_damp = 5.0
 script = ExtResource("1_ch1v4")

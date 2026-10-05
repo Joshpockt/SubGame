@@ -1,5 +1,9 @@
 extends Node3D
 
+func _process(delta: float) -> void:
+	
+	position.y += delta * 5
+
 #var a = 0.0
 #var t := 0.0
 #func _process(delta: float) -> void:

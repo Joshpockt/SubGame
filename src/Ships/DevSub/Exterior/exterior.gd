@@ -34,6 +34,12 @@ var i = 0
 func _physics_process(_delta: float) -> void:
 	#print(sleeping)
 	
+	#HACK
+	var tracks : Array[SonarTrack] = $SonarListener.get_tracks()
+	#print(tracks)
+	if !tracks.is_empty():
+		print(tracks[0].strength)
+	
 	if Input.is_action_just_pressed("shoot"):
 		_shoot()
 	
@@ -65,9 +71,14 @@ func _shoot():
 	add_sibling(torp_inst)
 	torp_inst.global_position = $test.global_position
 	torp_inst.global_rotation = $test.global_rotation
+	torp_inst.linear_velocity = torp_vel
 	torp_inst.target = targ
 
+var torp_vel := Vector3.ZERO
+
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	torp_vel = state.get_velocity_at_local_position($test.position)
+	
 	if damage_on_cooldown: return
 	
 	if is_multiplayer_authority():

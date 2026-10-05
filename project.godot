@@ -103,6 +103,7 @@ shoot={
 3d_physics/layer_2="Entity"
 3d_physics/layer_3="Sub"
 3d_physics/layer_4="Inteaction"
+3d_physics/layer_5="Sonar"
 
 [physics]
 

@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://crxdyjcx2h8xd" path="res://torpedo.tscn" id="1_uhqqe"]
 [ext_resource type="Script" uid="uid://dmmvq62qapxot" path="res://swaws.gd" id="2_ia1lp"]
+[ext_resource type="Script" uid="uid://he3ekr3fxxsu" path="res://src/Components/Sonar/sonar_listener.gd" id="4_2nij2"]
+[ext_resource type="PackedScene" uid="uid://bea5scuws0c2o" path="res://src/Components/Sonar/sonar_emitter.tscn" id="4_coq8p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,7 +32,7 @@ shadow_enabled = true
 environment = SubResource("Environment_ia1lp")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=654090530]
-transform = Transform3D(-0.05491097, -0.49477792, 0.86728287, 0, 0.8685934, 0.4955255, -0.9984913, 0.027209785, -0.0476953, 18.024153, 22.575378, -12.313931)
+transform = Transform3D(0.5295825, -0.3511527, 0.772162, 0, 0.910291, 0.41396898, -0.84825844, -0.21923073, 0.4820742, 10.782216, 5.9904585, 4.757047)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1315733251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
@@ -43,8 +45,19 @@ angular_damp = 1.0
 target = NodePath("../Node3D")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=612890375]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.004402, -24.562737, -36.83481)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35.603073)
 script = ExtResource("2_ia1lp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=589090954]
 mesh = SubResource("SphereMesh_beyo5")
+
+[node name="SonarListener" type="Node3D" parent="." unique_id=1310541806]
+script = ExtResource("4_2nij2")
+metadata/_custom_type_script = "uid://he3ekr3fxxsu"
+
+[node name="SonarEmitter" parent="." unique_id=161802748 instance=ExtResource("4_coq8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.4399605)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=594920714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.4399605)
+use_collision = true

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bea5scuws0c2o"]
+
+[ext_resource type="Script" uid="uid://jouopifhxtlf" path="res://src/Components/Sonar/sonar_emitter.gd" id="1_emiao"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_beyo5"]
+
+[node name="SonarEmitter" type="Area3D" unique_id=161802748]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_emiao")
+metadata/_custom_type_script = "uid://jouopifhxtlf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=681997672]
+shape = SubResource("SphereShape3D_beyo5")

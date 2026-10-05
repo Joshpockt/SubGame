@@ -4,6 +4,9 @@ var target : Node3D
 
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 
+func _ready() -> void:
+	$SonarEmitter.volume = 10
+
 var i = 0
 func _physics_process(delta: float) -> void:
 	#target = SubExterior.exterior_instance
