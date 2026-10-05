@@ -9,7 +9,6 @@ var current_shake := 0.0
 var shake_fade := 4.0
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
-@onready var ray_cast_3d: RayCast3D = $CameraPivot/RayCast3D
 @onready var camera_pivot: Node3D = $CameraPivot
 
 static func get_player(peer_id: int) -> Player:

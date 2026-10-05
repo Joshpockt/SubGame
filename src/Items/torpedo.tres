@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bty4vx8metthl"]
+
+[ext_resource type="Script" uid="uid://ckb3dgnq8a2kw" path="res://src/Components/item.gd" id="1_t7jk2"]
+
+[resource]
+script = ExtResource("1_t7jk2")
+name = "Torpedo"
+metadata/_custom_type_script = "uid://ckb3dgnq8a2kw"

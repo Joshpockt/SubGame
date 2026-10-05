@@ -14,5 +14,5 @@ func _physics_process(_delta: float) -> void:
 			body.apply_central_impulse(
 				global_position.direction_to(body.global_position) * explosion_strength * BASE_EXPLOSION_FORCE
 				)
-	#queue_free()
-	process_mode = Node.PROCESS_MODE_DISABLED
+	queue_free()
+	#process_mode = Node.PROCESS_MODE_DISABLED

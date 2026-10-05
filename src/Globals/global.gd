@@ -9,7 +9,7 @@ func _physics_process(_delta: float) -> void:
 			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if Input.is_action_just_pressed("full_screen"):
-		if get_window().mode == Window.MODE_FULLSCREEN:
+		if get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN:
 			get_window().mode = Window.MODE_WINDOWED
 		elif get_window().mode == Window.MODE_WINDOWED:
-			get_window().mode = Window.MODE_FULLSCREEN
+			get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
