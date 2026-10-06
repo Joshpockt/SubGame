@@ -22,9 +22,11 @@ var fuel_uniform := 0.0:
 
 
 func _ready() -> void:
-	SubExterior.exterior_instance.sub_hit.connect(spawn_damage)
 	
 	interior_instance = self
+	
+	SubExterior.exterior_instance.sub_hit.connect(spawn_damage)
+	
 	fuel = max_fuel_seconds
 	player_spawner.spawn_function = spawn_function
 	player_spawner.spawned.connect(_on_player_spawned)
