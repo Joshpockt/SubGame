@@ -93,14 +93,15 @@ process_material = SubResource("ParticleProcessMaterial_beyo5")
 draw_pass_1 = SubResource("PointMesh_w4tfr")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1513719610]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -8.5)
 remote_path = NodePath("../SubViewport/Camera3D")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1944179739]
 size = Vector2i(256, 256)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=969240049]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -8.5)
+fov = 80.0
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1244196742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -3)

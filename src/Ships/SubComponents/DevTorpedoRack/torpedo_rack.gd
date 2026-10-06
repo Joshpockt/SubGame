@@ -9,7 +9,10 @@ func _ready() -> void:
 	interaction_area.interacted.connect(_interacted)
 
 func _process(delta: float) -> void:
-	if Player.get_player(multiplayer.get_unique_id()).current_item != null:
+	var player := Player.get_player(multiplayer.get_unique_id())
+	if player == null: return
+	
+	if player.current_item != null:
 		interaction_area.disable_interaction = true
 	else:
 		interaction_area.disable_interaction = false

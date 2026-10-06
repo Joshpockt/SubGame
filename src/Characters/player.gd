@@ -12,7 +12,10 @@ var shake_fade := 4.0
 @onready var camera_pivot: Node3D = $CameraPivot
 
 static func get_player(peer_id: int) -> Player:
-	return Networking.players[peer_id]
+	if Networking.players.has(peer_id):
+		return Networking.players[peer_id]
+	else:
+		return null
 
 static func get_id(player: Player) -> int:
 	return Networking.players.find_key(player)

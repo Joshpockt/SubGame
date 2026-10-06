@@ -99,7 +99,7 @@ func close_crosshair():
 	crosshair_tween = get_tree().create_tween()
 	crosshair_tween.set_parallel(true)
 	
-	crosshair_tween.tween_property(crosshair.material, \"shader_parameter/circleSize\", 0.3, 0.05)
+	crosshair_tween.tween_property(crosshair.material, \"shader_parameter/circleSize\", 0.2, 0.05)
 	crosshair_tween.tween_property(crosshair.material, \"shader_parameter/hollowSize\", 0.0, 0.05)
 "
 
@@ -120,7 +120,7 @@ shader_parameter/hollowSize = 0.0
 shader_parameter/progress = 1.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
-size = Vector2(12, 12)
+size = Vector2(10, 10)
 
 [node name="Player" type="CharacterBody3D" unique_id=1312657620]
 collision_layer = 2
