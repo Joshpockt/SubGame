@@ -3,10 +3,11 @@ class_name SubExterior
 
 signal sub_hit(collision_direction: Vector3, strength: float)
 
-static var exterior_instance : SubExterior
-static var throttle_input : float = 0.0
-static var vertical_input : float = 0.0
-static var steering_input : float = 0.0
+@export var interior_instance : SubInterior
+
+var throttle_input : float = 0.0
+var vertical_input : float = 0.0
+var steering_input : float = 0.0
 
 var damage_on_cooldown := false
 
@@ -18,14 +19,13 @@ var damage_on_cooldown := false
 
 
 func _ready() -> void:
-	exterior_instance = self
 	ScreenManager.register_screen($SubViewport, "FRONT")
 
 var i = 0
 func _physics_process(_delta: float) -> void:
 	#print(sleeping)
 	
-	if SubInterior.interior_instance.fuel <= 0:
+	if interior_instance.fuel <= 0:
 		return
 	apply_central_force(
 			Vector3.FORWARD.rotated(Vector3.UP,rotation.y) * throttle_input * max_linear_force)

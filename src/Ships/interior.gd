@@ -4,9 +4,10 @@ class_name SubInterior
 const PLAYER = preload("uid://1vhx3e3e0f80")
 const HULL_BREACH = preload("uid://br5o4ec5ie751")
 
-static var interior_instance : SubInterior
+#static var interior_instance : SubInterior
 
 @export var max_fuel_seconds := 180.0
+@export var sub_exterior : SubExterior
 
 var fuel := 0.0:
 	set(value):
@@ -23,9 +24,9 @@ var fuel_uniform := 0.0:
 
 func _ready() -> void:
 	
-	interior_instance = self
+	#interior_instance = self
 	
-	SubExterior.exterior_instance.sub_hit.connect(spawn_damage)
+	sub_exterior.sub_hit.connect(spawn_damage)
 	
 	fuel = max_fuel_seconds
 	player_spawner.spawn_function = spawn_function
@@ -96,8 +97,9 @@ func spawn_player(id) -> void:
 
 
 func spawn_function(id: int) -> Node:
-	var player_instance : Node3D = PLAYER.instantiate()
+	var player_instance : Player = PLAYER.instantiate()
 	player_instance.set_multiplayer_authority(id)
 	player_instance.name = str(id)
 	player_instance.position.y = -1
+	player_instance.sub_exterior = sub_exterior
 	return player_instance

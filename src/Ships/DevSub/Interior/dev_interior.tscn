@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cuj2gpbf6tct6"]
 
-[ext_resource type="Script" uid="uid://4fiv42tc386t" path="res://src/Ships/DevSub/Interior/interior.gd" id="1_pjvd3"]
+[ext_resource type="Script" uid="uid://4fiv42tc386t" path="res://src/Ships/interior.gd" id="1_pjvd3"]
 [ext_resource type="PackedScene" uid="uid://b01kt6b3n182i" path="res://src/Ships/SubComponents/DevHelm/dev_helm.tscn" id="2_o5x6r"]
 [ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_o5x6r"]
 [ext_resource type="PackedScene" uid="uid://hxy003y2usmm" path="res://src/Ships/SubComponents/DevBoiler/dev_boiler.tscn" id="4_ha1vf"]
 [ext_resource type="PackedScene" uid="uid://leb7ytw2lq1u" path="res://src/Ships/SubComponents/DevCoal/dev_coal.tscn" id="5_djwfo"]
 [ext_resource type="PackedScene" uid="uid://bsm60qlcqw6hm" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.tscn" id="6_f0fd5"]
+[ext_resource type="PackedScene" uid="uid://b6gedrrvtpvpd" path="res://src/Ships/DevSub/Exterior/dev_exterior.tscn" id="7_cv3vo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -19,12 +20,6 @@ background_mode = 2
 sky = SubResource("Sky_dxppu")
 glow_enabled = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_beyo5"]
-size = Vector2(10, 25)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
-size = Vector2(256, 256)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djwfo"]
 radius = 3.0
 height = 18.0
@@ -34,8 +29,15 @@ flip_faces = true
 radius = 3.0
 height = 18.0
 
-[node name="DevInterior" type="Node" unique_id=18960767]
+[sub_resource type="PlaneMesh" id="PlaneMesh_beyo5"]
+size = Vector2(10, 25)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
+size = Vector2(256, 256)
+
+[node name="DevInterior" type="Node" unique_id=18960767 node_paths=PackedStringArray("sub_exterior")]
 script = ExtResource("1_pjvd3")
+sub_exterior = NodePath("DevExterior")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1428999658]
 spawn_path = NodePath("../Entitys")
@@ -51,41 +53,49 @@ environment = SubResource("Environment_gy3sr")
 
 [node name="Level" type="Node3D" parent="." unique_id=1530232166]
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Level" unique_id=781173203]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D" unique_id=1639957147]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.3, 0)
+shape = SubResource("CapsuleShape3D_djwfo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Level" unique_id=392676462]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.3, 0)
+mesh = SubResource("CapsuleMesh_beyo5")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level" unique_id=2109020811]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("PlaneMesh_beyo5")
 
-[node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
+[node name="Stations" type="Node3D" parent="Level" unique_id=528697969]
 
-[node name="Station" parent="." unique_id=1236775955 instance=ExtResource("2_o5x6r")]
+[node name="Station" parent="Level/Stations" unique_id=1236775955 node_paths=PackedStringArray("sub_exterior") instance=ExtResource("2_o5x6r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -8)
+sub_exterior = NodePath("../../../DevExterior")
 
-[node name="Sprite3D" type="Sprite3D" parent="Station" unique_id=240830634]
+[node name="Sprite3D" type="Sprite3D" parent="Level/Stations/Station" unique_id=240830634]
 transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 0, 1.5, -0.22136307)
 texture_filter = 0
 texture = SubResource("PlaceholderTexture2D_beyo5")
 script = ExtResource("3_o5x6r")
 
-[node name="DevBoiler" parent="." unique_id=245123805 instance=ExtResource("4_ha1vf")]
+[node name="DevBoiler" parent="Level/Stations" unique_id=245123805 node_paths=PackedStringArray("interior") instance=ExtResource("4_ha1vf")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 5)
+interior = NodePath("../../..")
 
-[node name="DevCoal" parent="." unique_id=1983937949 instance=ExtResource("5_djwfo")]
+[node name="DevCoal" parent="Level/Stations" unique_id=1983937949 instance=ExtResource("5_djwfo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4907246, -1, 2.612074)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=781173203]
-collision_layer = 4
-collision_mask = 0
+[node name="TorpedoRack" parent="Level/Stations" unique_id=1638878038 instance=ExtResource("6_f0fd5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.5, -1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1639957147]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.3, 0)
-shape = SubResource("CapsuleShape3D_djwfo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=392676462]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.3, 0)
-mesh = SubResource("CapsuleMesh_beyo5")
+[node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1656699537]
 collision_mask = 4
 
-[node name="TorpedoRack" parent="." unique_id=1638878038 instance=ExtResource("6_f0fd5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.5, -1, 0)
+[node name="DevExterior" parent="." unique_id=1056441616 node_paths=PackedStringArray("interior_instance") instance=ExtResource("7_cv3vo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
+interior_instance = NodePath("..")

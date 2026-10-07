@@ -3,6 +3,7 @@ class_name Player
 
 @export var current_item : Item
 
+var sub_exterior : SubExterior
 var mouse_motion := Vector2.ZERO
 var can_move := true
 var current_shake := 0.0
@@ -27,7 +28,7 @@ func _ready() -> void:
 		$CameraPivot/MeshInstance3D.hide()
 		$MeshInstance3D.hide()
 	var f = func(_collision_direction: Vector3, strength: float): shake_screen(strength * 0.05)
-	SubExterior.exterior_instance.sub_hit.connect(f)
+	sub_exterior.sub_hit.connect(f)
 
 
 func _process(delta: float) -> void:

@@ -1,5 +1,7 @@
 extends Node
 
+const DEV_INTERIOR = preload("uid://cuj2gpbf6tct6")
+
 enum {
 	INTERIOR,
 	EXTERIOR,
@@ -10,11 +12,9 @@ enum {
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	var interior_scene : PackedScene = load(SubmarineData.DEV[INTERIOR])
-	var exterior_scene : PackedScene = load(SubmarineData.DEV[EXTERIOR])
+	var sub_scene : PackedScene = DEV_INTERIOR
 	
-	var exterior_instance : = exterior_scene.instantiate()
-	world.add_child(exterior_instance)
-	
-	var interior_instance = interior_scene.instantiate()
-	add_child(interior_instance)
+	var sub_instance : SubInterior = sub_scene.instantiate()
+	add_child(sub_instance)
+	sub_instance.sub_exterior.reparent(world, false)
+	sub_instance.sub_exterior.position = Vector3.ZERO
