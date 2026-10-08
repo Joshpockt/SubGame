@@ -12,6 +12,9 @@ bounce = 0.25
 radius = 5.0
 height = 40.025
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
+size = Vector3(5, 4, 7)
+
 [sub_resource type="Curve" id="Curve_laggi"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -41,9 +44,6 @@ shader = ExtResource("3_laggi")
 [sub_resource type="PointMesh" id="PointMesh_w4tfr"]
 material = SubResource("ShaderMaterial_gidhb")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
-size = Vector3(5, 4, 7)
-
 [node name="DevExterior" type="RigidBody3D" unique_id=1056441616]
 collision_layer = 4
 collision_mask = 7
@@ -53,7 +53,7 @@ mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_5og5y")
 gravity_scale = 0.0
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 4
 linear_damp = 0.25
 angular_damp = 0.5
 script = ExtResource("1_6vnwu")
@@ -64,6 +64,10 @@ max_torque = 15000.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.332996e-08, 0.76250076)
 shape = SubResource("CapsuleShape3D_vo0vy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1244196742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -3)
+shape = SubResource("BoxShape3D_beyo5")
 
 [node name="submarine" parent="." unique_id=1472708832 instance=ExtResource("2_w4tfr")]
 
@@ -103,8 +107,7 @@ size = Vector2i(256, 256)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -8.5)
 fov = 80.0
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1244196742]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -3)
-shape = SubResource("BoxShape3D_beyo5")
+[node name="TorpedoSpawn" type="Marker3D" parent="." unique_id=1115925574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
 
 [editable path="submarine"]

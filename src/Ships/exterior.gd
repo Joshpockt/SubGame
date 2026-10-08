@@ -16,10 +16,9 @@ var damage_on_cooldown := false
 @export var max_torque := 1.0
 
 
-
-
 func _ready() -> void:
 	ScreenManager.register_screen($SubViewport, "FRONT")
+
 
 var i = 0
 func _physics_process(_delta: float) -> void:
@@ -77,18 +76,20 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	else:
 		pass
 
+
 @rpc("authority", "call_remote", "unreliable_ordered")
 func sync_input(inputs: Dictionary):
 	throttle_input = inputs["throttle"]
 	vertical_input = inputs["vertical"]
 	steering_input = inputs["steering"]
 
+
 @rpc("authority", "call_remote", "unreliable_ordered")
 func sync_position(pos: Vector3, rot: Vector3):
 	position = pos
 	rotation = rot
 
-# could probably be authority but eh.
+
 @rpc("authority", "call_remote", "reliable")
 func sync_hit(collision_direction: Vector3, strength: float):
 	sub_hit.emit(collision_direction, strength)

@@ -1,6 +1,6 @@
 extends Node3D
 
-const TORPEDO = preload("uid://bty4vx8metthl")
+const TORPEDO = preload("uid://kmxaf2m5go4x")
 
 
 @onready var interaction_area: InteractionArea = $InteractionArea

@@ -6,13 +6,13 @@ class_name InteractionArea
 signal interacted(peer_id: int)
 signal intreaction_started(peer_id: int)
 signal interaction_stopped(peer_id: int)
-#signal interaction_finished(peer_id: int)
 signal observed(peer_id: int)
 
 @export_range(0.0, 10.0, 0.1, "or_greater") var interaction_time := 0.0
 @export var disable_interaction := false
 @export var disable_observation := false
 @export var allow_swipe := false
+
 
 var current_interaction_time := 0.0
 var is_being_interacted := false
@@ -39,10 +39,6 @@ func stop_interaction(peer_id: int) -> void:
 	#print("stop_interact")
 	interaction_stopped.emit(peer_id)
 	is_being_interacted = false
-
-#func finish_interaction(peer_id: int) -> void:
-	#print("finish_interaction")
-	#interaction_finished.emit(peer_id)
 
 func observe(peer_id: int) -> void:
 	if disable_observation: return

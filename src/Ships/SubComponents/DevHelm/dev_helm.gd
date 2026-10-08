@@ -10,9 +10,17 @@ func _get_player_input():
 	sub_exterior.throttle_input = throttle_input
 	sub_exterior.steering_input = steering_input
 	sub_exterior.vertical_input = vertical_input
+	
+	if Input.is_action_just_pressed("shoot"):
+		if $"../DevTorpedoController":
+			$"../DevTorpedoController".shoot()
 
 func _on_controller_update(peer_id: int):
 	sub_exterior.set_multiplayer_authority(peer_id)
+	if peer_id == -1:
+		sub_exterior.throttle_input = 0.0
+		sub_exterior.steering_input = 0.0
+		sub_exterior.vertical_input = 0.0
 
 #@rpc("authority", "call_local", "reliable")
 #func update_current_controller_id(peer_id: int):

@@ -7,6 +7,8 @@ class_name Item
 func get_uid() -> String:
 	return ResourceUID.path_to_uid(resource_path)
 
+
+
 # in the future
 #
 # export model
