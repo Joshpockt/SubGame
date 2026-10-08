@@ -7,7 +7,7 @@ const COAL = preload("uid://bu8h31atua56k")
 func _ready() -> void:
 	interaction_area.interacted.connect(_interacted)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Player.get_player(multiplayer.get_unique_id()).current_item != null:
 		interaction_area.disable_interaction = true
 	else:

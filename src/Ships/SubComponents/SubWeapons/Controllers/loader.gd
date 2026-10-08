@@ -17,17 +17,18 @@ func _interacted(peer_id: int) -> void:
 	if player.current_item != null:
 		var item := player.current_item
 		if item is AmmoItem:
-			controller.ammo += item.ammo_count
+			controller.add_ammo(item.ammo_count)
 			player.remove_item()
 
 
 func _process(_delta: float) -> void:
 	var current_player_item := Player.get_player(multiplayer.get_unique_id()).current_item
 	# I know this is kinda yucky but it works!
-	if current_player_item != null:
-		if current_player_item is AmmoItem:
-			if current_player_item.ammunition_type == required_ammo_type:
-				interaction_area.disable_interaction = false
-				return
+	if !controller.fully_loaded:
+		if current_player_item != null:
+			if current_player_item is AmmoItem:
+				if current_player_item.ammunition_type == required_ammo_type:
+					interaction_area.disable_interaction = false
+					return
 	
 	interaction_area.disable_interaction = true

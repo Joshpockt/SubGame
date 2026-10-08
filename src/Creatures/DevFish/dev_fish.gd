@@ -3,9 +3,13 @@ extends RigidBody3D
 var target : Node3D
 
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
+@onready var sonar_emitter: SonarEmitter = $SonarEmitter
+
+func _ready() -> void:
+	sonar_emitter.volume = 15
 
 var i = 0
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#target = SubExterior.exterior_instance
 	if target:
 		var dir = target.global_position - global_position

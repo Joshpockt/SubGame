@@ -1,7 +1,7 @@
 extends Node3D
 class_name SonarListener
 
-
+@export var max_tracks := 32
 
 enum SonarType {
 	GENERIC,
@@ -21,7 +21,7 @@ func get_tracks() -> Array[SonarTrack]:
 	point_query.collision_mask = 0b10000
 	point_query.position = global_position
 	
-	var sonar_emitters := space.intersect_point(point_query)
+	var sonar_emitters := space.intersect_point(point_query, max_tracks)
 	
 	if sonar_emitters.is_empty():
 		return []

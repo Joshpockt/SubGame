@@ -2,8 +2,18 @@ extends RigidBody3D
 class_name Torpedo
 
 const EXPLOSION = preload("uid://b28khgabl81gf")
-@export var target : Node3D
+var target : SonarTrack
+@onready var sonar_listener: SonarListener = $SonarListener
 
+func get_sonar_tracks():
+	var sonar_tracks = sonar_listener.get_tracks()
+	var result : SonarTrack
+	for track in sonar_tracks:
+		if track.type == SonarTrack.SonarType.GENERIC:
+			if result == null: result = track
+			if track.strength > result.strength:
+				result = track
+	target = result
 
 func look_follow(state: PhysicsDirectBodyState3D, current_transform: Transform3D, target_position: Vector3) -> void:
 	#state.angular_velocity = Vector3.UP
@@ -18,14 +28,15 @@ func look_follow(state: PhysicsDirectBodyState3D, current_transform: Transform3D
 
 var last_position := Vector3.ZERO
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	get_sonar_tracks()
 	if target:
-		var est_tof := global_position.distance_to(target.global_position) / linear_velocity.length()
-		var target_velocity = (target.global_position - last_position) / state.step
+		var est_tof := global_position.distance_to(target.position) / linear_velocity.length()
+		var target_velocity = (target.position - last_position) / state.step
 		#print(target_velocity)
-		last_position = target.global_position
-		var target_position = target.global_position + (target_velocity * est_tof)
+		last_position = target.position
+		var target_position = target.position + (target_velocity * est_tof)
 		#print(target_position)
-		#var target_position = target.global_position
+		#var target_position = target.position
 		look_follow(state, global_transform, target_position)
 	apply_central_force(-global_basis.z * 32)
 	

@@ -1,11 +1,12 @@
 extends Node3D
 class_name SubWeaponController
 
+# This class is held together by hotglue and dreams.
+
 @warning_ignore("unused_signal")
-signal on_shot
+#signal on_shot
 
 @export var max_ammo := 1
-@export var plus_one := false
 
 @export var projectile_scene : PackedScene
 
@@ -16,13 +17,27 @@ signal on_shot
 
 var ammo := 0:
 	set(value):
-		ammo = value
-		print(ammo)
+		ammo = clamp(value, 0, max_ammo)
+		#sync_ammo.rpc(ammo)
+
+var fully_loaded := false:
+	get():
+		return ammo == max_ammo
+
+
+func add_ammo(ammount):
+	ammo = clamp(ammo + ammount, 0, max_ammo)
+	sync_ammo.rpc(ammo)
 
 
 func shoot():
+	sync_shoot.rpc()
+
+
+@rpc("any_peer", "call_local", "reliable")
+func sync_shoot() -> void:
+	print(ammo)
 	if ammo > 0:
-		print("shoot")
 		ammo -= 1
 		var projectile_instance : Node3D = projectile_scene.instantiate()
 		exterior.add_sibling(projectile_instance)
@@ -30,9 +45,5 @@ func shoot():
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func sync_shoot():
-	pass
-
-@rpc("any_peer", "call_remote", "reliable")
-func sync_ammo():
-	pass
+func sync_ammo(new_ammo: int) -> void:
+	ammo = new_ammo

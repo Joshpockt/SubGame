@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://crxdyjcx2h8xd"]
 
 [ext_resource type="Script" uid="uid://crx5paa5rur0g" path="res://torpedo.gd" id="1_ch1v4"]
+[ext_resource type="Script" uid="uid://he3ekr3fxxsu" path="res://src/Components/Sonar/sonar_listener.gd" id="2_uxf5w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
 radius = 0.25
@@ -33,3 +34,7 @@ mesh = SubResource("CylinderMesh_sasra")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1332410932]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="SonarListener" type="Node3D" parent="." unique_id=1448525351]
+script = ExtResource("2_uxf5w")
+metadata/_custom_type_script = "uid://he3ekr3fxxsu"

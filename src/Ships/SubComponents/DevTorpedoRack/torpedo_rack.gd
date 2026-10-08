@@ -8,7 +8,7 @@ const TORPEDO = preload("uid://kmxaf2m5go4x")
 func _ready() -> void:
 	interaction_area.interacted.connect(_interacted)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var player := Player.get_player(multiplayer.get_unique_id())
 	if player == null: return
 	
