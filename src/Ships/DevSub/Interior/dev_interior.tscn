@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bsm60qlcqw6hm" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.tscn" id="6_f0fd5"]
 [ext_resource type="PackedScene" uid="uid://dg6o6veiqfyvc" path="res://src/Ships/SubComponents/SubWeapons/Controllers/dev_torpedo_controller.tscn" id="7_1jucw"]
 [ext_resource type="PackedScene" uid="uid://b6gedrrvtpvpd" path="res://src/Ships/DevSub/Exterior/dev_exterior.tscn" id="7_cv3vo"]
+[ext_resource type="Script" uid="uid://ds1myr7gl3lnu" path="res://src/Ships/SubComponents/Compartment/compartment.gd" id="9_eilgj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,6 +36,10 @@ size = Vector2(10, 25)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
 size = Vector2(256, 256)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_23kj7"]
+resource_local_to_scene = true
+size = Vector3(6, 3.7, 18)
 
 [node name="DevSub" type="Node" unique_id=18960767 node_paths=PackedStringArray("sub_exterior")]
 script = ExtResource("1_pjvd3")
@@ -108,6 +113,16 @@ interior_instance = NodePath("..")
 
 [node name="Camera3D" parent="DevExterior/SubViewport" parent_id_path=PackedInt32Array(1056441616, 1944179739) index="0" unique_id=969240049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -8.5)
+
+[node name="Compartment" type="Area3D" parent="." unique_id=1573355743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("9_eilgj")
+compartment_volume = 399.6000051498413
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Compartment" unique_id=666422566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05000007, 0)
+shape = SubResource("BoxShape3D_23kj7")
+debug_color = Color(0, 0.8666668, 1, 1)
 
 [editable path="DevExterior"]
 [editable path="DevExterior/submarine"]

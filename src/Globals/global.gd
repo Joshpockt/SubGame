@@ -13,3 +13,5 @@ func _physics_process(_delta: float) -> void:
 			get_window().mode = Window.MODE_WINDOWED
 		elif get_window().mode == Window.MODE_WINDOWED:
 			get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+	
+	#print(Engine.get_frames_per_second())

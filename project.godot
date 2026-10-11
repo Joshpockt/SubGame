@@ -30,6 +30,14 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
+[file_customization]
+
+folder_colors={
+"res://src/Components/": "blue",
+"res://src/Ships/": "purple",
+"res://src/Ships/SubComponents/": "blue"
+}
+
 [filesystem]
 
 import/blender/enabled=false

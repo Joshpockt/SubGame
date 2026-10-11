@@ -42,6 +42,8 @@ func sync_shoot() -> void:
 		var projectile_instance : Node3D = projectile_scene.instantiate()
 		exterior.add_sibling(projectile_instance)
 		projectile_instance.global_transform = projectile_spawn_marker.global_transform
+		if projectile_instance is RigidBody3D:
+			projectile_instance.linear_velocity = exterior.linear_velocity
 
 
 @rpc("any_peer", "call_remote", "reliable")
