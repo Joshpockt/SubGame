@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://n8ydvu4t3a3l"]
+
+[ext_resource type="Script" uid="uid://cyr0n4ifm71gq" path="res://src/Globals/debug_menu.gd" id="1_u5jp3"]
+
+[node name="DebugMenu" type="CanvasLayer" unique_id=394045597]
+layer = 100
+script = ExtResource("1_u5jp3")
+
+[node name="Control" type="Control" parent="." unique_id=1912486977]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1180275555]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 50.0
+
+[node name="FPSLabel" type="Label" parent="Control/VBoxContainer" unique_id=366485772]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FPS"
+
+[node name="FramesLabel" type="Label" parent="Control/VBoxContainer" unique_id=173990271]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FRAMES DRAWN"

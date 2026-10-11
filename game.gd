@@ -7,7 +7,7 @@ enum {
 	EXTERIOR,
 }
 
-@onready var world: Node = $ExteriorWorld/World
+@onready var world: Node3D = $ExteriorWorld/World
 
 
 func _ready() -> void:
