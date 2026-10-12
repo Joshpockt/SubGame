@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bi35bwhaxnkqw"]
+
+[ext_resource type="Script" uid="uid://ds1myr7gl3lnu" path="res://src/Ships/SubComponents/Compartment/compartment.gd" id="1_qjyrb"]
+[ext_resource type="Shader" uid="uid://d058o8vsa7ufh" path="res://water.gdshader" id="2_bo62v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
+resource_local_to_scene = true
+size = Vector3(5, 3, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cbxl"]
+render_priority = 0
+shader = ExtResource("2_bo62v")
+shader_parameter/color = Color(0.36, 0.7653334, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ia1lp"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(38, 61)
+size = Vector3(5, 0, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dklud"]
+resource_local_to_scene = true
+margin = 0.1
+size = Vector3(5, 0, 5)
+
+[node name="Compartment" type="Area3D" unique_id=697891993 node_paths=PackedStringArray("compartment_shape", "water_mesh", "water_shape")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_qjyrb")
+compartment_shape = NodePath("CompartmentShape")
+water_mesh = NodePath("WaterMesh")
+water_shape = NodePath("Area3D/WaterShape")
+compartment_volume = 75.0
+metadata/_custom_type_script = "uid://ds1myr7gl3lnu"
+
+[node name="CompartmentShape" type="CollisionShape3D" parent="." unique_id=1711325067]
+shape = SubResource("BoxShape3D_beyo5")
+
+[node name="WaterMesh" type="MeshInstance3D" parent="." unique_id=1060979138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.51, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_7cbxl")
+mesh = SubResource("BoxMesh_ia1lp")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=375414988]
+collision_layer = 64
+collision_mask = 0
+
+[node name="WaterShape" type="CollisionShape3D" parent="Area3D" unique_id=1827712789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_dklud")

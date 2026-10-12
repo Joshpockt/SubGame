@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://c4d5o2a0f2fgs"]
 
-[ext_resource type="PackedScene" uid="uid://crxdyjcx2h8xd" path="res://torpedo.tscn" id="1_uhqqe"]
-[ext_resource type="Script" uid="uid://dmmvq62qapxot" path="res://swaws.gd" id="2_ia1lp"]
-[ext_resource type="Script" uid="uid://he3ekr3fxxsu" path="res://src/Components/Sonar/sonar_listener.gd" id="4_2nij2"]
-[ext_resource type="PackedScene" uid="uid://bea5scuws0c2o" path="res://src/Components/Sonar/sonar_emitter.tscn" id="4_coq8p"]
+[ext_resource type="Script" uid="uid://b238s162comny" path="res://test_scene.gd" id="1_7cbxl"]
+[ext_resource type="PackedScene" uid="uid://1vhx3e3e0f80" path="res://src/Characters/player.tscn" id="1_uhqqe"]
+[ext_resource type="Shader" uid="uid://qra3p80sajom" path="res://water_fog.gdshader" id="4_coq8p"]
+[ext_resource type="Script" uid="uid://52qtyr0f7g73" path="res://src/Components/collision_point_sampler.gd" id="5_2nij2"]
+[ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://compartment.tscn" id="5_7cbxl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njel3"]
+render_priority = 0
+shader = ExtResource("4_coq8p")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8pr8v"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,13 +25,19 @@ sky_material = SubResource("ProceduralSkyMaterial_6adnx")
 background_mode = 2
 sky = SubResource("Sky_uhqqe")
 glow_enabled = true
+volumetric_fog_density = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dklud"]
 size = Vector2(10, 10)
 
-[sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
-
 [node name="TestScene" type="Node3D" unique_id=804774785]
+script = ExtResource("1_7cbxl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=58408385]
+material_override = SubResource("ShaderMaterial_njel3")
+extra_cull_margin = 1000.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_8pr8v")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=980925505]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -31,33 +46,18 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1371183759]
 environment = SubResource("Environment_ia1lp")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=654090530]
-transform = Transform3D(0.5295825, -0.3511527, 0.772162, 0, 0.910291, 0.41396898, -0.84825844, -0.21923073, 0.4820742, 10.782216, 5.9904585, 4.757047)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1315733251]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = SubResource("PlaneMesh_dklud")
 
-[node name="Torpedo" parent="." unique_id=1241457050 node_paths=PackedStringArray("target") instance=ExtResource("1_uhqqe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 1, 0)
-angular_damp_mode = 1
-angular_damp = 1.0
-target = NodePath("../Node3D")
+[node name="Player" parent="." unique_id=1312657620 instance=ExtResource("1_uhqqe")]
 
-[node name="Node3D" type="Node3D" parent="." unique_id=612890375]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35.603073)
-script = ExtResource("2_ia1lp")
+[node name="CollsisionPointSampler3D" type="Node3D" parent="Player/CameraPivot" parent_id_path=PackedInt32Array(1312657620, 372035538) index="0" unique_id=1457197805]
+script = ExtResource("5_2nij2")
+layer = 64
+metadata/_custom_type_script = "uid://52qtyr0f7g73"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=589090954]
-mesh = SubResource("SphereMesh_beyo5")
+[node name="Compartment" parent="." unique_id=697891993 instance=ExtResource("5_7cbxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+size = Vector3(1, 1, 1)
 
-[node name="SonarListener" type="Node3D" parent="." unique_id=1310541806]
-script = ExtResource("4_2nij2")
-metadata/_custom_type_script = "uid://he3ekr3fxxsu"
-
-[node name="SonarEmitter" parent="." unique_id=161802748 instance=ExtResource("4_coq8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.4399605)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=594920714]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.4399605)
-use_collision = true
+[editable path="Player"]

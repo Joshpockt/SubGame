@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var fps_label: Label = %FPSLabel
 @onready var frames_label: Label = %FramesLabel
+@onready var ticks_label: Label = %TicksLabel
 
 func _ready() -> void:
 	hide()
@@ -16,3 +17,4 @@ func _process(delta: float) -> void:
 	if visible:
 		fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
 		frames_label.text = "Frames Drawn: " + str(Engine.get_frames_drawn())
+		ticks_label.text = "Game Ticks: " + str(Engine.get_physics_frames())

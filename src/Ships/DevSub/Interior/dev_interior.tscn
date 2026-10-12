@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bsm60qlcqw6hm" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.tscn" id="6_f0fd5"]
 [ext_resource type="PackedScene" uid="uid://dg6o6veiqfyvc" path="res://src/Ships/SubComponents/SubWeapons/Controllers/dev_torpedo_controller.tscn" id="7_1jucw"]
 [ext_resource type="PackedScene" uid="uid://b6gedrrvtpvpd" path="res://src/Ships/DevSub/Exterior/dev_exterior.tscn" id="7_cv3vo"]
-[ext_resource type="Script" uid="uid://ds1myr7gl3lnu" path="res://src/Ships/SubComponents/Compartment/compartment.gd" id="9_eilgj"]
+[ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://compartment.tscn" id="8_eilgj"]
+[ext_resource type="PackedScene" uid="uid://br5o4ec5ie751" path="res://src/Ships/Misc/hull_breach.tscn" id="9_23kj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,6 +22,11 @@ sky_material = SubResource("ProceduralSkyMaterial_t34gm")
 background_mode = 2
 sky = SubResource("Sky_dxppu")
 glow_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.3344, 0.58901334, 0.88, 1)
+fog_density = 1.0
+fog_depth_begin = 0.0
+fog_depth_end = 10.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djwfo"]
 radius = 3.0
@@ -37,10 +43,6 @@ size = Vector2(10, 25)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
 size = Vector2(256, 256)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_23kj7"]
-resource_local_to_scene = true
-size = Vector3(6, 3.7, 18)
-
 [node name="DevSub" type="Node" unique_id=18960767 node_paths=PackedStringArray("sub_exterior")]
 script = ExtResource("1_pjvd3")
 sub_exterior = NodePath("DevExterior")
@@ -48,7 +50,7 @@ sub_exterior = NodePath("DevExterior")
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1428999658]
 spawn_path = NodePath("../Entitys")
 
-[node name="WorldEnv" type="Node3D" parent="." unique_id=1522798022]
+[node name="WorldEnv" type="Node" parent="." unique_id=1722094812]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnv" unique_id=2003007890]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -102,6 +104,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
 projectile_spawn_marker = NodePath("../../../DevExterior/TorpedoSpawn")
 exterior = NodePath("../../../DevExterior")
 
+[node name="Compartments" type="Node3D" parent="." unique_id=127422684]
+
+[node name="Compartment" parent="Compartments" unique_id=697891993 instance=ExtResource("8_eilgj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bilge_speed = 10.0
+size = Vector3(7, 4, 18)
+compartment_volume = 504.0
+
 [node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1656699537]
@@ -114,15 +124,8 @@ interior_instance = NodePath("..")
 [node name="Camera3D" parent="DevExterior/SubViewport" parent_id_path=PackedInt32Array(1056441616, 1944179739) index="0" unique_id=969240049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -8.5)
 
-[node name="Compartment" type="Area3D" parent="." unique_id=1573355743]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-script = ExtResource("9_eilgj")
-compartment_volume = 399.6000051498413
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Compartment" unique_id=666422566]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05000007, 0)
-shape = SubResource("BoxShape3D_23kj7")
-debug_color = Color(0, 0.8666668, 1, 1)
+[node name="HullBreach" parent="." unique_id=1139776399 instance=ExtResource("9_23kj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9029636, 0.2931075, -4.541395)
 
 [editable path="DevExterior"]
 [editable path="DevExterior/submarine"]

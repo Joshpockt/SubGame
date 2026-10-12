@@ -11,7 +11,6 @@ enum {
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	var sub_scene : PackedScene = DEV_INTERIOR
 	
 	var sub_instance : SubInterior = sub_scene.instantiate()

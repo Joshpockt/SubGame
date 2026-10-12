@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1vhx3e3e0f80"]
 
 [ext_resource type="Script" uid="uid://cilaqtos5h1im" path="res://src/Characters/player.gd" id="1_d7uvo"]
+[ext_resource type="Script" uid="uid://52qtyr0f7g73" path="res://src/Components/collision_point_sampler.gd" id="2_wgy3x"]
 [ext_resource type="Shader" uid="uid://b2c6w1xb5yup0" path="res://Assets/Shaders/crosshair.gdshader" id="3_wgy3x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
@@ -146,6 +147,11 @@ collision_mask = 8
 collide_with_areas = true
 collide_with_bodies = false
 script = SubResource("GDScript_srcsy")
+
+[node name="CollisionPointSampler" type="Node3D" parent="CameraPivot" unique_id=1002447440]
+script = ExtResource("2_wgy3x")
+layer = 64
+metadata/_custom_type_script = "uid://52qtyr0f7g73"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1100652912]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

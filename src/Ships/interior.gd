@@ -23,7 +23,7 @@ var fuel_uniform := 0.0:
 
 
 func _ready() -> void:
-	
+	#$Compartments/Compartment.fill_level = 0.5
 	#interior_instance = self
 	
 	sub_exterior.sub_hit.connect(spawn_damage)
@@ -43,14 +43,20 @@ func _ready() -> void:
 		#spawn_damage(dir,1)
 		#await get_tree().process_frame
 
-
 func _physics_process(delta: float) -> void:
 	fuel = fuel - delta
 	if Input.is_action_just_pressed("ui_up"):
 		print(fuel)
+	
+	#$Compartments/Compartment.add_water(10.0 * delta)
 	#print(fuel)
 	#print(fuel_uniform)
 	#print(fuel / max_fuel_seconds)
+
+#HACK
+func set_fog(enabled: bool):
+	var environment : Environment = $WorldEnv/WorldEnvironment.environment
+	environment.fog_enabled = enabled
 
 func spawn_damage(direction: Vector3, _stren) -> void:
 	if direction == Vector3.ZERO:
@@ -102,4 +108,5 @@ func spawn_function(id: int) -> Node:
 	player_instance.name = str(id)
 	player_instance.position.y = -1
 	player_instance.sub_exterior = sub_exterior
+	player_instance.sub_interior = self
 	return player_instance

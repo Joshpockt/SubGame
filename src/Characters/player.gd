@@ -3,6 +3,7 @@ class_name Player
 
 @export var current_item : Item
 
+var sub_interior : SubInterior
 var sub_exterior : SubExterior
 var mouse_motion := Vector2.ZERO
 var can_move := true
@@ -11,6 +12,7 @@ var shake_fade := 4.0
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var camera_pivot: Node3D = $CameraPivot
+@onready var collision_point_sampler: CollisionPointSampler = $CameraPivot/CollisionPointSampler
 
 static func get_player(peer_id: int) -> Player:
 	if Networking.players.has(peer_id):
@@ -28,7 +30,9 @@ func _ready() -> void:
 		$CameraPivot/MeshInstance3D.hide()
 		$MeshInstance3D.hide()
 	var f = func(_collision_direction: Vector3, strength: float): shake_screen(strength * 0.05)
-	sub_exterior.sub_hit.connect(f)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if sub_exterior:
+		sub_exterior.sub_hit.connect(f)
 
 
 func _process(delta: float) -> void:
@@ -43,6 +47,12 @@ func _process(delta: float) -> void:
 	if current_shake > 0:
 		current_shake = lerp(current_shake, 0.0, shake_fade * delta)
 		camera_3d.position = Vector3(randf_range(-1, 1), randf_range(-1, 1), 0) * current_shake
+	
+	if is_multiplayer_authority():
+		if collision_point_sampler.get_overlapping_areas().size() > 0:
+			sub_interior.set_fog(true)
+		else:
+			sub_interior.set_fog(false)
 
 
 func _physics_process(_delta: float) -> void:
