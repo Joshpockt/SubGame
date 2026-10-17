@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dg6o6veiqfyvc" path="res://src/Ships/SubComponents/SubWeapons/Controllers/dev_torpedo_controller.tscn" id="7_1jucw"]
 [ext_resource type="PackedScene" uid="uid://b6gedrrvtpvpd" path="res://src/Ships/DevSub/Exterior/dev_exterior.tscn" id="7_cv3vo"]
 [ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://compartment.tscn" id="8_eilgj"]
-[ext_resource type="PackedScene" uid="uid://br5o4ec5ie751" path="res://src/Ships/Misc/hull_breach.tscn" id="9_23kj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -123,9 +122,6 @@ interior_instance = NodePath("..")
 
 [node name="Camera3D" parent="DevExterior/SubViewport" parent_id_path=PackedInt32Array(1056441616, 1944179739) index="0" unique_id=969240049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -8.5)
-
-[node name="HullBreach" parent="." unique_id=1139776399 instance=ExtResource("9_23kj7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9029636, 0.2931075, -4.541395)
 
 [editable path="DevExterior"]
 [editable path="DevExterior/submarine"]

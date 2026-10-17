@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://cn7pyubvhrcdq"]
+
+[ext_resource type="Script" uid="uid://dk5tmugin0088" path="res://src/MainMenu/steam_start.gd" id="1_chjcu"]
+[ext_resource type="PackedScene" uid="uid://buku4xyly0j33" path="res://src/MainMenu/steam_lobby_label.tscn" id="2_ktwas"]
+
+[node name="SteamStart" type="Control" unique_id=1805365998]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_chjcu")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1042501625]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="StartingScreen" type="Control" parent="MarginContainer" unique_id=571688977]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/StartingScreen" unique_id=370679425]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/StartingScreen/CenterContainer" unique_id=633264259]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer" unique_id=890307130]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1387868184]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer/VBoxContainer" unique_id=1962734772]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " Join "
+
+[node name="LobbyList" type="Control" parent="MarginContainer" unique_id=194645911]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/LobbyList" unique_id=1560482418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/LobbyList/HBoxContainer" unique_id=2007145868]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LobbyList/HBoxContainer/Control" unique_id=1411443797]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer" unique_id=1827360515]
+layout_mode = 2
+
+[node name="Lobbies" type="VBoxContainer" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer/ScrollContainer" unique_id=585688798]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SteamLobbyLabel" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer/ScrollContainer/Lobbies" unique_id=2093948388 instance=ExtResource("2_ktwas")]
+layout_mode = 2
+
+[node name="SteamLobbyLabel2" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer/ScrollContainer/Lobbies" unique_id=2045314510 instance=ExtResource("2_ktwas")]
+layout_mode = 2
+
+[node name="SteamLobbyLabel3" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer/ScrollContainer/Lobbies" unique_id=1964277525 instance=ExtResource("2_ktwas")]
+layout_mode = 2
+
+[node name="SteamLobbyLabel4" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer/ScrollContainer/Lobbies" unique_id=477583318 instance=ExtResource("2_ktwas")]
+layout_mode = 2
+
+[node name="SteamLobbyLabel5" parent="MarginContainer/LobbyList/HBoxContainer/Control/MarginContainer/ScrollContainer/Lobbies" unique_id=59456773 instance=ExtResource("2_ktwas")]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/LobbyList/HBoxContainer/Control" unique_id=907371242]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lobby" type="Control" parent="MarginContainer" unique_id=600005321]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Lobby" unique_id=832200808]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Lobby/HBoxContainer" unique_id=351716688]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Lobby/HBoxContainer/MarginContainer" unique_id=1179853827]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="LobbyPlayerList" type="VBoxContainer" parent="MarginContainer/Lobby/HBoxContainer/MarginContainer/ScrollContainer" unique_id=1603605993]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Lobby/HBoxContainer" unique_id=708207113]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Lobby/HBoxContainer" unique_id=1942237197]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Lobby/HBoxContainer/CenterContainer" unique_id=397094817]
+layout_mode = 2
+
+[node name="StartGame" type="Button" parent="MarginContainer/Lobby/HBoxContainer/CenterContainer/VBoxContainer" unique_id=223672556]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Start!"

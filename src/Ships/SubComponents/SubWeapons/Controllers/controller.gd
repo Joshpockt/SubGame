@@ -36,7 +36,7 @@ func shoot():
 
 @rpc("any_peer", "call_local", "reliable")
 func sync_shoot() -> void:
-	print(ammo)
+	#print(ammo)
 	if ammo > 0:
 		ammo -= 1
 		var projectile_instance : Node3D = projectile_scene.instantiate()

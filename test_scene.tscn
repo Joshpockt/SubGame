@@ -58,6 +58,5 @@ metadata/_custom_type_script = "uid://52qtyr0f7g73"
 
 [node name="Compartment" parent="." unique_id=697891993 instance=ExtResource("5_7cbxl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(1, 1, 1)
 
 [editable path="Player"]
