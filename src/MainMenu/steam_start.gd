@@ -4,6 +4,7 @@ extends Control
 
 const STEAM_LOBBY_LABEL = preload("uid://buku4xyly0j33")
 const PLAYER_LABEL = preload("uid://bbkc5a3fb7cn7")
+const GAME = preload("uid://dgvqg2yagkuep")
 
 @onready var lobbies: VBoxContainer = %Lobbies
 @onready var lobby_player_list: VBoxContainer = %LobbyPlayerList
@@ -14,6 +15,8 @@ const PLAYER_LABEL = preload("uid://bbkc5a3fb7cn7")
 
 @onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
+
+@onready var start_game_button: Button = %StartGame
 
 var current_lobby_id := 0
 
@@ -45,6 +48,12 @@ func _ready() -> void:
 	var f = func(id:int):
 		add_player_label(str(id))
 	multiplayer.peer_connected.connect(f)
+	var f2 = func(id:int):
+		remove_player_label(str(id))
+	multiplayer.peer_disconnected.connect(f2)
+	var f3 = func():
+		rpc("start_game")
+	start_game_button.pressed.connect(f3)
 
 
 func _refresh_lobbies():
@@ -121,6 +130,7 @@ func _lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: in
 			peer.server_relay = true
 			multiplayer.multiplayer_peer = peer
 			
+			add_player_label(str(multiplayer.get_unique_id()))
 			hide_all()
 			lobby.show()
 		else:
@@ -175,3 +185,8 @@ func _on_lobby_list_ready(lobby_ids: Array):
 		lobby_label.label.text = Steam.getLobbyData(this_lobby_id, "name")
 		var f = _join_lobby.bind(this_lobby_id)
 		lobby_label.button.pressed.connect(f)
+
+@rpc("authority","call_local","reliable")
+func start_game():
+	get_tree().change_scene_to_packed(GAME)
+	#Main.main_node._load_level()
