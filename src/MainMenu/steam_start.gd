@@ -74,10 +74,12 @@ func _on_lobby_list_ready(lobby_ids: Array):
 	for child in lobbies.get_children():
 		child.queue_free()
 	
-	for lobby in lobby_ids:
-		var response = Steam.getLobbyData(lobby, "roob")
+	for this_lobby_id in lobby_ids:
+		var response = Steam.getLobbyData(this_lobby_id, "roob")
 		if response != "true": continue
 		
 		var lobby_label : LobbyLabel = STEAM_LOBBY_LABEL.instantiate()
 		lobbies.add_child(lobby_label)
-		lobby_label.label.text = Steam.getLobbyData(lobby, "name")
+		lobby_label.label.text = Steam.getLobbyData(this_lobby_id, "name")
+		var f = _join_lobby.bind(this_lobby_id)
+		lobby_label.button.pressed.connect(f)

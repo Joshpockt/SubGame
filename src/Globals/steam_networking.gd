@@ -29,7 +29,7 @@ func _server_created(connect_status: Steam.Result, lobby_id: int):
 	
 	print("Server successfully created with lobby id: ", str(lobby_id))
 	current_lobby_id = lobby_id
-	Steam.setLobbyJoinable(lobby_id, false)
+	Steam.setLobbyJoinable(lobby_id, true)
 	Steam.setLobbyType(lobby_id, Steam.LOBBY_TYPE_FRIENDS_ONLY)
 	Steam.setLobbyData(lobby_id, "roob", "true")
 	Steam.setLobbyData(lobby_id, "name", Steam.getPersonaName())
