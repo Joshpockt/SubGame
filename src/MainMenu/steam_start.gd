@@ -105,20 +105,48 @@ func remove_player_label(player_name: String):
 
 
 func _join_lobby(lobby_id):
+	print("attempting to join lobby: ", lobby_id)
 	Steam.joinLobby(lobby_id)
 
 
 func _lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: int):
-	if multiplayer.multiplayer_peer != OfflineMultiplayerPeer: return
 	
 	if response == Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
-		current_lobby_id = lobby_id
-		var peer : MultiplayerPeer = SteamMultiplayerPeer.new()
-		peer.connect_to_lobby(lobby)
-		multiplayer.multiplayer_peer = peer
+		var server_steam_id = Steam.getLobbyOwner(lobby_id)
 		
-		hide_all()
-		lobby.show()
+		if server_steam_id != Steam.getSteamID():
+			
+			var peer : MultiplayerPeer = SteamMultiplayerPeer.new()
+			peer.create_client(server_steam_id, 0)
+			peer.server_relay = true
+			multiplayer.multiplayer_peer = peer
+			
+			hide_all()
+			lobby.show()
+		else:
+			match response:
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_DOESNT_EXIST:
+					printerr("Failed joining lobby %s, this lobby no longer exists.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_NOT_ALLOWED:
+					printerr("Failed joining lobby %s, you don't have permission to join this Lobbies.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_FULL:
+					printerr("Failed joining lobby %s, the lobby is now full.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_ERROR:
+					printerr("Failed joining lobby %s, something unexpected happened!")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_BANNED:
+					printerr("Failed joining lobby %s, you are banned from this lobby.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_LIMITED:
+					printerr("Failed joining lobby %s, you cannot join due to having a limited account.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_CLAN_DISABLED:
+					printerr("Failed joining lobby %s, this lobby is locked or disabled.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_COMMUNITY_BAN:
+					printerr("Failed joining lobby %s, this lobby is community locked.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_MEMBER_BLOCKED_YOU:
+					printerr("Failed joining lobby %s, a user in the lobby has blocked you from joining.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_YOU_BLOCKED_MEMBER:
+					printerr("Failed joining lobby %s, a user you have blocked is in the lobby.")
+				Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_RATE_LIMIT_EXCEEDED:
+					printerr("Failed joining lobby %s, you have exceeded the rate limit.")
 
 
 func _host_pressed():
