@@ -7,7 +7,7 @@ var target : SonarTrack
 
 func get_sonar_tracks():
 	var sonar_tracks = sonar_listener.get_tracks()
-	var result : SonarTrack
+	var result : SonarTrack = null
 	for track in sonar_tracks:
 		if track.type == SonarTrack.SonarType.GENERIC:
 			if result == null: result = track

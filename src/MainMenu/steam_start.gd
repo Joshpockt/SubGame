@@ -18,6 +18,7 @@ const PLAYER_LABEL = preload("uid://bbkc5a3fb7cn7")
 var current_lobby_id := 0
 
 func _ready() -> void:
+	print(multiplayer.multiplayer_peer)
 	hide_all()
 	starting_screen.show()
 	
@@ -67,7 +68,7 @@ func _server_created(connect_status: Steam.Result, lobby_id: int):
 	Steam.setLobbyData(lobby_id, "name", Steam.getPersonaName())
 	
 	var peer : MultiplayerPeer = SteamMultiplayerPeer.new()
-	peer.host_with_lobby(lobby_id)
+	peer.create_host(0)
 	peer.server_relay = true
 	multiplayer.multiplayer_peer = peer
 
@@ -90,7 +91,7 @@ func hide_all():
 
 
 func add_player_label(player_name: String):
-	print("print")
+	#print("print")
 	var label_instance : PlayerLobbyLabel = PLAYER_LABEL.instantiate()
 	lobby_player_list.add_child(label_instance)
 	label_instance.label.text = player_name
@@ -107,12 +108,17 @@ func _join_lobby(lobby_id):
 	Steam.joinLobby(lobby_id)
 
 
-func _lobby_joined(lobby: int, permissions: int, locked: bool, response: int):
+func _lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: int):
+	if multiplayer.multiplayer_peer != OfflineMultiplayerPeer: return
+	
 	if response == Steam.ChatRoomEnterResponse.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
-		current_lobby_id = lobby
+		current_lobby_id = lobby_id
 		var peer : MultiplayerPeer = SteamMultiplayerPeer.new()
 		peer.connect_to_lobby(lobby)
 		multiplayer.multiplayer_peer = peer
+		
+		hide_all()
+		lobby.show()
 
 
 func _host_pressed():

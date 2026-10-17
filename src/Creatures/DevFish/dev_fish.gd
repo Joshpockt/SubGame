@@ -13,7 +13,7 @@ var has_synced := false
 func _ready() -> void:
 	sonar_emitter.volume = 15
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#target = SubExterior.exterior_instance
 	if target:
 		var dir = target.global_position - global_position
@@ -36,7 +36,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 
 @rpc("authority", "call_remote", "unreliable_ordered")
-func sync_state(pos: Vector3, rot: Vector3, linear_vel: Vector3, angular_vel: Vector3):
+func sync_state(pos: Vector3, rot: Vector3, _linear_vel: Vector3, _angular_vel: Vector3):
 	var position_delta = (position - pos).length()
 	var rotation_delta = (rotation - rot).length()
 	
