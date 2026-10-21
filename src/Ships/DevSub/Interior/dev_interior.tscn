@@ -53,6 +53,7 @@ spawn_path = NodePath("../Entitys")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnv" unique_id=2003007890]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldEnv" unique_id=677214817]
@@ -102,6 +103,26 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.5,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
 projectile_spawn_marker = NodePath("../../../DevExterior/TorpedoSpawn")
 exterior = NodePath("../../../DevExterior")
+
+[node name="Lights" type="Node3D" parent="Level" unique_id=1270273468]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Level/Lights" unique_id=386728328]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8, 0)
+light_energy = 2.0
+spot_range = 10.0
+spot_angle = 60.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Level/Lights" unique_id=747141396]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8, -5)
+light_energy = 2.0
+spot_range = 10.0
+spot_angle = 60.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Level/Lights" unique_id=239908505]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8, 5)
+light_energy = 2.0
+spot_range = 10.0
+spot_angle = 60.0
 
 [node name="Compartments" type="Node3D" parent="." unique_id=127422684]
 

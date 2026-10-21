@@ -116,8 +116,8 @@ properties/1/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e3tld"]
 shader = ExtResource("3_wgy3x")
-shader_parameter/circleSize = 0.3
-shader_parameter/hollowSize = 0.0
+shader_parameter/circleSize = 0.5
+shader_parameter/hollowSize = 0.3
 shader_parameter/progress = 1.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
