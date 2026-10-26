@@ -36,14 +36,14 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 
 @rpc("authority", "call_remote", "unreliable_ordered")
-func sync_state(pos: Vector3, rot: Vector3, _linear_vel: Vector3, _angular_vel: Vector3):
+func sync_state(pos: Vector3, rot: Vector3, linear_vel: Vector3, angular_vel: Vector3):
 	var position_delta = (position - pos).length()
 	var rotation_delta = (rotation - rot).length()
 	
-	#var linear_velocity_delta = (linear_velocity - linear_vel).length()
-	#var angular_velocity_delta = (angular_velocity - angular_vel).length()
+	var linear_velocity_delta = (linear_velocity - linear_vel).length()
+	var angular_velocity_delta = (angular_velocity - angular_vel).length()
 	
-	if position_delta >= 1.0:
+	if position_delta >= 2.5:
 		position = pos
 		#synced_linear_velocity = linear_vel
 		#has_synced = true
@@ -52,7 +52,7 @@ func sync_state(pos: Vector3, rot: Vector3, _linear_vel: Vector3, _angular_vel: 
 		rotation = rot
 		#synced_angular_velocity = angular_vel
 		#has_synced = true
-	#
+	
 	#if linear_velocity_delta >= 1.0:
 		#synced_linear_velocity = linear_vel
 		#has_synced = true

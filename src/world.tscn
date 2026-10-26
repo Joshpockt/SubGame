@@ -14,7 +14,7 @@ fog_light_energy = 0.4
 fog_density = 0.005
 fog_depth_end = 65.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0025
+volumetric_fog_density = 0.001
 volumetric_fog_length = 128.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3cfgd"]
@@ -101,7 +101,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
 visible = false
 light_color = Color(0.7128, 0.99, 0.80057997, 1)
-light_energy = 16.0
+light_energy = 8.0
 spot_range = 150.0
 spot_angle = 50.0
 

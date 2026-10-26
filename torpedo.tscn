@@ -12,6 +12,14 @@ top_radius = 0.0
 bottom_radius = 0.1
 height = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t101k"]
+albedo_color = Color(18.892157, 11.708403, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uxf5w"]
+top_radius = 0.0
+bottom_radius = 0.25
+height = 1.0
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_beyo5"]
 radius = 0.25
 height = 2.5
@@ -31,6 +39,11 @@ mesh = SubResource("CapsuleMesh_beyo5")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -1)
 mesh = SubResource("CylinderMesh_sasra")
 
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=523613790]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1.5)
+material_override = SubResource("StandardMaterial3D_t101k")
+mesh = SubResource("CylinderMesh_uxf5w")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1332410932]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_beyo5")
@@ -38,3 +51,10 @@ shape = SubResource("CapsuleShape3D_beyo5")
 [node name="SonarListener" type="Node3D" parent="." unique_id=1448525351]
 script = ExtResource("2_uxf5w")
 metadata/_custom_type_script = "uid://he3ekr3fxxsu"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1436696053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4)
+light_color = Color(1, 0.6, 0, 1)
+light_energy = 8.0
+omni_range = 100.0
+omni_attenuation = 2.0

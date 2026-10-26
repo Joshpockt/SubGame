@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/SubComponents/DevHelm/dev_helm.gd" id="1_c1x4s"]
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_de4h6"]
+[ext_resource type="PackedScene" uid="uid://lkapsy47pjbm" path="res://Assets/Meshes/ShipParts/helm.glb" id="2_ganq3"]
+[ext_resource type="Shader" uid="uid://dcn6bo2rhrmle" path="res://Assets/Shaders/screen.gdshader" id="3_4avw6"]
+[ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_4cgje"]
+[ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="4_s4toa"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_beyo5"]
-size = Vector3(1, 1, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_c1x4s"]
-size = Vector3(1, 2, 0.25)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_beyo5"]
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4toa"]
+render_priority = 0
+shader = ExtResource("3_4avw6")
+shader_parameter/screen_texture = ExtResource("4_s4toa")
+shader_parameter/scanlines = 128.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1, 2, 0.8)
@@ -22,19 +21,22 @@ script = ExtResource("1_c1x4s")
 player_standing_marker = NodePath("PlayerMarker")
 camera_marker = NodePath("CameraMarker")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=265232951]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_beyo5")
+[node name="Visuals" type="Node3D" parent="." unique_id=1871263720]
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1321905173]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.35)
-mesh = SubResource("BoxMesh_c1x4s")
+[node name="helm" parent="Visuals" unique_id=1113689753 instance=ExtResource("2_ganq3")]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1660660701]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 1, 0.24206054)
-mesh = SubResource("CylinderMesh_beyo5")
+[node name="DisplayScreen" parent="Visuals/helm/Cube_004" parent_id_path=PackedInt32Array(1113689753, 1165235619) index="0" unique_id=542372953]
+material_override = SubResource("ShaderMaterial_s4toa")
+script = ExtResource("3_4cgje")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Visuals/helm/Cube_004/DisplayScreen" index="0" unique_id=588875358]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.1996576, 0, 0.14967968)
+light_energy = 0.5
+area_range = 1.0
+area_size = Vector2(0.515, 0.515)
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1057324836]
+visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_de4h6")
@@ -44,7 +46,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.050000012)
 shape = SubResource("BoxShape3D_beyo5")
 
 [node name="PlayerMarker" type="Marker3D" parent="." unique_id=176746422]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.367)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5879179, 0.51514953)
+
+[editable path="Visuals/helm"]

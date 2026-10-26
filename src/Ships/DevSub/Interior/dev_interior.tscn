@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://4fiv42tc386t" path="res://src/Ships/interior.gd" id="1_pjvd3"]
 [ext_resource type="PackedScene" uid="uid://b01kt6b3n182i" path="res://src/Ships/SubComponents/DevHelm/dev_helm.tscn" id="2_o5x6r"]
-[ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_o5x6r"]
 [ext_resource type="PackedScene" uid="uid://hxy003y2usmm" path="res://src/Ships/SubComponents/DevBoiler/dev_boiler.tscn" id="4_ha1vf"]
 [ext_resource type="PackedScene" uid="uid://leb7ytw2lq1u" path="res://src/Ships/SubComponents/DevCoal/dev_coal.tscn" id="5_djwfo"]
 [ext_resource type="PackedScene" uid="uid://bsm60qlcqw6hm" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.tscn" id="6_f0fd5"]
@@ -26,6 +25,7 @@ fog_light_color = Color(0.3344, 0.58901334, 0.88, 1)
 fog_density = 1.0
 fog_depth_begin = 0.0
 fog_depth_end = 10.0
+adjustment_enabled = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djwfo"]
 radius = 3.0
@@ -38,9 +38,6 @@ height = 18.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_beyo5"]
 size = Vector2(10, 25)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_beyo5"]
-size = Vector2(256, 256)
 
 [node name="DevSub" type="Node" unique_id=18960767 node_paths=PackedStringArray("sub_exterior")]
 script = ExtResource("1_pjvd3")
@@ -82,12 +79,6 @@ mesh = SubResource("PlaneMesh_beyo5")
 [node name="Station" parent="Level/Stations" unique_id=1236775955 node_paths=PackedStringArray("sub_exterior") instance=ExtResource("2_o5x6r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -3)
 sub_exterior = NodePath("../../../DevExterior")
-
-[node name="Sprite3D" type="Sprite3D" parent="Level/Stations/Station" unique_id=240830634]
-transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 0, 1.5, -0.22136307)
-texture_filter = 0
-texture = SubResource("PlaceholderTexture2D_beyo5")
-script = ExtResource("3_o5x6r")
 
 [node name="DevBoiler" parent="Level/Stations" unique_id=245123805 node_paths=PackedStringArray("interior") instance=ExtResource("4_ha1vf")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 5)

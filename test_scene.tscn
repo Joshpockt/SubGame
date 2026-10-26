@@ -1,18 +1,6 @@
 [gd_scene format=3 uid="uid://c4d5o2a0f2fgs"]
 
 [ext_resource type="Script" uid="uid://b238s162comny" path="res://test_scene.gd" id="1_7cbxl"]
-[ext_resource type="PackedScene" uid="uid://1vhx3e3e0f80" path="res://src/Characters/player.tscn" id="1_uhqqe"]
-[ext_resource type="Shader" uid="uid://qra3p80sajom" path="res://water_fog.gdshader" id="4_coq8p"]
-[ext_resource type="Script" uid="uid://52qtyr0f7g73" path="res://src/Components/collision_point_sampler.gd" id="5_2nij2"]
-[ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://compartment.tscn" id="5_7cbxl"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_njel3"]
-render_priority = 0
-shader = ExtResource("4_coq8p")
-
-[sub_resource type="QuadMesh" id="QuadMesh_8pr8v"]
-flip_faces = true
-size = Vector2(2, 2)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -33,12 +21,6 @@ size = Vector2(10, 10)
 [node name="TestScene" type="Node3D" unique_id=804774785]
 script = ExtResource("1_7cbxl")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=58408385]
-material_override = SubResource("ShaderMaterial_njel3")
-extra_cull_margin = 1000.0
-ignore_occlusion_culling = true
-mesh = SubResource("QuadMesh_8pr8v")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=980925505]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
@@ -48,15 +30,3 @@ environment = SubResource("Environment_ia1lp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1315733251]
 mesh = SubResource("PlaneMesh_dklud")
-
-[node name="Player" parent="." unique_id=1312657620 instance=ExtResource("1_uhqqe")]
-
-[node name="CollsisionPointSampler3D" type="Node3D" parent="Player/CameraPivot" parent_id_path=PackedInt32Array(1312657620, 372035538) index="0" unique_id=1457197805]
-script = ExtResource("5_2nij2")
-layer = 64
-metadata/_custom_type_script = "uid://52qtyr0f7g73"
-
-[node name="Compartment" parent="." unique_id=697891993 instance=ExtResource("5_7cbxl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[editable path="Player"]
