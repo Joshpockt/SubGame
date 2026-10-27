@@ -14,9 +14,6 @@ const DIRECTIONS = [
 @export var size := 5.0
 @export var max_i := 100
 
-
-
-
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var multi_mesh_instance_3d: MultiMeshInstance3D = $MultiMeshInstance3D
 

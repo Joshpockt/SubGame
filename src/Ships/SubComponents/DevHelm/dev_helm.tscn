@@ -6,12 +6,16 @@
 [ext_resource type="Shader" uid="uid://dcn6bo2rhrmle" path="res://Assets/Shaders/screen.gdshader" id="3_4avw6"]
 [ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_4cgje"]
 [ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="4_s4toa"]
+[ext_resource type="Script" uid="uid://d3e745u0qwbev" path="res://src/Ships/SubComponents/DevHelm/sonar_idkblahblahblah.gd" id="6_c335d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4toa"]
 render_priority = 0
 shader = ExtResource("3_4avw6")
 shader_parameter/screen_texture = ExtResource("4_s4toa")
 shader_parameter/scanlines = 128.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwgg4"]
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1, 2, 0.8)
@@ -35,6 +39,10 @@ light_energy = 0.5
 area_range = 1.0
 area_size = Vector2(0.515, 0.515)
 
+[node name="Cylinder_001" parent="Visuals/helm" index="2" unique_id=204422003]
+material_override = SubResource("StandardMaterial3D_xwgg4")
+script = ExtResource("6_c335d")
+
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1057324836]
 visible = false
 collision_layer = 8
@@ -49,6 +57,6 @@ shape = SubResource("BoxShape3D_beyo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5879179, 0.51514953)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5920539, 0.5122222)
 
 [editable path="Visuals/helm"]
