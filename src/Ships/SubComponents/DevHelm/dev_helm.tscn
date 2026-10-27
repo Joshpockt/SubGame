@@ -14,8 +14,14 @@ shader = ExtResource("3_4avw6")
 shader_parameter/screen_texture = ExtResource("4_s4toa")
 shader_parameter/scanlines = 128.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwgg4"]
-texture_filter = 0
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xl7wy"]
+size = Vector2(128, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c335d"]
+render_priority = 0
+shader = ExtResource("3_4avw6")
+shader_parameter/screen_texture = SubResource("PlaceholderTexture2D_xl7wy")
+shader_parameter/scanlines = 128.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1, 2, 0.8)
@@ -40,7 +46,7 @@ area_range = 1.0
 area_size = Vector2(0.515, 0.515)
 
 [node name="Cylinder_001" parent="Visuals/helm" index="2" unique_id=204422003]
-material_override = SubResource("StandardMaterial3D_xwgg4")
+material_override = SubResource("ShaderMaterial_c335d")
 script = ExtResource("6_c335d")
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1057324836]

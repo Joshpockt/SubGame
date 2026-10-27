@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dhcwry5n8765u" path="res://src/Ships/DevSub/Exterior/blip.gd" id="2_v6fu0"]
 
 [sub_resource type="Gradient" id="Gradient_xl7wy"]
-colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_v6fu0"]
 gradient = SubResource("Gradient_xl7wy")

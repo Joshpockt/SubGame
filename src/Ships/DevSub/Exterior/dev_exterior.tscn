@@ -85,7 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5644534, 2.310649, -18.2247
 light_color = Color(0.99, 0.9438, 0.7128, 1)
 light_energy = 64.0
 light_volumetric_fog_energy = 0.5
-spot_range = 200.0
+spot_range = 300.0
 spot_attenuation = 2.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1706362357]
@@ -93,7 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.564, 2.311, -18.225)
 light_color = Color(0.99, 0.9438, 0.7128, 1)
 light_energy = 64.0
 light_volumetric_fog_energy = 0.5
-spot_range = 200.0
+spot_range = 300.0
 spot_attenuation = 2.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1102759865]
@@ -121,15 +121,32 @@ fov = 80.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
 
 [node name="SonarTransceiver" type="Node3D" parent="." unique_id=256956669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 script = ExtResource("4_gidhb")
-range = 400.0
+range = 256.0
+max_error_offset = 20.0
 
 [node name="SubViewport" type="SubViewport" parent="SonarTransceiver" unique_id=1254560230]
 size = Vector2i(128, 128)
 
 [node name="Camera2D" type="Camera2D" parent="SonarTransceiver/SubViewport" unique_id=1700538096]
 ignore_rotation = false
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(0.2, 0.2)
+
+[node name="ColorRect" type="ColorRect" parent="SonarTransceiver/SubViewport/Camera2D" unique_id=1333225294]
+custom_minimum_size = Vector2(2000, 2000)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SonarTransceiver/SubViewport/Camera2D" unique_id=1325520992]
+z_index = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_y7j3k")
 
 [node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="SonarTransceiver/SubViewport" unique_id=1936249900]
 multimesh = SubResource("MultiMesh_beyo5")
@@ -139,19 +156,7 @@ texture = ExtResource("5_y7j3k")
 visible = false
 texture = ExtResource("5_y7j3k")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="SonarTransceiver/SubViewport" unique_id=1743138096]
-layer = -2
-follow_viewport_enabled = true
-
-[node name="ColorRect" type="ColorRect" parent="SonarTransceiver/SubViewport/CanvasLayer" unique_id=1333225294]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="RayCast3D" type="RayCast3D" parent="SonarTransceiver" unique_id=745815342]
+collision_mask = 3
 
 [editable path="submarine"]

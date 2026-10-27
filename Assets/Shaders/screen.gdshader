@@ -14,8 +14,9 @@ void fragment() {
 	float offset = 1.0 / float(tex_size.x);
 	vec4 left = texture(screen_texture, UV + vec2(-offset, 0)) * vec4(0.0, 1.0, 0.0, 1.0);
 	vec4 right = texture(screen_texture, UV + vec2(offset, 0)) * vec4(1.0, 0.0, 1.0, 1.0);
-	vec4 blur = (tex + ((left + right) * 0.2)) / 1.0;
-	ALBEDO = (blur.rgb * 0.4) + (blur.rgb * (abs(sin(UV.y * PI * scanlines)))) * 0.8;
+	vec4 blur = (tex + ((left + right) * 0.1)) / 1.5;
+	ALBEDO = (blur.rgb * 0.6) + (blur.rgb * (abs(sin(UV.y * PI * scanlines)))) * 0.4;
+	EMISSION = ALBEDO;
 	//ALBEDO = blur.rgb;
 	//IRRADIANCE = tex * 5.0;
 	

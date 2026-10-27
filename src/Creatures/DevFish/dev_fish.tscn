@@ -8,7 +8,13 @@ friction = 0.5
 bounce = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0i6jf"]
-radius = 1.0
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gm2e"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 3.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
 radius = 1.0
@@ -36,16 +42,25 @@ shape = SubResource("SphereShape3D_0i6jf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1095373740]
 transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6gm2e")
 mesh = SubResource("SphereMesh_beyo5")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=346530298]
 transform = Transform3D(0.5, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.09278474e-07, 1.35)
+material_override = SubResource("StandardMaterial3D_6gm2e")
 mesh = SubResource("CylinderMesh_beyo5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=2134549485]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -9.8350625e-08, -0.9)
+material_override = SubResource("StandardMaterial3D_6gm2e")
 mesh = SubResource("CylinderMesh_2g8hu")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=2045201126]
 
 [node name="SonarEmitter" parent="." unique_id=161802748 instance=ExtResource("2_6gm2e")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1922735761]
+light_color = Color(1, 0, 0, 1)
+light_energy = 32.0
+omni_range = 50.0
+omni_attenuation = 2.0

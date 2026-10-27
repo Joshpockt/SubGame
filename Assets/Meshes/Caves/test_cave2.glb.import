@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c3j6xagdu7tg0"
-path="res://.godot/imported/test_cave.glb-c826c9c8bb990173dfeda1822fba95ab.scn"
+uid="uid://sn7dfyda5m72"
+path="res://.godot/imported/test_cave2.glb-a50a52b630f4f4c873be89bdca79ca5a.scn"
 
 [deps]
 
-source_file="res://test_cave.glb"
-dest_files=["res://.godot/imported/test_cave.glb-c826c9c8bb990173dfeda1822fba95ab.scn"]
+source_file="res://Assets/Meshes/Caves/test_cave2.glb"
+dest_files=["res://.godot/imported/test_cave2.glb-a50a52b630f4f4c873be89bdca79ca5a.scn"]
 
 [params]
 
@@ -39,7 +39,13 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Cylinder": {
+"import/skip_import": true
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=1
 gltf/texture_map_mode=1
