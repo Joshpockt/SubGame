@@ -3,13 +3,13 @@ class_name SonarListener
 
 @export var max_tracks := 32
 
-enum SonarType {
-	GENERIC,
-	SUB,
-	CREATURE,
-	GEOLOGIC,
-	SONAR,
-}
+#enum SonarType {
+	#GENERIC,
+	#SUB,
+	#CREATURE,
+	#GEOLOGIC,
+	#SONAR,
+#}
 
 func get_tracks() -> Array[SonarTrack]:
 	var server = PhysicsServer3D

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://sn7dfyda5m72" path="res://Assets/Meshes/Caves/test_cave2.glb" id="3_t101k"]
 [ext_resource type="PackedScene" uid="uid://c864js3238ehe" path="res://src/Creatures/DevFish/dev_fish.tscn" id="4_t101k"]
 [ext_resource type="Shape3D" uid="uid://owjhqsjc5j2f" path="res://Assets/Meshes/Caves/new_concave_polygon_shape_3d.tres" id="5_36ipd"]
+[ext_resource type="PackedScene" uid="uid://b1sf8parf6ifn" path="res://thermal_vent.tscn" id="6_usxdn"]
 
 [sub_resource type="Environment" id="Environment_3cfgd"]
 ambient_light_source = 2
@@ -79,17 +80,47 @@ hit_back_faces = false
 collide_with_areas = true
 
 [node name="DevFish" parent="." unique_id=297756122 instance=ExtResource("4_t101k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 456.18695, -3, -525.14624)
 mass = 50.0
 
 [node name="test_cave2" parent="." unique_id=1282114149 instance=ExtResource("3_t101k")]
 
-[node name="Cube" parent="test_cave2" index="0" unique_id=1598573085]
+[node name="Cube" parent="test_cave2" index="0" unique_id=1028023916]
 material_override = SubResource("StandardMaterial3D_36ipd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="test_cave2/Cube" index="0" unique_id=225197408]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="test_cave2/Cube/StaticBody3D" unique_id=421168847]
 shape = ExtResource("5_36ipd")
+
+[node name="ThermalVent17" parent="test_cave2" unique_id=1958955374 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 448.602, -20.776634, -535.4261)
+
+[node name="ThermalVent19" parent="test_cave2" unique_id=1149684891 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 432.63196, -15.198245, -431.5764)
+
+[node name="ThermalVent2" parent="test_cave2" unique_id=346176141 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 455.25885, -20.663004, -554.3766)
+
+[node name="ThermalVent4" parent="test_cave2" unique_id=1456999722 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 474.50684, -19.022589, -581.5635)
+
+[node name="ThermalVent6" parent="test_cave2" unique_id=81770260 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 457.166, -18.52131, -600.04987)
+
+[node name="ThermalVent8" parent="test_cave2" unique_id=427466640 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 456.56412, -17.229162, -675.354)
+
+[node name="ThermalVent10" parent="test_cave2" unique_id=428994030 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 464.02502, -24.76667, -501.93198)
+
+[node name="ThermalVent12" parent="test_cave2" unique_id=980516097 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 449.97406, -24.53004, -486.86465)
+
+[node name="ThermalVent14" parent="test_cave2" unique_id=989078261 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 452.03168, -21.740746, -469.1325)
+
+[node name="ThermalVent16" parent="test_cave2" unique_id=1595136541 instance=ExtResource("6_usxdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 448.39456, -17.996742, -643.6128)
 
 [editable path="test_cave2"]

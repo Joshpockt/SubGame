@@ -27,9 +27,9 @@ func _physics_process(_delta: float) -> void:
 	if interior_instance.fuel <= 0:
 		return
 	apply_central_force(
-			Vector3.FORWARD.rotated(Vector3.UP,rotation.y) * throttle_input * max_linear_force)
-	apply_central_force(Vector3.UP * vertical_input * max_vertical_force)
-	apply_torque(Vector3.DOWN * steering_input * max_torque)
+			Vector3.FORWARD.rotated(Vector3.UP,rotation.y) * throttle_input * max_linear_force * mass)
+	apply_central_force(Vector3.UP * vertical_input * max_vertical_force * mass)
+	apply_torque(Vector3.DOWN * steering_input * max_torque * mass)
 	#throttle_input = 0.0
 	#steering_input = 0.0
 	

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crx5paa5rur0g" path="res://torpedo.gd" id="1_ch1v4"]
 [ext_resource type="Script" uid="uid://he3ekr3fxxsu" path="res://src/Components/Sonar/sonar_listener.gd" id="2_uxf5w"]
+[ext_resource type="PackedScene" uid="uid://bea5scuws0c2o" path="res://src/Components/Sonar/sonar_emitter.tscn" id="3_7xtdt"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
 radius = 0.25
@@ -25,6 +26,8 @@ radius = 0.25
 height = 2.5
 
 [node name="Torpedo" type="RigidBody3D" unique_id=2085054750]
+collision_layer = 0
+collision_mask = 7
 contact_monitor = true
 max_contacts_reported = 1
 linear_damp = 2.0
@@ -58,3 +61,5 @@ light_color = Color(1, 0.6, 0, 1)
 light_energy = 8.0
 omni_range = 100.0
 omni_attenuation = 2.0
+
+[node name="SonarEmitter" parent="." unique_id=161802748 instance=ExtResource("3_7xtdt")]

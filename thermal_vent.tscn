@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b1sf8parf6ifn"]
+
+[ext_resource type="Script" uid="uid://d0i71h231yrq0" path="res://thermal_vent.gd" id="1_smte2"]
+[ext_resource type="PackedScene" uid="uid://bea5scuws0c2o" path="res://src/Components/Sonar/sonar_emitter.tscn" id="1_wq1gx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beyo5"]
+top_radius = 0.0
+bottom_radius = 2.5
+height = 4.8
+
+[node name="ThermalVent" type="Node3D" unique_id=1434486017]
+script = ExtResource("1_smte2")
+
+[node name="SonarEmitter" parent="." unique_id=161802748 instance=ExtResource("1_wq1gx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1836844405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1000001, 0)
+mesh = SubResource("CylinderMesh_beyo5")

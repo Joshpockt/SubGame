@@ -2,15 +2,17 @@ extends Area3D
 class_name SonarEmitter
 
 const EXPONENT := 2.0
-enum SonarType {
-	GENERIC,
-	SUB,
-	CREATURE,
-	GEOLOGIC,
-	SONAR,
-}
+#enum SonarType {
+	#GENERIC,
+	#SUB,
+	#CREATURE,
+	#GEOLOGIC,
+	#SONAR,
+#}
 
-var type : SonarType = SonarType.GENERIC
+var type : SonarTrack.SonarType = SonarTrack.SonarType.GENERIC
+
+#var type : SonarType = SonarType.GENERIC
 var volume := 0.0:
 	set(value):
 		volume = value

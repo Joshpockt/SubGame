@@ -39,12 +39,6 @@ camera_marker = NodePath("CameraMarker")
 material_override = SubResource("ShaderMaterial_s4toa")
 script = ExtResource("3_4cgje")
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Visuals/helm/Cube_004/DisplayScreen" index="0" unique_id=588875358]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.1996576, 0, 0.14967968)
-light_energy = 0.5
-area_range = 1.0
-area_size = Vector2(0.515, 0.515)
-
 [node name="Cylinder_001" parent="Visuals/helm" index="2" unique_id=204422003]
 material_override = SubResource("ShaderMaterial_c335d")
 script = ExtResource("6_c335d")

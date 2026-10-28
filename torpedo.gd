@@ -4,16 +4,22 @@ class_name Torpedo
 const EXPLOSION = preload("uid://b28khgabl81gf")
 var target : SonarTrack
 @onready var sonar_listener: SonarListener = $SonarListener
+@onready var sonar_emitter: SonarEmitter = $SonarEmitter
+
+func _ready() -> void:
+	sonar_emitter.type = SonarTrack.SonarType.TORPEDO
+	sonar_emitter.volume = 20.0
 
 func get_sonar_tracks():
 	var sonar_tracks = sonar_listener.get_tracks()
 	var result : SonarTrack = null
 	for track in sonar_tracks:
-		if track.type == SonarTrack.SonarType.GENERIC:
+		if track.type == SonarTrack.SonarType.CREATURE:
 			if result == null: result = track
 			if track.strength > result.strength:
 				result = track
 	target = result
+
 
 func look_follow(state: PhysicsDirectBodyState3D, current_transform: Transform3D, target_position: Vector3) -> void:
 	#state.angular_velocity = Vector3.UP
@@ -25,6 +31,7 @@ func look_follow(state: PhysicsDirectBodyState3D, current_transform: Transform3D
 	var damp = (-global_basis.z.cross(target_dir).normalized() * angular_velocity).length() * 0.4
 	
 	state.apply_torque(clamp((2.0) - damp, 0.0, sqrt(linear_velocity.length()) * 0.4) * forward_dir.cross(target_dir).normalized())
+
 
 var last_position := Vector3.ZERO
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

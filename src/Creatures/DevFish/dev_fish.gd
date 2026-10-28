@@ -11,6 +11,7 @@ var synced_angular_velocity := Vector3.ZERO
 var has_synced := false
 
 func _ready() -> void:
+	sonar_emitter.type = SonarTrack.SonarType.CREATURE
 	sonar_emitter.volume = 15
 
 func _physics_process(_delta: float) -> void:

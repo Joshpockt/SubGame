@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://jouopifhxtlf" path="res://src/Components/Sonar/sonar_emitter.gd" id="1_emiao"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_beyo5"]
+resource_local_to_scene = true
 
 [node name="SonarEmitter" type="Area3D" unique_id=161802748]
 collision_layer = 16

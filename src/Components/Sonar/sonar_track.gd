@@ -3,10 +3,11 @@ class_name SonarTrack
 
 enum SonarType {
 	GENERIC,
-	SUB,
+	SUB_GENERIC,
+	SUB_SONAR,
+	TORPEDO,
 	CREATURE,
 	GEOLOGIC,
-	SONAR,
 }
 
 var position : Vector3 = Vector3.ZERO

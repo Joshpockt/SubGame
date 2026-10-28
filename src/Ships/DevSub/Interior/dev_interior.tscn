@@ -100,21 +100,18 @@ exterior = NodePath("../../../DevExterior")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Level/Lights" unique_id=386728328]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8, 0)
-visible = false
 light_energy = 2.0
 spot_range = 10.0
 spot_angle = 60.0
 
 [node name="SpotLight3D3" type="SpotLight3D" parent="Level/Lights" unique_id=747141396]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8, -5)
-visible = false
 light_energy = 2.0
 spot_range = 10.0
 spot_angle = 60.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Level/Lights" unique_id=239908505]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8, 5)
-visible = false
 light_energy = 2.0
 spot_range = 10.0
 spot_angle = 60.0

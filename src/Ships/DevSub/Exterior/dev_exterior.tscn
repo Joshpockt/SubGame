@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cddj4ew411efo" path="res://Assets/Meshes/Subs/submarine.glb" id="2_w4tfr"]
 [ext_resource type="Shader" uid="uid://bdtiqlofpncux" path="res://src/Ships/DevSub/Exterior/particle.gdshader" id="3_laggi"]
 [ext_resource type="Script" uid="uid://5u8glf4o0x5" path="res://src/Ships/DevSub/Exterior/sonar_transceiver.gd" id="4_gidhb"]
+[ext_resource type="Script" uid="uid://he3ekr3fxxsu" path="res://src/Components/Sonar/sonar_listener.gd" id="5_3mdxh"]
 [ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="5_y7j3k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5og5y"]
@@ -63,16 +64,18 @@ max_contacts_reported = 4
 linear_damp = 0.25
 angular_damp = 0.5
 script = ExtResource("1_6vnwu")
-max_linear_force = 8000.0
-max_vertical_force = 5000.0
-max_torque = 15000.0
+max_linear_force = 20.0
+max_vertical_force = 10.0
+max_torque = 30.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.332996e-08, 0.76250076)
+visible = false
 shape = SubResource("CapsuleShape3D_vo0vy")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1244196742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -3)
+visible = false
 shape = SubResource("BoxShape3D_beyo5")
 
 [node name="submarine" parent="." unique_id=1472708832 instance=ExtResource("2_w4tfr")]
@@ -84,16 +87,14 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5644534, 2.310649, -18.2247)
 light_color = Color(0.99, 0.9438, 0.7128, 1)
 light_energy = 64.0
-light_volumetric_fog_energy = 0.5
-spot_range = 300.0
+spot_range = 500.0
 spot_attenuation = 2.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1706362357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.564, 2.311, -18.225)
 light_color = Color(0.99, 0.9438, 0.7128, 1)
 light_energy = 64.0
-light_volumetric_fog_energy = 0.5
-spot_range = 300.0
+spot_range = 500.0
 spot_attenuation = 2.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1102759865]
@@ -115,7 +116,7 @@ size = Vector2i(128, 128)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=969240049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.9, -7.6)
-fov = 80.0
+fov = 60.0
 
 [node name="TorpedoSpawn" type="Marker3D" parent="." unique_id=1115925574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
@@ -123,8 +124,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
 [node name="SonarTransceiver" type="Node3D" parent="." unique_id=256956669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 script = ExtResource("4_gidhb")
-range = 256.0
-max_error_offset = 20.0
+sonar_range = 300.0
+max_error_offset = 15.0
+
+[node name="RayCast3D" type="RayCast3D" parent="SonarTransceiver" unique_id=745815342]
+
+[node name="SonarListener" type="Node3D" parent="SonarTransceiver" unique_id=371293480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+script = ExtResource("5_3mdxh")
+max_tracks = 64
+metadata/_custom_type_script = "uid://he3ekr3fxxsu"
 
 [node name="SubViewport" type="SubViewport" parent="SonarTransceiver" unique_id=1254560230]
 size = Vector2i(128, 128)
@@ -143,20 +152,34 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="SonarTransceiver/SubViewport/Camera2D" unique_id=1325520992]
-z_index = 2
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SonarTransceiver/SubViewport/Camera2D" unique_id=291839689]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_y7j3k")
+remote_path = NodePath("../../CanvasLayer/Sprite2D2")
 
 [node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="SonarTransceiver/SubViewport" unique_id=1936249900]
+visible = false
 multimesh = SubResource("MultiMesh_beyo5")
 texture = ExtResource("5_y7j3k")
 
-[node name="Sprite2D" type="Sprite2D" parent="SonarTransceiver/SubViewport" unique_id=1239057096]
-visible = false
-texture = ExtResource("5_y7j3k")
+[node name="Floor" type="CanvasLayer" parent="SonarTransceiver/SubViewport" unique_id=909564244]
+layer = 10
+follow_viewport_enabled = true
 
-[node name="RayCast3D" type="RayCast3D" parent="SonarTransceiver" unique_id=745815342]
-collision_mask = 3
+[node name="Walls" type="CanvasLayer" parent="SonarTransceiver/SubViewport" unique_id=702722713]
+layer = 20
+follow_viewport_enabled = true
+
+[node name="Other" type="CanvasLayer" parent="SonarTransceiver/SubViewport" unique_id=554277036]
+layer = 30
+follow_viewport_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SonarTransceiver/SubViewport" unique_id=417637954]
+layer = 50
+follow_viewport_enabled = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="SonarTransceiver/SubViewport/CanvasLayer" unique_id=1325520992]
+z_index = 50
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_y7j3k")
 
 [editable path="submarine"]
