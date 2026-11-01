@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bfok1iukok0my"]
+
+[ext_resource type="Script" uid="uid://b57segjxvob3o" path="res://src/Ships/SubComponents/SubWeapons/Controllers/controller.gd" id="1_lhtts"]
+[ext_resource type="Script" uid="uid://pdu13t2bxv8y" path="res://src/Ships/SubComponents/SubWeapons/Turret/turret_control_station.gd" id="2_ancaj"]
+[ext_resource type="PackedScene" uid="uid://bm8lb3iqru7b0" path="res://shell_projectile.tscn" id="2_qagco"]
+[ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="3_kijyl"]
+[ext_resource type="Script" uid="uid://bdcdflr0khk0s" path="res://src/Ships/SubComponents/SubWeapons/Controllers/loader.gd" id="4_6fvpn"]
+[ext_resource type="Shader" uid="uid://dcn6bo2rhrmle" path="res://Assets/Shaders/screen.gdshader" id="4_74ck0"]
+[ext_resource type="Script" uid="uid://d3e745u0qwbev" path="res://src/Ships/SubComponents/DevHelm/sonar_idkblahblahblah.gd" id="5_rq0h4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_me3ag"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rq0h4"]
+render_priority = 0
+shader = ExtResource("4_74ck0")
+shader_parameter/scanlines = 128.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_dklud"]
+size = Vector2(0.75, 0.75)
+
+[node name="DevTurretController" type="Node3D" unique_id=2142457969]
+script = ExtResource("1_lhtts")
+max_ammo = 30
+projectile_scene = ExtResource("2_qagco")
+metadata/_custom_type_script = "uid://b57segjxvob3o"
+
+[node name="TurretControlStation" type="Node3D" parent="." unique_id=1881967721 node_paths=PackedStringArray("turret_controller", "interaction_area", "player_standing_marker", "camera_marker")]
+script = ExtResource("2_ancaj")
+turret_controller = NodePath("..")
+interaction_area = NodePath("InteractionArea")
+player_standing_marker = NodePath("Player")
+camera_marker = NodePath("Camera")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TurretControlStation" unique_id=110267281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
+size = Vector3(1, 1, 0.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TurretControlStation" unique_id=2035899118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="TurretControlStation" unique_id=2144281581 node_paths=PackedStringArray("interaction_area", "controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.9, 0)
+size = Vector3(0.5, 0.5, 0.5)
+script = ExtResource("4_6fvpn")
+required_ammo_type = 1
+interaction_area = NodePath("InteractionArea")
+controller = NodePath("../..")
+
+[node name="InteractionArea" type="Area3D" parent="TurretControlStation/CSGBox3D3" unique_id=642127633]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_kijyl")
+metadata/_custom_type_script = "uid://biwa0j28dtdbf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurretControlStation/CSGBox3D3/InteractionArea" unique_id=848644221]
+shape = SubResource("BoxShape3D_me3ag")
+
+[node name="Player" type="Marker3D" parent="TurretControlStation" unique_id=654282882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.90000004)
+
+[node name="Camera" type="Marker3D" parent="TurretControlStation" unique_id=1718071839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.8000001)
+
+[node name="InteractionArea" type="Area3D" parent="TurretControlStation" unique_id=266509981]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_kijyl")
+metadata/_custom_type_script = "uid://biwa0j28dtdbf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurretControlStation/InteractionArea" unique_id=469370278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TurretControlStation" unique_id=69595395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("ShaderMaterial_rq0h4")
+mesh = SubResource("QuadMesh_dklud")
+script = ExtResource("5_rq0h4")
+screen_id = "TURRET_1"

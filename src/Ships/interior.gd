@@ -76,6 +76,7 @@ func spawn_damage(direction: Vector3, _stren) -> void:
 	#assert(ray_cast_3d.is_colliding(), "Raycast should be colliding")
 	
 	var hull_breach_instance = HULL_BREACH.instantiate()
+	hull_breach_instance.name = "HullBreach"
 	add_child(hull_breach_instance)
 	hull_breach_instance.position = ray_cast_3d.get_collision_point()
 	#hull_breach_instance.position.y = clamp(hull_breach_instance.position.y, -1, 2)

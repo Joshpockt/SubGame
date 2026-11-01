@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://sycffj3kjw0e" path="res://src/Components/Explosion/explosion.gd" id="1_euup8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pvb7a"]
-radius = 24.0
+radius = 25.0
 
 [node name="Explosion" type="Node3D" unique_id=1490261106]
 script = ExtResource("1_euup8")

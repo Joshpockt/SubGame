@@ -44,6 +44,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+disabled = true
 text = "Steam"
 
 [node name="EnetButton" type="Button" parent="MarginContainer/StartingScreen/CenterContainer/HBoxContainer/VBoxContainer" unique_id=825323709]

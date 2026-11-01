@@ -25,6 +25,8 @@ static func get_id(player: Player) -> int:
 
 
 func _ready() -> void:
+	camera_3d.fov = Options.player_fov
+	
 	if is_multiplayer_authority():
 		camera_3d.current = true
 		$CameraPivot/MeshInstance3D.hide()
@@ -105,13 +107,17 @@ func _sync_item(item_uid: String):
 func set_player_controling(station: Station):
 	if station == null:
 		can_move = true
-		#camera_pivot.top_level = false
+		
+		camera_3d.fov = Options.player_fov
+		
 		camera_pivot.position = Vector3(0, 1.5, 0)
-		camera_pivot.rotation = Vector3.ZERO
+		camera_pivot.rotation.x = 0.0
 	else:
 		can_move = false
+		
+		camera_3d.fov = station.camera_fov
+		
 		global_position = station.player_standing_marker.global_position
-		#camera_pivot.top_level = true
 		camera_pivot.global_position = station.camera_marker.global_position
 		camera_pivot.rotation.y = station.camera_marker.global_rotation.y
 		camera_pivot.rotation.x = station.camera_marker.global_rotation.x

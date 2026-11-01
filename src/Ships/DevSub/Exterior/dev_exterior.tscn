@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://5u8glf4o0x5" path="res://src/Ships/DevSub/Exterior/sonar_transceiver.gd" id="4_gidhb"]
 [ext_resource type="Script" uid="uid://he3ekr3fxxsu" path="res://src/Components/Sonar/sonar_listener.gd" id="5_3mdxh"]
 [ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="5_y7j3k"]
+[ext_resource type="PackedScene" uid="uid://cedob6rcaja7l" path="res://src/Ships/SubComponents/SubWeapons/Turret/dev_turret_mount.tscn" id="7_p8a78"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5og5y"]
 friction = 0.8
@@ -64,9 +65,9 @@ max_contacts_reported = 4
 linear_damp = 0.25
 angular_damp = 0.5
 script = ExtResource("1_6vnwu")
-max_linear_force = 20.0
+max_linear_force = 25.0
 max_vertical_force = 10.0
-max_torque = 30.0
+max_torque = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1265069387]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.332996e-08, 0.76250076)
@@ -182,4 +183,11 @@ z_index = 50
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_y7j3k")
 
+[node name="DevTurretMount" parent="." unique_id=527828432 instance=ExtResource("7_p8a78")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.1, -2)
+
+[node name="Camera3D" parent="DevTurretMount/Azimuth/Elevation/SubViewport" parent_id_path=PackedInt32Array(527828432, 2032378867) index="0" unique_id=1456312714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.1, -2)
+
 [editable path="submarine"]
+[editable path="DevTurretMount"]

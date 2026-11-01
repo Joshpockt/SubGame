@@ -2,7 +2,7 @@ shader_type spatial;
 //render_mode unshaded;
 
 uniform sampler2D screen_texture : filter_nearest, hint_default_black;
-uniform float scanlines = 1.0;
+uniform float scanlines = 128.0;
 
 //void vertex() {
 	//// Called for every vertex the material is visible on.

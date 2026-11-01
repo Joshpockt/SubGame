@@ -1,8 +1,9 @@
 extends Station
+class_name Helm
 
 @export var sub_exterior : SubExterior
 
-func _get_player_input():
+func _control_process(_delta):
 	var throttle_input = Input.get_axis("move_backward","move_forward")
 	var steering_input = Input.get_axis("move_left","move_right")
 	var vertical_input = Input.get_axis("move_down", "move_up")

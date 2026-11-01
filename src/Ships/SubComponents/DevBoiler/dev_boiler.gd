@@ -17,6 +17,8 @@ func _interacted(peer_id: int) -> void:
 			player.remove_item()
 
 func _process(_delta: float) -> void:
+	var player = Player.get_player(multiplayer.get_unique_id())
+	if !player: return
 	var current_player_item := Player.get_player(multiplayer.get_unique_id()).current_item
 	if current_player_item != null:
 		if current_player_item.fuel_seconds > 0.0:

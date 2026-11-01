@@ -1,24 +1,28 @@
 extends Node3D
 class_name Station
 
-@onready var interaction_area: InteractionArea = $InteractionArea
+@export var interaction_area: InteractionArea
 @export var player_standing_marker : Marker3D
 @export var camera_marker : Marker3D
+
+@export var camera_fov := 60.0
 
 var current_controller_id : int = -1
 
 func _ready() -> void:
 	interaction_area.interacted.connect(func(player): _interacted(player))
 
-func _process(_delta: float) -> void:
-	
+func _process(delta: float) -> void:
 	# If current controller is client
 	if current_controller_id == multiplayer.get_unique_id():
-		_get_player_input()
+		_control_process(delta)
 		if Input.is_action_just_pressed("cancel"):
 			Networking.players[current_controller_id].set_player_controling(null)
 			request_set_controller(-1)
 
+func _input(event: InputEvent) -> void:
+	if current_controller_id == multiplayer.get_unique_id():
+		_control_input(event)
 
 func _interacted(peer_id: int):
 	request_set_controller(peer_id)
@@ -60,5 +64,8 @@ func control(peer_id: int):
 			rpc("update_current_controller_id", -1)
 
 
-func _get_player_input():
+func _control_process(delta):
+	pass
+
+func _control_input(event: InputEvent):
 	pass

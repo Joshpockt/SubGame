@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bsm60qlcqw6hm" path="res://src/Ships/SubComponents/DevTorpedoRack/torpedo_rack.tscn" id="6_f0fd5"]
 [ext_resource type="PackedScene" uid="uid://dg6o6veiqfyvc" path="res://src/Ships/SubComponents/SubWeapons/Controllers/dev_torpedo_controller.tscn" id="7_1jucw"]
 [ext_resource type="PackedScene" uid="uid://b6gedrrvtpvpd" path="res://src/Ships/DevSub/Exterior/dev_exterior.tscn" id="7_cv3vo"]
+[ext_resource type="PackedScene" uid="uid://bfok1iukok0my" path="res://src/Ships/SubComponents/SubWeapons/Turret/dev_turret_controller.tscn" id="7_eilgj"]
 [ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://compartment.tscn" id="8_eilgj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t34gm"]
@@ -25,7 +26,8 @@ fog_light_color = Color(0.3344, 0.58901334, 0.88, 1)
 fog_density = 1.0
 fog_depth_begin = 0.0
 fog_depth_end = 10.0
-adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_23kj7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djwfo"]
 radius = 3.0
@@ -55,6 +57,7 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldEnv" unique_id=677214817]
 environment = SubResource("Environment_gy3sr")
+camera_attributes = SubResource("CameraAttributesPractical_23kj7")
 
 [node name="Level" type="Node3D" parent="." unique_id=1530232166]
 
@@ -116,6 +119,14 @@ light_energy = 2.0
 spot_range = 10.0
 spot_angle = 60.0
 
+[node name="DevTurretController" parent="Level" unique_id=2142457969 node_paths=PackedStringArray("projectile_spawn_marker", "exterior") instance=ExtResource("7_eilgj")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.4, -1, 0)
+projectile_spawn_marker = NodePath("../../DevExterior/DevTurretMount/Azimuth/Elevation/Barrel")
+exterior = NodePath("../../DevExterior")
+
+[node name="TurretControlStation" parent="Level/DevTurretController" index="0" unique_id=1881967721 node_paths=PackedStringArray("mount")]
+mount = NodePath("../../../DevExterior/DevTurretMount")
+
 [node name="Compartments" type="Node3D" parent="." unique_id=127422684]
 
 [node name="Compartment" parent="Compartments" unique_id=697891993 instance=ExtResource("8_eilgj")]
@@ -136,5 +147,10 @@ interior_instance = NodePath("..")
 [node name="Camera3D" parent="DevExterior/SubViewport" parent_id_path=PackedInt32Array(1056441616, 1944179739) index="0" unique_id=969240049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6.9, -7.6)
 
+[node name="Camera3D" parent="DevExterior/DevTurretMount/Azimuth/Elevation/SubViewport" parent_id_path=PackedInt32Array(1056441616, 527828432, 2032378867) index="0" unique_id=1456312714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 11.1, -2)
+
+[editable path="Level/DevTurretController"]
 [editable path="DevExterior"]
 [editable path="DevExterior/submarine"]
+[editable path="DevExterior/DevTurretMount"]

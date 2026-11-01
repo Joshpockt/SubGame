@@ -1,7 +1,7 @@
 extends Node3D
 class_name Explosion
 
-const BASE_EXPLOSION_FORCE = 50.0
+const BASE_EXPLOSION_FORCE = 15.0
 
 var explosion_strength := 100.0
 
@@ -10,8 +10,12 @@ var explosion_strength := 100.0
 
 func _physics_process(_delta: float) -> void:
 	await get_tree().physics_frame
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame
 	for body in area_3d.get_overlapping_bodies():
 		if body is RigidBody3D:
+			print(body)
 			body.apply_central_impulse(
 				global_position.direction_to(body.global_position) * explosion_strength * BASE_EXPLOSION_FORCE
 				)

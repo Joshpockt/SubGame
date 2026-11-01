@@ -1,33 +1,30 @@
 [gd_scene format=3 uid="uid://b01kt6b3n182i"]
 
-[ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/SubComponents/DevHelm/dev_helm.gd" id="1_c1x4s"]
+[ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/SubComponents/DevHelm/helm.gd" id="1_c1x4s"]
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_de4h6"]
 [ext_resource type="PackedScene" uid="uid://lkapsy47pjbm" path="res://Assets/Meshes/ShipParts/helm.glb" id="2_ganq3"]
 [ext_resource type="Shader" uid="uid://dcn6bo2rhrmle" path="res://Assets/Shaders/screen.gdshader" id="3_4avw6"]
-[ext_resource type="Script" uid="uid://qitos3j4fdoi" path="res://src/Ships/DevSub/Interior/sprite_3d.gd" id="3_4cgje"]
-[ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="4_s4toa"]
+[ext_resource type="PackedScene" uid="uid://btu42glwwcfee" path="res://Assets/Meshes/ShipParts/display_round.glb" id="3_c335d"]
 [ext_resource type="Script" uid="uid://d3e745u0qwbev" path="res://src/Ships/SubComponents/DevHelm/sonar_idkblahblahblah.gd" id="6_c335d"]
+[ext_resource type="PackedScene" uid="uid://bxyh7j68l1ddi" path="res://Assets/Meshes/ShipParts/display.glb" id="6_xwgg4"]
+[ext_resource type="PackedScene" uid="uid://cpp45hjtuwuaf" path="res://Assets/Meshes/ShipParts/knob.glb" id="8_xwgg4"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4toa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2eb5q"]
 render_priority = 0
 shader = ExtResource("3_4avw6")
-shader_parameter/screen_texture = ExtResource("4_s4toa")
 shader_parameter/scanlines = 128.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xl7wy"]
-size = Vector2(128, 128)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c335d"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cq2vt"]
 render_priority = 0
 shader = ExtResource("3_4avw6")
-shader_parameter/screen_texture = SubResource("PlaceholderTexture2D_xl7wy")
 shader_parameter/scanlines = 128.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1, 2, 0.8)
 
-[node name="Helm" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("player_standing_marker", "camera_marker")]
+[node name="Helm" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("interaction_area", "player_standing_marker", "camera_marker")]
 script = ExtResource("1_c1x4s")
+interaction_area = NodePath("InteractionArea")
 player_standing_marker = NodePath("PlayerMarker")
 camera_marker = NodePath("CameraMarker")
 
@@ -35,13 +32,21 @@ camera_marker = NodePath("CameraMarker")
 
 [node name="helm" parent="Visuals" unique_id=1113689753 instance=ExtResource("2_ganq3")]
 
-[node name="DisplayScreen" parent="Visuals/helm/Cube_004" parent_id_path=PackedInt32Array(1113689753, 1165235619) index="0" unique_id=542372953]
-material_override = SubResource("ShaderMaterial_s4toa")
-script = ExtResource("3_4cgje")
+[node name="display_round" parent="Visuals" unique_id=1299216145 instance=ExtResource("3_c335d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.7, 0)
 
-[node name="Cylinder_001" parent="Visuals/helm" index="2" unique_id=204422003]
-material_override = SubResource("ShaderMaterial_c335d")
+[node name="Cylinder_001" parent="Visuals/display_round" index="1" unique_id=2084233896]
+material_override = SubResource("ShaderMaterial_2eb5q")
 script = ExtResource("6_c335d")
+screen_id = "SONAR"
+
+[node name="display" parent="Visuals" unique_id=1259771538 instance=ExtResource("6_xwgg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.333, 1.6, 0)
+
+[node name="Cube_002" parent="Visuals/display/Cube_001" parent_id_path=PackedInt32Array(1259771538, 417405094) index="0" unique_id=547872475]
+material_override = SubResource("ShaderMaterial_cq2vt")
+script = ExtResource("6_c335d")
+screen_id = "FRONT"
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1057324836]
 visible = false
@@ -57,6 +62,20 @@ shape = SubResource("BoxShape3D_beyo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5920539, 0.5122222)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.74999994)
+
+[node name="knob" parent="." unique_id=517271159 instance=ExtResource("8_xwgg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.9, 0)
+
+[node name="knob2" parent="." unique_id=1918473090 instance=ExtResource("8_xwgg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.9, 0)
+
+[node name="knob3" parent="." unique_id=1136505916 instance=ExtResource("8_xwgg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.5, 0)
+
+[node name="knob4" parent="." unique_id=1944984258 instance=ExtResource("8_xwgg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0)
 
 [editable path="Visuals/helm"]
+[editable path="Visuals/display_round"]
+[editable path="Visuals/display"]

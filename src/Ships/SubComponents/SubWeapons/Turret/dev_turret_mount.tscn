@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cedob6rcaja7l"]
+
+[ext_resource type="Script" uid="uid://p03rpdew6318" path="res://src/Ships/SubComponents/SubWeapons/Turret/turret_mount.gd" id="1_nkb42"]
+[ext_resource type="Script" uid="uid://buw4ta2m30c8w" path="res://src/Ships/SubComponents/SubWeapons/Turret/external_camera.gd" id="2_tws5b"]
+[ext_resource type="Texture2D" uid="uid://byb0tmy4p5das" path="res://Assets/Textures/crosshair.png" id="3_2t60m"]
+
+[node name="DevTurretMount" type="Node3D" unique_id=527828432 node_paths=PackedStringArray("azimuth_pivot", "elevation_pivot")]
+script = ExtResource("1_nkb42")
+azimuth_pivot = NodePath("Azimuth")
+elevation_pivot = NodePath("Azimuth/Elevation")
+
+[node name="Azimuth" type="Node3D" parent="." unique_id=1055603652]
+
+[node name="Elevation" type="Node3D" parent="Azimuth" unique_id=1550027325]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Azimuth/Elevation" unique_id=571457378]
+remote_path = NodePath("../SubViewport/Camera3D")
+script = ExtResource("2_tws5b")
+screen_id = "TURRET_1"
+
+[node name="SubViewport" type="SubViewport" parent="Azimuth/Elevation" unique_id=2032378867]
+size = Vector2i(128, 128)
+
+[node name="Camera3D" type="Camera3D" parent="Azimuth/Elevation/SubViewport" unique_id=1456312714]
+fov = 50.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Azimuth/Elevation/SubViewport" unique_id=920749180]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Azimuth/Elevation/SubViewport/CenterContainer" unique_id=2054891224]
+modulate = Color(0, 1, 0.2509804, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_2t60m")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Azimuth/Elevation" unique_id=1040295840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0.2)
+light_color = Color(0.99, 0.9438, 0.7128, 1)
+light_energy = 48.0
+light_volumetric_fog_energy = 0.5
+spot_range = 500.0
+spot_attenuation = 2.0
+spot_angle = 20.0
+
+[node name="Barrel" type="Marker3D" parent="Azimuth/Elevation" unique_id=815761059]
