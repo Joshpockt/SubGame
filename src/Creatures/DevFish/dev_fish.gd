@@ -8,6 +8,10 @@ var target : Node3D
 
 var synced_linear_velocity := Vector3.ZERO
 var synced_angular_velocity := Vector3.ZERO
+
+var synced_position := Vector3.ZERO
+var synced_rotation := Vector3.ZERO
+
 var has_synced := false
 
 func _ready() -> void:
@@ -21,19 +25,24 @@ func _physics_process(_delta: float) -> void:
 		apply_central_force(dir * 2.5)
 	
 	if is_multiplayer_authority():
-		i += 1
-		if i >= 5:
-			i = 0
-			sync_state.rpc(position, rotation, linear_velocity, angular_velocity)
+		#i += 1
+		#if i >= 0:
+			#i = 0
+		sync_state.rpc(position, rotation, linear_velocity, angular_velocity)
 
-var i = 0
+#var i = 0
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if !is_multiplayer_authority():
+		
+		state.linear_velocity = synced_linear_velocity
+		state.angular_velocity = synced_angular_velocity
+		
 		if has_synced:
-			print("sync")
+			#print("sync")
 			has_synced = false
-			state.linear_velocity = synced_linear_velocity
-			state.angular_velocity = synced_angular_velocity
+			
+			state.transform.origin = synced_position
+			#state.transform. = synced_rotation
 
 
 @rpc("authority", "call_remote", "unreliable_ordered")
@@ -44,15 +53,19 @@ func sync_state(pos: Vector3, rot: Vector3, linear_vel: Vector3, angular_vel: Ve
 	var linear_velocity_delta = (linear_velocity - linear_vel).length()
 	var angular_velocity_delta = (angular_velocity - angular_vel).length()
 	
-	if position_delta >= 2.5:
-		position = pos
+	if position_delta >= 0.0:
+		synced_position = pos
 		#synced_linear_velocity = linear_vel
-		#has_synced = true
+		has_synced = true
 	
 	if rotation_delta >= PI/4:
-		rotation = rot
+		synced_rotation = rot
 		#synced_angular_velocity = angular_vel
-		#has_synced = true
+		has_synced = true
+	
+	synced_linear_velocity = linear_vel
+	synced_angular_velocity = angular_vel
+	#has_synced = true
 	
 	#if linear_velocity_delta >= 1.0:
 		#synced_linear_velocity = linear_vel

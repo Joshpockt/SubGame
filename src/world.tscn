@@ -82,7 +82,7 @@ hit_back_faces = false
 collide_with_areas = true
 
 [node name="DevFish" parent="." unique_id=297756122 instance=ExtResource("4_t101k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 456.18695, -3, -525.14624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 mass = 50.0
 
 [node name="test_cave2" parent="." unique_id=1282114149 instance=ExtResource("3_t101k")]

@@ -27,6 +27,7 @@ script = ExtResource("1_c1x4s")
 interaction_area = NodePath("InteractionArea")
 player_standing_marker = NodePath("PlayerMarker")
 camera_marker = NodePath("CameraMarker")
+camera_fov = 50.0
 
 [node name="Visuals" type="Node3D" parent="." unique_id=1871263720]
 
@@ -62,7 +63,7 @@ shape = SubResource("BoxShape3D_beyo5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.74999994)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.9499999)
 
 [node name="knob" parent="." unique_id=517271159 instance=ExtResource("8_xwgg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.9, 0)
