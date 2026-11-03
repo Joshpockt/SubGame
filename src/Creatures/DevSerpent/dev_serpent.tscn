@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://bwr2otrsklql0"]
+
+[ext_resource type="Script" uid="uid://bu7us0uav0uqs" path="res://src/Creatures/DevSerpent/serpent.gd" id="1_fl4o7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_beyo5"]
+radius = 1.0
+height = 5.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_beyo5"]
+radius = 1.0
+height = 5.0
+
+[node name="DevSerpent" type="Node3D" unique_id=1388001335]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=122265788]
+collision_layer = 2
+collision_mask = 7
+mass = 50.0
+linear_damp = 1.0
+script = ExtResource("1_fl4o7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=88967936]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RigidBody3D" unique_id=894493898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D2")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1859373470]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=915236734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+collision_layer = 2
+collision_mask = 7
+mass = 50.0
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=826624649]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=1237242065]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RigidBody3D2" unique_id=844996412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D3")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="." unique_id=1800658589]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+collision_layer = 2
+collision_mask = 7
+mass = 50.0
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3" unique_id=1199481818]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3" unique_id=395756472]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RigidBody3D3" unique_id=1429638800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D4")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="." unique_id=281578174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+collision_layer = 2
+collision_mask = 7
+mass = 50.0
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4" unique_id=1505422232]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4" unique_id=2124627208]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RigidBody3D4" unique_id=1169247491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D5")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
+
+[node name="RigidBody3D5" type="RigidBody3D" parent="." unique_id=2143100452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+collision_layer = 2
+collision_mask = 7
+mass = 50.0
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D5" unique_id=1057220475]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D5" unique_id=1321081622]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RigidBody3D5" unique_id=980025039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D6")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
+
+[node name="RigidBody3D6" type="RigidBody3D" parent="." unique_id=1719965438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+collision_layer = 2
+collision_mask = 7
+mass = 50.0
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D6" unique_id=1951335021]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D6" unique_id=525159498]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_beyo5")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RigidBody3D6" unique_id=2056298244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody3D7")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
+
+[node name="RigidBody3D7" type="RigidBody3D" parent="." unique_id=874572843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17)
+collision_layer = 2
+collision_mask = 7
+mass = 10.0
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D7" unique_id=1415052813]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+shape = SubResource("CapsuleShape3D_beyo5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D7" unique_id=446711312]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_beyo5")

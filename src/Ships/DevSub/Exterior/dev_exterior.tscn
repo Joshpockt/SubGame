@@ -65,7 +65,7 @@ max_contacts_reported = 4
 linear_damp = 0.25
 angular_damp = 0.5
 script = ExtResource("1_6vnwu")
-max_linear_force = 25.0
+max_linear_force = 15.0
 max_vertical_force = 10.0
 max_torque = 20.0
 

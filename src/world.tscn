@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c864js3238ehe" path="res://src/Creatures/DevFish/dev_fish.tscn" id="4_t101k"]
 [ext_resource type="Shape3D" uid="uid://owjhqsjc5j2f" path="res://Assets/Meshes/Caves/new_concave_polygon_shape_3d.tres" id="5_36ipd"]
 [ext_resource type="PackedScene" uid="uid://b1sf8parf6ifn" path="res://thermal_vent.tscn" id="6_usxdn"]
+[ext_resource type="PackedScene" uid="uid://bwr2otrsklql0" path="res://src/Creatures/DevSerpent/dev_serpent.tscn" id="7_jvefd"]
 
 [sub_resource type="Environment" id="Environment_3cfgd"]
 ambient_light_source = 2
@@ -125,4 +126,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 452.03168, -21.740746, -469.1
 [node name="ThermalVent16" parent="test_cave2" unique_id=1595136541 instance=ExtResource("6_usxdn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 448.39456, -17.996742, -643.6128)
 
+[node name="DevSerpent" parent="." unique_id=1388001335 instance=ExtResource("7_jvefd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -71)
+
+[node name="RigidBody3D" parent="DevSerpent" index="0" unique_id=122265788 node_paths=PackedStringArray("target")]
+target = NodePath("../../DevFish")
+
 [editable path="test_cave2"]
+[editable path="DevSerpent"]

@@ -30,7 +30,7 @@ func look_follow(state: PhysicsDirectBodyState3D, current_transform: Transform3D
 	
 	var damp = (-global_basis.z.cross(target_dir).normalized() * angular_velocity).length() * 0.4
 	
-	state.apply_torque(clamp((2.0) - damp, 0.0, sqrt(linear_velocity.length()) * 0.4) * forward_dir.cross(target_dir).normalized())
+	state.apply_torque(clamp(3.0 - damp, 0.0, sqrt(linear_velocity.length()) * 0.4) * forward_dir.cross(target_dir).normalized())
 
 
 var last_position := Vector3.ZERO
@@ -45,7 +45,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		#print(target_position)
 		#var target_position = target.position
 		look_follow(state, global_transform, target_position)
-	apply_central_force(-global_basis.z * 32)
+	apply_central_force(-global_basis.z * 64)
 	
 	if state.get_contact_count() > 0:
 		var explosion_instance : Explosion = EXPLOSION.instantiate()
