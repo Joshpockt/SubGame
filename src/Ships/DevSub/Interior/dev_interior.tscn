@@ -43,6 +43,7 @@ size = Vector2(10, 25)
 
 [node name="DevSub" type="Node" unique_id=18960767 node_paths=PackedStringArray("sub_exterior")]
 script = ExtResource("1_pjvd3")
+max_fuel_seconds = 260.0
 sub_exterior = NodePath("DevExterior")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1428999658]

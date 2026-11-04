@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://ckduunt4p8nc4"]
+
+[ext_resource type="Script" uid="uid://b2ofh1ugoh4xx" path="res://src/Components/gauge.gd" id="1_h1p1d"]
+[ext_resource type="Texture2D" uid="uid://d3fagxucrbkn3" path="res://Assets/Textures/needle2.png" id="2_ypo4e"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_grjot"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.05
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dklud"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_ypo4e")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_beyo5"]
+flip_faces = true
+size = Vector2(0.125, 0.125)
+
+[node name="Gauge" type="Node3D" unique_id=845273447]
+script = ExtResource("1_h1p1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=387539991]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_grjot")
+
+[node name="Label1" type="Label3D" parent="." unique_id=335046443]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.066573955, -0.021631189, -0.028)
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+text = "0"
+font_size = 12
+outline_size = 0
+
+[node name="Label2" type="Label3D" parent="." unique_id=965558676]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.05663119, 0.041144967, -0.028)
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+text = "25"
+font_size = 12
+outline_size = 0
+
+[node name="Label3" type="Label3D" parent="." unique_id=1793455007]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0.07, -0.028)
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+text = "50"
+font_size = 12
+outline_size = 0
+
+[node name="Label4" type="Label3D" parent="." unique_id=468462451]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.05663119, 0.041144967, -0.028)
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+text = "75"
+font_size = 12
+outline_size = 0
+
+[node name="Label5" type="Label3D" parent="." unique_id=926098417]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.066573955, -0.021631189, -0.028)
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+text = "100"
+font_size = 12
+outline_size = 0
+
+[node name="NeedlePivot" type="Node3D" parent="." unique_id=1796935946]
+transform = Transform3D(-0.30901694, 0.95105654, 0, -0.95105654, -0.30901694, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NeedlePivot" unique_id=421386891]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 0, 0, -0.03)
+material_override = SubResource("StandardMaterial3D_dklud")
+mesh = SubResource("QuadMesh_beyo5")

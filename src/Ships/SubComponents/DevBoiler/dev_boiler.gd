@@ -1,9 +1,11 @@
 extends Node3D
 
-@onready var interaction_area: InteractionArea = $InteractionArea
 
 @export var interior : SubInterior
 #const COAL = preload("uid://bu8h31atua56k")
+@onready var interaction_area: InteractionArea = $InteractionArea
+@onready var gauge: Gauge = $Gauge
+
 
 func _ready() -> void:
 	interaction_area.interacted.connect(_interacted)
@@ -28,4 +30,4 @@ func _process(_delta: float) -> void:
 	else:
 		interaction_area.disable_interaction = true
 	
-	$Node3D.rotation.z = - (interior.fuel_uniform * 2 - 1) * PI * 0.8
+	gauge.progress = interior.fuel_uniform
