@@ -8,7 +8,7 @@ func _ready() -> void:
 	hitbox_3d.was_hit.connect(_on_hit)
 
 func _on_hit(attack_data: AttackData):
-	#print(attack_data.damage)
 	health -= attack_data.damage
+	#print(health)
 	if health <= 0.0:
 		queue_free()

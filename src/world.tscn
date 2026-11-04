@@ -132,5 +132,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -71)
 [node name="RigidBody3D" parent="DevSerpent" index="0" unique_id=122265788 node_paths=PackedStringArray("target")]
 target = NodePath("../../DevFish")
 
+[node name="DevSerpent2" parent="." unique_id=1403735359 instance=ExtResource("7_jvefd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.35, 0, -154.265)
+
+[node name="RigidBody3D" parent="DevSerpent2" index="0" unique_id=122265788 node_paths=PackedStringArray("target")]
+target = NodePath("../../DevFish")
+
+[node name="DevSerpent3" parent="." unique_id=1905563418 instance=ExtResource("7_jvefd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -123.43)
+
+[node name="RigidBody3D" parent="DevSerpent3" index="0" unique_id=122265788 node_paths=PackedStringArray("target")]
+target = NodePath("../../DevFish")
+
 [editable path="test_cave2"]
 [editable path="DevSerpent"]
+[editable path="DevSerpent2"]
+[editable path="DevSerpent3"]

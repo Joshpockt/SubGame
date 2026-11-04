@@ -8,22 +8,39 @@
 radius = 0.25
 height = 2.5
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_sasra"]
-top_radius = 0.0
-bottom_radius = 0.1
-height = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t101k"]
-albedo_color = Color(18.892157, 11.708403, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_uxf5w"]
-top_radius = 0.0
-bottom_radius = 0.25
-height = 1.0
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_beyo5"]
 radius = 0.25
 height = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gs7b2"]
+transparency = 1
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ongux"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6604478, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7xtdt"]
+curve = SubResource("Curve_ongux")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ongux"]
+particle_flag_damping_as_friction = true
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 3, 0)
+damping_min = 2.0
+damping_max = 2.0
+alpha_curve = SubResource("CurveTexture_7xtdt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_obqh4"]
+size = Vector2(0.5, 0.5)
 
 [node name="Torpedo" type="RigidBody3D" unique_id=2085054750]
 collision_layer = 0
@@ -34,18 +51,18 @@ linear_damp = 2.0
 angular_damp = 5.0
 script = ExtResource("1_ch1v4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=102810091]
+[node name="Visuals" type="Node3D" parent="." unique_id=1539505638]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" unique_id=102810091]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_beyo5")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1890384202]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -1)
-mesh = SubResource("CylinderMesh_sasra")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=523613790]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1.5)
-material_override = SubResource("StandardMaterial3D_t101k")
-mesh = SubResource("CylinderMesh_uxf5w")
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals" unique_id=1558396453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4)
+light_color = Color(1, 0.6862745, 0, 1)
+light_energy = 8.0
+omni_range = 50.0
+omni_attenuation = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1332410932]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -55,11 +72,14 @@ shape = SubResource("CapsuleShape3D_beyo5")
 script = ExtResource("2_uxf5w")
 metadata/_custom_type_script = "uid://he3ekr3fxxsu"
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1436696053]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4)
-light_color = Color(1, 0.6, 0, 1)
-light_energy = 8.0
-omni_range = 100.0
-omni_attenuation = 2.0
-
 [node name="SonarEmitter" parent="." unique_id=161802748 instance=ExtResource("3_7xtdt")]
+visible = false
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2087228297]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+material_override = SubResource("StandardMaterial3D_gs7b2")
+amount = 48
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_ongux")
+draw_pass_1 = SubResource("QuadMesh_obqh4")

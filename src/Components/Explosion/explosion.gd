@@ -13,10 +13,11 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	await get_tree().physics_frame
+	#print("boom")
 	var base_force := explosion_strength * BASE_EXPLOSION_FORCE
 	for body in area_3d.get_overlapping_bodies():
 		if body is RigidBody3D:
-			var force : float = lerp(base_force, 0.0, max(0.0, global_position.distance_to(body.global_position) / (explosion_strength * 3)))
+			var force : float =  max(0.0, lerp(base_force, 0.0, max(0.0, global_position.distance_to(body.global_position) / (explosion_strength * 3))))
 			#print(force)
 			#print(global_position.distance_to(body.global_position))
 			body.apply_central_impulse(
@@ -27,7 +28,8 @@ func _physics_process(_delta: float) -> void:
 	var base_damage := BASE_EXPLOSION_DAMAGE * explosion_strength
 	for area in area_3d.get_overlapping_areas():
 		if area is Hitbox3D:
+			#print(area)
 			var attack_data := AttackData.new()
-			attack_data.damage = lerp(base_damage, 0.0, max(0.0, global_position.distance_to(area.global_position) / explosion_strength))
+			attack_data.damage = max(0.0, lerp(base_damage, 0.0, max(0.0, global_position.distance_to(area.global_position) / explosion_strength)))
 			area.hit(attack_data)
 	#process_mode = Node.PROCESS_MODE_DISABLED

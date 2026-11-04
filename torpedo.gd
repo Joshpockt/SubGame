@@ -5,6 +5,8 @@ const EXPLOSION = preload("uid://b28khgabl81gf")
 var target : SonarTrack
 @onready var sonar_listener: SonarListener = $SonarListener
 @onready var sonar_emitter: SonarEmitter = $SonarEmitter
+@onready var visuals: Node3D = $Visuals
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 func _ready() -> void:
 	sonar_emitter.type = SonarTrack.SonarType.TORPEDO
@@ -49,8 +51,20 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	apply_central_force(-global_basis.z * 64)
 	
 	if state.get_contact_count() > 0:
-		var explosion_instance : Explosion = EXPLOSION.instantiate()
-		explosion_instance.explosion_strength = 15.0
-		add_sibling(explosion_instance)
-		explosion_instance.global_position = global_position
-		queue_free()
+		hit()
+
+func hit():
+	var explosion_instance : Explosion = EXPLOSION.instantiate()
+	explosion_instance.explosion_strength = 15.0
+	add_sibling(explosion_instance)
+	explosion_instance.global_position = global_position
+	
+	visuals.hide()
+	gpu_particles_3d.emitting = false
+	
+	var f = func(): process_mode = Node.PROCESS_MODE_DISABLED
+	f.call_deferred()
+	
+	await get_tree().create_timer(8.0).timeout
+	print("free")
+	queue_free()
