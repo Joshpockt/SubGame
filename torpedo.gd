@@ -10,6 +10,7 @@ func _ready() -> void:
 	sonar_emitter.type = SonarTrack.SonarType.TORPEDO
 	sonar_emitter.volume = 20.0
 
+
 func get_sonar_tracks():
 	var sonar_tracks = sonar_listener.get_tracks()
 	var result : SonarTrack = null
@@ -49,6 +50,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	
 	if state.get_contact_count() > 0:
 		var explosion_instance : Explosion = EXPLOSION.instantiate()
+		explosion_instance.explosion_strength = 15.0
 		add_sibling(explosion_instance)
 		explosion_instance.global_position = global_position
 		queue_free()

@@ -126,6 +126,7 @@ debug_menu={
 3d_physics/layer_5="Sonar"
 3d_physics/layer_6="Compartment"
 3d_physics/layer_7="Water"
+3d_physics/layer_8="Hitbox"
 
 [physics]
 
