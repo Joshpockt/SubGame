@@ -2,16 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://twpvtaa850wt"
-path="res://.godot/imported/switch_and_knob_metalic.png-abd0650266c79b732fe0a2405928f3c4.ctex"
+uid="uid://bv0owp8aiinlb"
+path="res://.godot/imported/knob_knob2.png-1c894d5b8280f4888f40c50a27f5fc70.ctex"
 metadata={
 "vram_texture": false
+}
+generator_parameters={
+"md5": "8138df78852ef2a913b3e42b1ffd5c4d"
 }
 
 [deps]
 
-source_file="res://Assets/Models/ShipParts/Knob/switch_and_knob_metalic.png"
-dest_files=["res://.godot/imported/switch_and_knob_metalic.png-abd0650266c79b732fe0a2405928f3c4.ctex"]
+source_file="res://Assets/Models/ShipParts/Knob/knob_knob2.png"
+dest_files=["res://.godot/imported/knob_knob2.png-1c894d5b8280f4888f40c50a27f5fc70.ctex"]
 
 [params]
 

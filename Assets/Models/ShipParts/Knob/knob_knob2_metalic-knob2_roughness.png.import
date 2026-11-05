@@ -2,16 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5sm2s6lbql72"
-path="res://.godot/imported/switch_and_knob_roughness.png-85d33e340b48a8e4e8d9a1067847fec0.ctex"
+uid="uid://camfayaxbvi2t"
+path="res://.godot/imported/knob_knob2_metalic-knob2_roughness.png-670af47271f09a503fc692add0ff1742.ctex"
 metadata={
 "vram_texture": false
+}
+generator_parameters={
+"md5": "9b810b82f3d2851702693fe5bddf6e41"
 }
 
 [deps]
 
-source_file="res://Assets/Models/ShipParts/Knob/switch_and_knob_roughness.png"
-dest_files=["res://.godot/imported/switch_and_knob_roughness.png-85d33e340b48a8e4e8d9a1067847fec0.ctex"]
+source_file="res://Assets/Models/ShipParts/Knob/knob_knob2_metalic-knob2_roughness.png"
+dest_files=["res://.godot/imported/knob_knob2_metalic-knob2_roughness.png-670af47271f09a503fc692add0ff1742.ctex"]
 
 [params]
 
