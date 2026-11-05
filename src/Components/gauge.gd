@@ -13,10 +13,7 @@ class_name Gauge
 		if !is_node_ready(): return
 		update_label_positions()
 
-@export var label_distance := 0.065:
-	set(value):
-		label_distance = value
-		update_label_positions()
+
 
 @export_group("Labeling")
 @export var title := "":
@@ -46,6 +43,11 @@ class_name Gauge
 			label_4.text = str(int(max_value * 0.75))
 			label_5.text = str(int(max_value))
 @export var use_decimals := false
+
+@export var label_distance := 0.065:
+	set(value):
+		label_distance = value
+		update_label_positions()
 
 #@export_range(0,1) var needle_shake_start := 1.0
 #@export_range(0,1) var needle_shake_fade_in := 0.0
