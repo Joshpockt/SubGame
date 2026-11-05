@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bo3na0023raky" path="res://src/Ships/SubComponents/DevBoiler/dev_boiler.gd" id="1_m4y5w"]
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_gar1v"]
-[ext_resource type="PackedScene" uid="uid://ckduunt4p8nc4" path="res://src/Components/gauge.tscn" id="3_8x7p1"]
+[ext_resource type="PackedScene" uid="uid://c8n6isw1qfvw2" path="res://src/Components/gauge.tscn" id="3_8x7p1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_beyo5"]
 size = Vector3(1, 3.5, 1.6)
@@ -44,4 +44,5 @@ shape = SubResource("BoxShape3D_beyo5")
 
 [node name="Gauge" parent="." unique_id=845273447 instance=ExtResource("3_8x7p1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.6, 1)
-max_value = 260
+title = "Heat"
+max_value = 120.0

@@ -66,7 +66,7 @@ func _physics_process(_delta: float) -> void:
 		Input.get_axis("move_forward","move_backward")
 	).normalized().rotated(Vector3.UP, camera_pivot.rotation.y)
 	
-	velocity = direction * 5.0
+	velocity = direction * 3.5
 	if can_move: move_and_slide()
 	else: velocity = Vector3.ZERO
 	

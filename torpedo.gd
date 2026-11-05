@@ -55,7 +55,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 func hit():
 	var explosion_instance : Explosion = EXPLOSION.instantiate()
-	explosion_instance.explosion_strength = 15.0
+	explosion_instance.explosion_strength = 12.0
 	add_sibling(explosion_instance)
 	explosion_instance.global_position = global_position
 	

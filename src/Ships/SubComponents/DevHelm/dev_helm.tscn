@@ -1,14 +1,23 @@
-[gd_scene format=3 uid="uid://b01kt6b3n182i"]
+[gd_scene format=4 uid="uid://b01kt6b3n182i"]
 
 [ext_resource type="Script" uid="uid://dse0ibhxsln81" path="res://src/Ships/SubComponents/DevHelm/helm.gd" id="1_c1x4s"]
 [ext_resource type="Script" uid="uid://biwa0j28dtdbf" path="res://src/Components/interaction_area.gd" id="2_de4h6"]
-[ext_resource type="PackedScene" uid="uid://lkapsy47pjbm" path="res://Assets/Meshes/ShipParts/helm.glb" id="2_ganq3"]
+[ext_resource type="PackedScene" uid="uid://lkapsy47pjbm" path="res://Assets/Models/ShipParts/Helm/helm.glb" id="2_ganq3"]
 [ext_resource type="Shader" uid="uid://dcn6bo2rhrmle" path="res://Assets/Shaders/screen.gdshader" id="3_4avw6"]
-[ext_resource type="PackedScene" uid="uid://btu42glwwcfee" path="res://Assets/Meshes/ShipParts/display_round.glb" id="3_c335d"]
+[ext_resource type="PackedScene" uid="uid://btu42glwwcfee" path="res://Assets/Models/ShipParts/display_round.glb" id="3_c335d"]
+[ext_resource type="Texture2D" uid="uid://cwtxa32ttfile" path="res://Assets/Models/ShipParts/Helm/helm_texture.png" id="3_cq2vt"]
 [ext_resource type="Script" uid="uid://d3e745u0qwbev" path="res://src/Ships/SubComponents/DevHelm/sonar_idkblahblahblah.gd" id="6_c335d"]
-[ext_resource type="PackedScene" uid="uid://bxyh7j68l1ddi" path="res://Assets/Meshes/ShipParts/display.glb" id="6_xwgg4"]
-[ext_resource type="PackedScene" uid="uid://cpp45hjtuwuaf" path="res://Assets/Meshes/ShipParts/knob.glb" id="8_xwgg4"]
-[ext_resource type="PackedScene" uid="uid://ckduunt4p8nc4" path="res://src/Components/gauge.tscn" id="9_2eb5q"]
+[ext_resource type="PackedScene" uid="uid://bxyh7j68l1ddi" path="res://Assets/Models/ShipParts/display.glb" id="6_xwgg4"]
+[ext_resource type="PackedScene" uid="uid://c8n6isw1qfvw2" path="res://src/Components/gauge.tscn" id="9_2eb5q"]
+[ext_resource type="Texture2D" uid="uid://damlsbb5ojpqy" path="res://Assets/Models/ShipParts/Knob/switch_and_knob_texture.png" id="9_bhtv3"]
+[ext_resource type="Texture2D" uid="uid://twpvtaa850wt" path="res://Assets/Models/ShipParts/Knob/switch_and_knob_metalic.png" id="10_uc2sy"]
+[ext_resource type="Texture2D" uid="uid://5sm2s6lbql72" path="res://Assets/Models/ShipParts/Knob/switch_and_knob_roughness.png" id="11_k3bpd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a62ae"]
+albedo_texture = ExtResource("3_cq2vt")
+metallic = 1.0
+roughness = 0.63
+texture_filter = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2eb5q"]
 render_priority = 0
@@ -23,8 +32,51 @@ shader_parameter/scanlines = 128.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 size = Vector3(1, 2, 0.8)
 
-[node name="Helm" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("interaction_area", "player_standing_marker", "camera_marker")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_beyo5"]
+albedo_texture = ExtResource("9_bhtv3")
+metallic = 1.0
+metallic_texture = ExtResource("10_uc2sy")
+roughness_texture = ExtResource("11_k3bpd")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmu2f"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_85r6s"]
+_surfaces = [{
+"aabb": AABB(-0.1, -2.185577e-09, -0.1, 0.2, 0.07000001, 0.20000002),
+"format": 34896613377,
+"index_count": 216,
+"index_data": PackedByteArray("AgAXABgAAgAAABcABgACABgAAAAZABcAAAABABkABgAYABoABwAGABoAFwAQABgABwAaABsACAAHABsAGAAcABoAGAAQABwAGgASABsAGgAcABIACAAbAB0ACgAIAB0AGwASAB4AGwAeAB0ACgAdAB8ACwAKAB8AHQAeABMAHQATAB8ACwAfACAAAQALACAAAQAgABkAHwAhACAAHwATACEAIAARABkAIAAhABEAGQARACIAGQAiABcAFwAiABAAEQAjACIAIQAkABEAEQAkACMAIQAlACQAEwAlACEAIgAmABAAIgAjACYAEAAmABYAEAAWABwAEwAOACUAHgAOABMAIwADACYAHgAnAA4AEgAnAB4AIwAUAAMAJAAUACMAJgADAAQAJgAEABYAFAAoAAMAAwAoAAQAJAAVABQAJQAVACQAFQAoABQAJQAPABUADwAoABUADgAPACUADgANAA8ADQAoAA8AJwANAA4ABAAoAAkAFgAEAAkADAAoAA0AJwAMAA0ACQAoAAwABQAMACcABQAJAAwAFgAJAAUAEgAFACcAHAAWAAUAHAAFABIA"),
+"lods": [0.061097007, PackedByteArray("AgAAABAABgACABAAAAARABAAAAABABEAAQALABEABgAQABIABwAGABIACAAHABIACwATABEACAASABMACwAKABMACgAIABMAEgAMABMAEQAUABAAEQAVABQAFAADABAAFQADABQAEQAPABUAEwAPABEADwADABUAEwAOAA8AEwAMAA4ADgANAA8ADQADAA8ADAANAA4ADAADAA0AEAADAAQACQADAAwABAADAAkABQAJAAwAEgAFAAwAFgAEAAkAEAAEABYAFgAJAAUAEAAWABIAEgAWAAUA"), 0.09164551, PackedByteArray("AAABAAIAAQADAAIAAgADAAQAAgAEAAUABgACAAUABwAGAAUACAAHAAUABAAJAAUABAADAAkACAAFAAoACwAKAAEABQAJAAwACQADAAwABQAMAAoADAADAA0ACgAMAA4ADAANAA4ACgAPAAEAAQAPAAMACgAOAA8ADQADAA8ADgANAA8A")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 41,
+"vertex_data": PackedByteArray("gdoAAH0lAAD//wAA/38AAP9/AAAAAAAA/3///zIzAACxSf//sUkAAJkZbNv/fwAAfSUAAH0lAAAAAAAA/38AAH0lAACB2gAAMzP///9/AAD/fwAA/v8AAIHaAACB2gAAsUn//022AAD/f///y8wAAP9/bNtl5gAATbb//022AAD/f7ZtmRkAAGXmtm3/fwAAmRm2bf9/AAD/f7ZtZeYAAE22//+xSQAAy8z///9/AACXN2zblzcAAIHaJEl9JQAA/38kSQAAAAD//yRJ/38AAH0lJEl9JQAAAAAkSf9/AACXN7ZtlzcAAH0lJEmB2gAAlze2bWfIAAD/fyRJ//8AAIHaJEmB2gAAZ8i2bWfIAABnyLZtlzcAAGfIbNuXNwAAZeZs2/9/AABnyGzbZ8gAAP9/bNuZGQAAlzds22fIAAD/f////38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5h03d"]
+resource_name = "knob_Cylinder_002"
+_surfaces = [{
+"aabb": AABB(-0.1, -2.185577e-09, -0.1, 0.2, 0.07000001, 0.20000002),
+"attribute_data": PackedByteArray("/2//N/9f/zf/f/83KH4AAKlRAAD/P/83/0//N/8//w/WQQAAKE4AAKkxAABVPgAA/x//D/8v/zf/H/83/w//NwAA/zfXAQAAKA4AANYRAAAoHgAA1iEAACguAAAFMAVI/z9mQWcp/1cFMPpn/z+YbvpP+mf/f/8f/1//H9ZxAACpYQAA/z//H/8f/x8AAP8f/w//D5hW/1f6TwVI/2//L/9//y//b/8f/3//D/9f/y//b/8P/0//L/9f/w9VbgAA/0//H/8//y//T/8PVV4AAP8v/y//L/8f/x//L/8v/w//D/8vAAD/L/8P/x8AAP8P/z//Vw=="),
+"format": 34896613399,
+"index_count": 216,
+"index_data": PackedByteArray("AgAnACgAJwAdACgAAgAAACcAJwApAB0AKQAqAB0AAAArACcAKwApACcAAAABACsAKQAsACoALAADACoALAAfAAMAHgAsACkAKwAeACkAAQAtACsALQAeACsAAQAGAC0AHgAuACwALgAvACwALgAgAC8AMAAuAB4ALQAwAB4ABgAxAC0AMQAwAC0ABgAFADEAMAAyAC4AMgAzAC4AMgAEADMAIQAyADAAMQAhADAABQA0ADEANAAhADEABQANADQAIQAHADIABwAJADIABwAIAAkANQAHACEANAA1ACEADQA2ADQANgA1ADQADQAOADYANQA3AAcANwALAAcANwAKAAsAIgA3ADUANgAiADUADgA4ADYAOAAiADYADgAPADgADwA5ADgADwAQADkAOQA6ADgAOAA6ACIAOQAjADoAIgAMADcAOgAMACIADAAWADcADAAVABYAOgAkAAwAIwAkADoAJAAUAAwAJAATABQAIwA7ACQAOwASACQAOwARABIAJgA8ABgAGAA8ABcAJQA8ACYAFwA8ABkAHAA8ACUAGQA8ABoAGwA8ABwAGgA8ABsA"),
+"lods": [0.061097007, PackedByteArray("AgAAAB0AAAAeAB0AAAABAB4AAQAGAB4AHwADAB0AHgAfAB0AHgAgAB8AHgAEACAABgAhAB4AIQAEAB4ABgAFACEAIQAHAAQABQANACEABwAIAAkAIQAKAAcACgALAAcADQAiACEAIgAKACEADQAOACIAIgAMAAoADgAPACIADAAVABYADwAjACIADwAQACMAIgAkAAwAIwAkACIAJAAUAAwAJAATABQAIwASACQAIwARABIAFwAYABkAGQAYABoAGgAYABsAGwAYABwAHAAYACUAJQAYACYA"), 0.09164551, PackedByteArray("AAABAAIAAQADAAIAAQAEAAMABQAEAAEABgAFAAEABQAHAAQABwAIAAkABQAKAAcACgALAAcADAAKAAUADQAMAAUADQAOAAwADgAPAAwADwAQAAwAEAARABIAEAATAAwAEwAUAAwADAAVABYAFwAYABkAGQAYABoAGgAYABsAGwAYABwA")],
+"material": SubResource("StandardMaterial3D_vmu2f"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 61,
+"vertex_data": PackedByteArray("gdoAAH0l/9///wAA/3//v/9/AAAAAP///3///zIzzfZNtv//Tbaqwv9/AAD+/wCAgdoAAIHa/5//f2zbZeYtlP9////LzD22Tbb//022arixSf//TbZquP9////LzD22mRls2/9/csJ9JQAAgdr/nwAAAAD/f/+/fSUAAH0l/9//fwAAAAD///9///8yM832sUn//7FJ1++xSf//sUkE3jMz////f4XXMzP///9/2sexSf//TbaqwrFJ//+xSbLI/3///zIzqsszM////3/TwLFJ//9NtiK4/3///8vMVLRNtv//TbYiuP9/tm2ZGfH8Zea2bf9/98NNtv//sUnX78vM////f4XX/3+2bWXm15mZGbZt/3/3w/9/tm2ZGfH8lzds25c3BuHLzP///3/TwE22//+xSbLIgdokSX0lBuH/fyRJAAAO/mfItm2XN6zh/39s25kZDv7//yRJ/39ywmfIbNuXNwbhgdokSYHajKVl5mzb/39ywk22//+xSQTeZ8i2bWfIs6j/fyRJ//8tlGfIbNtnyIyly8z///9/2sd9JSRJgdqMpZc3tm1nyLOoAAAkSf9/csKXN2zbZ8iMpX0lJEl9JQbh/38kSQAADv6XN7Ztlzes4f9/bNuZGQ7+/3////9//7//fwAA/38AAP9/////vaEMsdaNMf9/////fwAA////fxHvcFh64wZXBdeDnHDY7JB+lQHV/3////9/////f////3///6GM/8GOh6DDZJ4Muf6acbcas5yujLFNqR33y5P///9/q/GlnAfzgpf///9/fOgIc6unrgq5slwZXryPB43I/hr///9/XJlFza6KUtjfiUjeWOOscTLsHne2od8JNaE+CZOo4gs1oT4J/Kp+Fbah3wlNu+8p/Kp+FfLGZR6iw9Mv////f0277ylh0Roz7qmxxNOvW7x+lQHV7qmxxN+JSN49icne4Ytr1z2Jyd7///9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_85r6s")
+
+[node name="Helm" type="Node3D" unique_id=1236775955 node_paths=PackedStringArray("fuel_gauge", "velocity_gauge", "interaction_area", "player_standing_marker", "camera_marker")]
 script = ExtResource("1_c1x4s")
+fuel_gauge = NodePath("Gauge")
+velocity_gauge = NodePath("Gauge2")
 interaction_area = NodePath("InteractionArea")
 player_standing_marker = NodePath("PlayerMarker")
 camera_marker = NodePath("CameraMarker")
@@ -34,10 +86,13 @@ camera_fov = 50.0
 
 [node name="helm" parent="Visuals" unique_id=1113689753 instance=ExtResource("2_ganq3")]
 
+[node name="Cube" parent="Visuals/helm" index="0" unique_id=1053907142]
+material_override = SubResource("StandardMaterial3D_a62ae")
+
 [node name="display_round" parent="Visuals" unique_id=1299216145 instance=ExtResource("3_c335d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.7, 0)
 
-[node name="Cylinder_001" parent="Visuals/display_round" index="1" unique_id=2084233896]
+[node name="Cylinder_001" parent="Visuals/display_round" index="1" unique_id=1415414565]
 material_override = SubResource("ShaderMaterial_2eb5q")
 script = ExtResource("6_c335d")
 screen_id = "SONAR"
@@ -45,7 +100,7 @@ screen_id = "SONAR"
 [node name="display" parent="Visuals" unique_id=1259771538 instance=ExtResource("6_xwgg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.333, 1.6, 0)
 
-[node name="Cube_002" parent="Visuals/display/Cube_001" parent_id_path=PackedInt32Array(1259771538, 417405094) index="0" unique_id=547872475]
+[node name="Cube_002" parent="Visuals/display/Cube_001" parent_id_path=PackedInt32Array(1259771538, 1229697774) index="0" unique_id=1540437547]
 material_override = SubResource("ShaderMaterial_cq2vt")
 script = ExtResource("6_c335d")
 screen_id = "FRONT"
@@ -66,20 +121,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 [node name="CameraMarker" type="Marker3D" parent="." unique_id=844299211]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.9499999)
 
-[node name="knob" parent="." unique_id=517271159 instance=ExtResource("8_xwgg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.9, 0)
+[node name="Cylinder" type="MeshInstance3D" parent="." unique_id=1999335840]
+transform = Transform3D(0.50000006, 0, 0, 0, 0, -0.5000017, 0, 1, 0, 0.1, 1.9, 0)
+material_override = SubResource("StandardMaterial3D_beyo5")
+mesh = SubResource("ArrayMesh_5h03d")
 
-[node name="knob2" parent="." unique_id=1918473090 instance=ExtResource("8_xwgg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.9, 0)
+[node name="Cylinder2" type="MeshInstance3D" parent="." unique_id=1029451846]
+transform = Transform3D(0.50000006, 0, 0, 0, 0, -0.5000017, 0, 1, 0, 0.5, 1.9, 0)
+material_override = SubResource("StandardMaterial3D_beyo5")
+mesh = SubResource("ArrayMesh_5h03d")
 
-[node name="knob3" parent="." unique_id=1136505916 instance=ExtResource("8_xwgg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.5, 0)
+[node name="Cylinder3" type="MeshInstance3D" parent="." unique_id=1633363635]
+transform = Transform3D(0.50000006, 0, 0, 0, 0, -0.5000017, 0, 1, 0, 0.1, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_beyo5")
+mesh = SubResource("ArrayMesh_5h03d")
 
-[node name="knob4" parent="." unique_id=1944984258 instance=ExtResource("8_xwgg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0)
+[node name="Cylinder4" type="MeshInstance3D" parent="." unique_id=1349712905]
+transform = Transform3D(0.50000006, 0, 0, 0, 0, -0.5000017, 0, 1, 0, 0.5, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_beyo5")
+mesh = SubResource("ArrayMesh_5h03d")
 
 [node name="Gauge" parent="." unique_id=845273447 instance=ExtResource("9_2eb5q")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 1.6, 0)
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.14999998, 1.35, 0)
+title = "Heat"
+
+[node name="Gauge2" parent="." unique_id=39588445 instance=ExtResource("9_2eb5q")]
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.3, 1.35, 0)
+title = "Speed"
+max_value = 40.0
 
 [editable path="Visuals/helm"]
 [editable path="Visuals/display_round"]

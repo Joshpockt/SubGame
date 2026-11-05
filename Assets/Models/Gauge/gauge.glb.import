@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c3j6xagdu7tg0"
-path="res://.godot/imported/test_cave.glb-0602afc525bcb0c2b3d6c0482363cf78.scn"
+uid="uid://c7tmtu2ecwa2l"
+path="res://.godot/imported/gauge.glb-e38a0ce267979a083617be78e56809f9.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/Caves/test_cave.glb"
-dest_files=["res://.godot/imported/test_cave.glb-0602afc525bcb0c2b3d6c0482363cf78.scn"]
+source_file="res://Assets/Models/Gauge/gauge.glb"
+dest_files=["res://.godot/imported/gauge.glb-e38a0ce267979a083617be78e56809f9.scn"]
 
 [params]
 

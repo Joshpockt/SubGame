@@ -2,15 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://bn5xgg53goib3" path="res://icon.svg" id="1_xlegt"]
 [ext_resource type="Script" uid="uid://dkd1ydolc6ewn" path="res://src/path_finder.gd" id="3_0qwtu"]
-[ext_resource type="PackedScene" uid="uid://sn7dfyda5m72" path="res://Assets/Meshes/Caves/test_cave2.glb" id="3_t101k"]
+[ext_resource type="PackedScene" uid="uid://sn7dfyda5m72" path="res://Assets/Models/Caves/test_cave2.glb" id="3_t101k"]
 [ext_resource type="PackedScene" uid="uid://c864js3238ehe" path="res://src/Creatures/DevFish/dev_fish.tscn" id="4_t101k"]
-[ext_resource type="Shape3D" uid="uid://owjhqsjc5j2f" path="res://Assets/Meshes/Caves/new_concave_polygon_shape_3d.tres" id="5_36ipd"]
+[ext_resource type="Shape3D" uid="uid://owjhqsjc5j2f" path="res://Assets/Models/Caves/new_concave_polygon_shape_3d.tres" id="5_36ipd"]
 [ext_resource type="PackedScene" uid="uid://b1sf8parf6ifn" path="res://thermal_vent.tscn" id="6_usxdn"]
 [ext_resource type="PackedScene" uid="uid://bwr2otrsklql0" path="res://src/Creatures/DevSerpent/dev_serpent.tscn" id="7_jvefd"]
 
 [sub_resource type="Environment" id="Environment_3cfgd"]
 ambient_light_source = 2
-glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(0.018, 0.04, 0.0356, 1)
 fog_light_energy = 0.4
@@ -88,7 +87,7 @@ mass = 50.0
 
 [node name="test_cave2" parent="." unique_id=1282114149 instance=ExtResource("3_t101k")]
 
-[node name="Cube" parent="test_cave2" index="0" unique_id=1028023916]
+[node name="Cube" parent="test_cave2" index="0" unique_id=1906635607]
 material_override = SubResource("StandardMaterial3D_36ipd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="test_cave2/Cube" index="0" unique_id=225197408]

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cpp45hjtuwuaf"
-path="res://.godot/imported/knob.glb-bae497d29cee2292cff2408030cd4d14.scn"
+uid="uid://btu42glwwcfee"
+path="res://.godot/imported/display_round.glb-0f7e1802f5e4a5150f59bf5089ba383e.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/ShipParts/knob.glb"
-dest_files=["res://.godot/imported/knob.glb-bae497d29cee2292cff2408030cd4d14.scn"]
+source_file="res://Assets/Models/ShipParts/display_round.glb"
+dest_files=["res://.godot/imported/display_round.glb-0f7e1802f5e4a5150f59bf5089ba383e.scn"]
 
 [params]
 

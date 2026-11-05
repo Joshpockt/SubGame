@@ -2,6 +2,24 @@ extends Station
 class_name Helm
 
 @export var sub_exterior : SubExterior
+@export var fuel_gauge : Gauge
+@export var velocity_gauge : Gauge
+
+func _ready() -> void:
+	super()
+	if fuel_gauge:
+		if sub_exterior.interior_instance:
+			fuel_gauge.max_value = sub_exterior.interior_instance.max_fuel_seconds
+
+func _process(delta: float) -> void:
+	super(delta)
+	if fuel_gauge:
+		# FIXME: yucky yucky yucky, weak ref in my tummy ;-;
+		# okay okay its not a "weak ref" but it still feels icky
+		if sub_exterior.interior_instance:
+			fuel_gauge.progress = sub_exterior.interior_instance.fuel_uniform
+	if velocity_gauge:
+		velocity_gauge.progress = sub_exterior.linear_velocity.length() / 40
 
 func _control_process(_delta):
 	var throttle_input = Input.get_axis("move_backward","move_forward")

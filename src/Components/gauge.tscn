@@ -1,13 +1,51 @@
-[gd_scene format=3 uid="uid://ckduunt4p8nc4"]
+[gd_scene format=4 uid="uid://c8n6isw1qfvw2"]
 
 [ext_resource type="Script" uid="uid://b2ofh1ugoh4xx" path="res://src/Components/gauge.gd" id="1_h1p1d"]
+[ext_resource type="Texture2D" uid="uid://2b5bgpi821vl" path="res://Assets/Models/Gauge/gauge_texture.png" id="2_c013w"]
 [ext_resource type="Texture2D" uid="uid://d3fagxucrbkn3" path="res://Assets/Textures/needle2.png" id="2_ypo4e"]
+[ext_resource type="Texture2D" uid="uid://dopopih2ubf11" path="res://Assets/Models/Gauge/gauge_metalic.png" id="3_dhjfr"]
+[ext_resource type="Texture2D" uid="uid://cij8myfc1xxl1" path="res://Assets/Models/Gauge/gauge_roughnesst.png" id="4_h7tnl"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_grjot"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.05
-radial_segments = 16
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5swve"]
+albedo_texture = ExtResource("2_c013w")
+metallic = 1.0
+metallic_texture = ExtResource("3_dhjfr")
+roughness_texture = ExtResource("4_h7tnl")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ondc7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bdt4b"]
+_surfaces = [{
+"aabb": AABB(-0.12579472, -0.027432308, -0.12579472, 0.25158945, 0.0639672, 0.25158945),
+"format": 34896613377,
+"index_count": 276,
+"index_data": PackedByteArray("GQAaABUAAAAZABUAFQAaAAYAFQAGAAAAGgAHAAYAAAAGABsAAAAbABwABgAdABsABgAHAB0AHgAAABwAHgAZAAAAHAAbABYAHAAWAB4AGwAdABAAGwAQABYADQAdAAcAHwAQAB0ADQAfAB0AHwAPABAAIAANAAcAIAAfAA0AHwAhAA8AIAAhAB8ADwAiABAAFgAQACIADwAhACIAFgAiACMAHgAWACMAIwAiAAkAIQAJACIAHgAjAAMAIQAOAAkAIwAJABgAAwAjABgADgAkAAkAGAAJACQAIQAlAA4ADgAlACQAIQAmACUAIQAgACYAAwAYACcAJwAeAAMAGAAkACgAJwAYACgAJQALACQAKAAkAAsAJQAMAAsAJQAmAAwAJwAoABcAAQAeACcAAQAnABcAFwAoAAQAKAALAAQAFwAEAAEADAApAAsABAALACkADAAmACkABAApABMAAQAEABMAJgAKACkAEwApAAoAJgARAAoAAQATACoAJgArABEAGQAeAAEAJgAgACsAKgATACwAEwAKACwALQABACoAGQABAC0AKgAsAC0AGQAtAAIAEQAuAAoALAAKAC4AEQArAC4ALQAsAAUALQAFAAIALAAuAAUAAgAUABkAAgAFABQAGQAUABoABQAuAAgABQAIABQAKwAIAC4AKwASAAgAKwAgABIAFAAIAC8AFAAvABoAEgAvAAgAEgAgAC8AGgAvAAcAIAAHAC8A"),
+"lods": [0.021235792, PackedByteArray("DQAOAA8ADwAOABAADQAPAAcADwAQAAcADgANABEAEQANABIADgARAAwAEgANAAgADQAHAAgAEQASAAoAEgAIAAoADAARAAsAEQAKAAsADgAMAAkADgAJABAADAALAAkABQAKAAgAEwALAAoAEwAKAAUABQAIABQAFAAIAAcAAgATAAUAAgAFABQABAALABMAAQATAAIAAQAEABMAAgAUABUAFQABAAIAFAAHAAYAFQAUAAYABgAHABAAFQAGAAAABgAQABYAAAAGABYAFgAQAAkAAwAVAAAAAAAWAAMAFQADAAEAAQADABcAFwAEAAEAAwAWABgAAwAYABcAFgAJABgAFwAYAAQAGAAJAAsAGAALAAQA"), 0.17493813, PackedByteArray("AAABAAIAAAADAAEAAQAEAAIAAwAEAAEAAgAFAAAAAgAEAAUAAAAGAAMAAwAGAAQAAAAFAAYABQAHAAYABQAIAAcABgAJAAQABgAHAAkABAAKAAUABQAKAAgABAAJAAsABAALAAoADAALAAkADAAKAAsADQAJAAcADQAMAAkADQAHAAgADAANAAoADQAIAAoA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("/3/V0T8aAAD/f9XRv+UAAD8a1dH/fwAAv+XV0f9/AAD/f///v+UAAD8a////fwAA/3///z8aAAD/f///AAAAACYR////PwAA2O7///+/AAAmEf///78AAP9//////wAA/38AAP//AAD/fwAAAAAAANjuAAD/vwAA2O4AAP8/AADY7v///z8AACYRAAD/vwAAJhEAAP8/AAAfTf//HtgAAOAn//8fTQAAH03V0eAnAAAe2P//H00AAN+y1dEe2AAAHtj//9+yAADgJ9XRH00AAB9N///gJwAA37L//+AnAADfstXR4CcAAP+///8mEQAAHtjV0R9NAAD/vwAAJhEAAP8/AAAmEQAA//8AAP9/AAD//////38AAL/l////fwAA/7///9juAAD/vwAA2O4AAP8/AADY7gAAHtjV0d+yAADfsv//HtgAAP8////Y7gAAH03V0R7YAAAAAAAA/38AAOAn///fsgAA4CfV0d+yAAAAAP///38AAP8///8mEQAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_krqox"]
+resource_name = "gauge_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.12579472, -0.027432308, -0.12579472, 0.25158945, 0.0639672, 0.25158945),
+"attribute_data": PackedByteArray("/88Rlv/P7UkR9v9v7Kn/b/+//z//P/8f/7//HwAA/z8AAP8f/7//H/9/AAD/vwAAAAD/H/8/AAAAAAAA/4//Z/+P/2//R/9n/0f/bwAA/2cAAP9v/6cfor1+LbD/p1qYQdEtsP+n3u3ezf/H/6ej90HR0d//R/93AAD/fwAA/3f/j/9//4//d/83/PeOYQCwjmH933AOALBwDv3f/zcCmP8X/3f/L/9//1//fwjj+JD2vAdP/3//P/9//x//P/8//3//H/8//x//d/9v/y//b/8X/2cyhw+177oypzKH7tq9ftHfy8ju2v8v/2f/F/9v/1//Z/9f/2//d/9nASCO8f5PjvH8Z//HAgj/xwEgcJ7+T3Ce/xf/f/8v/3f/R/9//1//d/93/3f/d/9/Bq8Ig/a8+JD38AiDBq/2XPfw9lwI4wdP/5//P/+f/x//X/8f/1//P/8f/x//H/8//58AAP+f/x//XwAA/1//H/8fAAD/H/8f0b9B8e+6y+gtkEHxo9f/xw+Vy+jLyA+1W3j/x9G/vJ4fgv/HD5Uypy2QvJ4="),
+"format": 34896613399,
+"index_count": 276,
+"index_data": PackedByteArray("OgA7ADQANAA7ABQANAAUABMAOgAzADsAEQAzADoAEQASADMAPAASABEAPAA9ABIAPgA9ADwAPgAyAD0ADwAyAD4ADwAQADIAPwBAACIAPwBBAEAAQABBACQAQgA/ACYAQwA/AEIAQQA/AEMAQwBCACUAQQBDAEQARABDACcAQQBEACMAKAAeAB8AKABFAB4ARgBFACgARgApAEUAHQApAEYAHQBHACkASABHAB0ASAAqAEcASQAqAEgASQBKACoAIQBKAEkAIQAgAEoASwAAAEwASwBNAAAAAABNACsATgBLAAMAAQBLAE4ATQBLAAEAAQBOACwATQABAE8ATwABAFAATQBPAAIAUQAuAFIABABRAFIABABSAAYAUQAtAC4ALQBTAC4ALQBUAFMAVAAFAFMAVAAvAAUALwBVAAUALwBWAFUAVgAIAFUAVgAHAAgACQBXAAsACQBYAFcAWAAKAFcAWAAwAAoAMABZAAoAMABaAFkAWgANAFkAWgAxAA0AMQBbAA0AMQBcAFsAXAAOAFsAXAAMAA4AOQBdAF4AXgBdABsAOQAcAF0AXgAbABkAGgAcADkAGQAbAF8AGgBgABwAGQBfAGEAYgBgABoAYQBfADgAYgAYAGAAYQA4ADcANgAYAGIANwA4AGMANgBkABgANwBjAGUAFQBkADYAZQBjABYAFQAXAGQAZQAWADUAZgAXABUANQAWAGcAZgBnABcANQBnAGYA"),
+"lods": [0.021235792, PackedByteArray("IgAjACQAIwAiACUAJQAiACYAIwAlACcAKAAeAB8AKAApAB4AHQApACgAHQAqACkAIQAqAB0AIQAgACoAAwArAAAAKwADAAEAAQADACwAKwABAAIALQAuAAYABAAtAAYALQAvAC4ALwAFAC4ALwAHAAUABwAIAAUACQAwAAsAMAAKAAsAMAAxAAoAMQANAAoAMQAMAA0ADAAOAA0ADwAyABEADwAQADIAEQAyABIAEQASADMAEQAzADQANAAzABQANAAUABMANQAXABUAFQAXADYANQAWABcANgAXABgANwAWADUANgAYABoANwA4ABYAGgAYABwAGQA4ADcAGgAcADkAGQAbADgAOQAcABsAOQAbABkA"), 0.17493813, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUABwAIAAUACQAKAAsACQAMAAoADAANAAoADAAOAA0ADwAQABEAEQAQABIAEQASABMAEwASABQAFQAWABcAFQAXABgAGQAWABUAFQAYABoAGQAbABYAGgAbABkAGgAYABwAGgAcABsAHQAeAB8AHQAgAB4AIQAgAB0A")],
+"material": SubResource("StandardMaterial3D_ondc7"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 104,
+"vertex_data": PackedByteArray("/3/V0T8a////f9XRv+X//z8a1dH/f///v+XV0f9/////fwAAAAD//9ju////v6mq/3///wAA////fwAA//8AgP9//////wCA/38AAP//AIAmEf///7+pqv9//////wCA/38AAAAA//8mEf///z9U1f9///8AAP///3/V0b/l////f///v+X//z8a1dH/f///Pxr///9/////f9XRPxr///9///8/Gv///3///7/l///Y7v///7////9/////////JhH///+/////f///Pxr//z8a////f////3///wAA//8mEf///z///7/l1dH/f////3///7/l////f9XRv+X///9///8/Gv///3/V0T8a////fwAAAAD/v9juAAD/v/+/2O4AAP8//78mEQAA/7//vyYRAAD/P/+//38AAP///7/fstXRHtj//x7Y///fsv//Htj//x9N//8fTdXR4Cf//9+y1dEe2P//2O4AAP8/VNXY7v///z9U1djuAAD/v6mqJhEAAP+/qaomEQAA/z9U1R9N//8e2P//4Cf//x9N//8fTdXR4Cf//x7Y///fsv//H03//x7Y//8e2P//H03//9ju////P///4Cf//x9N///gJ9XRH03//x9N///gJ///4CfV0d+y///gJ///37L//x9N1dEe2P///z8AACYR/7//vwAAJhH/v///AAD/f/+/AAAAAP9//7//PwAA2O7/v/+/AADY7v+/37L//x7Y//8e2NXR37L//7/l////f///HtjV0R9N///fstXR4Cf//9+y///gJ///HtjV0R9N///fstXR4Cf//+An1dEfTf//HtjV0d+y///gJ9XR37L//x9N1dEe2P///78AACYRqer/v///JhGp6v//////f/+///8AAP9//7//v///2O5Ulf+/AADY7lSV/z///9juVJX/PwAA2O5UlQAA////f/+/AAAAAP9//7//P///JhGp6v8/AAAmEanq/z///yYR//8fTf//4Cf///+///8mEf//AAD///9////fsv//4Cf//+An///fsv////////9/////P///2O7//7/l////f///37L//x7Y////v///2O7///9//7//f/+//3//v/9//7//f////38AAP9/////f////3////9/////f////3////9/////f////3///////3////9//7//f/+//3//f/9//3//f/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//z//f////3////9//3//f/9//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3///wyb///ZriVR/3//f/+//3//v/9/AAD/fwAA/38AAP9/////f///8uT/f9mu/38Mm/9//3//v/9//7//f/+//3//v/9//7/Zrv9/DJv/fyXR/38l0f9/8uT/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f///DJv//9mu/z//fyVR/3/yZP9/8mT/f/9//7//f/+//3//v/9//7//f/+//3//v/9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bdt4b")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dklud"]
 transparency = 2
@@ -23,52 +61,60 @@ size = Vector2(0.125, 0.125)
 [node name="Gauge" type="Node3D" unique_id=845273447]
 script = ExtResource("1_h1p1d")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=387539991]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_grjot")
+[node name="Cylinder" type="MeshInstance3D" parent="." unique_id=2114369208]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5swve")
+mesh = SubResource("ArrayMesh_krqox")
+
+[node name="Title" type="Label3D" parent="." unique_id=1128580777]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, -0.05, -0.028)
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+font_size = 16
+outline_size = 0
 
 [node name="Label1" type="Label3D" parent="." unique_id=335046443]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.066573955, -0.021631189, -0.028)
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.061818674, -0.020086104, -0.028)
 texture_filter = 0
 modulate = Color(0, 0, 0, 1)
 text = "0"
 font_size = 12
-outline_size = 0
+outline_size = 1
 
 [node name="Label2" type="Label3D" parent="." unique_id=965558676]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.05663119, 0.041144967, -0.028)
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0.052586105, 0.03820604, -0.028)
 texture_filter = 0
 modulate = Color(0, 0, 0, 1)
 text = "25"
 font_size = 12
-outline_size = 0
+outline_size = 1
 
 [node name="Label3" type="Label3D" parent="." unique_id=1793455007]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0.07, -0.028)
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0.065, -0.028)
 texture_filter = 0
 modulate = Color(0, 0, 0, 1)
 text = "50"
 font_size = 12
-outline_size = 0
+outline_size = 1
 
 [node name="Label4" type="Label3D" parent="." unique_id=468462451]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.05663119, 0.041144967, -0.028)
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.052586105, 0.03820604, -0.028)
 texture_filter = 0
 modulate = Color(0, 0, 0, 1)
 text = "75"
 font_size = 12
-outline_size = 0
+outline_size = 1
 
 [node name="Label5" type="Label3D" parent="." unique_id=926098417]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.066573955, -0.021631189, -0.028)
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.061818674, -0.020086104, -0.028)
 texture_filter = 0
 modulate = Color(0, 0, 0, 1)
 text = "100"
 font_size = 12
-outline_size = 0
+outline_size = 1
 
 [node name="NeedlePivot" type="Node3D" parent="." unique_id=1796935946]
-transform = Transform3D(-0.30901694, 0.95105654, 0, -0.95105654, -0.30901694, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-0.3090169, 0.9510564, 0, -0.9510564, -0.3090169, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="NeedlePivot" unique_id=421386891]
 transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 0, 0, -0.03)

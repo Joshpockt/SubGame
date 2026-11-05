@@ -44,6 +44,7 @@ func sync_shoot() -> void:
 		projectile_instance.global_transform = projectile_spawn_marker.global_transform
 		if projectile_instance is RigidBody3D:
 			projectile_instance.linear_velocity = exterior.linear_velocity
+			projectile_instance.linear_velocity += -exterior.global_basis.z * 75
 
 
 @rpc("any_peer", "call_remote", "reliable")

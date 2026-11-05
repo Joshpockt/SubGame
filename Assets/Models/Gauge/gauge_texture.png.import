@@ -2,24 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo2j3gm3ck4qq"
-path.s3tc="res://.godot/imported/submarine_Sub_texture.png-ad1ad8727ed6a38cd00391fb5fde1f3b.s3tc.ctex"
+uid="uid://2b5bgpi821vl"
+path="res://.godot/imported/gauge_texture.png-6e82ff5720fad6df7dd7abd3fa937b73.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
-}
-generator_parameters={
-"md5": "72f0738ee01b9a3432c0270adbab3793"
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Meshes/Subs/submarine_Sub_texture.png"
-dest_files=["res://.godot/imported/submarine_Sub_texture.png-ad1ad8727ed6a38cd00391fb5fde1f3b.s3tc.ctex"]
+source_file="res://Assets/Models/Gauge/gauge_texture.png"
+dest_files=["res://.godot/imported/gauge_texture.png-6e82ff5720fad6df7dd7abd3fa937b73.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

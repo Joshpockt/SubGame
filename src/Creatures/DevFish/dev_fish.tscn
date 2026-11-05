@@ -62,5 +62,6 @@ mesh = SubResource("CylinderMesh_2g8hu")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1922735761]
 light_color = Color(1, 0, 0, 1)
 light_energy = 32.0
+light_volumetric_fog_energy = 4.0
 omni_range = 50.0
 omni_attenuation = 2.0

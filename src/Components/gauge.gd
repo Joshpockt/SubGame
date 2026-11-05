@@ -2,10 +2,31 @@
 extends Node3D
 class_name Gauge
 
+@export_group("Needle Movement")
 @export_range(0,1) var progress := 0.0
+@export var lerp_speed := 10.0
+@export_range(0,1) var needle_range := 0.6:
+	set(value):
+		needle_range = value
+		
+		# NOTE: need to turn the labels into exports, will throw an error if the line below does not exist.
+		if !is_node_ready(): return
+		update_label_positions()
 
-@export var use_decimals := false
-@export var max_value := 100:
+@export var label_distance := 0.065:
+	set(value):
+		label_distance = value
+		update_label_positions()
+
+@export_group("Labeling")
+@export var title := "":
+	set(value):
+		#if !is_node_ready(): return
+		# NOTE: Okay so this only crashes if the orignal gauge scene has a title??
+		title = value
+		$Title.text = value
+
+@export var max_value := 100.0:
 	set(value):
 		max_value = value
 		
@@ -24,35 +45,14 @@ class_name Gauge
 			label_3.text = str(int(max_value * 0.5))
 			label_4.text = str(int(max_value * 0.75))
 			label_5.text = str(int(max_value))
-
-@export_range(0,1) var needle_range := 0.6:
-	set(value):
-		needle_range = value
-		
-		# NOTE: need to turn the labels into exports, will throw an error if the line below does not exist.
-		if !is_node_ready(): return
-		
-		label_1.position.x = sin(needle_range * PI) * 0.07
-		label_1.position.y = cos(needle_range * PI) * 0.07
-		
-		label_2.position.x = sin(needle_range * PI * 0.5) * 0.07
-		label_2.position.y = cos(needle_range * PI * 0.5) * 0.07
-		
-		label_3.position.y = 0.07
-		
-		label_4.position.x = sin(-needle_range * PI * 0.5) * 0.07
-		label_4.position.y = cos(-needle_range * PI * 0.5) * 0.07
-		
-		label_5.position.x = sin(-needle_range * PI) * 0.07
-		label_5.position.y = cos(-needle_range * PI) * 0.07
-
-@export var lerp_speed := 10.0
+@export var use_decimals := false
 
 #@export_range(0,1) var needle_shake_start := 1.0
 #@export_range(0,1) var needle_shake_fade_in := 0.0
 
 @onready var needle_pivot: Node3D = $NeedlePivot
 
+@onready var title_label: Label3D = $Title
 @onready var label_1: Label3D = $Label1
 @onready var label_2: Label3D = $Label2
 @onready var label_3: Label3D = $Label3
@@ -61,6 +61,7 @@ class_name Gauge
 
 func _ready() -> void:
 	max_value = max_value
+	title_label.text = title
 
 var t := 0.0
 func _process(delta: float) -> void:
@@ -81,3 +82,20 @@ func decay_lerp(a: float, b: float, decay: float, delta: float):
 	# NOTE: This shit dont work...
 	# I mean its does, it just like nans everything lol.
 	# i might try and get it to work later.
+
+func update_label_positions():
+	if !is_node_ready():
+		await ready
+	label_1.position.x = sin(needle_range * PI) * label_distance
+	label_1.position.y = cos(needle_range * PI) * label_distance
+	
+	label_2.position.x = sin(needle_range * PI * 0.5) * label_distance
+	label_2.position.y = cos(needle_range * PI * 0.5) * label_distance
+	
+	label_3.position.y = label_distance
+	
+	label_4.position.x = sin(-needle_range * PI * 0.5) * label_distance
+	label_4.position.y = cos(-needle_range * PI * 0.5) * label_distance
+	
+	label_5.position.x = sin(-needle_range * PI) * label_distance
+	label_5.position.y = cos(-needle_range * PI) * label_distance

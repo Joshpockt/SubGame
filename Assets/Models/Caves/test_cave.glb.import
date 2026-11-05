@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://lkapsy47pjbm"
-path="res://.godot/imported/helm.glb-1e412dbc7eda107f88c1195b125a2377.scn"
+uid="uid://c3j6xagdu7tg0"
+path="res://.godot/imported/test_cave.glb-7016cd07d69b4cae13230d56636c9020.scn"
 
 [deps]
 
-source_file="res://Assets/Meshes/ShipParts/helm.glb"
-dest_files=["res://.godot/imported/helm.glb-1e412dbc7eda107f88c1195b125a2377.scn"]
+source_file="res://Assets/Models/Caves/test_cave.glb"
+dest_files=["res://.godot/imported/test_cave.glb-7016cd07d69b4cae13230d56636c9020.scn"]
 
 [params]
 
