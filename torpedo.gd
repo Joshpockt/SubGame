@@ -66,5 +66,5 @@ func hit():
 	f.call_deferred()
 	
 	await get_tree().create_timer(8.0).timeout
-	print("free")
+	#print("free")
 	queue_free()

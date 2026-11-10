@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://c8n6isw1qfvw2" path="res://src/Components/gauge.tscn" id="9_2eb5q"]
 [ext_resource type="PackedScene" uid="uid://cpp45hjtuwuaf" path="res://Assets/Models/ShipParts/Knob/knob.glb" id="10_cq2vt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a62ae"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cq2vt"]
 albedo_texture = ExtResource("3_cq2vt")
-metallic = 1.0
-roughness = 0.63
+metallic = 0.75
+roughness = 0.39
 texture_filter = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2eb5q"]
@@ -41,10 +41,10 @@ camera_fov = 50.0
 
 [node name="Visuals" type="Node3D" parent="." unique_id=1871263720]
 
-[node name="helm" parent="Visuals" unique_id=1113689753 instance=ExtResource("2_ganq3")]
+[node name="helm" parent="Visuals" unique_id=1967401226 instance=ExtResource("2_ganq3")]
 
-[node name="Cube" parent="Visuals/helm" index="0" unique_id=1053907142]
-material_override = SubResource("StandardMaterial3D_a62ae")
+[node name="Cube" parent="Visuals/helm" index="0" unique_id=301968070]
+material_override = SubResource("StandardMaterial3D_cq2vt")
 
 [node name="display_round" parent="Visuals" unique_id=1299216145 instance=ExtResource("3_c335d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.7, 0)
@@ -79,11 +79,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.9499999)
 
 [node name="Gauge" parent="." unique_id=845273447 instance=ExtResource("9_2eb5q")]
-transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.14999998, 1.35, 0)
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.225, 1.35, 0)
 title = "Heat"
 
 [node name="Gauge2" parent="." unique_id=39588445 instance=ExtResource("9_2eb5q")]
-transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.3, 1.35, 0)
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.375, 1.35, 0)
 title = "Speed"
 max_value = 40.0
 

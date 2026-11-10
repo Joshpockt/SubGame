@@ -25,6 +25,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "FPS"
 
+[node name="FrameTimeLabel" type="Label" parent="Control/VBoxContainer" unique_id=2144629950]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FPS"
+
 [node name="FramesLabel" type="Label" parent="Control/VBoxContainer" unique_id=173990271]
 unique_name_in_owner = true
 layout_mode = 2

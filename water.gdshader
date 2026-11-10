@@ -13,6 +13,8 @@ void vertex() {
 void fragment() {
 	ALPHA = 0.5;
 	ALBEDO = color;
+	ROUGHNESS = 0.0;
+	METALLIC = 0.5;
 }
 
 //void light() {
