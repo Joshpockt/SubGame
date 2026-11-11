@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bcn0heigi10pr"]
+
+[ext_resource type="Script" uid="uid://qp3eqh1uwtfh" path="res://src/Misc/blinky.gd" id="1_rsxap"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beyo5"]
+height = 10.0
+
+[node name="Blinky" type="Node3D" unique_id=1839125902]
+script = ExtResource("1_rsxap")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=479518561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.7, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 8.0
+omni_range = 50.0
+omni_attenuation = 2.0
+
+[node name="Timer" type="Timer" parent="." unique_id=957161315]
+wait_time = 2.0
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=233484260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+mesh = SubResource("CylinderMesh_beyo5")

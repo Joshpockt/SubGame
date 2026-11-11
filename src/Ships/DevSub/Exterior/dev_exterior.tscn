@@ -117,7 +117,7 @@ size = Vector2i(128, 128)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=969240049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.9, -7.6)
-fov = 60.0
+fov = 45.0
 
 [node name="TorpedoSpawn" type="Marker3D" parent="." unique_id=1115925574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -21.5)
