@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4d5o2a0f2fgs"]
 
 [ext_resource type="Script" uid="uid://b238s162comny" path="res://test_scene.gd" id="1_7cbxl"]
+[ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://src/Ships/SubComponents/Compartment/compartment.tscn" id="2_ia1lp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,4 +33,13 @@ environment = SubResource("Environment_ia1lp")
 mesh = SubResource("PlaneMesh_dklud")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1746652188]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 4, 5)
+
+[node name="Compartment" parent="." unique_id=697891993 instance=ExtResource("2_ia1lp")]
+size = Vector3(2, 3, 2)
+compartment_volume = 5.0
+
+[node name="Compartment2" parent="." unique_id=1680352655 instance=ExtResource("2_ia1lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+size = Vector3(2, 3, 2)
+compartment_volume = 5.0

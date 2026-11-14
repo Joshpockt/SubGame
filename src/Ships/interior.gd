@@ -66,11 +66,12 @@ func spawn_damage(direction: Vector3, _stren) -> void:
 	#direction.y = randf_range(-0.1, 0.1)
 	direction.y = 0.0
 	
-	ray_cast_3d.position = direction * 50
+	ray_cast_3d.position = direction * 1000
 	ray_cast_3d.position.y = randf_range(-0.5, 1)
 	ray_cast_3d.target_position = -ray_cast_3d.position
 	ray_cast_3d.target_position.y = 0.0
 	ray_cast_3d.force_raycast_update()
+	print(ray_cast_3d.get_collision_point())
 	if !ray_cast_3d.is_colliding():
 		return
 	#assert(ray_cast_3d.is_colliding(), "Raycast should be colliding")

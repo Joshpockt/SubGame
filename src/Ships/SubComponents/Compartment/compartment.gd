@@ -24,8 +24,10 @@ var idk_change_this_name_lol := 0
 		#if !Engine.is_editor_hint(): return
 		size = value
 		compartment_shape.shape.size = size
+		compartment_shape.position.y = compartment_shape.shape.size.y / 2
 		water_mesh.mesh.size = size
 		water_shape.shape.size = size
+		fill_level = fill_level
 
 @export var compartment_volume : float
 
@@ -36,7 +38,7 @@ var idk_change_this_name_lol := 0
 		if !is_node_ready():
 			await ready
 		var s : float = compartment_shape.shape.size.y * fill_level
-		var offset : float = (-(compartment_shape.shape.size.y - s) / 2) - 0.01
+		var offset : float = (s/2) - 0.01
 		water_mesh.mesh.size.y = s
 		water_mesh.position.y = offset
 		
@@ -52,7 +54,8 @@ func _ready() -> void:
 	fill_level = fill_level
 
 func _physics_process(delta: float) -> void:
-	#print("process")
+	if Engine.is_editor_hint(): return
+	
 	if idk_change_this_name_lol <= 0:
 		remove_water(bilge_speed * delta)
 	idk_change_this_name_lol -= 1

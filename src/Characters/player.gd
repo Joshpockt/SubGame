@@ -51,6 +51,7 @@ func _process(delta: float) -> void:
 		camera_3d.position = Vector3(randf_range(-1, 1), randf_range(-1, 1), 0) * current_shake
 	
 	if is_multiplayer_authority():
+		if sub_interior == null: return
 		if collision_point_sampler.get_overlapping_areas().size() > 0:
 			sub_interior.set_fog(true)
 		else:

@@ -14,7 +14,6 @@ class_name SubWeaponController
 @export var projectile_spawn_marker : Node3D
 @export var exterior : SubExterior
 
-
 var ammo := 0:
 	set(value):
 		ammo = clamp(value, 0, max_ammo)
@@ -32,7 +31,6 @@ func add_ammo(ammount):
 
 func shoot():
 	sync_shoot.rpc()
-
 
 @rpc("any_peer", "call_local", "reliable")
 func sync_shoot() -> void:

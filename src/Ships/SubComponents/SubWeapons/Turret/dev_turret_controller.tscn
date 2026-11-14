@@ -34,6 +34,7 @@ turret_controller = NodePath("..")
 interaction_area = NodePath("InteractionArea")
 player_standing_marker = NodePath("Player")
 camera_marker = NodePath("Camera")
+camera_fov = 55.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="TurretControlStation" unique_id=110267281]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
