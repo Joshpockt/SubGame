@@ -59,6 +59,6 @@ func get_random_name(s: int) -> Array[String]:
 		LAST_NAMES[rng.randi_range(0, FIRST_NAMES.size() -1)]
 		]
 
-func _ready() -> void:
-	for i in 1000:
-		print(get_random_name(i))
+#func _ready() -> void:
+	#for i in 1000:
+		#print(get_random_name(i))

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b238s162comny" path="res://test_scene.gd" id="1_7cbxl"]
 [ext_resource type="PackedScene" uid="uid://bi35bwhaxnkqw" path="res://src/Ships/SubComponents/Compartment/compartment.tscn" id="2_ia1lp"]
+[ext_resource type="Script" uid="uid://bhugkm3l17xh5" path="res://src/Ships/SubComponents/Compartment/compartment_gap.gd" id="3_sasra"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6adnx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,6 +19,8 @@ volumetric_fog_density = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dklud"]
 size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_beyo5"]
 
 [node name="TestScene" type="Node3D" unique_id=804774785]
 script = ExtResource("1_7cbxl")
@@ -43,3 +46,11 @@ compartment_volume = 5.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 size = Vector3(2, 3, 2)
 compartment_volume = 5.0
+
+[node name="CompartmentGap" type="Area3D" parent="." unique_id=1598203587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+script = ExtResource("3_sasra")
+metadata/_custom_type_script = "uid://bhugkm3l17xh5"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CompartmentGap" unique_id=508906771]
+shape = SubResource("BoxShape3D_beyo5")
