@@ -1,5 +1,6 @@
 shader_type spatial;
 render_mode cull_disabled;
+stencil_mode read, compare_equal, 0;
 
 //uniform sampler2D noise : source_color;
 //uniform float value;
@@ -13,8 +14,8 @@ void vertex() {
 void fragment() {
 	ALPHA = 0.5;
 	ALBEDO = color;
-	ROUGHNESS = 0.0;
-	METALLIC = 0.5;
+	ROUGHNESS = 0.5;
+	METALLIC = 1.0;
 }
 
 //void light() {

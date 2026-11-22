@@ -1,6 +1,10 @@
 extends Node3D
+#
+@onready var compartment: Compartment = $CompartmentManager/Compartment
 
-@onready var compartment: Compartment = $Compartment
 
+var t := 0.0
 func _process(delta: float) -> void:
-	compartment.add_water(0.5 * delta)
+	t += delta
+	if t > 6.5: return
+	#compartment.add_water(1.0 * delta)

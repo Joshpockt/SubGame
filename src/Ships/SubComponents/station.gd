@@ -63,9 +63,10 @@ func control(peer_id: int):
 		if multiplayer.get_remote_sender_id() == current_controller_id:
 			rpc("update_current_controller_id", -1)
 
-
+@warning_ignore("unused_parameter")
 func _control_process(delta):
 	pass
 
+@warning_ignore("unused_parameter")
 func _control_input(event: InputEvent):
 	pass

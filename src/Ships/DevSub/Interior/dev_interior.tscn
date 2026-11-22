@@ -479,7 +479,6 @@ mount = NodePath("../../../DevExterior/DevTurretMount")
 [node name="Compartment" parent="Level/Compartments" unique_id=697891993 instance=ExtResource("8_eilgj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 bilge_speed = 20.0
-size = Vector3(10.1, 3.6, 26.1)
 compartment_volume = 948.9960245733254
 
 [node name="Entitys" type="Node3D" parent="." unique_id=1643332871]
