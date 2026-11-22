@@ -24,51 +24,57 @@ func _update(delta):
 		balance(delta)
 
 func balance(delta: float):
-	var higher_compartment : Compartment = compartment_a
-	var lower_compartment : Compartment = compartment_b
+	if compartment_a.fill_level == 0.0 and compartment_b.fill_level == 0.0:
+		return
+	
+	var source_compartment : Compartment = compartment_a
+	var target_compartment : Compartment = compartment_b
 	
 	# Find higher and lower compartments
 	if compartment_a.global_water_level > compartment_b.global_water_level:
-		higher_compartment = compartment_a
-		lower_compartment = compartment_b
+		source_compartment = compartment_a
+		target_compartment = compartment_b
 	elif compartment_b.global_water_level > compartment_a.global_water_level:
-		higher_compartment = compartment_b
-		lower_compartment = compartment_a
+		source_compartment = compartment_b
+		target_compartment = compartment_a
 	else:
 		return # They are equal and dont need to be balanced
 	
-	if lower_compartment.fill_level == 1.0:
+	if target_compartment.fill_level == 1.0:
+		print("full")
 		return
+	
 	
 	var volume_delta : float = (max_flow_rate * 2) * delta
-	#volume_delta = min(volume_delta, higher_compartment.fill_volume/2)
-	var water_over = over(lower_compartment.fill_volume + volume_delta, lower_compartment.compartment_volume)
+	#volume_delta = min(volume_delta, source_compartment.fill_volume/2)
+	var water_over = over(target_compartment.fill_volume + volume_delta, target_compartment.compartment_volume)
 	if water_over > 0.0:
-		higher_compartment.remove_water((volume_delta * 0.5) - water_over)
+		print("over")
+		source_compartment.remove_water((volume_delta * 0.5) - water_over)
 		#print(volume_delta - water_over)
-		lower_compartment.fill_level = 1.0
+		target_compartment.fill_level = 1.0
 		return
 	
-	var level_difference := higher_compartment.global_water_level - lower_compartment.global_water_level
+	var level_difference := source_compartment.global_water_level - target_compartment.global_water_level
 	# Im gonna kill whoever invented the ">" and "<" symbol.
 	if level_difference < volume_delta * 0.5:
-		print("close")
-		higher_compartment.remove_water(level_difference * 0.5)
-		lower_compartment.add_water(level_difference * 0.5)
+		#print("close")
+		source_compartment.remove_water(level_difference * 0.5)
+		target_compartment.add_water(level_difference * 0.5)
 		return
 	
 	
-	#var water_under = under(lower_compartment.fill_volume + volume_delta, 0.0)
+	#var water_under = under(target_compartment.fill_volume + volume_delta, 0.0)
 	#if water_over < 0.0:
 		#print(water_under)
-		#higher_compartment.remove_water(volume_delta + water_under)
+		#source_compartment.remove_water(volume_delta + water_under)
 		#
-		#lower_compartment.fill_level = 0.0
+		#target_compartment.fill_level = 0.0
 	
 	#print(volume_delta)
 	
-	higher_compartment.remove_water(volume_delta * 0.5)
-	lower_compartment.add_water(volume_delta * 0.5)
+	source_compartment.remove_water(volume_delta * 0.5)
+	target_compartment.add_water(volume_delta * 0.5)
 
 
 @warning_ignore("shadowed_global_identifier")

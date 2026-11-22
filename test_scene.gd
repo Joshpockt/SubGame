@@ -13,6 +13,6 @@ func _process(delta: float) -> void:
 		#b = true
 	
 	if b == true:
-		compartment.remove_water(fill_speed * delta)
+		#compartment.remove_water(fill_speed * delta)
 		return
 	compartment.add_water(fill_speed * delta)
