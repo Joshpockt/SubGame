@@ -44,21 +44,40 @@ func balance(delta: float):
 	#volume_delta = min(volume_delta, higher_compartment.fill_volume/2)
 	var water_over = over(lower_compartment.fill_volume + volume_delta, lower_compartment.compartment_volume)
 	if water_over > 0.0:
-		higher_compartment.remove_water(volume_delta - water_over)
+		higher_compartment.remove_water((volume_delta * 0.5) - water_over)
 		#print(volume_delta - water_over)
 		lower_compartment.fill_level = 1.0
 		return
 	
+	var level_difference := higher_compartment.global_water_level - lower_compartment.global_water_level
+	# Im gonna kill whoever invented the ">" and "<" symbol.
+	if level_difference < volume_delta * 0.5:
+		print("close")
+		higher_compartment.remove_water(level_difference * 0.5)
+		lower_compartment.add_water(level_difference * 0.5)
+		return
+	
+	
+	#var water_under = under(lower_compartment.fill_volume + volume_delta, 0.0)
+	#if water_over < 0.0:
+		#print(water_under)
+		#higher_compartment.remove_water(volume_delta + water_under)
+		#
+		#lower_compartment.fill_level = 0.0
+	
 	#print(volume_delta)
 	
-	higher_compartment.remove_water(volume_delta/2)
-	lower_compartment.add_water(volume_delta/2)
+	higher_compartment.remove_water(volume_delta * 0.5)
+	lower_compartment.add_water(volume_delta * 0.5)
 
 
 @warning_ignore("shadowed_global_identifier")
 func over(x,max) -> float:
 	return max(x, max) - max
 
+@warning_ignore("shadowed_global_identifier")
+func under(x, min) -> float:
+	return max(x, min) - min
 
 # Here lies dead code that sucked ass.
 # You shall not be missed...

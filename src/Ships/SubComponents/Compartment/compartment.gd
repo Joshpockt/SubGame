@@ -2,7 +2,7 @@
 extends Area3D
 class_name Compartment
 
-const GHOST_SPEED := 10.0
+const GHOST_SPEED := 5.0
 
 signal water_added(ammount: float)
 

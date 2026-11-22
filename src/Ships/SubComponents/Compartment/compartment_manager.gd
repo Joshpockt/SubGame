@@ -30,4 +30,5 @@ func _physics_process(delta: float) -> void:
 	for compartment in compartments:
 		compartment._update(delta)
 	for gap in compartment_gaps:
+		#compartment_gaps.shuffle()
 		gap._update(delta)
