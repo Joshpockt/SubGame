@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dnr1pukciqkn7"]
+
+[ext_resource type="Texture2D" uid="uid://cd481whuc863l" path="res://Assets/Textures/cave2_texture.png" id="1_mu5wb"]
+[ext_resource type="Texture2D" uid="uid://c8eveehw8kler" path="res://Assets/Textures/cave2_normal.png" id="2_uahtx"]
+
+[resource]
+albedo_texture = ExtResource("1_mu5wb")
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2_uahtx")
+uv1_scale = Vector3(0.01, 0.01, 0.01)
+uv1_triplanar = true
+texture_filter = 4
