@@ -8,7 +8,7 @@ var b := false
 var t := 0.0
 func _process(delta: float) -> void:
 	t += delta
-	if t > 5.0: b = true
+	if t > 4.0: b = true
 	#if compartment.fill_level == 1.0:
 		#b = true
 	

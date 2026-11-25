@@ -2,7 +2,7 @@
 extends Area3D
 class_name Compartment
 
-const GHOST_SPEED := 5.0
+const GHOST_SPEED := 10.0
 
 signal water_added(ammount: float)
 
@@ -11,12 +11,7 @@ signal water_added(ammount: float)
 @export var compartment_shape: CollisionShape3D
 @export var water_mesh: MeshInstance3D
 @export var water_shape: CollisionShape3D
-#@export var bilge_speed := 0.0:
-	#set(value):
-		#bilge_speed = max(0.0, value)
 
-
-#var idk_change_this_name_lol := 0
 var global_water_level : float:
 	get():
 		return global_position.y + (fill_level * compartment_shape.shape.size.y)
@@ -72,11 +67,6 @@ func _update_fill_level():
 	
 	water_shape.shape.size.y = s
 	water_shape.position.y = offset + 0.01
-	
-	#if fill_level == 0.0:
-		#water_mesh.hide()
-	#else:
-		#water_mesh.show()
 
 
 func _ready() -> void:
@@ -91,23 +81,6 @@ func _process(delta: float) -> void:
 	
 	
 	$Label3D.text = str(snapped(fill_volume, 0.001))
-	
-	# NOTE: This should really be handled by the compartment manager.
-	# Like the compartment manager could keep track of what is all connected together/
-	# has a route and could just relay that to the compartments.
-	#for gap in gaps:
-		#if gap.is_open:
-			# NOTE: Need to add this functonality back at some point, but for now it
-			# really shouldnt matter.
-			#if gap.global_position.y > global_water_level:
-				#for compart in gap.connected_compartments:
-					#if compart == self:
-						#continue
-					#compartments.append(compart)
-	
-	for compart in compartments:
-		pass
-	
 	
 	fill_level_ghost = lerp(fill_level_ghost, fill_level, GHOST_SPEED * delta)
 	

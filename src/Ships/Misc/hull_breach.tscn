@@ -6,6 +6,10 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_beyo5"]
 radius = 0.4
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_joa25"]
+no_depth_test = true
+shading_mode = 0
+
 [sub_resource type="SphereMesh" id="SphereMesh_beyo5"]
 radius = 0.4
 height = 0.8
@@ -21,6 +25,7 @@ script = ExtResource("1_4ijxy")
 shape = SubResource("SphereShape3D_beyo5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=676715418]
+material_override = SubResource("StandardMaterial3D_joa25")
 mesh = SubResource("SphereMesh_beyo5")
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=555026704]

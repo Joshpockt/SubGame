@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://xm27qxg3qmu5"]
+
+[ext_resource type="Script" uid="uid://bnf80bksy2oe6" path="res://src/Ships/SubComponents/DevPump/dev_pump.gd" id="1_heqs3"]
+[ext_resource type="Script" uid="uid://52qtyr0f7g73" path="res://src/Components/collision_point_sampler.gd" id="1_rntwm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beyo5"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fkm60"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_beyo5"]
+size = Vector3(0.1, 0.5, 0.5)
+
+[node name="DevPump" type="Node3D" unique_id=529665612]
+script = ExtResource("1_heqs3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=991015837]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_beyo5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1050134388]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4, 0.25, 0)
+mesh = SubResource("CylinderMesh_fkm60")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1270932759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000002, 0.25, 0)
+mesh = SubResource("BoxMesh_beyo5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=2071472080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20000002, 0.25, 0)
+mesh = SubResource("BoxMesh_beyo5")
+
+[node name="CollisionPointSampler" type="Node3D" parent="." unique_id=1779122962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+script = ExtResource("1_rntwm")
+layer = 32
+metadata/_custom_type_script = "uid://52qtyr0f7g73"
